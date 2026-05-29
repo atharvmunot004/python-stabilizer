@@ -1,1 +1,55 @@
-site_name: My Docs
+site_name: stabilizer-python
+site_url: https://atharvmunot004.github.io/python-stabilizer/
+repo_url: https://github.com/atharvmunot004/python-stabilizer
+repo_name: atharvmunot004/python-stabilizer
+site_description: >-
+  Minimal stabilizer (Clifford) simulator in pure Python —
+  tableau-based state representation, QEC code examples, and a learning resource
+  for anyone wanting to understand stabilizer simulation from first principles.
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - admonition
+  - tables
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Theory:
+    - Stabilizer Formalism: theory/stabilizer-formalism.md
+    - The Tableau: theory/tableau.md
+    - Measurement: theory/measurement.md
+    - Error-Correcting Codes: theory/qec-codes.md
+  - API Reference: api-reference.md
+  - References: references.md
