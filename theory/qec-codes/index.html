@@ -259,6 +259,25 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../../architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -418,6 +437,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -439,10 +485,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -460,8 +506,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -633,15 +679,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-qubit-bit-flip-code-3-1-1" class="md-nav__link">
+  <a href="#3-qubit-bit-flip-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3-qubit Bit-flip Code — \([[3, 1, 1]]\)
+        3-qubit Bit-flip Code
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3-qubit Bit-flip Code — \([[3, 1, 1]]\)">
+    <nav class="md-nav" aria-label="3-qubit Bit-flip Code">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -755,10 +801,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-shor-corrects-any-single-qubit-error" class="md-nav__link">
+  <a href="#why-shors-code-corrects-any-single-qubit-error" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why Shor corrects any single-qubit error
+        Why Shor's code corrects any single-qubit error
       
     </span>
   </a>
@@ -895,15 +941,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-qubit-bit-flip-code-3-1-1" class="md-nav__link">
+  <a href="#3-qubit-bit-flip-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3-qubit Bit-flip Code — \([[3, 1, 1]]\)
+        3-qubit Bit-flip Code
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3-qubit Bit-flip Code — \([[3, 1, 1]]\)">
+    <nav class="md-nav" aria-label="3-qubit Bit-flip Code">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1017,10 +1063,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-shor-corrects-any-single-qubit-error" class="md-nav__link">
+  <a href="#why-shors-code-corrects-any-single-qubit-error" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why Shor corrects any single-qubit error
+        Why Shor's code corrects any single-qubit error
       
     </span>
   </a>
@@ -1071,6 +1117,12 @@
 
 <h1 id="error-correcting-codes">Error-Correcting Codes</h1>
 <p>Quantum error correction (QEC) is the primary application of stabilizer formalism. The stabilizer framework makes QEC codes almost natural to describe: a code is just a stabilizer group, a syndrome is a pattern of measurement outcomes, and correction is applying the right Pauli to restore the state.</p>
+<p>Implementation links:</p>
+<ul>
+<li>QEC helpers: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>stabilizer_python/codes.py</code></a></li>
+<li>Tableau operations used by syndrome extraction: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>stabilizer_python/tableau.py</code></a></li>
+<li>QEC tests: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_bitflip3.py"><code>tests/test_bitflip3.py</code></a></li>
+</ul>
 <hr />
 <h2 id="the-stabilizer-code-framework">The stabilizer code framework</h2>
 <p>An <span class="arithmatex">\([[n, k, d]]\)</span> stabilizer code encodes <span class="arithmatex">\(k\)</span> logical qubits into <span class="arithmatex">\(n\)</span> physical qubits with distance <span class="arithmatex">\(d\)</span>.</p>
@@ -1082,7 +1134,8 @@
 </ul>
 <p>The stabilizer generators are Pauli operators that all commute with each other and have <span class="arithmatex">\(+1\)</span> eigenvalue on the code space. Any error that anticommutes with a generator is detectable.</p>
 <hr />
-<h2 id="3-qubit-bit-flip-code-3-1-1">3-qubit Bit-flip Code — <span class="arithmatex">\([[3, 1, 1]]\)</span></h2>
+<h2 id="3-qubit-bit-flip-code">3-qubit Bit-flip Code</h2>
+<p>The 3-qubit repetition code protects one logical bit against a single bit-flip error. It is best understood as a pedagogical code for <span class="arithmatex">\(X\)</span> errors rather than a complete quantum code: it does not detect or correct arbitrary single-qubit Pauli errors.</p>
 <h3 id="encoding">Encoding</h3>
 <p>Logical states:</p>
 <div class="arithmatex">\[|0_L\rangle = |000\rangle, \qquad |1_L\rangle = |111\rangle\]</div>
@@ -1177,7 +1230,7 @@
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="k">return</span> <span class="n">s01</span><span class="p">,</span> <span class="n">s12</span>
 </code></pre></div>
-<p>The ancilla qubits start in <span class="arithmatex">\(|0\rangle\)</span> and are used to extract syndrome bits without collapsing the data qubits' logical state. CNOTs fan the data qubit <span class="arithmatex">\(X\)</span> operators onto the ancilla, and then measuring the ancilla in <span class="arithmatex">\(Z\)</span> reads out the parity.</p>
+<p>The ancilla qubits start in <span class="arithmatex">\(|0\rangle\)</span> and are used to extract syndrome bits without measuring the data qubits directly. CNOTs fan parity information onto the ancilla, and then measuring the ancilla in <span class="arithmatex">\(Z\)</span> reads out the stabilizer eigenvalue.</p>
 <p>After measurement, <code>reset_z</code> returns the ancilla to <span class="arithmatex">\(|0\rangle\)</span> for reuse.</p>
 <hr />
 <h3 id="what-this-code-cannot-correct">What this code cannot correct</h3>
@@ -1243,9 +1296,9 @@ $<span class="arithmatex">\(X_0X_1X_2X_3X_4X_5, \; X_3X_4X_5X_6X_7X_8\)</span>$<
 <a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="c1"># Correct</span>
 <a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="n">Shor9Code</span><span class="o">.</span><span class="n">correct_x_from_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">syndrome</span><span class="p">)</span>
 </code></pre></div>
-<p>The syndrome is the tuple of phase bits from all 9 stabilizer generators. Each single-qubit <span class="arithmatex">\(X\)</span> error produces a unique syndrome pattern — stored in <code>_X_SYNDROME</code> — allowing the correct qubit to be identified and fixed.</p>
+<p>The syndrome is the tuple of phase bits from all 9 stabilizer generators in this simulator's tableau. Each single-qubit <span class="arithmatex">\(X\)</span> error produces a unique syndrome pattern for the current encoded layout. These patterns are stored in <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>_X_SYNDROME</code></a>, allowing the implemented helper to identify and fix the affected qubit.</p>
 <hr />
-<h2 id="why-shor-corrects-any-single-qubit-error">Why Shor corrects any single-qubit error</h2>
+<h2 id="why-shors-code-corrects-any-single-qubit-error">Why Shor's code corrects any single-qubit error</h2>
 <p>Any single-qubit error can be decomposed into Pauli components: <span class="arithmatex">\(I\)</span>, <span class="arithmatex">\(X\)</span>, <span class="arithmatex">\(Y\)</span>, <span class="arithmatex">\(Z\)</span>.</p>
 <ul>
 <li><span class="arithmatex">\(X\)</span> errors: detected and corrected by the bit-flip stabilizers within each block.</li>
@@ -1254,6 +1307,7 @@ $<span class="arithmatex">\(X_0X_1X_2X_3X_4X_5, \; X_3X_4X_5X_6X_7X_8\)</span>$<
 <li><span class="arithmatex">\(I\)</span> (no error): syndrome is all zeros, no correction applied.</li>
 </ul>
 <p>The concatenated structure means a single physical qubit error can never affect more than one block and one inter-block relationship simultaneously — keeping it below the detection threshold.</p>
+<p>The current package implements the encoder and an <code>X</code>-error correction helper. The stabilizer-code theory above explains the full Shor-code protection mechanism; adding explicit <code>Z</code> and <code>Y</code> correction helpers would be a natural extension point.</p>
 <hr />
 <h2 id="comparing-the-two-codes">Comparing the two codes</h2>
 <table>
@@ -1276,8 +1330,8 @@ $<span class="arithmatex">\(X_0X_1X_2X_3X_4X_5, \; X_3X_4X_5X_6X_7X_8\)</span>$<
 <td>1</td>
 </tr>
 <tr>
-<td>Distance</td>
-<td>1</td>
+<td>Full quantum distance</td>
+<td>Not a full arbitrary-Pauli code</td>
 <td>3</td>
 </tr>
 <tr>
@@ -1288,17 +1342,22 @@ $<span class="arithmatex">\(X_0X_1X_2X_3X_4X_5, \; X_3X_4X_5X_6X_7X_8\)</span>$<
 <tr>
 <td>Corrects <span class="arithmatex">\(Z\)</span></td>
 <td>❌</td>
-<td>✅</td>
+<td>Theoretically yes; helper not implemented</td>
 </tr>
 <tr>
 <td>Corrects <span class="arithmatex">\(Y\)</span></td>
 <td>❌</td>
-<td>✅</td>
+<td>Theoretically yes; helper not implemented</td>
 </tr>
 <tr>
 <td>Stabilizers</td>
 <td>2</td>
 <td>8</td>
+</tr>
+<tr>
+<td>Main source class</td>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>BitFlip3Code</code></a></td>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>Shor9Code</code></a></td>
 </tr>
 </tbody>
 </table>

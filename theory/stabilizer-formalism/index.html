@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://atharvmunot004.github.io/python-stabilizer/theory/stabilizer-formalism/">
       
       
-        <link rel="prev" href="../../getting-started/">
+        <link rel="prev" href="../../architecture/">
       
       
         <link rel="next" href="../tableau/">
@@ -259,6 +259,25 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../../architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -418,6 +437,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -439,10 +485,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -460,8 +506,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -914,6 +960,12 @@
 
 
 <h1 id="stabilizer-formalism">Stabilizer Formalism</h1>
+<p>Code links for this page:</p>
+<ul>
+<li>Core tableau state: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>stabilizer_python/tableau.py</code></a></li>
+<li>Circuit builder: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py"><code>stabilizer_python/circuit.py</code></a></li>
+<li>GF(2) helpers: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/linear_algebra.py"><code>stabilizer_python/linear_algebra.py</code></a></li>
+</ul>
 <h2 id="why-not-just-use-state-vectors">Why not just use state vectors?</h2>
 <p>An <span class="arithmatex">\(n\)</span>-qubit state vector has <span class="arithmatex">\(2^n\)</span> complex amplitudes. Simulating 50 qubits classically is already infeasible — the vector has over a quadrillion entries.</p>
 <p>But many states of interest in quantum computing — particularly in quantum error correction — belong to a restricted class called <strong>stabilizer states</strong>. For these states, there is a polynomial-time classical simulation algorithm. This is the content of the <strong>Gottesman–Knill theorem</strong>.</p>
@@ -964,7 +1016,7 @@ Z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}
 </tr>
 </tbody>
 </table>
-<p>This binary encoding is exactly what lives in the <code>x_mat</code> and <code>z_mat</code> arrays of <code>StabilizerState</code>.</p>
+<p>This binary encoding is exactly what lives in the <code>x_mat</code> and <code>z_mat</code> arrays of <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>StabilizerState</code></a>.</p>
 <hr />
 <h2 id="stabilizers">Stabilizers</h2>
 <p>A Pauli operator <span class="arithmatex">\(P\)</span> <strong>stabilizes</strong> a state <span class="arithmatex">\(|\psi\rangle\)</span> if:</p>
@@ -1054,7 +1106,7 @@ Z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}
 <h2 id="commutativity-and-independence">Commutativity and independence</h2>
 <p>Two Paulis <span class="arithmatex">\(P, Q \in \mathcal{P}_n\)</span> either commute (<span class="arithmatex">\(PQ = QP\)</span>) or anticommute (<span class="arithmatex">\(PQ = -QP\)</span>). The rule:</p>
 <div class="arithmatex">\[P \text{ and } Q \text{ anticommute} \iff \sum_{q} (x_P^q z_Q^q + x_Q^q z_P^q) \equiv 1 \pmod{2}\]</div>
-<p>This is just a bitwise inner product over GF(2). The linear algebra module (<code>linear_algebra.py</code>) provides GF(2) tools used internally to check independence of stabilizer generators.</p>
+<p>This is just a bitwise inner product over GF(2). The <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/linear_algebra.py"><code>linear_algebra.py</code></a> module provides GF(2) tools used by tests to check independence of stabilizer generators.</p>
 <hr />
 <h2 id="summary">Summary</h2>
 <table>
@@ -1094,6 +1146,7 @@ Z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}
 </tbody>
 </table>
 <p><strong>Next:</strong> <a href="../tableau/">The Tableau Representation</a> — how all of this is stored as bit arrays.</p>
+<p>For the source-level module map, see <a href="../../architecture/">Architecture</a>.</p>
 
 
 

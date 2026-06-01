@@ -16,7 +16,7 @@
         <link rel="prev" href="..">
       
       
-        <link rel="next" href="../theory/stabilizer-formalism/">
+        <link rel="next" href="../architecture/">
       
       
         
@@ -251,6 +251,25 @@
     
   
   Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
 
       </a>
     </li>
@@ -583,6 +602,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -597,10 +643,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -618,8 +664,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -965,13 +1011,20 @@
 
 
 <h1 id="getting-started">Getting Started</h1>
+<p>This guide walks from installation to the core workflows: preparing a tableau state, applying Clifford circuits, measuring qubits, running the included QEC examples, and validating the checkout.</p>
 <h2 id="installation">Installation</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/atharvmunot004/python-stabilizer.git
 </code></pre></div>
 <p>With dev dependencies (pytest + Qiskit interop tests):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;stabilizer-python[dev] @ git+https://github.com/atharvmunot004/python-stabilizer.git&quot;</span>
 </code></pre></div>
-<p>Requirements: Python &gt;= 3.9. No other runtime dependencies.</p>
+<p>Requirements: Python <code>&gt;=3.9</code>. The runtime package has no required third-party dependencies.</p>
+<p>Source links:</p>
+<ul>
+<li>Repository: <a href="https://github.com/atharvmunot004/python-stabilizer"><code>atharvmunot004/python-stabilizer</code></a></li>
+<li>Package metadata: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/pyproject.toml"><code>pyproject.toml</code></a></li>
+<li>Public exports: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/__init__.py"><code>stabilizer_python/__init__.py</code></a></li>
+</ul>
 <hr />
 <h2 id="your-first-stabilizer-state">Your first stabilizer state</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
@@ -986,10 +1039,10 @@
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>+ZI
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>+IZ
 </code></pre></div>
-<p>The top half are destabilizers, the bottom half are stabilizer generators. See <a href="../theory/tableau/">The Tableau Representation</a> for what these mean.</p>
+<p>The top half are destabilizers, the bottom half are stabilizer generators. See <a href="../theory/tableau/">The Tableau Representation</a> for what these mean and <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>StabilizerState.zero</code></a> for the initialization logic.</p>
 <hr />
 <h2 id="building-circuits">Building circuits</h2>
-<p><code>Circuit</code> is a fluent gate builder:</p>
+<p><code>Circuit</code> is a fluent gate builder implemented in <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py"><code>circuit.py</code></a>. It records operations and applies them to a <code>StabilizerState</code> when <code>run(state)</code> is called.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span><span class="p">,</span> <span class="n">Circuit</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># Bell state</span>
@@ -1034,9 +1087,14 @@
 <td><code>.mz(q)</code></td>
 <td>Measure Z</td>
 </tr>
+<tr>
+<td><code>.extend(ops)</code></td>
+<td>Append existing <code>Op</code> objects</td>
+</tr>
 </tbody>
 </table>
 <p>The <code>run(state)</code> method returns a list of measurement outcomes (one per <code>.mz()</code> call).</p>
+<p>State-level methods on <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>StabilizerState</code></a> include additional Clifford operations such as <code>sdg</code>, <code>sx</code>, <code>sxdg</code>, <code>y</code>, <code>cz</code>, <code>cy</code>, and <code>swap</code>. These are available directly on the state even if the minimal <code>Circuit</code> builder does not expose every one of them.</p>
 <hr />
 <h2 id="measuring-qubits">Measuring qubits</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span><span class="p">,</span> <span class="n">Circuit</span>
@@ -1057,6 +1115,7 @@
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">outcomes</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span>   <span class="c1"># e.g. [0, 0] or [1, 1]</span>
 </code></pre></div>
+<p>Measurement is implemented in <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>StabilizerState.measure_z</code></a>. The method takes a deterministic path when the measured observable already commutes with the stabilizer group and a random path when the observable anticommutes with a stabilizer generator. The details are in <a href="../theory/measurement/">Measurement</a>.</p>
 <hr />
 <h2 id="using-qec-codes">Using QEC codes</h2>
 <h3 id="3-qubit-bit-flip">3-qubit bit-flip</h3>
@@ -1076,6 +1135,7 @@
 <a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
 <a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Syndrome: (</span><span class="si">{</span><span class="n">s01</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">s12</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>   <span class="c1"># (0, 1) → error was on q2</span>
 </code></pre></div>
+<p>The code lives in <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>BitFlip3Code</code></a>. <code>measure_syndrome</code> uses two ancillas to read <span class="arithmatex">\(Z_0Z_1\)</span> and <span class="arithmatex">\(Z_1Z_2\)</span>, then resets those ancillas to <code>|0&gt;</code>.</p>
 <h3 id="shor-9-qubit-code">Shor 9-qubit code</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.codes</span> <span class="kn">import</span> <span class="n">Shor9Code</span>
@@ -1088,6 +1148,7 @@
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">syndrome</span> <span class="o">=</span> <span class="n">Shor9Code</span><span class="o">.</span><span class="n">read_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
 <a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="n">Shor9Code</span><span class="o">.</span><span class="n">correct_x_from_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">syndrome</span><span class="p">)</span>
 </code></pre></div>
+<p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>Shor9Code</code></a> builds the 9-qubit encoder and includes a helper for recognizing current single-<code>X</code>-error syndrome patterns.</p>
 <hr />
 <h2 id="inspecting-the-tableau">Inspecting the tableau</h2>
 <p>Three debug formats are available:</p>
@@ -1110,11 +1171,39 @@
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>pytest
 </code></pre></div>
-<p>The test suite covers: individual gates, Bell/GHZ states, bit-flip code, Shor code, GF(2) linear algebra, random Clifford circuits, and Qiskit interoperability.</p>
+<p>The test suite covers individual gates, Bell/GHZ states, bit-flip code behavior, Shor-code encoding/correction helpers, GF(2) linear algebra, random Clifford circuits, random measurements, and small Qiskit interoperability checks.</p>
+<p>Useful test entry points:</p>
+<table>
+<thead>
+<tr>
+<th>Test file</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_two_qubit_bell.py"><code>tests/test_two_qubit_bell.py</code></a></td>
+<td>Bell-state preparation and stabilizers</td>
+</tr>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_bitflip3.py"><code>tests/test_bitflip3.py</code></a></td>
+<td>3-qubit repetition-code syndrome and correction</td>
+</tr>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_random_circuits.py"><code>tests/test_random_circuits.py</code></a></td>
+<td>Tableau invariants under random Clifford and measurement circuits</td>
+</tr>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_qiskit_circuits.py"><code>tests/test_qiskit_circuits.py</code></a></td>
+<td>Small Qiskit-to-local circuit comparisons</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="whats-next">What's next</h2>
 <ul>
 <li><a href="../theory/stabilizer-formalism/">Stabilizer Formalism</a> — the math behind the simulation</li>
+<li><a href="../architecture/">Architecture</a> — how the modules fit together and where to find the source</li>
 <li><a href="../theory/tableau/">The Tableau Representation</a> — how bits map to quantum states</li>
 <li><a href="../theory/measurement/">Measurement</a> — deterministic vs random outcomes</li>
 <li><a href="../theory/qec-codes/">Error-Correcting Codes</a> — bit-flip and Shor code deep dive</li>
