@@ -1,5 +1,11 @@
 # Stabilizer Formalism
 
+Code links for this page:
+
+- Core tableau state: [`stabilizer_python/tableau.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py)
+- Circuit builder: [`stabilizer_python/circuit.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py)
+- GF(2) helpers: [`stabilizer_python/linear_algebra.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/linear_algebra.py)
+
 ## Why not just use state vectors?
 
 An $n$-qubit state vector has $2^n$ complex amplitudes. Simulating 50 qubits classically is already infeasible — the vector has over a quadrillion entries.
@@ -40,7 +46,7 @@ For stabilizer simulation we only need phases $\pm 1$ (the $\pm i$ phases cancel
 | 1 | 1 | $Y$ |
 | 0 | 1 | $Z$ |
 
-This binary encoding is exactly what lives in the `x_mat` and `z_mat` arrays of `StabilizerState`.
+This binary encoding is exactly what lives in the `x_mat` and `z_mat` arrays of [`StabilizerState`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py).
 
 ---
 
@@ -149,7 +155,7 @@ Two Paulis $P, Q \in \mathcal{P}_n$ either commute ($PQ = QP$) or anticommute ($
 
 $$P \text{ and } Q \text{ anticommute} \iff \sum_{q} (x_P^q z_Q^q + x_Q^q z_P^q) \equiv 1 \pmod{2}$$
 
-This is just a bitwise inner product over GF(2). The linear algebra module (`linear_algebra.py`) provides GF(2) tools used internally to check independence of stabilizer generators.
+This is just a bitwise inner product over GF(2). The [`linear_algebra.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/linear_algebra.py) module provides GF(2) tools used by tests to check independence of stabilizer generators.
 
 ---
 
@@ -164,3 +170,5 @@ This is just a bitwise inner product over GF(2). The linear algebra module (`lin
 | QEC syndrome | Parity check | `BitFlip3Code.measure_syndrome()` |
 
 **Next:** [The Tableau Representation](tableau.md) — how all of this is stored as bit arrays.
+
+For the source-level module map, see [Architecture](../architecture.md).

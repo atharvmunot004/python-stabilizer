@@ -260,6 +260,25 @@
   
   
   
+    <li class="md-tabs__item">
+      <a href="architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
     
     
       <li class="md-tabs__item">
@@ -425,10 +444,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#whats-included" class="md-nav__link">
+  <a href="#what-is-included" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's included
+        What is included
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capabilities-and-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capabilities and limits
       
     </span>
   </a>
@@ -486,10 +516,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-to-go-next" class="md-nav__link">
+  <a href="#documentation-map" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Where to go next
+        Documentation map
       
     </span>
   </a>
@@ -537,6 +567,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -551,10 +608,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -572,8 +629,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -783,10 +840,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#whats-included" class="md-nav__link">
+  <a href="#what-is-included" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's included
+        What is included
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capabilities-and-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capabilities and limits
       
     </span>
   </a>
@@ -844,10 +912,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-to-go-next" class="md-nav__link">
+  <a href="#documentation-map" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Where to go next
+        Documentation map
       
     </span>
   </a>
@@ -875,90 +943,122 @@
 
 
 <h1 id="stabilizer-python">stabilizer-python</h1>
-<p>A minimal, dependency-free stabilizer (Clifford) simulator in pure Python — built to be read, not just used.</p>
-<p>If you want to understand <strong>how</strong> stabilizer simulation works at the bit level, this is the right place. Every gate, measurement, and QEC routine maps directly to the theory, and the code is written to make that connection obvious.</p>
+<p>A minimal, dependency-free stabilizer (Clifford) simulator in pure Python, built to make the stabilizer formalism readable at the bit level.</p>
+<p>The project is both a small simulator and a learning resource. Every operation is close to the underlying Aaronson-Gottesman tableau algorithm: gates update X/Z bit matrices, measurements row-reduce the tableau, and the QEC examples expose syndrome extraction directly.</p>
+<p>Source repository: <a href="https://github.com/atharvmunot004/python-stabilizer"><code>atharvmunot004/python-stabilizer</code></a></p>
 <hr />
-<h2 id="whats-included">What's included</h2>
+<h2 id="what-is-included">What is included</h2>
 <table>
 <thead>
 <tr>
-<th>Module</th>
+<th>Component</th>
 <th>What it does</th>
+<th>Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>StabilizerState</code></td>
-<td>Aaronson–Gottesman tableau: the core state representation</td>
+<td>Core Aaronson-Gottesman tableau state representation</td>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>tableau.py</code></a></td>
 </tr>
 <tr>
 <td><code>Circuit</code></td>
-<td>Fluent gate builder that runs on a <code>StabilizerState</code></td>
+<td>Fluent builder for small Clifford circuits</td>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py"><code>circuit.py</code></a></td>
 </tr>
 <tr>
-<td><code>codes</code></td>
-<td><code>BitFlip3Code</code> and <code>Shor9Code</code> — full encode/syndrome/correct pipelines</td>
+<td><code>BitFlip3Code</code></td>
+<td>3-qubit repetition-code encoder, syndrome reader, and X correction</td>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>codes.py</code></a></td>
 </tr>
 <tr>
-<td><code>linear_algebra</code></td>
-<td>GF(2) Gaussian elimination and rank</td>
+<td><code>Shor9Code</code></td>
+<td>9-qubit Shor encoder and current X-syndrome correction helper</td>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>codes.py</code></a></td>
+</tr>
+<tr>
+<td><code>gaussian_elimination_gf2</code>, <code>rank_gf2</code></td>
+<td>Binary linear algebra helpers</td>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/linear_algebra.py"><code>linear_algebra.py</code></a></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>Runnable Bell, bit-flip, and Shor demos</td>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/tree/main/stabilizer_python/examples"><code>stabilizer_python/examples</code></a></td>
+</tr>
+<tr>
+<td>Tests</td>
+<td>Invariant, random-circuit, QEC, and Qiskit interop checks</td>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/tree/main/tests"><code>tests</code></a></td>
 </tr>
 </tbody>
 </table>
 <hr />
+<h2 id="capabilities-and-limits">Capabilities and limits</h2>
+<p><code>stabilizer-python</code> supports Clifford-state simulation:</p>
+<ul>
+<li>Computational-basis initialization via <code>StabilizerState.zero(n)</code></li>
+<li>Clifford updates: <code>H</code>, <code>S</code>, Pauli gates, <code>CNOT</code>, plus several state-level derived Clifford gates</li>
+<li>Z-basis measurement with deterministic and random tableau update paths</li>
+<li>Small fluent circuits through <code>Circuit</code></li>
+<li>Stabilizer inspection and debug formatting</li>
+<li>GF(2) rank and RREF utilities for binary stabilizer checks</li>
+<li>Educational QEC examples for the 3-qubit repetition code and Shor's 9-qubit code</li>
+</ul>
+<p>The simulator is intentionally not a universal quantum simulator. It does not support non-Clifford gates such as <code>T</code> or arbitrary state-vector amplitudes. If you need large-scale production stabilizer simulation, use a tool such as <a href="https://github.com/quantumlib/Stim">Stim</a>; this project is designed to show the mechanics clearly.</p>
+<hr />
 <h2 id="installation">Installation</h2>
+<p>Install from GitHub:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/atharvmunot004/python-stabilizer.git
 </code></pre></div>
-<p>No Qiskit required. Pure Python, <code>&gt;=3.9</code>.</p>
-<p>Optional dev dependencies (pytest + Qiskit interop tests):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;stabilizer-python[dev] @ git+https://github.com/atharvmunot004/python-stabilizer.git&quot;</span>
+<p>For local development:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/atharvmunot004/python-stabilizer.git
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>python-stabilizer
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
 </code></pre></div>
+<p>Runtime requirements are intentionally small: Python <code>&gt;=3.9</code> and no required third-party packages. The <code>dev</code> extra installs <code>pytest</code> and <code>qiskit</code> for the optional test suite.</p>
 <hr />
 <h2 id="quick-start">Quick start</h2>
 <h3 id="bell-state">Bell state</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span><span class="p">,</span> <span class="n">Circuit</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">c</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_chp_printstate</span><span class="p">())</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_chp_printstate</span><span class="p">())</span>
 </code></pre></div>
-<p>Output:
+<p>Output:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>+XI
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>+IX
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>-----------
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>+XX
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>+ZZ
-</code></pre></div></p>
-<p>The stabilizers <code>+XX</code> and <code>+ZZ</code> are exactly the generators of the Bell state <span class="arithmatex">\(|\Phi^+\rangle\)</span>.</p>
-<hr />
+</code></pre></div>
+<p>The stabilizers <code>+XX</code> and <code>+ZZ</code> are the generators of the Bell state <span class="arithmatex">\(|\Phi^+\rangle\)</span>.</p>
 <h3 id="3-qubit-bit-flip-correction">3-qubit bit-flip correction</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.codes</span> <span class="kn">import</span> <span class="n">BitFlip3Code</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Encode |0_L&gt;</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>   <span class="c1"># 3 data + 2 ancilla</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">encoder_circuit</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># Inject an X error on qubit 1</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">st</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="c1"># Measure syndrome</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">s01</span><span class="p">,</span> <span class="n">s12</span> <span class="o">=</span> <span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">measure_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Syndrome: (</span><span class="si">{</span><span class="n">s01</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">s12</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>  <span class="c1"># (1, 1) → error on q1</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="c1"># Correct</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">correct_x_from_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">s01</span><span class="p">,</span> <span class="n">s12</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>   <span class="c1"># 3 data qubits + 2 syndrome ancillas</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">encoder_circuit</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">st</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                        <span class="c1"># inject an X error on q1</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">s01</span><span class="p">,</span> <span class="n">s12</span> <span class="o">=</span> <span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">measure_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">correct_x_from_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">s01</span><span class="p">,</span> <span class="n">s12</span><span class="p">)</span>
 </code></pre></div>
+<p>The syndrome <code>(1, 1)</code> identifies an <code>X</code> error on qubit 1.</p>
 <hr />
-<h2 id="where-to-go-next">Where to go next</h2>
+<h2 id="documentation-map">Documentation map</h2>
 <ul>
-<li><strong>New to stabilizers?</strong> Start with <a href="theory/stabilizer-formalism/">Stabilizer Formalism</a></li>
-<li><strong>Understand the tableau?</strong> Read <a href="theory/tableau/">The Tableau Representation</a></li>
-<li><strong>See how measurement works?</strong> Read <a href="theory/measurement/">Measurement</a></li>
-<li><strong>QEC codes?</strong> Read <a href="theory/qec-codes/">Error-Correcting Codes</a></li>
-<li><strong>Just want the API?</strong> Jump to <a href="api-reference/">API Reference</a></li>
+<li><a href="getting-started/">Getting Started</a>: installation, first states, circuits, measurements, examples, and tests.</li>
+<li><a href="architecture/">Architecture</a>: module responsibilities, source map, data flow, measurement internals, and extension points.</li>
+<li><a href="theory/stabilizer-formalism/">Stabilizer Formalism</a>: Pauli groups, stabilizers, Clifford evolution, and Gottesman-Knill.</li>
+<li><a href="theory/tableau/">The Tableau Representation</a>: how X/Z/phase arrays encode stabilizer states and how gates mutate them.</li>
+<li><a href="theory/measurement/">Measurement</a>: deterministic versus random measurement and tableau row updates.</li>
+<li><a href="theory/qec-codes/">Error-Correcting Codes</a>: repetition-code and Shor-code concepts mapped to the implementation.</li>
+<li><a href="api-reference/">API Reference</a>: public classes, functions, method behavior, and source links.</li>
+<li><a href="references/">References</a>: papers, tools, textbooks, and repository resources.</li>
 </ul>
 
 

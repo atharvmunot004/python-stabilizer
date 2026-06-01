@@ -2,6 +2,8 @@
 
 Measurement is the most subtle operation in stabilizer simulation. Unlike gates, which just permute tableau entries, a Z-measurement has two fundamentally different cases depending on whether the outcome is **deterministic** or **random**.
 
+Implementation link: [`StabilizerState.measure_z`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py)
+
 ---
 
 ## Z-measurement in quantum mechanics
@@ -157,7 +159,7 @@ During `_rowmult(a, b)`, the phase of the product row must be computed carefully
 
 $$X \cdot Z = iY$$
 
-Tracking these factors correctly is what `_row_mult_phase()` does — summing the exponents of $i$ over all qubits, then reducing mod 4. An incorrect phase here would give wrong syndrome bits in QEC.
+Tracking these factors correctly is what [`_row_mult_phase()`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py) does — summing the exponents of $i$ over all qubits, then reducing mod 4. An incorrect phase here would give wrong syndrome bits in QEC.
 
 ---
 
@@ -169,3 +171,5 @@ Tracking these factors correctly is what `_row_mult_phase()` does — summing th
 | $Z_q$ anticommutes with a stabilizer | Random (uniform) | Replace anticommuting row with $\pm Z_q$; clear X from all other rows |
 
 **Next:** [Error-Correcting Codes](qec-codes.md) — how measurement is used to detect and correct errors.
+
+For broader context on how measurement fits into the simulator, see [Architecture](../architecture.md).

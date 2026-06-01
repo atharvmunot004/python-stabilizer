@@ -260,6 +260,25 @@
   
   
   
+    <li class="md-tabs__item">
+      <a href="../architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
     
     
       <li class="md-tabs__item">
@@ -420,6 +439,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -434,10 +480,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -455,8 +501,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -673,6 +719,17 @@
   
     <nav class="md-nav" aria-label="StabilizerState">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data attributes
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#construction" class="md-nav__link">
@@ -1369,6 +1426,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#data-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data attributes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#construction" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1999,13 +2067,50 @@
 
 
 <h1 id="api-reference">API Reference</h1>
+<p>This page documents the public API exposed by <a href="https://github.com/atharvmunot004/python-stabilizer/tree/main/stabilizer_python"><code>stabilizer_python</code></a>. For a source-level overview, see <a href="../architecture/">Architecture</a>.</p>
 <h2 id="stabilizer_python"><code>stabilizer_python</code></h2>
 <p>Top-level imports:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span><span class="p">,</span> <span class="n">Circuit</span><span class="p">,</span> <span class="n">gaussian_elimination_gf2</span><span class="p">,</span> <span class="n">rank_gf2</span><span class="p">,</span> <span class="n">codes</span>
 </code></pre></div>
+<p>Exports are defined in <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/__init__.py"><code>stabilizer_python/__init__.py</code></a>.</p>
 <hr />
 <h2 id="stabilizerstate"><code>StabilizerState</code></h2>
 <p>Core state representation. An <span class="arithmatex">\(n\)</span>-qubit stabilizer state stored as an Aaronson–Gottesman tableau.</p>
+<p>Source: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>stabilizer_python/tableau.py</code></a></p>
+<h3 id="data-attributes">Data attributes</h3>
+<p><code>StabilizerState</code> intentionally keeps its tableau arrays visible for teaching and debugging:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Shape</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>n</code></td>
+<td>scalar</td>
+<td>Number of qubits</td>
+</tr>
+<tr>
+<td><code>x_mat</code></td>
+<td><code>2n x n</code> list of bits</td>
+<td>X component of each Pauli row</td>
+</tr>
+<tr>
+<td><code>z_mat</code></td>
+<td><code>2n x n</code> list of bits</td>
+<td>Z component of each Pauli row</td>
+</tr>
+<tr>
+<td><code>r_phase</code></td>
+<td><code>2n</code> list of bits</td>
+<td>Row sign: <code>0</code> for <code>+</code>, <code>1</code> for <code>-</code></td>
+</tr>
+</tbody>
+</table>
+<p>Rows <code>0..n-1</code> are destabilizers and rows <code>n..2n-1</code> are stabilizer generators.</p>
 <h3 id="construction">Construction</h3>
 <h4 id="stabilizerstatezeron-int-stabilizerstate"><code>StabilizerState.zero(n: int) → StabilizerState</code></h4>
 <p>Create the <span class="arithmatex">\(n\)</span>-qubit all-zeros state <span class="arithmatex">\(|00\cdots0\rangle\)</span>.</p>
@@ -2028,6 +2133,7 @@
 <h4 id="czcontrol-int-target-int-controlled-z"><code>cz(control: int, target: int)</code> — Controlled-Z</h4>
 <h4 id="cycontrol-int-target-int-controlled-y"><code>cy(control: int, target: int)</code> — Controlled-Y</h4>
 <h4 id="swapq1-int-q2-int-swap-via-3-cnots"><code>swap(q1: int, q2: int)</code> — SWAP (via 3 CNOTs)</h4>
+<p>Index validation is currently explicit for <code>i(q)</code> and implicit for most other gate methods through Python list indexing.</p>
 <hr />
 <h3 id="measurement">Measurement</h3>
 <h4 id="measure_zq-int-int"><code>measure_z(q: int) → int</code></h4>
@@ -2056,6 +2162,7 @@
 </code></pre></div>
 <h4 id="copy-stabilizerstate"><code>copy() → StabilizerState</code></h4>
 <p>Returns a deep copy of the state.</p>
+<p>The copied state has independent <code>x_mat</code>, <code>z_mat</code>, and <code>r_phase</code> lists.</p>
 <hr />
 <h3 id="debug-formatting">Debug formatting</h3>
 <h4 id="format_chp_printstate-str"><code>format_chp_printstate() → str</code></h4>
@@ -2075,6 +2182,7 @@
 <hr />
 <h2 id="circuit"><code>Circuit</code></h2>
 <p>Lightweight fluent circuit builder.</p>
+<p>Source: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py"><code>stabilizer_python/circuit.py</code></a></p>
 <h3 id="circuitn_qubits-int"><code>Circuit(n_qubits: int)</code></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">c</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div>
@@ -2118,6 +2226,7 @@
 </tr>
 </tbody>
 </table>
+<p><code>Circuit</code> exposes a smaller builder surface than <code>StabilizerState</code>. For example, state-level gates such as <code>sdg</code>, <code>sx</code>, <code>y</code>, <code>cz</code>, <code>cy</code>, and <code>swap</code> can be called directly on <code>StabilizerState</code>, but are not currently first-class <code>Circuit</code> methods.</p>
 <h3 id="runstate-stabilizerstate-listint"><code>run(state: StabilizerState) → List[int]</code></h3>
 <p>Apply all ops to <code>state</code>. Returns list of measurement outcomes (one per <code>.mz()</code> call), in order.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -2125,8 +2234,10 @@
 </code></pre></div>
 <h3 id="op"><code>Op</code></h3>
 <p>Frozen dataclass: <code>Op(name: str, targets: Tuple[int, ...])</code>. Gate name is a string like <code>"H"</code>, <code>"CNOT"</code>, <code>"MZ"</code>, <code>"MZ:key"</code>.</p>
+<p><code>key</code> in <code>.mz(q, key="name")</code> is stored in the op name for readability, but <code>Circuit.run</code> currently returns outcomes as an ordered list rather than a key-value mapping.</p>
 <hr />
 <h2 id="codes"><code>codes</code></h2>
+<p>Source: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>stabilizer_python/codes.py</code></a></p>
 <h3 id="bitflip3code"><code>BitFlip3Code</code></h3>
 <p>3-qubit repetition code for single <span class="arithmatex">\(X\)</span>-error correction. All methods are <code>@staticmethod</code>.</p>
 <h4 id="encoder_circuit-circuit"><code>encoder_circuit() → Circuit</code></h4>
@@ -2165,15 +2276,18 @@
 </table>
 <h4 id="read_syndromestate-tupleint-int"><code>read_syndrome(state) → Tuple[int, int]</code></h4>
 <p>Reads syndrome from stabilizer phases directly (no ancilla required, no measurement collapse).</p>
+<p>This helper expects the relevant data-qubit stabilizers to be present in the state's generator set. If the state is not in the expected encoded layout, it raises <code>ValueError</code>.</p>
 <hr />
 <h3 id="shor9code"><code>Shor9Code</code></h3>
-<p>9-qubit Shor code correcting any single-qubit error. All methods are <code>@staticmethod</code>.</p>
+<p>9-qubit Shor-code encoder and syndrome helpers. All methods are <code>@staticmethod</code>.</p>
+<p>The current implementation provides the encoder and an <code>X</code>-error syndrome correction helper. Full phase-error correction is explained in <a href="../theory/qec-codes/">Error-Correcting Codes</a>, but is not yet exposed as a separate helper.</p>
 <h4 id="encoder_circuit-circuit_1"><code>encoder_circuit() → Circuit</code></h4>
 <p>Returns the 9-qubit encoding circuit (input on q0, all others <span class="arithmatex">\(|0\rangle\)</span>).</p>
 <h4 id="read_syndromestate-tupleint"><code>read_syndrome(state) → Tuple[int, ...]</code></h4>
 <p>Returns tuple of 9 phase bits from all stabilizer generators.</p>
 <h4 id="correct_x_from_syndromestate-syndrome-tupleint-none"><code>correct_x_from_syndrome(state, syndrome: Tuple[int, ...]) → None</code></h4>
 <p>Applies <span class="arithmatex">\(X\)</span> on the qubit matching the syndrome pattern, if recognized.</p>
+<p>If the syndrome does not match a stored single-<code>X</code> pattern, the method leaves the state unchanged.</p>
 <hr />
 <h3 id="convenience-functions">Convenience functions</h3>
 <h4 id="run_2qubit_bell-tuplestabilizerstate-listint"><code>run_2qubit_bell() → Tuple[StabilizerState, List[int]]</code></h4>
@@ -2183,6 +2297,7 @@
 <hr />
 <h2 id="linear_algebra"><code>linear_algebra</code></h2>
 <p>GF(2) linear algebra utilities.</p>
+<p>Source: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/linear_algebra.py"><code>stabilizer_python/linear_algebra.py</code></a></p>
 <h3 id="gaussian_elimination_gf2matrix-tuplelistlistint-listint"><code>gaussian_elimination_gf2(matrix) → Tuple[List[List[int]], List[int]]</code></h3>
 <p>Compute reduced row-echelon form (RREF) of a binary matrix over GF(2).</p>
 <ul>

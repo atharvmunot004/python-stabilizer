@@ -107,9 +107,17 @@ Annual industry report on the state of QEC and decoder development. Good overvie
 
 ---
 
-## Background notebooks (this repo)
+## Source repository resources
 
-The `references/` folder in the source repository contains supplementary notebooks and PDFs:
+The source repository is [`atharvmunot004/python-stabilizer`](https://github.com/atharvmunot004/python-stabilizer). Useful entry points:
+
+- [`stabilizer_python/tableau.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py) — Aaronson-Gottesman tableau implementation
+- [`stabilizer_python/circuit.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py) — fluent circuit builder
+- [`stabilizer_python/codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py) — QEC examples
+- [`tests/test_random_circuits.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_random_circuits.py) — random circuit and tableau invariant tests
+- [`docs/architecture.md`](https://github.com/atharvmunot004/python-stabilizer/blob/main/docs/architecture.md) — source-level documentation map
+
+If present in the source repository, a `references/` folder may contain supplementary notebooks and PDFs:
 
 - `Gottesman-Knill Theorem Part 1 & 2` — worked derivations of the theorem
 - `Stabilizer Formalism.pdf` — lecture-style notes on the formalism

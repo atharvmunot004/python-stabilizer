@@ -2,11 +2,13 @@
 
 This page explains exactly how `StabilizerState` stores an $n$-qubit stabilizer state as arrays of bits, and how every gate modifies those arrays. By the end, the source of `tableau.py` should be fully transparent.
 
+Implementation link: [`stabilizer_python/tableau.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py)
+
 ---
 
 ## The Aaronson–Gottesman Tableau
 
-The key reference is [Aaronson & Gottesman (2004)](https://arxiv.org/abs/quant-ph/0406196). The representation stores $2n$ rows and $n$ columns of bits, split into two matrices `x_mat` and `z_mat`, plus a phase vector `r_phase`.
+The key reference is [Aaronson & Gottesman (2004)](https://arxiv.org/abs/quant-ph/0406196). The representation in [`StabilizerState`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py) stores $2n$ rows and $n$ columns of bits, split into two matrices `x_mat` and `z_mat`, plus a phase vector `r_phase`.
 
 ```
           x_mat           z_mat         r_phase
@@ -196,6 +198,24 @@ def z(self, q):
 
 ---
 
+### Derived Clifford gates
+
+The source also includes state-level helpers for additional Clifford gates:
+
+| Method | Implementation strategy |
+|---|---|
+| `sdg(q)` / `s_dagger(q)` | Direct $S^\dagger$ tableau update |
+| `sx(q)` / `sqrt_x(q)` | Direct $\sqrt{X}$ tableau update |
+| `sxdg(q)` / `sqrt_x_dagger(q)` | Direct $\sqrt{X}^\dagger$ tableau update |
+| `y(q)` | Pauli-Y conjugation sign update |
+| `cz(control, target)` | `H(target)`, `CNOT(control, target)`, `H(target)` |
+| `cy(control, target)` | `S†(target)`, `CNOT(control, target)`, `S(target)` |
+| `swap(q1, q2)` | Three CNOTs |
+
+These methods are available directly on `StabilizerState`; the minimal `Circuit` builder currently exposes only `H`, `S`, `X`, `Z`, `CNOT`, and `MZ`.
+
+---
+
 ## Row multiplication — `_rowmult(a, b)`
 
 Row multiplication implements $\text{row}_a \leftarrow \text{row}_a \cdot \text{row}_b$ in the Pauli group. The bits XOR, but the phase requires careful tracking because Pauli multiplication introduces factors of $i$:
@@ -234,3 +254,5 @@ This prints the CHP-style Pauli rows, the raw X and Z bit matrices, and the phas
 | `measure_z(q)` | See [Measurement](measurement.md) |
 
 **Next:** [Measurement](measurement.md) — the most non-trivial operation in the tableau.
+
+For the full source map, see [Architecture](../architecture.md).

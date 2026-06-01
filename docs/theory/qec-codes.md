@@ -2,6 +2,12 @@
 
 Quantum error correction (QEC) is the primary application of stabilizer formalism. The stabilizer framework makes QEC codes almost natural to describe: a code is just a stabilizer group, a syndrome is a pattern of measurement outcomes, and correction is applying the right Pauli to restore the state.
 
+Implementation links:
+
+- QEC helpers: [`stabilizer_python/codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py)
+- Tableau operations used by syndrome extraction: [`stabilizer_python/tableau.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py)
+- QEC tests: [`tests/test_bitflip3.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_bitflip3.py)
+
 ---
 
 ## The stabilizer code framework
@@ -17,7 +23,9 @@ The stabilizer generators are Pauli operators that all commute with each other a
 
 ---
 
-## 3-qubit Bit-flip Code — $[[3, 1, 1]]$
+## 3-qubit Bit-flip Code
+
+The 3-qubit repetition code protects one logical bit against a single bit-flip error. It is best understood as a pedagogical code for $X$ errors rather than a complete quantum code: it does not detect or correct arbitrary single-qubit Pauli errors.
 
 ### Encoding
 
@@ -107,7 +115,7 @@ def measure_syndrome(state, *, ancilla_01=3, ancilla_12=4):
     return s01, s12
 ```
 
-The ancilla qubits start in $|0\rangle$ and are used to extract syndrome bits without collapsing the data qubits' logical state. CNOTs fan the data qubit $X$ operators onto the ancilla, and then measuring the ancilla in $Z$ reads out the parity.
+The ancilla qubits start in $|0\rangle$ and are used to extract syndrome bits without measuring the data qubits directly. CNOTs fan parity information onto the ancilla, and then measuring the ancilla in $Z$ reads out the stabilizer eigenvalue.
 
 After measurement, `reset_z` returns the ancilla to $|0\rangle$ for reuse.
 
@@ -203,11 +211,11 @@ syndrome = Shor9Code.read_syndrome(st)
 Shor9Code.correct_x_from_syndrome(st, syndrome)
 ```
 
-The syndrome is the tuple of phase bits from all 9 stabilizer generators. Each single-qubit $X$ error produces a unique syndrome pattern — stored in `_X_SYNDROME` — allowing the correct qubit to be identified and fixed.
+The syndrome is the tuple of phase bits from all 9 stabilizer generators in this simulator's tableau. Each single-qubit $X$ error produces a unique syndrome pattern for the current encoded layout. These patterns are stored in [`_X_SYNDROME`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py), allowing the implemented helper to identify and fix the affected qubit.
 
 ---
 
-## Why Shor corrects any single-qubit error
+## Why Shor's code corrects any single-qubit error
 
 Any single-qubit error can be decomposed into Pauli components: $I$, $X$, $Y$, $Z$.
 
@@ -218,6 +226,8 @@ Any single-qubit error can be decomposed into Pauli components: $I$, $X$, $Y$, $
 
 The concatenated structure means a single physical qubit error can never affect more than one block and one inter-block relationship simultaneously — keeping it below the detection threshold.
 
+The current package implements the encoder and an `X`-error correction helper. The stabilizer-code theory above explains the full Shor-code protection mechanism; adding explicit `Z` and `Y` correction helpers would be a natural extension point.
+
 ---
 
 ## Comparing the two codes
@@ -226,11 +236,12 @@ The concatenated structure means a single physical qubit error can never affect 
 |---|---|---|
 | Physical qubits | 3 | 9 |
 | Logical qubits | 1 | 1 |
-| Distance | 1 | 3 |
+| Full quantum distance | Not a full arbitrary-Pauli code | 3 |
 | Corrects $X$ | ✅ | ✅ |
-| Corrects $Z$ | ❌ | ✅ |
-| Corrects $Y$ | ❌ | ✅ |
+| Corrects $Z$ | ❌ | Theoretically yes; helper not implemented |
+| Corrects $Y$ | ❌ | Theoretically yes; helper not implemented |
 | Stabilizers | 2 | 8 |
+| Main source class | [`BitFlip3Code`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py) | [`Shor9Code`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py) |
 
 ---
 

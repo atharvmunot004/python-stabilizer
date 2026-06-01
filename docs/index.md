@@ -1,35 +1,60 @@
 # stabilizer-python
 
-A minimal, dependency-free stabilizer (Clifford) simulator in pure Python — built to be read, not just used.
+A minimal, dependency-free stabilizer (Clifford) simulator in pure Python, built to make the stabilizer formalism readable at the bit level.
 
-If you want to understand **how** stabilizer simulation works at the bit level, this is the right place. Every gate, measurement, and QEC routine maps directly to the theory, and the code is written to make that connection obvious.
+The project is both a small simulator and a learning resource. Every operation is close to the underlying Aaronson-Gottesman tableau algorithm: gates update X/Z bit matrices, measurements row-reduce the tableau, and the QEC examples expose syndrome extraction directly.
+
+Source repository: [`atharvmunot004/python-stabilizer`](https://github.com/atharvmunot004/python-stabilizer)
 
 ---
 
-## What's included
+## What is included
 
-| Module | What it does |
-|---|---|
-| `StabilizerState` | Aaronson–Gottesman tableau: the core state representation |
-| `Circuit` | Fluent gate builder that runs on a `StabilizerState` |
-| `codes` | `BitFlip3Code` and `Shor9Code` — full encode/syndrome/correct pipelines |
-| `linear_algebra` | GF(2) Gaussian elimination and rank |
+| Component | What it does | Source |
+|---|---|---|
+| `StabilizerState` | Core Aaronson-Gottesman tableau state representation | [`tableau.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py) |
+| `Circuit` | Fluent builder for small Clifford circuits | [`circuit.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py) |
+| `BitFlip3Code` | 3-qubit repetition-code encoder, syndrome reader, and X correction | [`codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py) |
+| `Shor9Code` | 9-qubit Shor encoder and current X-syndrome correction helper | [`codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py) |
+| `gaussian_elimination_gf2`, `rank_gf2` | Binary linear algebra helpers | [`linear_algebra.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/linear_algebra.py) |
+| Examples | Runnable Bell, bit-flip, and Shor demos | [`stabilizer_python/examples`](https://github.com/atharvmunot004/python-stabilizer/tree/main/stabilizer_python/examples) |
+| Tests | Invariant, random-circuit, QEC, and Qiskit interop checks | [`tests`](https://github.com/atharvmunot004/python-stabilizer/tree/main/tests) |
+
+---
+
+## Capabilities and limits
+
+`stabilizer-python` supports Clifford-state simulation:
+
+- Computational-basis initialization via `StabilizerState.zero(n)`
+- Clifford updates: `H`, `S`, Pauli gates, `CNOT`, plus several state-level derived Clifford gates
+- Z-basis measurement with deterministic and random tableau update paths
+- Small fluent circuits through `Circuit`
+- Stabilizer inspection and debug formatting
+- GF(2) rank and RREF utilities for binary stabilizer checks
+- Educational QEC examples for the 3-qubit repetition code and Shor's 9-qubit code
+
+The simulator is intentionally not a universal quantum simulator. It does not support non-Clifford gates such as `T` or arbitrary state-vector amplitudes. If you need large-scale production stabilizer simulation, use a tool such as [Stim](https://github.com/quantumlib/Stim); this project is designed to show the mechanics clearly.
 
 ---
 
 ## Installation
 
+Install from GitHub:
+
 ```bash
 pip install git+https://github.com/atharvmunot004/python-stabilizer.git
 ```
 
-No Qiskit required. Pure Python, `>=3.9`.
-
-Optional dev dependencies (pytest + Qiskit interop tests):
+For local development:
 
 ```bash
-pip install "stabilizer-python[dev] @ git+https://github.com/atharvmunot004/python-stabilizer.git"
+git clone https://github.com/atharvmunot004/python-stabilizer.git
+cd python-stabilizer
+pip install -e ".[dev]"
 ```
+
+Runtime requirements are intentionally small: Python `>=3.9` and no required third-party packages. The `dev` extra installs `pytest` and `qiskit` for the optional test suite.
 
 ---
 
@@ -41,14 +66,14 @@ pip install "stabilizer-python[dev] @ git+https://github.com/atharvmunot004/pyth
 from stabilizer_python import StabilizerState, Circuit
 
 st = StabilizerState.zero(2)
-c = Circuit(2).h(0).cnot(0, 1)
-c.run(st)
+Circuit(2).h(0).cnot(0, 1).run(st)
 
 print(st.format_chp_printstate())
 ```
 
 Output:
-```
+
+```text
 +XI
 +IX
 -----------
@@ -56,9 +81,7 @@ Output:
 +ZZ
 ```
 
-The stabilizers `+XX` and `+ZZ` are exactly the generators of the Bell state $|\Phi^+\rangle$.
-
----
+The stabilizers `+XX` and `+ZZ` are the generators of the Bell state $|\Phi^+\rangle$.
 
 ### 3-qubit bit-flip correction
 
@@ -66,27 +89,25 @@ The stabilizers `+XX` and `+ZZ` are exactly the generators of the Bell state $|\
 from stabilizer_python import StabilizerState
 from stabilizer_python.codes import BitFlip3Code
 
-# Encode |0_L>
-st = StabilizerState.zero(5)   # 3 data + 2 ancilla
+st = StabilizerState.zero(5)   # 3 data qubits + 2 syndrome ancillas
 BitFlip3Code.encoder_circuit().run(st)
 
-# Inject an X error on qubit 1
-st.x(1)
-
-# Measure syndrome
+st.x(1)                        # inject an X error on q1
 s01, s12 = BitFlip3Code.measure_syndrome(st)
-print(f"Syndrome: ({s01}, {s12})")  # (1, 1) → error on q1
-
-# Correct
 BitFlip3Code.correct_x_from_syndrome(st, s01, s12)
 ```
 
+The syndrome `(1, 1)` identifies an `X` error on qubit 1.
+
 ---
 
-## Where to go next
+## Documentation map
 
-- **New to stabilizers?** Start with [Stabilizer Formalism](theory/stabilizer-formalism.md)
-- **Understand the tableau?** Read [The Tableau Representation](theory/tableau.md)
-- **See how measurement works?** Read [Measurement](theory/measurement.md)
-- **QEC codes?** Read [Error-Correcting Codes](theory/qec-codes.md)
-- **Just want the API?** Jump to [API Reference](api-reference.md)
+- [Getting Started](getting-started.md): installation, first states, circuits, measurements, examples, and tests.
+- [Architecture](architecture.md): module responsibilities, source map, data flow, measurement internals, and extension points.
+- [Stabilizer Formalism](theory/stabilizer-formalism.md): Pauli groups, stabilizers, Clifford evolution, and Gottesman-Knill.
+- [The Tableau Representation](theory/tableau.md): how X/Z/phase arrays encode stabilizer states and how gates mutate them.
+- [Measurement](theory/measurement.md): deterministic versus random measurement and tableau row updates.
+- [Error-Correcting Codes](theory/qec-codes.md): repetition-code and Shor-code concepts mapped to the implementation.
+- [API Reference](api-reference.md): public classes, functions, method behavior, and source links.
+- [References](references.md): papers, tools, textbooks, and repository resources.

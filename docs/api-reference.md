@@ -1,5 +1,7 @@
 # API Reference
 
+This page documents the public API exposed by [`stabilizer_python`](https://github.com/atharvmunot004/python-stabilizer/tree/main/stabilizer_python). For a source-level overview, see [Architecture](architecture.md).
+
 ## `stabilizer_python`
 
 Top-level imports:
@@ -8,11 +10,28 @@ Top-level imports:
 from stabilizer_python import StabilizerState, Circuit, gaussian_elimination_gf2, rank_gf2, codes
 ```
 
+Exports are defined in [`stabilizer_python/__init__.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/__init__.py).
+
 ---
 
 ## `StabilizerState`
 
 Core state representation. An $n$-qubit stabilizer state stored as an Aaronson–Gottesman tableau.
+
+Source: [`stabilizer_python/tableau.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py)
+
+### Data attributes
+
+`StabilizerState` intentionally keeps its tableau arrays visible for teaching and debugging:
+
+| Attribute | Shape | Meaning |
+|---|---|---|
+| `n` | scalar | Number of qubits |
+| `x_mat` | `2n x n` list of bits | X component of each Pauli row |
+| `z_mat` | `2n x n` list of bits | Z component of each Pauli row |
+| `r_phase` | `2n` list of bits | Row sign: `0` for `+`, `1` for `-` |
+
+Rows `0..n-1` are destabilizers and rows `n..2n-1` are stabilizer generators.
 
 ### Construction
 
@@ -45,6 +64,8 @@ All gate methods modify the state in place and return `None`.
 #### `cz(control: int, target: int)` — Controlled-Z
 #### `cy(control: int, target: int)` — Controlled-Y
 #### `swap(q1: int, q2: int)` — SWAP (via 3 CNOTs)
+
+Index validation is currently explicit for `i(q)` and implicit for most other gate methods through Python list indexing.
 
 ---
 
@@ -90,6 +111,8 @@ for phase, x, z in st.stabilizer_generators():
 
 Returns a deep copy of the state.
 
+The copied state has independent `x_mat`, `z_mat`, and `r_phase` lists.
+
 ---
 
 ### Debug formatting
@@ -124,6 +147,8 @@ All three formats combined. Useful for step-by-step debugging.
 
 Lightweight fluent circuit builder.
 
+Source: [`stabilizer_python/circuit.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py)
+
 ### `Circuit(n_qubits: int)`
 
 ```python
@@ -144,6 +169,8 @@ All return `self` for chaining.
 | `.mz(q, key=None)` | Measure Z |
 | `.extend(ops)` | Append a list of `Op` objects |
 
+`Circuit` exposes a smaller builder surface than `StabilizerState`. For example, state-level gates such as `sdg`, `sx`, `y`, `cz`, `cy`, and `swap` can be called directly on `StabilizerState`, but are not currently first-class `Circuit` methods.
+
 ### `run(state: StabilizerState) → List[int]`
 
 Apply all ops to `state`. Returns list of measurement outcomes (one per `.mz()` call), in order.
@@ -157,9 +184,13 @@ outcomes = Circuit(2).h(0).cnot(0, 1).mz(0).mz(1).run(st)
 
 Frozen dataclass: `Op(name: str, targets: Tuple[int, ...])`. Gate name is a string like `"H"`, `"CNOT"`, `"MZ"`, `"MZ:key"`.
 
+`key` in `.mz(q, key="name")` is stored in the op name for readability, but `Circuit.run` currently returns outcomes as an ordered list rather than a key-value mapping.
+
 ---
 
 ## `codes`
+
+Source: [`stabilizer_python/codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py)
 
 ### `BitFlip3Code`
 
@@ -192,11 +223,15 @@ Applies the corrective $X$ gate based on syndrome:
 
 Reads syndrome from stabilizer phases directly (no ancilla required, no measurement collapse).
 
+This helper expects the relevant data-qubit stabilizers to be present in the state's generator set. If the state is not in the expected encoded layout, it raises `ValueError`.
+
 ---
 
 ### `Shor9Code`
 
-9-qubit Shor code correcting any single-qubit error. All methods are `@staticmethod`.
+9-qubit Shor-code encoder and syndrome helpers. All methods are `@staticmethod`.
+
+The current implementation provides the encoder and an `X`-error syndrome correction helper. Full phase-error correction is explained in [Error-Correcting Codes](theory/qec-codes.md), but is not yet exposed as a separate helper.
 
 #### `encoder_circuit() → Circuit`
 
@@ -209,6 +244,8 @@ Returns tuple of 9 phase bits from all stabilizer generators.
 #### `correct_x_from_syndrome(state, syndrome: Tuple[int, ...]) → None`
 
 Applies $X$ on the qubit matching the syndrome pattern, if recognized.
+
+If the syndrome does not match a stored single-`X` pattern, the method leaves the state unchanged.
 
 ---
 
@@ -227,6 +264,8 @@ Returns a `StabilizerState` with $|0_L\rangle$ encoded in the 3-qubit bit-flip c
 ## `linear_algebra`
 
 GF(2) linear algebra utilities.
+
+Source: [`stabilizer_python/linear_algebra.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/linear_algebra.py)
 
 ### `gaussian_elimination_gf2(matrix) → Tuple[List[List[int]], List[int]]`
 
