@@ -51,5 +51,6 @@ nav:
     - The Tableau: theory/tableau.md
     - Measurement: theory/measurement.md
     - Error-Correcting Codes: theory/qec-codes.md
+    - Hybrid Simulation: hybrid-simulation.md
   - API Reference: api-reference.md
   - References: references.md

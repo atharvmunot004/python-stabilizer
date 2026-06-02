@@ -228,16 +228,8 @@ class StabilizerState:
                 break
 
         if p == -1:
-            # Deterministic: Z_q is fixed by stabilizers. Outcome determined by product of rows
-            # that have Z on q in destabilizer part.
-            # Compute sign of implied observable by eliminating X on q in destabilizers.
-            # Using standard AG technique: multiply stabilizer rows where destabilizer has X on q.
-            outcome = 0
-            for r in range(0, n):
-                if self.x_mat[r][q] == 1:
-                    # This destabilizer row implies a stabilizer with Z on q; its phase contributes.
-                    outcome ^= self.r_phase[n + r]
-            return outcome
+            # Deterministic: Z_q is fixed by a product of stabilizer rows.
+            return self._deterministic_z_outcome(q)
 
         # Random outcome
         outcome = random.randint(0, 1)
@@ -267,6 +259,62 @@ class StabilizerState:
         self.r_phase[q] = 0
 
         return outcome
+
+    def _deterministic_z_outcome(self, q: int) -> int:
+        """
+        Return the sign of Z_q when it is already implied by the stabilizer group.
+        """
+        n = self.n
+        target = [0] * (2 * n)
+        target[n + q] = 1
+        rows = [self.x_mat[n + i][:] + self.z_mat[n + i][:] for i in range(n)]
+        solution = self._solve_stabilizer_product(rows, target)
+
+        work = self.copy()
+        for j in range(n):
+            work.x_mat[0][j] = 0
+            work.z_mat[0][j] = 0
+        work.r_phase[0] = 0
+
+        for i, selected in enumerate(solution):
+            if selected:
+                work._rowmult(0, n + i)
+        return work.r_phase[0]
+
+    def _solve_stabilizer_product(self, rows: List[List[int]], target: List[int]) -> List[int]:
+        """
+        Solve for stabilizer-row coefficients whose binary Pauli vector equals target.
+        """
+        n = self.n
+        matrix = [[rows[var][eq] for var in range(n)] + [target[eq]] for eq in range(2 * n)]
+        pivot_rows: List[int] = []
+        pivot_cols: List[int] = []
+        row = 0
+        for col in range(n):
+            pivot = -1
+            for r in range(row, 2 * n):
+                if matrix[r][col] == 1:
+                    pivot = r
+                    break
+            if pivot == -1:
+                continue
+            matrix[row], matrix[pivot] = matrix[pivot], matrix[row]
+            for r in range(2 * n):
+                if r != row and matrix[r][col] == 1:
+                    for c in range(col, n + 1):
+                        matrix[r][c] ^= matrix[row][c]
+            pivot_rows.append(row)
+            pivot_cols.append(col)
+            row += 1
+
+        for r in range(row, 2 * n):
+            if all(matrix[r][c] == 0 for c in range(n)) and matrix[r][n] == 1:
+                raise ValueError("deterministic measurement target is not in stabilizer span")
+
+        solution = [0] * n
+        for pivot_row, pivot_col in zip(pivot_rows, pivot_cols):
+            solution[pivot_col] = matrix[pivot_row][n]
+        return solution
 
     def reset_z(self, q: int) -> int:
         """
