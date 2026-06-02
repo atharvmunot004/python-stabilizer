@@ -484,6 +484,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#simulation-backends-at-a-glance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulation backends at a glance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#your-first-stabilizer-state" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -495,10 +506,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#building-circuits" class="md-nav__link">
+  <a href="#building-clifford-circuits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Building circuits
+        Building Clifford circuits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-clifford-gates-with-quantumsimulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-Clifford gates with QuantumSimulator
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-circuits-from-qiskit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loading circuits from Qiskit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspecting-simulation-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inspecting simulation state
       
     </span>
   </a>
@@ -552,17 +596,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inspecting-the-tableau" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Inspecting the tableau
-      
-    </span>
-  </a>
   
 </li>
       
@@ -787,6 +820,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hybrid-simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -886,6 +947,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#simulation-backends-at-a-glance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulation backends at a glance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#your-first-stabilizer-state" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -897,10 +969,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#building-circuits" class="md-nav__link">
+  <a href="#building-clifford-circuits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Building circuits
+        Building Clifford circuits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-clifford-gates-with-quantumsimulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-Clifford gates with QuantumSimulator
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-circuits-from-qiskit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loading circuits from Qiskit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspecting-simulation-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inspecting simulation state
       
     </span>
   </a>
@@ -958,17 +1063,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#inspecting-the-tableau" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Inspecting the tableau
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#running-the-tests" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1011,20 +1105,50 @@
 
 
 <h1 id="getting-started">Getting Started</h1>
-<p>This guide walks from installation to the core workflows: preparing a tableau state, applying Clifford circuits, measuring qubits, running the included QEC examples, and validating the checkout.</p>
+<p>This guide walks from installation to the core workflows: preparing tableau states, running Clifford circuits, switching automatically to statevector simulation for non-Clifford gates, loading circuits from Qiskit, measuring qubits, running the included QEC examples, and validating the checkout.</p>
 <h2 id="installation">Installation</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/atharvmunot004/python-stabilizer.git
 </code></pre></div>
 <p>With dev dependencies (pytest + Qiskit interop tests):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;stabilizer-python[dev] @ git+https://github.com/atharvmunot004/python-stabilizer.git&quot;</span>
 </code></pre></div>
-<p>Requirements: Python <code>&gt;=3.9</code>. The runtime package has no required third-party dependencies.</p>
+<p>Requirements: Python <code>&gt;=3.9</code>. The runtime package has no required third-party dependencies. NumPy is used automatically when the hybrid statevector backend is active; it is not required for pure Clifford circuits.</p>
 <p>Source links:</p>
 <ul>
 <li>Repository: <a href="https://github.com/atharvmunot004/python-stabilizer"><code>atharvmunot004/python-stabilizer</code></a></li>
 <li>Package metadata: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/pyproject.toml"><code>pyproject.toml</code></a></li>
 <li>Public exports: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/__init__.py"><code>stabilizer_python/__init__.py</code></a></li>
 </ul>
+<hr />
+<h2 id="simulation-backends-at-a-glance">Simulation backends at a glance</h2>
+<table>
+<thead>
+<tr>
+<th>Backend</th>
+<th>Class</th>
+<th>State</th>
+<th>Gate scope</th>
+<th>Per-gate cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tableau</td>
+<td><code>StabilizerState</code></td>
+<td>2n×n binary tableau</td>
+<td>Clifford only</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>Hybrid</td>
+<td><code>QuantumSimulator</code></td>
+<td>Tableau until first non-Clifford gate, then 2^n statevector</td>
+<td>Full Qiskit gate set</td>
+<td>O(n) Clifford, O(2^n) after switch</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>StabilizerState</code> directly for pure Clifford and QEC workflows. Use <code>QuantumSimulator</code> when a circuit may contain <code>T</code>, rotations, Toffoli, or gates loaded from Qiskit.</p>
 <hr />
 <h2 id="your-first-stabilizer-state">Your first stabilizer state</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
@@ -1041,8 +1165,8 @@
 </code></pre></div>
 <p>The top half are destabilizers, the bottom half are stabilizer generators. See <a href="../theory/tableau/">The Tableau Representation</a> for what these mean and <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>StabilizerState.zero</code></a> for the initialization logic.</p>
 <hr />
-<h2 id="building-circuits">Building circuits</h2>
-<p><code>Circuit</code> is a fluent gate builder implemented in <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py"><code>circuit.py</code></a>. It records operations and applies them to a <code>StabilizerState</code> when <code>run(state)</code> is called.</p>
+<h2 id="building-clifford-circuits">Building Clifford circuits</h2>
+<p><code>Circuit</code> is a fluent gate builder implemented in <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py"><code>circuit.py</code></a>. It records operations and applies them to a <code>StabilizerState</code> or <code>QuantumSimulator</code> when <code>run(state)</code> is called.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span><span class="p">,</span> <span class="n">Circuit</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># Bell state</span>
@@ -1052,9 +1176,9 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_chp_printstate</span><span class="p">())</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># +XX</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># +ZZ   ← stabilizers of |Φ+&gt;</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># +ZZ   stabilizers of |Phi+&gt;</span>
 </code></pre></div>
-<p>Available gates:</p>
+<p>Available Clifford circuit methods:</p>
 <table>
 <thead>
 <tr>
@@ -1069,109 +1193,350 @@
 </tr>
 <tr>
 <td><code>.s(q)</code></td>
-<td>Phase (<span class="arithmatex">\(S\)</span>)</td>
+<td>Phase (<code>S</code>)</td>
+</tr>
+<tr>
+<td><code>.sdg(q)</code></td>
+<td><code>S</code> dagger</td>
+</tr>
+<tr>
+<td><code>.sx(q)</code></td>
+<td>Square-root X</td>
+</tr>
+<tr>
+<td><code>.sxdg(q)</code></td>
+<td>Square-root X dagger</td>
 </tr>
 <tr>
 <td><code>.x(q)</code></td>
-<td>Pauli <span class="arithmatex">\(X\)</span></td>
+<td>Pauli <code>X</code></td>
+</tr>
+<tr>
+<td><code>.y(q)</code></td>
+<td>Pauli <code>Y</code></td>
 </tr>
 <tr>
 <td><code>.z(q)</code></td>
-<td>Pauli <span class="arithmatex">\(Z\)</span></td>
+<td>Pauli <code>Z</code></td>
 </tr>
 <tr>
-<td><code>.cnot(c, t)</code></td>
+<td><code>.i(q)</code></td>
+<td>Identity</td>
+</tr>
+<tr>
+<td><code>.cnot(c, t)</code> / <code>.cx(c, t)</code></td>
 <td>Controlled-NOT</td>
+</tr>
+<tr>
+<td><code>.cz(c, t)</code></td>
+<td>Controlled-Z</td>
+</tr>
+<tr>
+<td><code>.cy(c, t)</code></td>
+<td>Controlled-Y</td>
+</tr>
+<tr>
+<td><code>.ch(c, t)</code></td>
+<td>Controlled-H</td>
+</tr>
+<tr>
+<td><code>.swap(q1, q2)</code></td>
+<td>SWAP</td>
+</tr>
+<tr>
+<td><code>.iswap(q1, q2)</code></td>
+<td>iSWAP</td>
+</tr>
+<tr>
+<td><code>.cs(c, t)</code></td>
+<td>Controlled-S</td>
+</tr>
+<tr>
+<td><code>.csdg(c, t)</code></td>
+<td>Controlled-S dagger</td>
+</tr>
+<tr>
+<td><code>.ecr(q1, q2)</code></td>
+<td>Echoed cross-resonance</td>
+</tr>
+<tr>
+<td><code>.dcx(q1, q2)</code></td>
+<td>Double-CNOT</td>
 </tr>
 <tr>
 <td><code>.mz(q)</code></td>
 <td>Measure Z</td>
 </tr>
+</tbody>
+</table>
+<p>The <code>run(state)</code> method returns a list of measurement outcomes, one per <code>.mz()</code> call.</p>
+<hr />
+<h2 id="non-clifford-gates-with-quantumsimulator">Non-Clifford gates with QuantumSimulator</h2>
+<p><code>QuantumSimulator</code> starts in tableau mode and switches to statevector mode on the first non-Clifford gate.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>      <span class="c1"># stays in tableau mode</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>      <span class="c1"># triggers switch to statevector</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>          <span class="c1"># &quot;statevector&quot;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>       <span class="c1"># [0.70710678+0.j  0.5       +0.5j]</span>
+</code></pre></div>
+<p>Single-qubit rotations use concrete numeric parameters:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">import</span> <span class="nn">math</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;rx&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">])</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;ry&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">5</span><span class="p">])</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;rz&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">6</span><span class="p">])</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">7</span><span class="p">])</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">8</span><span class="p">])</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</code></pre></div>
+<p>Two-qubit parameterized gates use the same name-based interface:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">import</span> <span class="nn">math</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;cnot&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;crz&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span><span class="p">])</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;rzz&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">])</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;rxx&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">5</span><span class="p">])</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">probabilities</span><span class="p">())</span>
+</code></pre></div>
+<p>Toffoli is a three-qubit non-Clifford gate. This prepares <code>|110&gt;</code> in the displayed bitstring convention, then flips the target to <code>|111&gt;</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;ccx&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">statevector_snapshot</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>  <span class="c1"># {&#39;111&#39;: (1+0j)}</span>
+</code></pre></div>
+<p><code>Circuit</code> can also contain non-Clifford gates and run directly on a <code>QuantumSimulator</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">Circuit</span><span class="p">,</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">import</span> <span class="nn">math</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">circuit</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="n">circuit</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>      <span class="c1"># &quot;statevector&quot;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<p>For lower-level code, pass a <code>Gate</code> object with <code>.apply_gate()</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span><span class="p">,</span> <span class="n">RZGate</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">import</span> <span class="nn">math</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply_gate</span><span class="p">(</span><span class="n">RZGate</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span><span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="loading-circuits-from-qiskit">Loading circuits from Qiskit</h2>
+<p>Install Qiskit separately when you want to load Qiskit circuits:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>pip<span class="w"> </span>install<span class="w"> </span>qiskit
+</code></pre></div>
+<p>Qiskit is an optional dependency. The runtime package does not require it for local circuits.</p>
+<p>Example 1 - pure Clifford Qiskit circuit, which stays in tableau mode:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span> <span class="k">as</span> <span class="n">QiskitCircuit</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="kn">from</span> <span class="nn">stabilizer_python.qiskit_interop</span> <span class="kn">import</span> <span class="n">from_qiskit</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">qc</span> <span class="o">=</span> <span class="n">QiskitCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="n">from_qiskit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>                              <span class="c1"># &quot;tableau&quot;</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">statevector_snapshot</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span> <span class="c1"># {&#39;00&#39;: ..., &#39;11&#39;: ...}</span>
+</code></pre></div>
+<p>Example 2 - non-Clifford Qiskit circuit, which triggers statevector mode:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">import</span> <span class="nn">math</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span> <span class="k">as</span> <span class="n">QiskitCircuit</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="kn">from</span> <span class="nn">stabilizer_python.qiskit_interop</span> <span class="kn">import</span> <span class="n">from_qiskit</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="n">qc</span> <span class="o">=</span> <span class="n">QiskitCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="n">qc</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="n">qc</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="n">from_qiskit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>       <span class="c1"># &quot;statevector&quot;</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<p>Example 3 - 3-qubit QFT from Qiskit's circuit library:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">from</span> <span class="nn">qiskit.circuit.library</span> <span class="kn">import</span> <span class="n">QFT</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="kn">from</span> <span class="nn">stabilizer_python.qiskit_interop</span> <span class="kn">import</span> <span class="n">from_qiskit</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="n">qc</span> <span class="o">=</span> <span class="n">QFT</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">do_swaps</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="n">from_qiskit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">probabilities</span><span class="p">())</span>   <span class="c1"># approximately uniform across 8 basis states</span>
+</code></pre></div>
+<p>Example 4 - parameterized VQE ansatz with bound parameters:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span> <span class="nn">qiskit.circuit.library</span> <span class="kn">import</span> <span class="n">RealAmplitudes</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="kn">from</span> <span class="nn">stabilizer_python.qiskit_interop</span> <span class="kn">import</span> <span class="n">from_qiskit</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="kn">import</span> <span class="nn">math</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="n">ansatz</span> <span class="o">=</span> <span class="n">RealAmplitudes</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">reps</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="n">bound</span> <span class="o">=</span> <span class="n">ansatz</span><span class="o">.</span><span class="n">assign_parameters</span><span class="p">([</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">6</span><span class="p">])</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="n">from_qiskit</span><span class="p">(</span><span class="n">bound</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</code></pre></div>
+<p>Example 5 - Qiskit circuit with measurement, reading outcomes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span> <span class="k">as</span> <span class="n">QiskitCircuit</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="kn">from</span> <span class="nn">stabilizer_python.qiskit_interop</span> <span class="kn">import</span> <span class="n">from_qiskit</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="n">qc</span> <span class="o">=</span> <span class="n">QiskitCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="n">outcomes</span> <span class="o">=</span> <span class="n">from_qiskit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span>   <span class="c1"># e.g. [0, 0] or [1, 1], always correlated</span>
+</code></pre></div>
+<p>Non-obvious gate name mappings:</p>
+<table>
+<thead>
 <tr>
-<td><code>.extend(ops)</code></td>
-<td>Append existing <code>Op</code> objects</td>
+<th>Qiskit name</th>
+<th>Local name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cx</code></td>
+<td><code>cnot</code></td>
+</tr>
+<tr>
+<td><code>measure</code></td>
+<td><code>mz</code></td>
+</tr>
+<tr>
+<td><code>u1</code></td>
+<td><code>p</code></td>
+</tr>
+<tr>
+<td><code>u3</code> / <code>u</code></td>
+<td><code>u</code></td>
+</tr>
+<tr>
+<td><code>tdg</code></td>
+<td><code>tdg</code></td>
+</tr>
+<tr>
+<td><code>ccx</code></td>
+<td><code>ccx</code></td>
+</tr>
+<tr>
+<td><code>cswap</code></td>
+<td><code>cswap</code></td>
 </tr>
 </tbody>
 </table>
-<p>The <code>run(state)</code> method returns a list of measurement outcomes (one per <code>.mz()</code> call).</p>
-<p>State-level methods on <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>StabilizerState</code></a> include additional Clifford operations such as <code>sdg</code>, <code>sx</code>, <code>sxdg</code>, <code>y</code>, <code>cz</code>, <code>cy</code>, and <code>swap</code>. These are available directly on the state even if the minimal <code>Circuit</code> builder does not expose every one of them.</p>
+<p>Gates not in the mapping raise <code>ValueError</code> with the gate name.</p>
+<hr />
+<h2 id="inspecting-simulation-state">Inspecting simulation state</h2>
+<p>Three tableau debug formats are available:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># CHP-style: Pauli strings with +/- signs</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_chp_printstate</span><span class="p">())</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># Raw X and Z bit matrices</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_xz_binary_matrices</span><span class="p">())</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1"># Phase column</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_phase_matrix</span><span class="p">())</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="c1"># All three together</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_tableau_debug</span><span class="p">())</span>
+</code></pre></div>
+<p>Statevector inspection works through <code>QuantumSimulator</code> in either mode:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">sv</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">statevector_snapshot</span><span class="p">()</span>   <span class="c1"># works in either mode</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>                    <span class="c1"># raw complex128 array, length 2^n</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">probabilities</span><span class="p">())</span>         <span class="c1"># |amplitude|^2 per computational basis state</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>               <span class="c1"># {bitstring: amplitude} above tolerance</span>
+</code></pre></div>
 <hr />
 <h2 id="measuring-qubits">Measuring qubits</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span><span class="p">,</span> <span class="n">Circuit</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># Measure qubit 0</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">outcome</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">measure_z</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Outcome: </span><span class="si">{</span><span class="n">outcome</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>   <span class="c1"># 0 or 1, equally likely</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># Both qubits are now correlated</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_chp_printstate</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span><span class="p">,</span> <span class="n">Circuit</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="c1"># Measure qubit 0</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="n">outcome</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">measure_z</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Outcome: </span><span class="si">{</span><span class="n">outcome</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>   <span class="c1"># 0 or 1, equally likely</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="c1"># Both qubits are now correlated</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_chp_printstate</span><span class="p">())</span>
 </code></pre></div>
 <p>Or measure inline in the circuit:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">c</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mz</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mz</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">outcomes</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span>   <span class="c1"># e.g. [0, 0] or [1, 1]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="n">c</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mz</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mz</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">outcomes</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span>   <span class="c1"># e.g. [0, 0] or [1, 1]</span>
 </code></pre></div>
 <p>Measurement is implemented in <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>StabilizerState.measure_z</code></a>. The method takes a deterministic path when the measured observable already commutes with the stabilizer group and a random path when the observable anticommutes with a stabilizer generator. The details are in <a href="../theory/measurement/">Measurement</a>.</p>
+<p>Measurement also works in statevector mode through <code>QuantumSimulator.measure_z()</code> and <code>.mz()</code> circuit operations.</p>
 <hr />
 <h2 id="using-qec-codes">Using QEC codes</h2>
 <h3 id="3-qubit-bit-flip">3-qubit bit-flip</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.codes</span> <span class="kn">import</span> <span class="n">BitFlip3Code</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># 3 data qubits + 2 ancilla</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">encoder_circuit</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1"># Inject an error</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">st</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="c1"># Measure syndrome and correct</span>
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="n">s01</span><span class="p">,</span> <span class="n">s12</span> <span class="o">=</span> <span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">measure_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">correct_x_from_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">s01</span><span class="p">,</span> <span class="n">s12</span><span class="p">)</span>
-<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
-<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Syndrome: (</span><span class="si">{</span><span class="n">s01</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">s12</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>   <span class="c1"># (0, 1) → error was on q2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.codes</span> <span class="kn">import</span> <span class="n">BitFlip3Code</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="c1"># 3 data qubits + 2 ancilla</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">encoder_circuit</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="c1"># Inject an error</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="n">st</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="c1"># Measure syndrome and correct</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="n">s01</span><span class="p">,</span> <span class="n">s12</span> <span class="o">=</span> <span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">measure_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">correct_x_from_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">s01</span><span class="p">,</span> <span class="n">s12</span><span class="p">)</span>
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Syndrome: (</span><span class="si">{</span><span class="n">s01</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">s12</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>   <span class="c1"># (0, 1) → error was on q2</span>
 </code></pre></div>
 <p>The code lives in <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>BitFlip3Code</code></a>. <code>measure_syndrome</code> uses two ancillas to read <span class="arithmatex">\(Z_0Z_1\)</span> and <span class="arithmatex">\(Z_1Z_2\)</span>, then resets those ancillas to <code>|0&gt;</code>.</p>
 <h3 id="shor-9-qubit-code">Shor 9-qubit code</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.codes</span> <span class="kn">import</span> <span class="n">Shor9Code</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">Shor9Code</span><span class="o">.</span><span class="n">encoder_circuit</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="n">st</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>   <span class="c1"># inject error</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">syndrome</span> <span class="o">=</span> <span class="n">Shor9Code</span><span class="o">.</span><span class="n">read_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="n">Shor9Code</span><span class="o">.</span><span class="n">correct_x_from_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">syndrome</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.codes</span> <span class="kn">import</span> <span class="n">Shor9Code</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="n">Shor9Code</span><span class="o">.</span><span class="n">encoder_circuit</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="n">st</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>   <span class="c1"># inject error</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="n">syndrome</span> <span class="o">=</span> <span class="n">Shor9Code</span><span class="o">.</span><span class="n">read_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="n">Shor9Code</span><span class="o">.</span><span class="n">correct_x_from_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">syndrome</span><span class="p">)</span>
 </code></pre></div>
 <p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>Shor9Code</code></a> builds the 9-qubit encoder and includes a helper for recognizing current single-<code>X</code>-error syndrome patterns.</p>
 <hr />
-<h2 id="inspecting-the-tableau">Inspecting the tableau</h2>
-<p>Three debug formats are available:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># CHP-style: Pauli strings with +/- signs</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_chp_printstate</span><span class="p">())</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Raw X and Z bit matrices</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_xz_binary_matrices</span><span class="p">())</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># Phase column</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_phase_matrix</span><span class="p">())</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1"># All three together</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_tableau_debug</span><span class="p">())</span>
-</code></pre></div>
-<hr />
 <h2 id="running-the-tests">Running the tests</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/atharvmunot004/python-stabilizer.git
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nb">cd</span><span class="w"> </span>python-stabilizer
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>pytest
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/atharvmunot004/python-stabilizer.git
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nb">cd</span><span class="w"> </span>python-stabilizer
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>pytest
 </code></pre></div>
-<p>The test suite covers individual gates, Bell/GHZ states, bit-flip code behavior, Shor-code encoding/correction helpers, GF(2) linear algebra, random Clifford circuits, random measurements, and small Qiskit interoperability checks.</p>
+<p>The test suite has 35 tests covering individual gates, Bell/GHZ states, bit-flip code behavior, Shor-code encoding/correction helpers, GF(2) linear algebra, random Clifford circuits, random measurements, Qiskit interoperability checks, and non-Clifford hybrid simulation.</p>
 <p>Useful test entry points:</p>
 <table>
 <thead>
@@ -1197,17 +1562,22 @@
 <td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_qiskit_circuits.py"><code>tests/test_qiskit_circuits.py</code></a></td>
 <td>Small Qiskit-to-local circuit comparisons</td>
 </tr>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_nonclifford_gates.py"><code>tests/test_nonclifford_gates.py</code></a></td>
+<td>Hybrid statevector fallback and non-Clifford gates</td>
+</tr>
 </tbody>
 </table>
 <hr />
 <h2 id="whats-next">What's next</h2>
 <ul>
-<li><a href="../theory/stabilizer-formalism/">Stabilizer Formalism</a> — the math behind the simulation</li>
-<li><a href="../architecture/">Architecture</a> — how the modules fit together and where to find the source</li>
-<li><a href="../theory/tableau/">The Tableau Representation</a> — how bits map to quantum states</li>
-<li><a href="../theory/measurement/">Measurement</a> — deterministic vs random outcomes</li>
-<li><a href="../theory/qec-codes/">Error-Correcting Codes</a> — bit-flip and Shor code deep dive</li>
-<li><a href="../api-reference/">API Reference</a> — full module documentation</li>
+<li><a href="../theory/stabilizer-formalism/">Stabilizer Formalism</a> - the math behind the simulation</li>
+<li><a href="../architecture/">Architecture</a> - hybrid routing and how the modules fit together</li>
+<li><a href="../theory/tableau/">The Tableau Representation</a> - how bits map to quantum states</li>
+<li><a href="../theory/measurement/">Measurement</a> - deterministic vs random outcomes</li>
+<li><a href="../theory/qec-codes/">Error-Correcting Codes</a> - bit-flip and Shor code deep dive</li>
+<li><a href="../hybrid-simulation/">Hybrid Simulation</a> - the Clifford/non-Clifford boundary</li>
+<li><a href="../api-reference/">API Reference</a> - public classes, gates, and helper functions</li>
 </ul>
 
 
