@@ -1605,11 +1605,11 @@
 <p>Rows <code>0..n-1</code> are destabilizers. Rows <code>n..2n-1</code> are stabilizer generators. This follows Aaronson-Gottesman's extended tableau representation and makes measurement efficient.</p>
 <p>The class owns all Clifford state mutation:</p>
 <ul>
-<li>Constructors: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>zero(n)</code></a></li>
+<li>Constructors: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>zero(n)</code></a>, <code>from_stabilizer_list(...)</code></li>
 <li>Single-qubit Clifford gates: <code>h</code>, <code>s</code>, <code>sdg</code>, <code>sx</code>, <code>sxdg</code>, <code>x</code>, <code>y</code>, <code>z</code>, <code>i</code></li>
 <li>Two-qubit Clifford gates: <code>cnot</code>/<code>cx</code>, <code>cz</code>, <code>cy</code>, <code>swap</code></li>
 <li>Measurement and reset: <code>measure_z</code>, <code>reset_z</code></li>
-<li>Inspection: <code>inspect</code>, <code>stabilizer_generators</code>, <code>copy</code>, <code>format_chp_printstate</code>, <code>format_xz_binary_matrices</code>, <code>format_phase_matrix</code>, <code>format_tableau_debug</code></li>
+<li>Inspection: <code>inspect</code>, <code>stabilizer_generators</code>, <code>stabilizer_strings</code>, <code>destabilizer_strings</code>, <code>copy</code>, <code>format_chp_printstate</code>, <code>format_xz_binary_matrices</code>, <code>format_phase_matrix</code>, <code>format_tableau_debug</code></li>
 </ul>
 <h3 id="gate"><code>Gate</code></h3>
 <p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/gate.py"><code>gate.py</code></a> defines the <code>Gate</code> dataclass:</p>
