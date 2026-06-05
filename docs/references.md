@@ -123,4 +123,6 @@ If present in the source repository, a `references/` folder may contain suppleme
 - `Stabilizer Formalism.pdf` — lecture-style notes on the formalism
 - `Stabilizer Codes.pdf` — code construction reference
 
+The `docs/proofs/` folder contains working notes linked from the theory pages, for example [X gate tableau update proof](proofs/x-gate-proof.md) ([PDF](proofs/x-gate-proof.pdf)).
+
 These are available in the source repository but not included in the installed package.

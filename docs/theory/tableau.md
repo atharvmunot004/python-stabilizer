@@ -184,6 +184,8 @@ Final stabilizers: $+XX$, $+ZZ$ — the Bell state $|\Phi^+\rangle$. ✓
 
 Pauli gates act by conjugation: $X P X^\dagger$ flips the sign of $Z$ and $Y$ (anything with a $z$ bit set on qubit $q$). $Z P Z^\dagger$ flips the sign of $X$ and $Y$.
 
+Working notes with a full case-by-case proof and complexity comparison to CHP: [markdown](../proofs/x-gate-proof.md) · [PDF](../proofs/x-gate-proof.pdf).
+
 ```python
 def x(self, q):
     for r in range(2 * self.n):
