@@ -728,13 +728,96 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#viewing-the-full-tableau" class="md-nav__link">
+  <a href="#viewing-and-inspecting-the-tableau" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Viewing the full tableau
+        Viewing and inspecting the tableau
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Viewing and inspecting the tableau">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chp-signed-pauli-rows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        chp: signed Pauli rows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binary-raw-x-and-z-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        binary: raw X and Z matrices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-row-sign-bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        phase: row sign bits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug-chp-rows-plus-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        debug: CHP rows plus matrices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stabilizers-only-rows-n2n-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stabilizers: only rows n..2n-1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destabilizers-only-rows-0n-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        destabilizers: only rows 0..n-1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combining-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combining views
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1046,13 +1129,96 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#viewing-the-full-tableau" class="md-nav__link">
+  <a href="#viewing-and-inspecting-the-tableau" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Viewing the full tableau
+        Viewing and inspecting the tableau
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Viewing and inspecting the tableau">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chp-signed-pauli-rows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        chp: signed Pauli rows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binary-raw-x-and-z-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        binary: raw X and Z matrices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-row-sign-bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        phase: row sign bits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug-chp-rows-plus-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        debug: CHP rows plus matrices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stabilizers-only-rows-n2n-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stabilizers: only rows n..2n-1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destabilizers-only-rows-0n-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        destabilizers: only rows 0..n-1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combining-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combining views
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1237,6 +1403,7 @@
 <hr />
 <h3 id="pauli-gates">Pauli gates</h3>
 <p>Pauli gates act by conjugation: <span class="arithmatex">\(X P X^\dagger\)</span> flips the sign of <span class="arithmatex">\(Z\)</span> and <span class="arithmatex">\(Y\)</span> (anything with a <span class="arithmatex">\(z\)</span> bit set on qubit <span class="arithmatex">\(q\)</span>). <span class="arithmatex">\(Z P Z^\dagger\)</span> flips the sign of <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span>.</p>
+<p>Working notes with a full case-by-case proof and complexity comparison to CHP: <a href="../../proofs/x-gate-proof/">markdown</a> · <a href="../../proofs/x-gate-proof.pdf">PDF</a>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span> <span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -1296,14 +1463,127 @@
 <p>The helper <code>_row_mult_phase(x1, z1, x2, z2)</code> returns the exponent of <span class="arithmatex">\(i\)</span> contributed by one qubit. Summing over all qubits and reducing mod 4 gives the total phase. If the sum is 2 (i.e., <span class="arithmatex">\(i^2 = -1\)</span>), flip the sign bit.</p>
 <p>This is used during measurement to maintain a valid tableau after updating rows.</p>
 <hr />
-<h2 id="viewing-the-full-tableau">Viewing the full tableau</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span><span class="p">,</span> <span class="n">Circuit</span>
+<h2 id="viewing-and-inspecting-the-tableau">Viewing and inspecting the tableau</h2>
+<p>The tableau is intentionally visible. The most convenient entrypoint is <code>inspect()</code>, which returns formatted text. Use <code>print(st.inspect())</code> for terminal output.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">Circuit</span><span class="p">,</span> <span class="n">StabilizerState</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">Circuit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>  <span class="c1"># GHZ state</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_tableau_debug</span><span class="p">())</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">())</span>
 </code></pre></div>
-<p>This prints the CHP-style Pauli rows, the raw X and Z bit matrices, and the phase column — useful for debugging and understanding what the tableau looks like after any sequence of gates.</p>
+<p>With <code>views=None</code> (the default), <code>inspect()</code> prints the four main views separated by blank lines:</p>
+<ol>
+<li><code>chp</code></li>
+<li><code>binary</code></li>
+<li><code>phase</code></li>
+<li><code>debug</code></li>
+</ol>
+<p>The default is intentionally verbose. It is useful in notebooks, examples, and debugging sessions where you want every representation in one place. For narrower output, pass <code>views=[...]</code>.</p>
+<h3 id="chp-signed-pauli-rows"><code>chp</code>: signed Pauli rows</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>+ZII
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>+IXI
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>+IIX
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>----
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>+XXX
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>+ZZI
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>+ZIZ
+</code></pre></div>
+<p>This is the same output as <code>format_chp_printstate()</code>. Rows above the separator are destabilizers. Rows below the separator are stabilizer generators.</p>
+<h3 id="binary-raw-x-and-z-matrices"><code>binary</code>: raw X and Z matrices</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;binary&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>X matrix (6 x 3)    Z matrix (6 x 3)
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>  0 0 0               1 0 0
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>  0 1 0               0 0 0
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>  0 0 1               0 0 0
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>  1 1 1               0 0 0
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>  0 0 0               1 1 0
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>  0 0 0               1 0 1
+</code></pre></div>
+<p>This is the same output as <code>format_xz_binary_matrices()</code>. It is the closest view to the internal data structure: each row is a Pauli operator, and each column is a qubit.</p>
+<h3 id="phase-row-sign-bits"><code>phase</code>: row sign bits</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;phase&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Phase matrix (6 x 1)
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>  [0]
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>  [0]
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>  [0]
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>  [0]
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>  [0]
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>  [0]
+</code></pre></div>
+<p>This is the same output as <code>format_phase_matrix()</code>. A phase bit of <code>0</code> means the row has a <code>+</code> sign; a phase bit of <code>1</code> means the row has a <code>-</code> sign.</p>
+<h3 id="debug-chp-rows-plus-matrices"><code>debug</code>: CHP rows plus matrices</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<p>This is the same output as <code>format_tableau_debug()</code>. It combines the CHP-style rows, raw X/Z matrices, and phase column in one block.</p>
+<h3 id="stabilizers-only-rows-n2n-1"><code>stabilizers</code>: only rows <code>n..2n-1</code></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stabilizers&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>+XXX
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>+ZZI
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>+ZIZ
+</code></pre></div>
+<p>Use this when you only want the generators that define the quantum state. For the GHZ state above, the stabilizers are <span class="arithmatex">\(+XXX\)</span>, <span class="arithmatex">\(+ZZI\)</span>, and <span class="arithmatex">\(+ZIZ\)</span>.</p>
+<h3 id="destabilizers-only-rows-0n-1"><code>destabilizers</code>: only rows <code>0..n-1</code></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;destabilizers&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>+ZII
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>+IXI
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>+IIX
+</code></pre></div>
+<p>Use this when debugging measurement updates. Destabilizers are not usually part of the mathematical state description, but they are essential to the Aaronson-Gottesman measurement algorithm.</p>
+<h3 id="combining-views">Combining views</h3>
+<p>The <code>views</code> argument is ordered. This prints exactly the selected views in the requested order:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<p>Supported view keys are:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Meaning</th>
+<th>Equivalent method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>chp</code></td>
+<td>Signed Pauli rows with destabilizer/stabilizer separator</td>
+<td><code>format_chp_printstate()</code></td>
+</tr>
+<tr>
+<td><code>binary</code></td>
+<td>Raw X and Z bit matrices</td>
+<td><code>format_xz_binary_matrices()</code></td>
+</tr>
+<tr>
+<td><code>phase</code></td>
+<td>Phase-bit column</td>
+<td><code>format_phase_matrix()</code></td>
+</tr>
+<tr>
+<td><code>debug</code></td>
+<td>CHP rows + X/Z matrices + phase column</td>
+<td><code>format_tableau_debug()</code></td>
+</tr>
+<tr>
+<td><code>stabilizers</code></td>
+<td>Stabilizer rows only (<code>n..2n-1</code>)</td>
+<td>internal helper</td>
+</tr>
+<tr>
+<td><code>destabilizers</code></td>
+<td>Destabilizer rows only (<code>0..n-1</code>)</td>
+<td>internal helper</td>
+</tr>
+</tbody>
+</table>
+<p>If a view name is unknown, <code>inspect()</code> raises <code>ValueError</code>.</p>
 <hr />
 <h2 id="summary">Summary</h2>
 <table>

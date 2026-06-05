@@ -2,42 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/</loc>
-         <lastmod>2026-06-02</lastmod>
+         <lastmod>2026-06-05</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/api-reference/</loc>
-         <lastmod>2026-06-02</lastmod>
+         <lastmod>2026-06-05</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/architecture/</loc>
-         <lastmod>2026-06-02</lastmod>
+         <lastmod>2026-06-05</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/</loc>
-         <lastmod>2026-06-02</lastmod>
+         <lastmod>2026-06-05</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/hybrid-simulation/</loc>
-         <lastmod>2026-06-02</lastmod>
+         <lastmod>2026-06-05</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/references/</loc>
-         <lastmod>2026-06-02</lastmod>
+         <lastmod>2026-06-05</lastmod>
+    </url>
+    <url>
+         <loc>https://atharvmunot004.github.io/python-stabilizer/proofs/x-gate-proof/</loc>
+         <lastmod>2026-06-05</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/theory/measurement/</loc>
-         <lastmod>2026-06-02</lastmod>
+         <lastmod>2026-06-05</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/theory/qec-codes/</loc>
-         <lastmod>2026-06-02</lastmod>
+         <lastmod>2026-06-05</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/theory/stabilizer-formalism/</loc>
-         <lastmod>2026-06-02</lastmod>
+         <lastmod>2026-06-05</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/theory/tableau/</loc>
-         <lastmod>2026-06-02</lastmod>
+         <lastmod>2026-06-05</lastmod>
     </url>
 </urlset>

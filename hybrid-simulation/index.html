@@ -1004,7 +1004,7 @@ g_i = \pm P_1 \otimes P_2 \otimes \cdots \otimes P_n
 <p>The tableau prefix before the first <code>T</code> gate or rotation is essentially free compared with dense simulation. The cost cliff is at the switch point, not at circuit start.</p>
 <hr />
 <h2 id="when-to-use-each-class-directly">When to use each class directly</h2>
-<p>Use <code>StabilizerState</code> directly for pure QEC circuits, syndrome extraction, stabilizer code encoding/decoding, and other all-Clifford workflows. It gives you tableau speed and the <code>format_chp_printstate()</code> debugging tools.</p>
+<p>Use <code>StabilizerState</code> directly for pure QEC circuits, syndrome extraction, stabilizer code encoding/decoding, and other all-Clifford workflows. It gives you tableau speed and the <code>inspect()</code> debugging entrypoint, plus direct formatters such as <code>format_chp_printstate()</code>.</p>
 <p>Use <code>QuantumSimulator</code> for any circuit with <code>T</code> gates, rotations, Toffoli, arbitrary <code>Gate</code> objects, or Qiskit circuits loaded through <code>from_qiskit</code>. The Clifford prefix still runs on the tableau backend.</p>
 <p>Use <code>from_qiskit</code> with <code>QuantumSimulator</code> when starting from an existing Qiskit circuit and wanting the tableau speedup on any Clifford prefix before the first non-Clifford operation.</p>
 
