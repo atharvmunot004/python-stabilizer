@@ -76,7 +76,7 @@ Output:
 ```text
 +XI
 +IX
------------
+---
 +XX
 +ZZ
 ```
@@ -105,7 +105,7 @@ The syndrome `(1, 1)` identifies an `X` error on qubit 1.
 
 ## Documentation map
 
-- [Getting Started](getting-started.md): installation, first states, circuits, measurements, examples, and tests.
+- [Getting Started](getting-started/index.md): beginner path for installation, first states, circuits, measurement, Qiskit, QEC, and tests.
 - [Architecture](architecture.md): module responsibilities, source map, data flow, measurement internals, and extension points.
 - [Stabilizer Formalism](theory/stabilizer-formalism.md): Pauli groups, stabilizers, Clifford evolution, and Gottesman-Knill.
 - [The Tableau Representation](theory/tableau.md): how X/Z/phase arrays encode stabilizer states and how gates mutate them.

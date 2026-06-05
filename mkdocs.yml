@@ -44,7 +44,17 @@ extra_javascript:
 
 nav:
   - Home: index.md
-  - Getting Started: getting-started.md
+  - Getting Started:
+    - Overview: getting-started/index.md
+    - Installation: getting-started/installation.md
+    - Your First Tableau State: getting-started/first-tableau.md
+    - Building Circuits: getting-started/circuits.md
+    - Inspecting Tableaux: getting-started/inspection.md
+    - Measuring Qubits: getting-started/measurement.md
+    - Hybrid Simulation: getting-started/non-clifford.md
+    - Qiskit Interop: getting-started/qiskit.md
+    - QEC Examples: getting-started/qec.md
+    - Running Tests: getting-started/tests.md
   - Architecture: architecture.md
   - Theory:
     - Stabilizer Formalism: theory/stabilizer-formalism.md
