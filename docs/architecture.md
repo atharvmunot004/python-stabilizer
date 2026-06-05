@@ -59,11 +59,11 @@ Rows `0..n-1` are destabilizers. Rows `n..2n-1` are stabilizer generators. This 
 
 The class owns all Clifford state mutation:
 
-- Constructors: [`zero(n)`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py)
+- Constructors: [`zero(n)`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py), `from_stabilizer_list(...)`
 - Single-qubit Clifford gates: `h`, `s`, `sdg`, `sx`, `sxdg`, `x`, `y`, `z`, `i`
 - Two-qubit Clifford gates: `cnot`/`cx`, `cz`, `cy`, `swap`
 - Measurement and reset: `measure_z`, `reset_z`
-- Inspection: `inspect`, `stabilizer_generators`, `copy`, `format_chp_printstate`, `format_xz_binary_matrices`, `format_phase_matrix`, `format_tableau_debug`
+- Inspection: `inspect`, `stabilizer_generators`, `stabilizer_strings`, `destabilizer_strings`, `copy`, `format_chp_printstate`, `format_xz_binary_matrices`, `format_phase_matrix`, `format_tableau_debug`
 
 ### `Gate`
 

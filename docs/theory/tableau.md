@@ -240,17 +240,18 @@ from stabilizer_python import Circuit, StabilizerState
 st = StabilizerState.zero(3)
 Circuit(3).h(0).cnot(0, 1).cnot(0, 2).run(st)  # GHZ state
 
-print(st.inspect())
+print(st.inspect())  # default: CHP-style rows only
 ```
 
-With `views=None` (the default), `inspect()` prints the four main views separated by blank lines:
+With `views=None` (the default), `inspect()` prints only the `chp` view. This keeps the default readable for terminal and notebook output.
 
-1. `chp`
-2. `binary`
-3. `phase`
-4. `debug`
+To print the four main views together, request them explicitly:
 
-The default is intentionally verbose. It is useful in notebooks, examples, and debugging sessions where you want every representation in one place. For narrower output, pass `views=[...]`.
+```python
+print(st.inspect(views=["chp", "binary", "phase", "debug"]))
+```
+
+That verbose form is useful in notebooks, examples, and debugging sessions where you want every representation in one place. For narrower output, pass only the view names you need.
 
 ### `chp`: signed Pauli rows
 
@@ -329,6 +330,13 @@ print(st.inspect(views=["stabilizers"]))
 
 Use this when you only want the generators that define the quantum state. For the GHZ state above, the stabilizers are $+XXX$, $+ZZI$, and $+ZIZ$.
 
+For programmatic access, use `stabilizer_strings()`:
+
+```python
+st.stabilizer_strings()
+# ['+XXX', '+ZZI', '+ZIZ']
+```
+
 ### `destabilizers`: only rows `0..n-1`
 
 ```python
@@ -342,6 +350,13 @@ print(st.inspect(views=["destabilizers"]))
 ```
 
 Use this when debugging measurement updates. Destabilizers are not usually part of the mathematical state description, but they are essential to the Aaronson-Gottesman measurement algorithm.
+
+For programmatic access, use `destabilizer_strings()`:
+
+```python
+st.destabilizer_strings()
+# ['+ZII', '+IXI', '+IIX']
+```
 
 ### Combining views
 
@@ -363,6 +378,25 @@ Supported view keys are:
 | `destabilizers` | Destabilizer rows only (`0..n-1`) | internal helper |
 
 If a view name is unknown, `inspect()` raises `ValueError`.
+
+### Constructing a tableau from stabilizer strings
+
+`from_stabilizer_list()` builds a tableau from signed Pauli labels:
+
+```python
+st = StabilizerState.from_stabilizer_list(["+XX", "+ZZ"])
+print(st.stabilizer_strings())
+```
+
+```text
+['+XX', '+ZZ']
+```
+
+Signs are optional and default to `+`:
+
+```python
+StabilizerState.from_stabilizer_list(["XX", "ZZ"])
+```
 
 ---
 

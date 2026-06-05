@@ -11,12 +11,24 @@ Circuit(3).h(0).cnot(0, 1).cnot(0, 2).run(st)
 print(st.inspect())
 ```
 
-With no arguments, `inspect()` prints four main views:
+With no arguments, `inspect()` prints the `chp` view only. This keeps the default compact:
 
-1. `chp`
-2. `binary`
-3. `phase`
-4. `debug`
+```text
++ZII
++IXI
++IIX
+
+----
++XXX
++ZZI
++ZIZ
+```
+
+To print all main views, request them explicitly:
+
+```python
+print(st.inspect(views=["chp", "binary", "phase", "debug"]))
+```
 
 Each view is separated by a blank line.
 
@@ -127,6 +139,13 @@ print(st.inspect(views=["stabilizers"]))
 
 Use this when you want the generators that define the quantum state.
 
+For programmatic access as a list, use `stabilizer_strings()`:
+
+```python
+print(st.stabilizer_strings())
+# ['+XXX', '+ZZI', '+ZIZ']
+```
+
 ## View: `destabilizers`
 
 Only rows `0..n-1`:
@@ -142,6 +161,13 @@ print(st.inspect(views=["destabilizers"]))
 ```
 
 Use this when debugging tableau measurement updates. Destabilizers are not usually listed in textbook state descriptions, but they are essential to efficient measurement simulation.
+
+For programmatic access as a list, use `destabilizer_strings()`:
+
+```python
+print(st.destabilizer_strings())
+# ['+ZII', '+IXI', '+IIX']
+```
 
 ## Combining Views
 
@@ -167,6 +193,22 @@ Unknown view names raise `ValueError`:
 
 ```python
 st.inspect(views=["chp", "not-a-view"])  # ValueError
+```
+
+## Constructing From Stabilizer Labels
+
+Use `from_stabilizer_list()` when you already have signed Pauli labels:
+
+```python
+st = StabilizerState.from_stabilizer_list(["+XX", "+ZZ"])
+print(st.stabilizer_strings())
+# ['+XX', '+ZZ']
+```
+
+Signs are optional and default to `+`:
+
+```python
+st = StabilizerState.from_stabilizer_list(["XX", "ZZ"])
 ```
 
 For the theory behind these rows and matrices, see [The Tableau Representation](../theory/tableau.md).

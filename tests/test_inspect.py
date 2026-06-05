@@ -9,13 +9,13 @@ def _bell_state() -> StabilizerState:
     return st
 
 
-def test_inspect_default_includes_all_four_views():
+def test_inspect_default_includes_chp_only():
     text = _bell_state().inspect()
     assert "+XX" in text
     assert "+ZZ" in text
-    assert "X matrix (4 x 2)" in text
-    assert "Phase matrix (4 x 1)" in text
-    assert "Tableau (CHP-style destabilizers | stabilizers):" in text
+    assert "X matrix (4 x 2)" not in text
+    assert "Phase matrix (4 x 1)" not in text
+    assert "Tableau (CHP-style destabilizers | stabilizers):" not in text
 
 
 def test_inspect_selective_stabilizer_and_destabilizer_rows():

@@ -45,6 +45,17 @@ st = StabilizerState.zero(3)
 
 Raises `ValueError` if `n < 1`.
 
+#### `StabilizerState.from_stabilizer_list(stabilizers: List[str]) -> StabilizerState`
+
+Construct a state from signed Pauli stabilizer labels. Each label may start with `+` or `-`; if omitted, `+` is assumed.
+
+```python
+st = StabilizerState.from_stabilizer_list(["+XX", "+ZZ"])
+print(st.stabilizer_strings())  # ['+XX', '+ZZ']
+```
+
+Raises `ValueError` for invalid Pauli characters, inconsistent string lengths, wrong generator count, or identity stabilizer rows.
+
 ---
 
 ### Gates
@@ -107,6 +118,28 @@ for phase, x, z in st.stabilizer_generators():
     print(phase, x, z)
 ```
 
+#### `stabilizer_strings() -> List[str]`
+
+Returns the $n$ stabilizer generators as signed Pauli strings.
+
+```python
+st = StabilizerState.from_stabilizer_list(["XX", "ZZ"])
+print(st.stabilizer_strings())  # ['+XX', '+ZZ']
+```
+
+This mirrors Qiskit's `Clifford.to_labels(mode="S")` style.
+
+#### `destabilizer_strings() -> List[str]`
+
+Returns the $n$ destabilizer generators as signed Pauli strings.
+
+```python
+st = StabilizerState.zero(2)
+print(st.destabilizer_strings())  # ['+XI', '+IX']
+```
+
+This mirrors Qiskit's `Clifford.to_labels(mode="D")` style. Destabilizers are tableau bookkeeping rows used for efficient measurement simulation, not the physical stabilizer generators of the state.
+
 #### `copy() -> StabilizerState`
 
 Returns a deep copy of the state.
@@ -117,20 +150,21 @@ The copied state has independent `x_mat`, `z_mat`, and `r_phase` lists.
 
 ### Debug formatting
 
-#### `inspect(views: List[str] | None = None) -> str`
+#### `inspect(views: Optional[List[str]] = None) -> str`
 
 Unified tableau inspection entrypoint. Returns formatted text; it does not print by itself.
 
 ```python
-print(st.inspect())
+print(st.inspect())  # default: same as views=["chp"]
 ```
 
-When `views` is `None`, `inspect()` returns the four main views in this order, separated by blank lines:
+When `views` is `None`, `inspect()` returns the `chp` view only.
 
-1. `chp`
-2. `binary`
-3. `phase`
-4. `debug`
+Request multiple views explicitly:
+
+```python
+print(st.inspect(views=["chp", "binary", "phase", "debug"]))
+```
 
 When `views` is a list, only those views are returned, in the order requested:
 

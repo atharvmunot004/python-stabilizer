@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import random
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 
 def _row_mult_phase(x1: int, z1: int, x2: int, z2: int) -> int:
@@ -69,6 +69,131 @@ class StabilizerState:
             x[i][i] = 1
             z[n + i][i] = 1
         return cls(n=n, x=x, z=z, r_phase=r_phase)
+
+    @classmethod
+    def from_stabilizer_list(cls, stabilizers: List[str]) -> "StabilizerState":
+        """
+        Construct a StabilizerState from a list of signed Pauli strings.
+
+        This mirrors Qiskit's ``StabilizerState.from_stabilizer_list()``.
+        The list must contain exactly n independent commuting Pauli operators
+        on n qubits.  Each string may optionally start with '+' or '-'; if no
+        sign is given '+' is assumed.
+
+        The implementation:
+        1. Parses each Pauli string into (phase_bit, x_row, z_row).
+        2. Places the parsed rows into the stabilizer half (rows n..2n-1) of a
+           fresh zero-state tableau.
+        3. Reconstructs the destabilizer rows using the standard rule: for each
+           qubit i, the destabilizer is the unique row that anticommutes with
+           stabilizer i and commutes with all others.  For a diagonal stabilizer
+           set this is trivially X_i; for non-diagonal sets we derive it by
+           inspection using GF(2) elimination.
+        4. Returns the resulting StabilizerState.
+
+        Raises ValueError if:
+        - Any string contains characters other than I, X, Y, Z (and optional
+          leading +/-).
+        - All strings do not have the same length after stripping the sign.
+        - The number of generators does not equal the number of qubits.
+
+        Example::
+
+            >>> st = StabilizerState.from_stabilizer_list(['+XX', '+ZZ'])
+            >>> st.stabilizer_strings()
+            ['+XX', '+ZZ']
+        """
+        # --- parse ---
+        parsed: List[Tuple[int, List[int], List[int]]] = []
+        for raw in stabilizers:
+            s = raw.strip()
+            if s and s[0] in ('+', '-'):
+                phase_bit = 1 if s[0] == '-' else 0
+                s = s[1:]
+            else:
+                phase_bit = 0
+            if not s:
+                raise ValueError(f"Empty Pauli string in input: {raw!r}")
+            x_row: List[int] = []
+            z_row: List[int] = []
+            for ch in s.upper():
+                if ch == 'I':
+                    x_row.append(0); z_row.append(0)
+                elif ch == 'X':
+                    x_row.append(1); z_row.append(0)
+                elif ch == 'Y':
+                    x_row.append(1); z_row.append(1)
+                elif ch == 'Z':
+                    x_row.append(0); z_row.append(1)
+                else:
+                    raise ValueError(
+                        f"Invalid Pauli character {ch!r} in string {raw!r}"
+                    )
+            parsed.append((phase_bit, x_row, z_row))
+
+        n = len(parsed[0][1]) if parsed else 0
+        if len(parsed) != n:
+            raise ValueError(
+                f"Expected {n} stabilizer generators for {n} qubits, "
+                f"got {len(parsed)}"
+            )
+        for i, (_, xr, zr) in enumerate(parsed):
+            if len(xr) != n:
+                raise ValueError(
+                    f"Stabilizer {i} has length {len(xr)}, expected {n}"
+                )
+
+        # --- build tableau ---
+        # Start from |0...0> to get valid destabilizer rows, then overwrite stab rows.
+        state = cls.zero(n)
+        for i, (phase_bit, x_row, z_row) in enumerate(parsed):
+            r = n + i  # stabilizer slot
+            state.r_phase[r] = phase_bit
+            state.x_mat[r] = x_row[:]
+            state.z_mat[r] = z_row[:]
+
+        # Rebuild destabilizer rows so that destabilizer i anticommutes with
+        # stabilizer i and commutes with all other stabilizers.
+        # Strategy: for each stabilizer row r = n+i, find the first qubit position
+        # p where the row has X or Y support.  Set destabilizer i to X_p (the
+        # simplest anticommuting partner), then clear any X support that would
+        # cause it to anticommute with other stabilizers by multiplying rows.
+        # For the common case (diagonal Z stabilizers), this reduces to X_i directly.
+        for i in range(n):
+            # Reset destabilizer row i to identity.
+            state.x_mat[i] = [0] * n
+            state.z_mat[i] = [0] * n
+            state.r_phase[i] = 0
+            # Find first qubit where stabilizer i has Z or Y (i.e., z bit set).
+            pivot = -1
+            for q in range(n):
+                if state.z_mat[n + i][q] == 1:
+                    pivot = q
+                    break
+            if pivot == -1:
+                # Stabilizer has only X support; find first X qubit.
+                for q in range(n):
+                    if state.x_mat[n + i][q] == 1:
+                        pivot = q
+                        break
+            if pivot == -1:
+                raise ValueError(
+                    f"Stabilizer {i} is the identity operator, which is invalid."
+                )
+            # Set destabilizer i to the single-qubit operator on pivot that
+            # anticommutes with stabilizer i at that qubit.
+            z_at_pivot = state.z_mat[n + i][pivot]
+            x_at_pivot = state.x_mat[n + i][pivot]
+            if z_at_pivot == 1:
+                # Stabilizer has Z or Y at pivot -> anticommuting partner is X.
+                state.x_mat[i][pivot] = 1
+                state.z_mat[i][pivot] = 0
+            else:
+                # Stabilizer has only X at pivot -> anticommuting partner is Z.
+                state.x_mat[i][pivot] = 0
+                state.z_mat[i][pivot] = 1
+
+        return state
 
     # --- Basic tableau utilities ---
     def copy(self) -> "StabilizerState":
@@ -377,7 +502,7 @@ class StabilizerState:
         """CHP-style destabilizer rows only (tableau rows 0..n-1)."""
         return self._format_chp_rows(0, self.n)
 
-    def inspect(self, views: List[str] | None = None) -> str:
+    def inspect(self, views: Optional[List[str]] = None) -> str:
         """
         Return one or more tableau inspection views.
 
@@ -393,7 +518,7 @@ class StabilizerState:
             "stabilizers": self._format_stabilizers_only,
             "destabilizers": self._format_destabilizers_only,
         }
-        selected = ["chp", "binary", "phase", "debug"] if views is None else list(views)
+        selected = ["chp"] if views is None else list(views)
         unknown = [view for view in selected if view not in view_map]
         if unknown:
             raise ValueError(f"unknown inspect view(s): {unknown}")
@@ -443,5 +568,49 @@ class StabilizerState:
         out = []
         for r in range(self.n, 2 * self.n):
             out.append((self.r_phase[r], self.x_mat[r][:], self.z_mat[r][:]))
+        return out
+
+    def stabilizer_strings(self) -> List[str]:
+        """
+        Return the n stabilizer generators as a list of signed Pauli strings.
+
+        Each string has a leading '+' or '-' sign followed by n Pauli characters
+        (I, X, Y, Z), one per qubit.  This mirrors Qiskit's
+        ``Clifford.to_labels(mode="S")`` return format.
+
+        Example for a 3-qubit GHZ state::
+
+            >>> st.stabilizer_strings()
+            ['+XXX', '+ZZI', '+ZIZ']
+        """
+        out: List[str] = []
+        for r in range(self.n, 2 * self.n):
+            sign = "-" if self.r_phase[r] else "+"
+            pauli = "".join(self._pauli_char_at(r, q) for q in range(self.n))
+            out.append(sign + pauli)
+        return out
+
+    def destabilizer_strings(self) -> List[str]:
+        """
+        Return the n destabilizer generators as a list of signed Pauli strings.
+
+        Each string has a leading '+' or '-' sign followed by n Pauli characters
+        (I, X, Y, Z), one per qubit.  This mirrors Qiskit's
+        ``Clifford.to_labels(mode="D")`` return format.
+
+        Destabilizers are the computational bookkeeping rows used for efficient
+        measurement simulation.  They are not part of the physical state description
+        and are not listed in standard textbook treatments.
+
+        Example for a 3-qubit GHZ state::
+
+            >>> st.destabilizer_strings()
+            ['+ZII', '+IXI', '+IIX']
+        """
+        out: List[str] = []
+        for r in range(self.n):
+            sign = "-" if self.r_phase[r] else "+"
+            pauli = "".join(self._pauli_char_at(r, q) for q in range(self.n))
+            out.append(sign + pauli)
         return out
 

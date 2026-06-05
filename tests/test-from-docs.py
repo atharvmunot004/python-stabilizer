@@ -24,13 +24,17 @@ print(sim.tableau.format_chp_printstate())
 
 # Unified tableau inspection API.
 #
-# Default: prints all four main views, separated by blank lines:
+# Default: prints the compact CHP-style view only.
+print("\ninspect() default: chp view")
+print(sim.tableau.inspect())
+
+# Request all main views explicitly, separated by blank lines:
 # - chp: CHP-style destabilizer/stabilizer rows
 # - binary: raw X and Z bit matrices
 # - phase: phase-bit column
 # - debug: CHP rows plus binary and phase matrices
-print("\ninspect() default: all four main views")
-print(sim.tableau.inspect())
+print("\ninspect(['chp', 'binary', 'phase', 'debug']):")
+print(sim.tableau.inspect(views=["chp", "binary", "phase", "debug"]))
 
 # Selective output: pass the exact view names you want.
 print("\ninspect(['chp']):")
@@ -53,6 +57,12 @@ print(sim.tableau.inspect(views=["destabilizers"]))
 
 print("\ninspect(['chp', 'binary', 'phase']):")
 print(sim.tableau.inspect(views=["chp", "binary", "phase"]))
+
+print("\nstabilizer_strings():")
+print(sim.tableau.stabilizer_strings())
+
+print("\ndestabilizer_strings():")
+print(sim.tableau.destabilizer_strings())
 
 # Also print just the stabilizer generators with their Pauli strings
 print("\nStabilizer generators:")

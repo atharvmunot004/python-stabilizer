@@ -83,7 +83,7 @@ Output:
 
 The stabilizers `+XX` and `+ZZ` are the generators of the Bell state $|\Phi^+\rangle$.
 
-Use `st.inspect()` with no arguments for all main tableau views, or pass `views=["chp", "binary", "phase", "debug", "stabilizers", "destabilizers"]` to select specific output.
+Use `st.inspect()` with no arguments for compact CHP-style output. Pass `views=["chp", "binary", "phase", "debug", "stabilizers", "destabilizers"]` to select specific output.
 
 ### 3-qubit bit-flip correction
 
