@@ -215,6 +215,18 @@ class StabilizerState:
         self.cnot(q1, q2)
 
     # --- Measurement ---
+    def z_measurement_branch(self, q: int) -> str:
+        """
+        Classify an upcoming Z measurement on qubit q as deterministic or random.
+
+        Matches the branch taken by measure_z(): random when some stabilizer row
+        anticommutes with Z_q (X component on q), otherwise deterministic.
+        """
+        for r in range(self.n, 2 * self.n):
+            if self.x_mat[r][q] == 1:
+                return "random"
+        return "deterministic"
+
     def measure_z(self, q: int) -> int:
         """
         Measure Z on qubit q. Returns outcome bit (0 -> +1 eigenvalue, 1 -> -1 eigenvalue).
@@ -342,16 +354,50 @@ class StabilizerState:
         Same layout as CHP's printstate(): destabilizer rows, a rule line, stabilizer rows,
         each row prefixed with + or - from the sign bit (CHP phase mod 4 reduced to +/- here).
         """
-        n = self.n
+        return self._format_chp_rows(0, 2 * self.n, include_separator=True)
+
+    def _format_chp_rows(
+        self, start: int, end: int, *, include_separator: bool = False
+    ) -> str:
         lines: List[str] = []
-        for i in range(2 * n):
-            if i == n:
+        for i in range(start, end):
+            if include_separator and i == self.n:
                 lines.append("")
-                lines.append("-" * (n + 1))
+                lines.append("-" * (self.n + 1))
             sign = "-" if self.r_phase[i] else "+"
-            pauli = "".join(self._pauli_char_at(i, q) for q in range(n))
+            pauli = "".join(self._pauli_char_at(i, q) for q in range(self.n))
             lines.append(sign + pauli)
         return "\n".join(lines)
+
+    def _format_stabilizers_only(self) -> str:
+        """CHP-style stabilizer rows only (tableau rows n..2n-1)."""
+        return self._format_chp_rows(self.n, 2 * self.n)
+
+    def _format_destabilizers_only(self) -> str:
+        """CHP-style destabilizer rows only (tableau rows 0..n-1)."""
+        return self._format_chp_rows(0, self.n)
+
+    def inspect(self, views: List[str] | None = None) -> str:
+        """
+        Return one or more tableau inspection views.
+
+        When views is None, returns all four standard views (CHP, binary matrices,
+        phase column, and full debug bundle) separated by blank lines. Pass a list
+        of view names to select specific outputs.
+        """
+        view_map = {
+            "chp": self.format_chp_printstate,
+            "binary": self.format_xz_binary_matrices,
+            "phase": self.format_phase_matrix,
+            "debug": self.format_tableau_debug,
+            "stabilizers": self._format_stabilizers_only,
+            "destabilizers": self._format_destabilizers_only,
+        }
+        selected = ["chp", "binary", "phase", "debug"] if views is None else list(views)
+        unknown = [view for view in selected if view not in view_map]
+        if unknown:
+            raise ValueError(f"unknown inspect view(s): {unknown}")
+        return "\n\n".join(view_map[view]() for view in selected)
 
     def format_xz_binary_matrices(self) -> str:
         """Print the raw X and Z bit tables (2n rows × n columns), side by side."""

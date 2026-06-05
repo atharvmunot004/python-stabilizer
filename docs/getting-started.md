@@ -303,20 +303,68 @@ Gates not in the mapping raise `ValueError` with the gate name.
 
 ## Inspecting simulation state
 
-Three tableau debug formats are available:
+The main tableau inspection entrypoint is `StabilizerState.inspect()`. It returns a string, so use `print(...)` when you want terminal output.
 
 ```python
-# CHP-style: Pauli strings with +/- signs
+from stabilizer_python import Circuit, StabilizerState
+
+st = StabilizerState.zero(3)
+Circuit(3).h(0).cnot(0, 1).cnot(0, 2).run(st)
+
+# Default: all four main views, separated by blank lines.
+print(st.inspect())
+```
+
+The default output includes:
+
+| View | Meaning |
+|---|---|
+| `chp` | CHP-style Pauli rows: destabilizers, separator, stabilizers |
+| `binary` | Raw X and Z bit matrices side by side |
+| `phase` | Phase-bit column, where `0` means `+` and `1` means `-` |
+| `debug` | CHP rows plus binary and phase matrices in one block |
+
+Selective output is controlled with the `views` argument. The order you pass is the order printed:
+
+```python
+# One view at a time
+print(st.inspect(views=["chp"]))
+print(st.inspect(views=["binary"]))
+print(st.inspect(views=["phase"]))
+print(st.inspect(views=["debug"]))
+
+# Stabilizer-only and destabilizer-only rows
+print(st.inspect(views=["stabilizers"]))
+print(st.inspect(views=["destabilizers"]))
+
+# Custom combined output
+print(st.inspect(views=["chp", "binary", "phase"]))
+```
+
+All supported `inspect()` view keys:
+
+| Key | Output |
+|---|---|
+| `chp` | Same as `format_chp_printstate()` |
+| `binary` | Same as `format_xz_binary_matrices()` |
+| `phase` | Same as `format_phase_matrix()` |
+| `debug` | Same as `format_tableau_debug()` |
+| `stabilizers` | Only tableau rows `n..2n-1` as signed Pauli strings |
+| `destabilizers` | Only tableau rows `0..n-1` as signed Pauli strings |
+
+The older formatter methods are still available when you want one fixed output:
+
+```python
 print(st.format_chp_printstate())
-
-# Raw X and Z bit matrices
 print(st.format_xz_binary_matrices())
-
-# Phase column
 print(st.format_phase_matrix())
-
-# All three together
 print(st.format_tableau_debug())
+```
+
+Unknown view names raise `ValueError`, which helps catch typos:
+
+```python
+st.inspect(views=["chp", "not-a-view"])  # ValueError
 ```
 
 Statevector inspection works through `QuantumSimulator` in either mode:
@@ -413,7 +461,7 @@ pip install -e ".[dev]"
 pytest
 ```
 
-The test suite has 35 tests covering individual gates, Bell/GHZ states, bit-flip code behavior, Shor-code encoding/correction helpers, GF(2) linear algebra, random Clifford circuits, random measurements, Qiskit interoperability checks, and non-Clifford hybrid simulation.
+The test suite has 43 tests covering individual gates, Bell/GHZ states, bit-flip code behavior, Shor-code encoding/correction helpers, GF(2) linear algebra, random Clifford circuits, random measurements, Qiskit interoperability checks, non-Clifford hybrid simulation, tableau inspection, and traced circuit output.
 
 Useful test entry points:
 
@@ -424,6 +472,8 @@ Useful test entry points:
 | [`tests/test_random_circuits.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_random_circuits.py) | Tableau invariants under random Clifford and measurement circuits |
 | [`tests/test_qiskit_circuits.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_qiskit_circuits.py) | Small Qiskit-to-local circuit comparisons |
 | [`tests/test_nonclifford_gates.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_nonclifford_gates.py) | Hybrid statevector fallback and non-Clifford gates |
+| [`tests/test_inspect.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_inspect.py) | `StabilizerState.inspect()` default and selective views |
+| [`tests/test_traced_circuit.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_traced_circuit.py) | Step-by-step traced syndrome circuits |
 
 ---
 

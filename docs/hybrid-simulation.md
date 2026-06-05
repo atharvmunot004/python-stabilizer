@@ -97,7 +97,7 @@ The tableau prefix before the first `T` gate or rotation is essentially free com
 
 ## When to use each class directly
 
-Use `StabilizerState` directly for pure QEC circuits, syndrome extraction, stabilizer code encoding/decoding, and other all-Clifford workflows. It gives you tableau speed and the `format_chp_printstate()` debugging tools.
+Use `StabilizerState` directly for pure QEC circuits, syndrome extraction, stabilizer code encoding/decoding, and other all-Clifford workflows. It gives you tableau speed and the `inspect()` debugging entrypoint, plus direct formatters such as `format_chp_printstate()`.
 
 Use `QuantumSimulator` for any circuit with `T` gates, rotations, Toffoli, arbitrary `Gate` objects, or Qiskit circuits loaded through `from_qiskit`. The Clifford prefix still runs on the tableau backend.
 

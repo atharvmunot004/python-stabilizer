@@ -117,6 +117,41 @@ The copied state has independent `x_mat`, `z_mat`, and `r_phase` lists.
 
 ### Debug formatting
 
+#### `inspect(views: List[str] | None = None) -> str`
+
+Unified tableau inspection entrypoint. Returns formatted text; it does not print by itself.
+
+```python
+print(st.inspect())
+```
+
+When `views` is `None`, `inspect()` returns the four main views in this order, separated by blank lines:
+
+1. `chp`
+2. `binary`
+3. `phase`
+4. `debug`
+
+When `views` is a list, only those views are returned, in the order requested:
+
+```python
+print(st.inspect(views=["stabilizers", "destabilizers"]))
+print(st.inspect(views=["chp", "binary", "phase"]))
+```
+
+Supported view names:
+
+| View | Output |
+|---|---|
+| `chp` | CHP-style destabilizer rows, separator, and stabilizer rows |
+| `binary` | Raw X and Z bit matrices |
+| `phase` | Phase-bit column |
+| `debug` | CHP rows plus X/Z matrices plus phase column |
+| `stabilizers` | Stabilizer rows only (`n..2n-1`) as signed Pauli strings |
+| `destabilizers` | Destabilizer rows only (`0..n-1`) as signed Pauli strings |
+
+Raises `ValueError` if any requested view name is unknown.
+
 #### `format_chp_printstate() -> str`
 
 CHP-style output: destabilizer rows, a separator line, stabilizer rows. Each row prefixed with `+` or `-`.
@@ -140,6 +175,8 @@ Prints the $2n \times 1$ phase bit column.
 #### `format_tableau_debug() -> str`
 
 All three formats combined. Useful for step-by-step debugging.
+
+Equivalent to the `debug` view in `inspect()`.
 
 ---
 

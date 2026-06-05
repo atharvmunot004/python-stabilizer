@@ -230,17 +230,139 @@ This is used during measurement to maintain a valid tableau after updating rows.
 
 ---
 
-## Viewing the full tableau
+## Viewing and inspecting the tableau
+
+The tableau is intentionally visible. The most convenient entrypoint is `inspect()`, which returns formatted text. Use `print(st.inspect())` for terminal output.
 
 ```python
-from stabilizer_python import StabilizerState, Circuit
+from stabilizer_python import Circuit, StabilizerState
 
 st = StabilizerState.zero(3)
 Circuit(3).h(0).cnot(0, 1).cnot(0, 2).run(st)  # GHZ state
-print(st.format_tableau_debug())
+
+print(st.inspect())
 ```
 
-This prints the CHP-style Pauli rows, the raw X and Z bit matrices, and the phase column — useful for debugging and understanding what the tableau looks like after any sequence of gates.
+With `views=None` (the default), `inspect()` prints the four main views separated by blank lines:
+
+1. `chp`
+2. `binary`
+3. `phase`
+4. `debug`
+
+The default is intentionally verbose. It is useful in notebooks, examples, and debugging sessions where you want every representation in one place. For narrower output, pass `views=[...]`.
+
+### `chp`: signed Pauli rows
+
+```python
+print(st.inspect(views=["chp"]))
+```
+
+```text
++ZII
++IXI
++IIX
+
+----
++XXX
++ZZI
++ZIZ
+```
+
+This is the same output as `format_chp_printstate()`. Rows above the separator are destabilizers. Rows below the separator are stabilizer generators.
+
+### `binary`: raw X and Z matrices
+
+```python
+print(st.inspect(views=["binary"]))
+```
+
+```text
+X matrix (6 x 3)    Z matrix (6 x 3)
+  0 0 0               1 0 0
+  0 1 0               0 0 0
+  0 0 1               0 0 0
+  1 1 1               0 0 0
+  0 0 0               1 1 0
+  0 0 0               1 0 1
+```
+
+This is the same output as `format_xz_binary_matrices()`. It is the closest view to the internal data structure: each row is a Pauli operator, and each column is a qubit.
+
+### `phase`: row sign bits
+
+```python
+print(st.inspect(views=["phase"]))
+```
+
+```text
+Phase matrix (6 x 1)
+  [0]
+  [0]
+  [0]
+  [0]
+  [0]
+  [0]
+```
+
+This is the same output as `format_phase_matrix()`. A phase bit of `0` means the row has a `+` sign; a phase bit of `1` means the row has a `-` sign.
+
+### `debug`: CHP rows plus matrices
+
+```python
+print(st.inspect(views=["debug"]))
+```
+
+This is the same output as `format_tableau_debug()`. It combines the CHP-style rows, raw X/Z matrices, and phase column in one block.
+
+### `stabilizers`: only rows `n..2n-1`
+
+```python
+print(st.inspect(views=["stabilizers"]))
+```
+
+```text
++XXX
++ZZI
++ZIZ
+```
+
+Use this when you only want the generators that define the quantum state. For the GHZ state above, the stabilizers are $+XXX$, $+ZZI$, and $+ZIZ$.
+
+### `destabilizers`: only rows `0..n-1`
+
+```python
+print(st.inspect(views=["destabilizers"]))
+```
+
+```text
++ZII
++IXI
++IIX
+```
+
+Use this when debugging measurement updates. Destabilizers are not usually part of the mathematical state description, but they are essential to the Aaronson-Gottesman measurement algorithm.
+
+### Combining views
+
+The `views` argument is ordered. This prints exactly the selected views in the requested order:
+
+```python
+print(st.inspect(views=["chp", "binary", "phase"]))
+```
+
+Supported view keys are:
+
+| Key | Meaning | Equivalent method |
+|---|---|---|
+| `chp` | Signed Pauli rows with destabilizer/stabilizer separator | `format_chp_printstate()` |
+| `binary` | Raw X and Z bit matrices | `format_xz_binary_matrices()` |
+| `phase` | Phase-bit column | `format_phase_matrix()` |
+| `debug` | CHP rows + X/Z matrices + phase column | `format_tableau_debug()` |
+| `stabilizers` | Stabilizer rows only (`n..2n-1`) | internal helper |
+| `destabilizers` | Destabilizer rows only (`0..n-1`) | internal helper |
+
+If a view name is unknown, `inspect()` raises `ValueError`.
 
 ---
 

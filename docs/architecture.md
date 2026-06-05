@@ -33,6 +33,7 @@ The main design choices are:
 | [`stabilizer_python/simulator.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/simulator.py) | `QuantumSimulator` hybrid router |
 | [`stabilizer_python/qiskit_interop.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/qiskit_interop.py) | `from_qiskit()` Qiskit circuit converter |
 | [`stabilizer_python/circuit.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py) | Lightweight fluent circuit builder |
+| [`stabilizer_python/tracing.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tracing.py) | `TracedCircuit` wrapper for step-by-step tableau snapshots |
 | [`stabilizer_python/codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py) | Bit-flip and Shor-code examples plus convenience helpers |
 | [`stabilizer_python/linear_algebra.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/linear_algebra.py) | GF(2) RREF and rank utilities |
 | [`stabilizer_python/examples/`](https://github.com/atharvmunot004/python-stabilizer/tree/main/stabilizer_python/examples) | Runnable examples for Bell, bit-flip, and Shor code workflows |
@@ -62,7 +63,7 @@ The class owns all Clifford state mutation:
 - Single-qubit Clifford gates: `h`, `s`, `sdg`, `sx`, `sxdg`, `x`, `y`, `z`, `i`
 - Two-qubit Clifford gates: `cnot`/`cx`, `cz`, `cy`, `swap`
 - Measurement and reset: `measure_z`, `reset_z`
-- Inspection: `stabilizer_generators`, `copy`, `format_chp_printstate`, `format_xz_binary_matrices`, `format_phase_matrix`, `format_tableau_debug`
+- Inspection: `inspect`, `stabilizer_generators`, `copy`, `format_chp_printstate`, `format_xz_binary_matrices`, `format_phase_matrix`, `format_tableau_debug`
 
 ### `Gate`
 

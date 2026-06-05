@@ -30,7 +30,7 @@ Source repository: [`atharvmunot004/python-stabilizer`](https://github.com/athar
 - Clifford updates: `H`, `S`, Pauli gates, `CNOT`, plus several state-level derived Clifford gates
 - Z-basis measurement with deterministic and random tableau update paths
 - Small fluent circuits through `Circuit`
-- Stabilizer inspection and debug formatting
+- Stabilizer inspection through `inspect()` plus direct debug formatters
 - GF(2) rank and RREF utilities for binary stabilizer checks
 - Educational QEC examples for the 3-qubit repetition code and Shor's 9-qubit code
 
@@ -68,7 +68,7 @@ from stabilizer_python import StabilizerState, Circuit
 st = StabilizerState.zero(2)
 Circuit(2).h(0).cnot(0, 1).run(st)
 
-print(st.format_chp_printstate())
+print(st.inspect(views=["chp"]))
 ```
 
 Output:
@@ -82,6 +82,8 @@ Output:
 ```
 
 The stabilizers `+XX` and `+ZZ` are the generators of the Bell state $|\Phi^+\rangle$.
+
+Use `st.inspect()` with no arguments for all main tableau views, or pass `views=["chp", "binary", "phase", "debug", "stabilizers", "destabilizers"]` to select specific output.
 
 ### 3-qubit bit-flip correction
 
