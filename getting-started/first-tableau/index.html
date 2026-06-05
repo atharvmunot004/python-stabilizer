@@ -10,25 +10,31 @@
       
       
       
+        <link rel="canonical" href="https://atharvmunot004.github.io/python-stabilizer/getting-started/first-tableau/">
       
+      
+        <link rel="prev" href="../installation/">
+      
+      
+        <link rel="next" href="../circuits/">
       
       
         
       
       
-      <link rel="icon" href="/python-stabilizer/assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>stabilizer-python</title>
+        <title>Your First Tableau State - stabilizer-python</title>
       
     
     
-      <link rel="stylesheet" href="/python-stabilizer/assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="/python-stabilizer/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL("/python-stabilizer/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -71,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#your-first-tableau-state" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -81,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/python-stabilizer/." title="stabilizer-python" class="md-header__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
+    <a href="../.." title="stabilizer-python" class="md-header__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -101,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Your First Tableau State
             
           </span>
         </div>
@@ -212,7 +223,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/python-stabilizer/." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -229,11 +240,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="/python-stabilizer/getting-started/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -251,7 +264,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/python-stabilizer/architecture/" class="md-tabs__link">
+      <a href="../../architecture/" class="md-tabs__link">
         
   
   
@@ -272,7 +285,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/python-stabilizer/theory/stabilizer-formalism/" class="md-tabs__link">
+        <a href="../../theory/stabilizer-formalism/" class="md-tabs__link">
           
   
   
@@ -290,7 +303,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/python-stabilizer/api-reference/" class="md-tabs__link">
+      <a href="../../api-reference/" class="md-tabs__link">
         
   
   
@@ -309,7 +322,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/python-stabilizer/references/" class="md-tabs__link">
+      <a href="../../references/" class="md-tabs__link">
         
   
   
@@ -344,7 +357,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/python-stabilizer/." title="stabilizer-python" class="md-nav__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
+    <a href="../.." title="stabilizer-python" class="md-nav__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -374,7 +387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -398,26 +411,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -435,7 +453,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -453,7 +471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -481,7 +499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/installation/" class="md-nav__link">
+      <a href="../installation/" class="md-nav__link">
         
   
   
@@ -506,10 +524,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/first-tableau/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your First Tableau State
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -525,6 +570,48 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-bits-mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What The Bits Mean
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -537,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/circuits/" class="md-nav__link">
+      <a href="../circuits/" class="md-nav__link">
         
   
   
@@ -565,7 +652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/inspection/" class="md-nav__link">
+      <a href="../inspection/" class="md-nav__link">
         
   
   
@@ -593,7 +680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/measurement/" class="md-nav__link">
+      <a href="../measurement/" class="md-nav__link">
         
   
   
@@ -621,7 +708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/non-clifford/" class="md-nav__link">
+      <a href="../non-clifford/" class="md-nav__link">
         
   
   
@@ -649,7 +736,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/qiskit/" class="md-nav__link">
+      <a href="../qiskit/" class="md-nav__link">
         
   
   
@@ -677,7 +764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/qec/" class="md-nav__link">
+      <a href="../qec/" class="md-nav__link">
         
   
   
@@ -705,7 +792,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/tests/" class="md-nav__link">
+      <a href="../tests/" class="md-nav__link">
         
   
   
@@ -740,7 +827,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/architecture/" class="md-nav__link">
+      <a href="../../architecture/" class="md-nav__link">
         
   
   
@@ -819,7 +906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/theory/stabilizer-formalism/" class="md-nav__link">
+      <a href="../../theory/stabilizer-formalism/" class="md-nav__link">
         
   
   
@@ -847,7 +934,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/theory/tableau/" class="md-nav__link">
+      <a href="../../theory/tableau/" class="md-nav__link">
         
   
   
@@ -875,7 +962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/theory/measurement/" class="md-nav__link">
+      <a href="../../theory/measurement/" class="md-nav__link">
         
   
   
@@ -903,7 +990,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/theory/qec-codes/" class="md-nav__link">
+      <a href="../../theory/qec-codes/" class="md-nav__link">
         
   
   
@@ -931,7 +1018,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/hybrid-simulation/" class="md-nav__link">
+      <a href="../../hybrid-simulation/" class="md-nav__link">
         
   
   
@@ -966,7 +1053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/api-reference/" class="md-nav__link">
+      <a href="../../api-reference/" class="md-nav__link">
         
   
   
@@ -993,7 +1080,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/references/" class="md-nav__link">
+      <a href="../../references/" class="md-nav__link">
         
   
   
@@ -1030,6 +1117,38 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-bits-mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What The Bits Mean
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1042,8 +1161,104 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="your-first-tableau-state">Your First Tableau State</h1>
+<p>The core object is <code>StabilizerState</code>. It stores a stabilizer tableau: X bits, Z bits, and phase bits for <code>2n</code> Pauli rows.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>+XI
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>+IX
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>---
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>+ZI
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>+IZ
+</code></pre></div>
+<p>The top half are <strong>destabilizers</strong>. The bottom half are <strong>stabilizer generators</strong>.</p>
+<p>For <code>|00&gt;</code>, the stabilizers are:</p>
+<div class="arithmatex">\[
+Z_0, \quad Z_1
+\]</div>
+<p>That is why the bottom rows are <code>+ZI</code> and <code>+IZ</code>.</p>
+<h2 id="what-the-bits-mean">What The Bits Mean</h2>
+<p>Internally, every row stores a Pauli string using one X bit and one Z bit per qubit:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">X bit</th>
+<th style="text-align: center;">Z bit</th>
+<th style="text-align: center;">Pauli</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><code>I</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><code>X</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><code>Y</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><code>Z</code></td>
+</tr>
+</tbody>
+</table>
+<p>You can see those raw bits with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;binary&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>X matrix (4 x 2)    Z matrix (4 x 2)
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  1 0                 0 0
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  0 1                 0 0
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  0 0                 1 0
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  0 0                 0 1
+</code></pre></div>
+<p>And the row signs with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;phase&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Phase matrix (4 x 1)
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  [0]
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  [0]
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  [0]
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  [0]
+</code></pre></div>
+<p><code>0</code> means <code>+</code>; <code>1</code> means <code>-</code>.</p>
+<h2 id="why-this-matters">Why This Matters</h2>
+<p>The simulator never needs to store all amplitudes for a pure Clifford state. It stores only the Pauli generators that describe the state. This is the Gottesman-Knill advantage in practice.</p>
+<p>For the full bit-level explanation, see <a href="../../theory/tableau/">The Tableau Representation</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -1086,10 +1301,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/python-stabilizer/", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "/python-stabilizer/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/python-stabilizer/assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

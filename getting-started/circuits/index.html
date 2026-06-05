@@ -10,25 +10,31 @@
       
       
       
+        <link rel="canonical" href="https://atharvmunot004.github.io/python-stabilizer/getting-started/circuits/">
       
+      
+        <link rel="prev" href="../first-tableau/">
+      
+      
+        <link rel="next" href="../inspection/">
       
       
         
       
       
-      <link rel="icon" href="/python-stabilizer/assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>stabilizer-python</title>
+        <title>Building Circuits - stabilizer-python</title>
       
     
     
-      <link rel="stylesheet" href="/python-stabilizer/assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="/python-stabilizer/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL("/python-stabilizer/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -71,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#building-circuits" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -81,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/python-stabilizer/." title="stabilizer-python" class="md-header__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
+    <a href="../.." title="stabilizer-python" class="md-header__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -101,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Building Circuits
             
           </span>
         </div>
@@ -212,7 +223,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/python-stabilizer/." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -229,11 +240,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="/python-stabilizer/getting-started/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -251,7 +264,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/python-stabilizer/architecture/" class="md-tabs__link">
+      <a href="../../architecture/" class="md-tabs__link">
         
   
   
@@ -272,7 +285,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/python-stabilizer/theory/stabilizer-formalism/" class="md-tabs__link">
+        <a href="../../theory/stabilizer-formalism/" class="md-tabs__link">
           
   
   
@@ -290,7 +303,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/python-stabilizer/api-reference/" class="md-tabs__link">
+      <a href="../../api-reference/" class="md-tabs__link">
         
   
   
@@ -309,7 +322,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/python-stabilizer/references/" class="md-tabs__link">
+      <a href="../../references/" class="md-tabs__link">
         
   
   
@@ -344,7 +357,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/python-stabilizer/." title="stabilizer-python" class="md-nav__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
+    <a href="../.." title="stabilizer-python" class="md-nav__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -374,7 +387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -398,26 +411,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -435,7 +453,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -453,7 +471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -481,7 +499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/installation/" class="md-nav__link">
+      <a href="../installation/" class="md-nav__link">
         
   
   
@@ -509,7 +527,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/first-tableau/" class="md-nav__link">
+      <a href="../first-tableau/" class="md-nav__link">
         
   
   
@@ -534,10 +552,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/circuits/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building Circuits
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -553,6 +598,81 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#circuit-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Circuit Size
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chaining-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chaining Gates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clifford-circuit-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clifford Circuit Methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measurement-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Measurement Outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lower-level-gate-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lower-Level Gate Objects
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -565,7 +685,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/inspection/" class="md-nav__link">
+      <a href="../inspection/" class="md-nav__link">
         
   
   
@@ -593,7 +713,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/measurement/" class="md-nav__link">
+      <a href="../measurement/" class="md-nav__link">
         
   
   
@@ -621,7 +741,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/non-clifford/" class="md-nav__link">
+      <a href="../non-clifford/" class="md-nav__link">
         
   
   
@@ -649,7 +769,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/qiskit/" class="md-nav__link">
+      <a href="../qiskit/" class="md-nav__link">
         
   
   
@@ -677,7 +797,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/qec/" class="md-nav__link">
+      <a href="../qec/" class="md-nav__link">
         
   
   
@@ -705,7 +825,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/getting-started/tests/" class="md-nav__link">
+      <a href="../tests/" class="md-nav__link">
         
   
   
@@ -740,7 +860,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/architecture/" class="md-nav__link">
+      <a href="../../architecture/" class="md-nav__link">
         
   
   
@@ -819,7 +939,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/theory/stabilizer-formalism/" class="md-nav__link">
+      <a href="../../theory/stabilizer-formalism/" class="md-nav__link">
         
   
   
@@ -847,7 +967,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/theory/tableau/" class="md-nav__link">
+      <a href="../../theory/tableau/" class="md-nav__link">
         
   
   
@@ -875,7 +995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/theory/measurement/" class="md-nav__link">
+      <a href="../../theory/measurement/" class="md-nav__link">
         
   
   
@@ -903,7 +1023,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/theory/qec-codes/" class="md-nav__link">
+      <a href="../../theory/qec-codes/" class="md-nav__link">
         
   
   
@@ -931,7 +1051,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/hybrid-simulation/" class="md-nav__link">
+      <a href="../../hybrid-simulation/" class="md-nav__link">
         
   
   
@@ -966,7 +1086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/api-reference/" class="md-nav__link">
+      <a href="../../api-reference/" class="md-nav__link">
         
   
   
@@ -993,7 +1113,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/python-stabilizer/references/" class="md-nav__link">
+      <a href="../../references/" class="md-nav__link">
         
   
   
@@ -1030,6 +1150,71 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#circuit-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Circuit Size
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chaining-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chaining Gates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clifford-circuit-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clifford Circuit Methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measurement-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Measurement Outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lower-level-gate-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lower-Level Gate Objects
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1042,8 +1227,171 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="building-circuits">Building Circuits</h1>
+<p><code>Circuit</code> is a fluent builder for operation lists. It records gates, then applies them when you call <code>run(state)</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">Circuit</span><span class="p">,</span> <span class="n">StabilizerState</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">circuit</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">circuit</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stabilizers&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>+XX
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>+ZZ
+</code></pre></div>
+<p>Those are the stabilizers of the Bell state <span class="arithmatex">\(|\Phi^+\rangle\)</span>.</p>
+<h2 id="circuit-size">Circuit Size</h2>
+<p>The circuit constructor takes the number of qubits the circuit expects:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">circuit</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+<p>The state passed to <code>run()</code> must have at least that many qubits:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">circuit</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="chaining-gates">Chaining Gates</h2>
+<p>Every builder method returns <code>self</code>, so circuits can be written as chains:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">circuit</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">Circuit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">)</span>
+</code></pre></div>
+<p>This prepares a 3-qubit GHZ state. Its stabilizers are:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">circuit</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stabilizers&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>+XXX
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>+ZZI
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>+ZIZ
+</code></pre></div>
+<h2 id="clifford-circuit-methods">Clifford Circuit Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.h(q)</code></td>
+<td>Hadamard</td>
+</tr>
+<tr>
+<td><code>.s(q)</code></td>
+<td>Phase (<code>S</code>)</td>
+</tr>
+<tr>
+<td><code>.sdg(q)</code></td>
+<td><code>S</code> dagger</td>
+</tr>
+<tr>
+<td><code>.sx(q)</code></td>
+<td>Square-root X</td>
+</tr>
+<tr>
+<td><code>.sxdg(q)</code></td>
+<td>Square-root X dagger</td>
+</tr>
+<tr>
+<td><code>.x(q)</code></td>
+<td>Pauli <code>X</code></td>
+</tr>
+<tr>
+<td><code>.y(q)</code></td>
+<td>Pauli <code>Y</code></td>
+</tr>
+<tr>
+<td><code>.z(q)</code></td>
+<td>Pauli <code>Z</code></td>
+</tr>
+<tr>
+<td><code>.i(q)</code></td>
+<td>Identity</td>
+</tr>
+<tr>
+<td><code>.cnot(c, t)</code> / <code>.cx(c, t)</code></td>
+<td>Controlled-NOT</td>
+</tr>
+<tr>
+<td><code>.cz(c, t)</code></td>
+<td>Controlled-Z</td>
+</tr>
+<tr>
+<td><code>.cy(c, t)</code></td>
+<td>Controlled-Y</td>
+</tr>
+<tr>
+<td><code>.ch(c, t)</code></td>
+<td>Controlled-H</td>
+</tr>
+<tr>
+<td><code>.swap(q1, q2)</code></td>
+<td>SWAP</td>
+</tr>
+<tr>
+<td><code>.iswap(q1, q2)</code></td>
+<td>iSWAP</td>
+</tr>
+<tr>
+<td><code>.cs(c, t)</code></td>
+<td>Controlled-S</td>
+</tr>
+<tr>
+<td><code>.csdg(c, t)</code></td>
+<td>Controlled-S dagger</td>
+</tr>
+<tr>
+<td><code>.ecr(q1, q2)</code></td>
+<td>Echoed cross-resonance</td>
+</tr>
+<tr>
+<td><code>.dcx(q1, q2)</code></td>
+<td>Double-CNOT</td>
+</tr>
+<tr>
+<td><code>.mz(q, key=None)</code></td>
+<td>Z-basis measurement</td>
+</tr>
+</tbody>
+</table>
+<h2 id="measurement-outcomes">Measurement Outcomes</h2>
+<p><code>run(state)</code> returns one outcome for every <code>.mz()</code> operation, in order:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">outcomes</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mz</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mz</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span>  <span class="c1"># e.g. [0, 0] or [1, 1]</span>
+</code></pre></div>
+<p>The outcomes are random, but they are correlated because this is a Bell state.</p>
+<h2 id="lower-level-gate-objects">Lower-Level Gate Objects</h2>
+<p>For the full gate library, use <code>.gate(gate_obj, qubits)</code> or the non-Clifford methods described in <a href="../non-clifford/">Hybrid Simulation</a>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">Circuit</span><span class="p">,</span> <span class="n">HGate</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">circuit</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">gate</span><span class="p">(</span><span class="n">HGate</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -1086,10 +1434,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/python-stabilizer/", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "/python-stabilizer/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/python-stabilizer/assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

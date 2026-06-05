@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://atharvmunot004.github.io/python-stabilizer/getting-started/">
+        <link rel="canonical" href="https://atharvmunot004.github.io/python-stabilizer/getting-started/inspection/">
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../circuits/">
       
       
-        <link rel="next" href="installation/">
+        <link rel="next" href="../measurement/">
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Overview - stabilizer-python</title>
+        <title>Inspecting Tableaux - stabilizer-python</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#getting-started" class="md-skip">
+        <a href="#inspecting-tableaux" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="stabilizer-python" class="md-header__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
+    <a href="../.." title="stabilizer-python" class="md-header__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Inspecting Tableaux
             
           </span>
         </div>
@@ -223,7 +223,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -246,7 +246,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -264,7 +264,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../architecture/" class="md-tabs__link">
+      <a href="../../architecture/" class="md-tabs__link">
         
   
   
@@ -285,7 +285,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../theory/stabilizer-formalism/" class="md-tabs__link">
+        <a href="../../theory/stabilizer-formalism/" class="md-tabs__link">
           
   
   
@@ -303,7 +303,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../api-reference/" class="md-tabs__link">
+      <a href="../../api-reference/" class="md-tabs__link">
         
   
   
@@ -322,7 +322,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../references/" class="md-tabs__link">
+      <a href="../../references/" class="md-tabs__link">
         
   
   
@@ -357,7 +357,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="stabilizer-python" class="md-nav__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
+    <a href="../.." title="stabilizer-python" class="md-nav__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -387,7 +387,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -468,37 +468,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -514,59 +487,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#which-simulator-should-i-use" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Which Simulator Should I Use?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#minimal-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Minimal Example
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#deeper-references" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Deeper References
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -579,7 +499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="installation/" class="md-nav__link">
+      <a href="../installation/" class="md-nav__link">
         
   
   
@@ -607,7 +527,7 @@
   
   
     <li class="md-nav__item">
-      <a href="first-tableau/" class="md-nav__link">
+      <a href="../first-tableau/" class="md-nav__link">
         
   
   
@@ -635,7 +555,7 @@
   
   
     <li class="md-nav__item">
-      <a href="circuits/" class="md-nav__link">
+      <a href="../circuits/" class="md-nav__link">
         
   
   
@@ -660,10 +580,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="inspection/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inspecting Tableaux
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -679,6 +626,103 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#view-chp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View: chp
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-binary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View: binary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View: phase
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View: debug
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-stabilizers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View: stabilizers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-destabilizers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View: destabilizers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#combining-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combining Views
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -691,7 +735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="measurement/" class="md-nav__link">
+      <a href="../measurement/" class="md-nav__link">
         
   
   
@@ -719,7 +763,7 @@
   
   
     <li class="md-nav__item">
-      <a href="non-clifford/" class="md-nav__link">
+      <a href="../non-clifford/" class="md-nav__link">
         
   
   
@@ -747,7 +791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="qiskit/" class="md-nav__link">
+      <a href="../qiskit/" class="md-nav__link">
         
   
   
@@ -775,7 +819,7 @@
   
   
     <li class="md-nav__item">
-      <a href="qec/" class="md-nav__link">
+      <a href="../qec/" class="md-nav__link">
         
   
   
@@ -803,7 +847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="tests/" class="md-nav__link">
+      <a href="../tests/" class="md-nav__link">
         
   
   
@@ -838,7 +882,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../../architecture/" class="md-nav__link">
         
   
   
@@ -917,7 +961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../theory/stabilizer-formalism/" class="md-nav__link">
+      <a href="../../theory/stabilizer-formalism/" class="md-nav__link">
         
   
   
@@ -945,7 +989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../theory/tableau/" class="md-nav__link">
+      <a href="../../theory/tableau/" class="md-nav__link">
         
   
   
@@ -973,7 +1017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../theory/measurement/" class="md-nav__link">
+      <a href="../../theory/measurement/" class="md-nav__link">
         
   
   
@@ -1001,7 +1045,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../theory/qec-codes/" class="md-nav__link">
+      <a href="../../theory/qec-codes/" class="md-nav__link">
         
   
   
@@ -1029,7 +1073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../hybrid-simulation/" class="md-nav__link">
+      <a href="../../hybrid-simulation/" class="md-nav__link">
         
   
   
@@ -1064,7 +1108,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api-reference/" class="md-nav__link">
+      <a href="../../api-reference/" class="md-nav__link">
         
   
   
@@ -1091,7 +1135,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../references/" class="md-nav__link">
+      <a href="../../references/" class="md-nav__link">
         
   
   
@@ -1138,10 +1182,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#which-simulator-should-i-use" class="md-nav__link">
+  <a href="#view-chp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Which Simulator Should I Use?
+        View: chp
       
     </span>
   </a>
@@ -1149,10 +1193,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#minimal-example" class="md-nav__link">
+  <a href="#view-binary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Minimal Example
+        View: binary
       
     </span>
   </a>
@@ -1160,10 +1204,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#deeper-references" class="md-nav__link">
+  <a href="#view-phase" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Deeper References
+        View: phase
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View: debug
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-stabilizers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View: stabilizers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-destabilizers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View: destabilizers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#combining-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combining Views
       
     </span>
   </a>
@@ -1190,115 +1278,140 @@
   
 
 
-<h1 id="getting-started">Getting Started</h1>
-<p>This section is a beginner-friendly path through <code>stabilizer-python</code>. It starts with installation and a first tableau state, then builds up to circuits, measurement, non-Clifford gates, Qiskit interop, QEC examples, and tests.</p>
-<p>If you are new to stabilizer simulation, read these pages in order:</p>
-<table>
-<thead>
-<tr>
-<th>Step</th>
-<th>Page</th>
-<th>What you learn</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><a href="installation/">Installation</a></td>
-<td>How to install the package and optional dev tools</td>
-</tr>
-<tr>
-<td>2</td>
-<td><a href="first-tableau/">Your First Tableau State</a></td>
-<td>What <code>StabilizerState.zero()</code> creates and how to read the output</td>
-</tr>
-<tr>
-<td>3</td>
-<td><a href="circuits/">Building Circuits</a></td>
-<td>How to build and run Clifford circuits with <code>Circuit</code></td>
-</tr>
-<tr>
-<td>4</td>
-<td><a href="inspection/">Inspecting Tableaux</a></td>
-<td>How to print every tableau view with <code>inspect()</code></td>
-</tr>
-<tr>
-<td>5</td>
-<td><a href="measurement/">Measuring Qubits</a></td>
-<td>How Z-basis measurement works from user code</td>
-</tr>
-<tr>
-<td>6</td>
-<td><a href="non-clifford/">Hybrid Simulation</a></td>
-<td>When to use <code>QuantumSimulator</code> for non-Clifford gates</td>
-</tr>
-<tr>
-<td>7</td>
-<td><a href="qiskit/">Qiskit Interop</a></td>
-<td>How to load Qiskit circuits into the local simulator</td>
-</tr>
-<tr>
-<td>8</td>
-<td><a href="qec/">QEC Examples</a></td>
-<td>How to run bit-flip and Shor-code workflows</td>
-</tr>
-<tr>
-<td>9</td>
-<td><a href="tests/">Running Tests</a></td>
-<td>How to validate a checkout and find useful test examples</td>
-</tr>
-</tbody>
-</table>
-<h2 id="which-simulator-should-i-use">Which Simulator Should I Use?</h2>
-<table>
-<thead>
-<tr>
-<th>If your circuit contains...</th>
-<th>Use</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Only Clifford gates and Z measurements</td>
-<td><code>StabilizerState</code> directly</td>
-</tr>
-<tr>
-<td>QEC encoders, syndrome extraction, tableau debugging</td>
-<td><code>StabilizerState</code> directly</td>
-</tr>
-<tr>
-<td><code>T</code>, rotations, Toffoli, or arbitrary unitary gates</td>
-<td><code>QuantumSimulator</code></td>
-</tr>
-<tr>
-<td>Qiskit circuits with unknown gate mix</td>
-<td><code>QuantumSimulator</code></td>
-</tr>
-</tbody>
-</table>
-<p>The short version: use <code>StabilizerState</code> while the circuit is purely Clifford. Use <code>QuantumSimulator</code> when the circuit may cross into non-Clifford gates.</p>
-<h2 id="minimal-example">Minimal Example</h2>
+<h1 id="inspecting-tableaux">Inspecting Tableaux</h1>
+<p><code>StabilizerState.inspect()</code> is the recommended way to print tableau state. It returns a string, so wrap it in <code>print(...)</code> for terminal output.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">Circuit</span><span class="p">,</span> <span class="n">StabilizerState</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">Circuit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stabilizers&quot;</span><span class="p">]))</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">())</span>
 </code></pre></div>
-<p>Output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>+XX
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>+ZZ
+<p>With no arguments, <code>inspect()</code> prints four main views:</p>
+<ol>
+<li><code>chp</code></li>
+<li><code>binary</code></li>
+<li><code>phase</code></li>
+<li><code>debug</code></li>
+</ol>
+<p>Each view is separated by a blank line.</p>
+<h2 id="view-chp">View: <code>chp</code></h2>
+<p>CHP-style signed Pauli rows:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">]))</span>
 </code></pre></div>
-<p>Those two stabilizers identify the Bell state <span class="arithmatex">\(|\Phi^+\rangle\)</span>.</p>
-<h2 id="deeper-references">Deeper References</h2>
-<p>After this section, continue with:</p>
-<ul>
-<li><a href="../theory/stabilizer-formalism/">Stabilizer Formalism</a> for the math</li>
-<li><a href="../theory/tableau/">The Tableau Representation</a> for the bit-level storage</li>
-<li><a href="../theory/measurement/">Measurement</a> for deterministic and random measurement paths</li>
-<li><a href="../architecture/">Architecture</a> for module-level design</li>
-<li><a href="../api-reference/">API Reference</a> for method-level details</li>
-</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>+ZII
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>+IXI
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>+IIX
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>----
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>+XXX
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>+ZZI
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>+ZIZ
+</code></pre></div>
+<p>Rows above the separator are destabilizers. Rows below the separator are stabilizer generators.</p>
+<p>Equivalent direct method:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_chp_printstate</span><span class="p">())</span>
+</code></pre></div>
+<h2 id="view-binary">View: <code>binary</code></h2>
+<p>Raw X and Z bit matrices:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;binary&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>X matrix (6 x 3)    Z matrix (6 x 3)
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  0 0 0               1 0 0
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  0 1 0               0 0 0
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  0 0 1               0 0 0
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  1 1 1               0 0 0
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  0 0 0               1 1 0
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  0 0 0               1 0 1
+</code></pre></div>
+<p>Equivalent direct method:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_xz_binary_matrices</span><span class="p">())</span>
+</code></pre></div>
+<h2 id="view-phase">View: <code>phase</code></h2>
+<p>Phase-bit column:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;phase&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Phase matrix (6 x 1)
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  [0]
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>  [0]
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>  [0]
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>  [0]
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>  [0]
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>  [0]
+</code></pre></div>
+<p><code>0</code> means a <code>+</code> sign. <code>1</code> means a <code>-</code> sign.</p>
+<p>Equivalent direct method:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_phase_matrix</span><span class="p">())</span>
+</code></pre></div>
+<h2 id="view-debug">View: <code>debug</code></h2>
+<p>Combined CHP rows, X/Z matrices, and phase column:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<p>Equivalent direct method:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">format_tableau_debug</span><span class="p">())</span>
+</code></pre></div>
+<h2 id="view-stabilizers">View: <code>stabilizers</code></h2>
+<p>Only rows <code>n..2n-1</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stabilizers&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>+XXX
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>+ZZI
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>+ZIZ
+</code></pre></div>
+<p>Use this when you want the generators that define the quantum state.</p>
+<h2 id="view-destabilizers">View: <code>destabilizers</code></h2>
+<p>Only rows <code>0..n-1</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;destabilizers&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>+ZII
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>+IXI
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>+IIX
+</code></pre></div>
+<p>Use this when debugging tableau measurement updates. Destabilizers are not usually listed in textbook state descriptions, but they are essential to efficient measurement simulation.</p>
+<h2 id="combining-views">Combining Views</h2>
+<p>Pass view names in the exact order you want:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">]))</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stabilizers&quot;</span><span class="p">,</span> <span class="s2">&quot;destabilizers&quot;</span><span class="p">]))</span>
+</code></pre></div>
+<p>Supported view keys:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>chp</code></td>
+<td>Same as <code>format_chp_printstate()</code></td>
+</tr>
+<tr>
+<td><code>binary</code></td>
+<td>Same as <code>format_xz_binary_matrices()</code></td>
+</tr>
+<tr>
+<td><code>phase</code></td>
+<td>Same as <code>format_phase_matrix()</code></td>
+</tr>
+<tr>
+<td><code>debug</code></td>
+<td>Same as <code>format_tableau_debug()</code></td>
+</tr>
+<tr>
+<td><code>stabilizers</code></td>
+<td>Only tableau rows <code>n..2n-1</code> as signed Pauli strings</td>
+</tr>
+<tr>
+<td><code>destabilizers</code></td>
+<td>Only tableau rows <code>0..n-1</code> as signed Pauli strings</td>
+</tr>
+</tbody>
+</table>
+<p>Unknown view names raise <code>ValueError</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">,</span> <span class="s2">&quot;not-a-view&quot;</span><span class="p">])</span>  <span class="c1"># ValueError</span>
+</code></pre></div>
+<p>For the theory behind these rows and matrices, see <a href="../../theory/tableau/">The Tableau Representation</a>.</p>
 
 
 
@@ -1354,10 +1467,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
