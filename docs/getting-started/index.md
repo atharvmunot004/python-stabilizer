@@ -12,9 +12,10 @@ If you are new to stabilizer simulation, read these pages in order:
 | 4 | [Inspecting Tableaux](inspection.md) | How to print every tableau view with `inspect()` |
 | 5 | [Measuring Qubits](measurement.md) | How Z-basis measurement works from user code |
 | 6 | [Hybrid Simulation](non-clifford.md) | When to use `QuantumSimulator` for non-Clifford gates |
-| 7 | [Qiskit Interop](qiskit.md) | How to load Qiskit circuits into the local simulator |
+| 7 | [Qiskit Interop](qiskit.md) | How to load Qiskit circuits into the local simulator ([internals](../qiskit-interop.md)) |
 | 8 | [QEC Examples](qec.md) | How to run bit-flip and Shor-code workflows |
-| 9 | [Running Tests](tests.md) | How to validate a checkout and find useful test examples |
+| 9 | [Tracing Syndrome Extraction](tracing.md) | Step-by-step tableau evolution during syndrome measurement |
+| 10 | [Running Tests](tests.md) | How to validate a checkout and find useful test examples |
 
 ## Which Simulator Should I Use?
 

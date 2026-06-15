@@ -33,6 +33,39 @@ The reason is practical and mathematical. Converting a statevector back to a tab
 
 ---
 
+## Tracing the boundary
+
+Pass `trace=True` to `QuantumSimulator` when you want to see the state after
+each gate:
+
+```python
+import math
+from stabilizer_python import QuantumSimulator
+
+sim = QuantumSimulator(3, trace=True)
+sim.apply("h", [0])
+sim.apply("cnot", [0, 1])
+sim.apply("rz", [0], params=[math.pi / 4])
+
+for step in sim.trace:
+    print(step.gate_name, step.qubits, step.mode_before, "->", step.mode_after)
+    if step.mode_after == "tableau":
+        print(step.snapshot.format_chp_printstate())
+    else:
+        print(step.snapshot.to_dict())
+```
+
+Each trace entry stores the gate name, qubit targets, parameters, mode before
+and after the gate, and a copied snapshot of the active backend. Tableau-mode
+snapshots are `StabilizerState` copies; statevector-mode snapshots are
+`Statevector` copies.
+
+This is useful when teaching or debugging the Clifford/non-Clifford boundary:
+the first non-Clifford gate is the step where `mode_before == "tableau"` and
+`mode_after == "statevector"`.
+
+---
+
 ## The `tableau_to_statevector` bridge
 
 Given stabilizer generators \(g_1, \ldots, g_n\), the stabilizer state \(|\psi\rangle\) is the unique state satisfying:

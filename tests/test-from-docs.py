@@ -64,6 +64,9 @@ print(sim.tableau.stabilizer_strings())
 print("\ndestabilizer_strings():")
 print(sim.tableau.destabilizer_strings())
 
+print("\ntableau_dict():")
+print(sim.tableau.tableau_dict())
+
 # Also print just the stabilizer generators with their Pauli strings
 print("\nStabilizer generators:")
 for phase, x_row, z_row in sim.tableau.stabilizer_generators():
@@ -80,3 +83,18 @@ for phase, x_row, z_row in sim.tableau.stabilizer_generators():
         else:
             pauli += "Z"
     print(f"  {sign}{pauli}")
+
+# Traced syndrome extraction (see docs/getting-started/tracing.md)
+from stabilizer_python import StabilizerState
+from stabilizer_python.codes import BitFlip3Code
+from stabilizer_python.tracing import TracedCircuit
+
+st = StabilizerState.zero(5)
+BitFlip3Code.encoder_circuit().run(st)
+st.x(1)
+
+tc = TracedCircuit(BitFlip3Code.syndrome_circuit(), trace=True)
+outcomes = tc.run(st)
+print("\nTracedCircuit syndrome outcomes:", outcomes)
+print("Trace steps:", len(tc.steps))
+print("First step:", tc.steps[0].op_label, tc.steps[0].kind)

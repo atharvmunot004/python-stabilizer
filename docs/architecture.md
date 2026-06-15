@@ -63,7 +63,8 @@ The class owns all Clifford state mutation:
 - Single-qubit Clifford gates: `h`, `s`, `sdg`, `sx`, `sxdg`, `x`, `y`, `z`, `i`
 - Two-qubit Clifford gates: `cnot`/`cx`, `cz`, `cy`, `swap`
 - Measurement and reset: `measure_z`, `reset_z`
-- Inspection: `inspect`, `stabilizer_generators`, `stabilizer_strings`, `destabilizer_strings`, `copy`, `format_chp_printstate`, `format_xz_binary_matrices`, `format_phase_matrix`, `format_tableau_debug`
+- Validation: `_check_qubit`, `_check_tableau_invariants` (debug/tests)
+- Inspection: `inspect`, `stabilizer_generators`, `destabilizer_generators`, `stabilizer_strings`, `destabilizer_strings`, `tableau_dict`, `copy`, `format_chp_printstate`, `format_xz_binary_matrices`, `format_phase_matrix`, `format_tableau_debug`
 
 ### `Gate`
 
@@ -101,7 +102,7 @@ The bridge function applies stabilizer projectors `(I + g_i) / 2` iteratively. I
 
 `apply(name, qubits, params)` or `apply_gate(gate, qubits)` routes to `StabilizerState` methods when `is_clifford=True` and `mode == "tableau"`. Otherwise it calls `_switch_to_statevector()` and then `sv.apply_gate()`.
 
-`_switch_to_statevector()` calls `tableau_to_statevector()` exactly once, stores the result, and sets `mode` to `"statevector"`. `measure_z(qubit)` delegates to whichever backend is active. `statevector_snapshot()` returns a dense statevector in either mode without changing `mode`.
+`_switch_to_statevector()` calls `tableau_to_statevector()` exactly once, stores the result, and sets `mode` to `"statevector"`. `measure_z(qubit)` delegates to whichever backend is active. `statevector_snapshot()` returns a dense statevector in either mode without changing `mode`. Pass `trace=True` to record a `SimulatorTraceStep` after every gate with mode before/after and a state snapshot. Pass `debug=True` to assert tableau invariants after Clifford gates and measurements. Gate application validates qubit indices and rejects duplicates before routing.
 
 ### `Circuit`
 
@@ -115,9 +116,9 @@ Supported builder operations include Clifford methods (`h`, `s`, `sdg`, `sx`, `s
 
 [`qiskit_interop.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/qiskit_interop.py) provides `from_qiskit(qc: QuantumCircuit) -> Circuit`.
 
-It walks `qc.data`, maps each instruction name to the local gate name, extracts qubit indices from the circuit's qubit register, and builds a local `Circuit` using `.gate()` for parameterized gates and named convenience methods for fixed gates. Barriers and delay instructions are silently skipped. Unknown gate names raise `ValueError`.
+It walks `qc.data`, maps each instruction name to the local gate name, extracts qubit indices from the circuit's qubit register, and builds a local `Circuit` using named convenience methods for fixed gates and parameterized builder calls where needed. Barriers and delay instructions are silently skipped. Unknown gate names raise `ValueError`.
 
-Composite Qiskit library instructions are recursively expanded through their definitions when possible.
+Composite Qiskit library instructions are recursively expanded through their definitions when possible. See [How from_qiskit Works](qiskit-interop.md) for the full conversion algorithm.
 
 ### `codes`
 

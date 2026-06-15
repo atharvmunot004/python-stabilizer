@@ -337,6 +337,9 @@ st.stabilizer_strings()
 # ['+XXX', '+ZZI', '+ZIZ']
 ```
 
+For raw tableau data instead of labels, use `stabilizer_generators()`. It returns
+`(phase_bit, x_row, z_row)` tuples for the stabilizer rows.
+
 ### `destabilizers`: only rows `0..n-1`
 
 ```python
@@ -358,6 +361,21 @@ st.destabilizer_strings()
 # ['+ZII', '+IXI', '+IIX']
 ```
 
+For raw tuple access, use `destabilizer_generators()`. It returns the same
+`(phase_bit, x_row, z_row)` structure as `stabilizer_generators()`, but for rows
+`0..n-1`.
+
+To read both sides of the tableau as signed Pauli strings in one call, use
+`tableau_dict()`:
+
+```python
+st.tableau_dict()
+# {
+#     'stabilizers': ['+XXX', '+ZZI', '+ZIZ'],
+#     'destabilizers': ['+ZII', '+IXI', '+IIX'],
+# }
+```
+
 ### Combining views
 
 The `views` argument is ordered. This prints exactly the selected views in the requested order:
@@ -374,8 +392,8 @@ Supported view keys are:
 | `binary` | Raw X and Z bit matrices | `format_xz_binary_matrices()` |
 | `phase` | Phase-bit column | `format_phase_matrix()` |
 | `debug` | CHP rows + X/Z matrices + phase column | `format_tableau_debug()` |
-| `stabilizers` | Stabilizer rows only (`n..2n-1`) | internal helper |
-| `destabilizers` | Destabilizer rows only (`0..n-1`) | internal helper |
+| `stabilizers` | Stabilizer rows only (`n..2n-1`) | `stabilizer_strings()` |
+| `destabilizers` | Destabilizer rows only (`0..n-1`) | `destabilizer_strings()` |
 
 If a view name is unknown, `inspect()` raises `ValueError`.
 
@@ -397,6 +415,94 @@ Signs are optional and default to `+`:
 ```python
 StabilizerState.from_stabilizer_list(["XX", "ZZ"])
 ```
+
+---
+
+## Comparison with Qiskit's `Clifford`
+
+Qiskit represents Clifford states with [`qiskit.quantum_info.Clifford`](https://docs.quantum.ibm.com/api/qiskit/qiskit.quantum_info.Clifford). Like this package, it keeps **stabilizers** and **destabilizers** as separate generator sets. The physics is the same; the storage layout differs.
+
+### Qiskit's layout
+
+`Clifford` wraps a `StabilizerTable` with two `PauliTable` sub-tables:
+
+| Qiskit attribute | Meaning | Shape |
+|---|---|---|
+| `cliff.stabilizer` | Stabilizer generators | `(n, 2n)` |
+| `cliff.destabilizer` | Destabilizer generators | `(n, 2n)` |
+| `cliff.stabilizer.phase` | Stabilizer sign bits | `(n,)` |
+| `cliff.destabilizer.phase` | Destabilizer sign bits | `(n,)` |
+
+Each `PauliTable` row stores Pauli bits in **`[X | Z]` column order**: columns `0..n-1` are X bits, columns `n..2n-1` are Z bits. Phase is stored separately as a boolean array, not inside the bit matrix.
+
+Access pattern:
+
+```python
+from qiskit import QuantumCircuit
+from qiskit.quantum_info import Clifford
+
+qc = QuantumCircuit(2)
+qc.h(0)
+qc.cx(0, 1)
+
+cliff = Clifford(qc)
+print(cliff.stabilizer)      # PauliTable for stabilizer rows
+print(cliff.destabilizer)    # PauliTable for destabilizer rows
+print(cliff.to_labels(mode="S"))  # e.g. ['+XX', '+ZZ']
+print(cliff.to_labels(mode="D"))  # destabilizer labels
+```
+
+### Our layout
+
+`StabilizerState` follows Aaronson–Gottesman CHP-style storage:
+
+| Our attribute | Meaning | Shape |
+|---|---|---|
+| `x_mat` | X bits for all `2n` tableau rows | `(2n, n)` |
+| `z_mat` | Z bits for all `2n` tableau rows | `(2n, n)` |
+| `r_phase` | Sign bits for all `2n` rows | `(2n,)` |
+
+Rows `0..n-1` are destabilizers. Rows `n..2n-1` are stabilizers. X and Z live in **separate** matrices instead of one combined `[X|Z]` row.
+
+Equivalent read APIs:
+
+```python
+st.stabilizer_strings()       # like cliff.to_labels(mode="S")
+st.destabilizer_strings()     # like cliff.to_labels(mode="D")
+st.tableau_dict()             # both sides in one dict
+st.stabilizer_generators()    # raw (phase, x_row, z_row) tuples
+st.destabilizer_generators()  # raw tuples for destabilizer rows
+```
+
+### Row correspondence
+
+For an `n`-qubit state, Qiskit row `i` in `.stabilizer` matches our tableau row `n + i`. Qiskit row `i` in `.destabilizer` matches our tableau row `i`.
+
+| Generator set | Qiskit source | Our source |
+|---|---|---|
+| Stabilizer row `i` | `cliff.stabilizer[i]` | `x_mat[n+i]`, `z_mat[n+i]`, `r_phase[n+i]` |
+| Destabilizer row `i` | `cliff.destabilizer[i]` | `x_mat[i]`, `z_mat[i]`, `r_phase[i]` |
+
+To compare Pauli **content**, translate Qiskit's combined row into separate X/Z lists:
+
+```python
+# Qiskit stabilizer row i -> our stabilizer row n + i
+x_row = cliff.stabilizer[i, :n].tolist()
+z_row = cliff.stabilizer[i, n:].tolist()
+phase = int(cliff.stabilizer.phase[i])  # 0 -> +, 1 -> -
+```
+
+Direct NumPy array comparison against `x_mat` / `z_mat` requires reshaping: Qiskit packs `[X|Z]` horizontally into one `(n, 2n)` matrix, while we store X and Z as two `(2n, n)` matrices. The bits match after accounting for row offset and column layout.
+
+### What stays aligned
+
+- Stabilizer **labels** from Qiskit `to_labels(mode="S")` match `stabilizer_strings()` for the same Clifford circuit.
+- Destabilizer **labels** from `to_labels(mode="D")` match `destabilizer_strings()`.
+- Gate semantics are aligned through `from_qiskit()` for supported Clifford gates.
+
+The main practical difference is API shape: Qiskit exposes two `(n, 2n)` Pauli tables plus separate phase vectors; we expose two `(2n, n)` bit matrices plus one phase vector over all rows.
+
+For loading Qiskit circuits into this simulator, see [Qiskit Interop](../getting-started/qiskit.md).
 
 ---
 

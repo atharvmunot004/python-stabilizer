@@ -53,7 +53,9 @@ nav:
     - Measuring Qubits: getting-started/measurement.md
     - Hybrid Simulation: getting-started/non-clifford.md
     - Qiskit Interop: getting-started/qiskit.md
+    - How from_qiskit Works: qiskit-interop.md
     - QEC Examples: getting-started/qec.md
+    - Tracing Syndrome Extraction: getting-started/tracing.md
     - Running Tests: getting-started/tests.md
   - Architecture: architecture.md
   - Theory:

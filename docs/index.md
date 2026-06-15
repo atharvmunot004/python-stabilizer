@@ -14,6 +14,7 @@ Source repository: [`atharvmunot004/python-stabilizer`](https://github.com/athar
 |---|---|---|
 | `StabilizerState` | Core Aaronson-Gottesman tableau state representation | [`tableau.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py) |
 | `Circuit` | Fluent builder for small Clifford circuits | [`circuit.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py) |
+| `QuantumSimulator` | Hybrid tableau/statevector simulator with optional gate tracing | [`simulator.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/simulator.py) |
 | `BitFlip3Code` | 3-qubit repetition-code encoder, syndrome reader, and X correction | [`codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py) |
 | `Shor9Code` | 9-qubit Shor encoder and current X-syndrome correction helper | [`codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py) |
 | `gaussian_elimination_gf2`, `rank_gf2` | Binary linear algebra helpers | [`linear_algebra.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/linear_algebra.py) |
@@ -30,11 +31,12 @@ Source repository: [`atharvmunot004/python-stabilizer`](https://github.com/athar
 - Clifford updates: `H`, `S`, Pauli gates, `CNOT`, plus several state-level derived Clifford gates
 - Z-basis measurement with deterministic and random tableau update paths
 - Small fluent circuits through `Circuit`
-- Stabilizer inspection through `inspect()` plus direct debug formatters
+- Stabilizer inspection through `inspect()`, `stabilizer_strings()`, `destabilizer_strings()`, and `tableau_dict()`
+- Hybrid simulation through `QuantumSimulator`, including optional gate-by-gate tracing
 - GF(2) rank and RREF utilities for binary stabilizer checks
 - Educational QEC examples for the 3-qubit repetition code and Shor's 9-qubit code
 
-The simulator is intentionally not a universal quantum simulator. It does not support non-Clifford gates such as `T` or arbitrary state-vector amplitudes. If you need large-scale production stabilizer simulation, use a tool such as [Stim](https://github.com/quantumlib/Stim); this project is designed to show the mechanics clearly.
+The core tableau simulator is intentionally not a universal quantum simulator. Use `QuantumSimulator` for small circuits that cross into non-Clifford gates such as `T`, rotations, Toffoli, or arbitrary state-vector amplitudes. If you need large-scale production stabilizer simulation, use a tool such as [Stim](https://github.com/quantumlib/Stim); this project is designed to show the mechanics clearly.
 
 ---
 
@@ -111,5 +113,6 @@ The syndrome `(1, 1)` identifies an `X` error on qubit 1.
 - [The Tableau Representation](theory/tableau.md): how X/Z/phase arrays encode stabilizer states and how gates mutate them.
 - [Measurement](theory/measurement.md): deterministic versus random measurement and tableau row updates.
 - [Error-Correcting Codes](theory/qec-codes.md): repetition-code and Shor-code concepts mapped to the implementation.
+- [Hybrid Simulation](hybrid-simulation.md): how `QuantumSimulator` switches from tableau to statevector mode and records trace snapshots.
 - [API Reference](api-reference.md): public classes, functions, method behavior, and source links.
 - [References](references.md): papers, tools, textbooks, and repository resources.

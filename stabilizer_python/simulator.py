@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING, List
+
 from .gate import (
     CNOTGate,
     CPhaseGate,
@@ -53,24 +55,39 @@ from .gate import (
 from .statevector import Statevector, tableau_to_statevector
 from .tableau import StabilizerState
 
+if TYPE_CHECKING:
+    from .tracing import SimulatorTraceStep
+
 
 class QuantumSimulator:
     """Hybrid simulator that routes Clifford gates to tableau and others to statevector."""
 
-    def __init__(self, n: int):
+    def __init__(self, n: int, trace: bool = False, debug: bool = False):
         """Create an n-qubit simulator initialized to |0...0>."""
         self.n = n
         self.mode = "tableau"
         self.tableau = StabilizerState.zero(n)
         self.sv: Statevector | None = None
+        self._trace_enabled = trace
+        self._debug = debug
+        self.trace: List[SimulatorTraceStep] = []
 
     def apply(self, gate: Gate | str, qubits: list[int], params: list[float] | None = None) -> None:
         """Apply a gate object or gate name to the simulator state."""
         gate_obj = gate if isinstance(gate, Gate) else self._gate_from_name(gate, params)
         self.apply_gate(gate_obj, qubits)
 
+    def _check_qubits(self, qubits: list[int], gate_name: str) -> None:
+        for q in qubits:
+            if not (0 <= q < self.n):
+                raise ValueError(f"Gate {gate_name}: qubit {q} out of range")
+        if len(qubits) != len(set(qubits)):
+            raise ValueError(f"Gate {gate_name}: duplicate qubit indices {qubits}")
+
     def apply_gate(self, gate: Gate, qubits: list[int]) -> None:
         """Apply a Gate object to the simulator state."""
+        self._check_qubits(qubits, gate.name)
+        mode_before = self.mode
         method_names = {
             "h": "h",
             "s": "s",
@@ -89,11 +106,42 @@ class QuantumSimulator:
         }
         if gate.is_clifford and self.mode == "tableau" and gate.name in method_names:
             getattr(self.tableau, method_names[gate.name])(*qubits)
-            return
-        self._switch_to_statevector()
+        else:
+            self._switch_to_statevector()
+            if self.sv is None:
+                raise RuntimeError("statevector backend is not initialized")
+            self.sv.apply_gate(gate, qubits)
+        if self._trace_enabled:
+            self._record_trace(gate.name, qubits, list(gate.params), mode_before)
+        if self._debug and self.mode == "tableau":
+            self.tableau._check_tableau_invariants()
+
+    def _record_trace(
+        self,
+        gate_name: str,
+        qubits: list[int],
+        params: list[float],
+        mode_before: str,
+    ) -> None:
+        from .tracing import SimulatorTraceStep
+
+        self.trace.append(
+            SimulatorTraceStep(
+                gate_name=gate_name,
+                qubits=list(qubits),
+                params=params,
+                mode_before=mode_before,
+                mode_after=self.mode,
+                snapshot=self._snapshot(),
+            )
+        )
+
+    def _snapshot(self) -> StabilizerState | Statevector:
+        if self.mode == "tableau":
+            return self.tableau.copy()
         if self.sv is None:
             raise RuntimeError("statevector backend is not initialized")
-        self.sv.apply_gate(gate, qubits)
+        return Statevector(self.n, self.sv.data)
 
     def _gate_from_name(self, name: str, params: list[float] | None = None) -> Gate:
         """Build a Gate object from a local gate name and optional parameters."""
@@ -167,8 +215,13 @@ class QuantumSimulator:
 
     def measure_z(self, qubit: int) -> int:
         """Measure a qubit in the Z basis."""
+        if not (0 <= qubit < self.n):
+            raise ValueError(f"qubit={qubit} out of range for {self.n}-qubit simulator")
         if self.mode == "tableau":
-            return self.tableau.measure_z(qubit)
+            outcome = self.tableau.measure_z(qubit)
+            if self._debug:
+                self.tableau._check_tableau_invariants()
+            return outcome
         if self.sv is None:
             raise RuntimeError("statevector backend is not initialized")
         return self.sv.measure_z(qubit)

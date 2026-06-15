@@ -92,4 +92,29 @@ print(sv.probabilities())
 print(sv.to_dict())
 ```
 
+## Gate-by-Gate Tracing
+
+Pass `trace=True` to record the state after every gate:
+
+```python
+import math
+from stabilizer_python import QuantumSimulator
+
+sim = QuantumSimulator(3, trace=True)
+sim.apply("h", [0])
+sim.apply("cnot", [0, 1])
+sim.apply("rz", [0], params=[math.pi / 4])
+
+for step in sim.trace:
+    print(step.gate_name, step.qubits, step.mode_after)
+    if step.mode_after == "tableau":
+        print(step.snapshot.format_chp_printstate())
+    else:
+        print(step.snapshot.to_dict())
+```
+
+Each trace step records the gate name, qubit targets, parameters, mode before
+and after the gate, and a snapshot of the active backend. This is useful for
+seeing exactly when the simulator switches from tableau to statevector mode.
+
 For the backend design, see [Hybrid Simulation](../hybrid-simulation.md).

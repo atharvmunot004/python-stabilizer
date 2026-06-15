@@ -46,7 +46,7 @@ It measures:
 
 ## Tracing Syndrome Extraction
 
-Use `TracedCircuit` to see every CNOT and measurement step:
+Use `TracedCircuit` to see every CNOT and measurement step. For a full walkthrough with example output, see [Tracing Syndrome Extraction](tracing.md).
 
 ```python
 from stabilizer_python import StabilizerState
@@ -64,14 +64,9 @@ print(outcomes)
 tc.print_trace()
 ```
 
-Each trace step includes:
+Each trace step includes the operation label, measurement outcome and branch for `MZ` operations, and the CHP tableau after the step.
 
-- the operation label, such as `CNOT(0, 3)`
-- measurement outcome for `MZ` operations
-- whether the measurement branch was `deterministic` or `random`
-- the tableau after the operation
-
-This is the most useful beginner tool for seeing how syndrome ancillas become entangled with data qubits and then collapse on measurement.
+`BitFlip3Code.syndrome_circuit()` measures ancillas but does not reset them. For measure-and-reset in one call, use `BitFlip3Code.measure_syndrome(st)`.
 
 ## Shor 9-Qubit Code
 

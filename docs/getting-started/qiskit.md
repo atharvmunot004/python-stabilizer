@@ -8,6 +8,8 @@ pip install qiskit
 
 Then convert a Qiskit `QuantumCircuit` with `from_qiskit()`.
 
+For a step-by-step explanation of the conversion algorithm, see [How from_qiskit Works](../qiskit-interop.md).
+
 ## Pure Clifford Qiskit Circuit
 
 ```python
@@ -119,4 +121,28 @@ print(outcomes)  # e.g. [0, 0] or [1, 1]
 
 `barrier` and `delay` are skipped. Unknown gates raise `ValueError` with the gate name.
 
-For method-level details, see [`qiskit_interop`](../api-reference.md#qiskit_interop).
+## Stabilizers vs Destabilizers in Qiskit
+
+Qiskit's [`Clifford`](https://docs.quantum.ibm.com/api/qiskit/qiskit.quantum_info.Clifford) object stores stabilizers and destabilizers separately, similar to our tableau rows. After running a pure Clifford Qiskit circuit locally:
+
+```python
+from qiskit import QuantumCircuit as QiskitCircuit
+from stabilizer_python import QuantumSimulator
+from stabilizer_python.qiskit_interop import from_qiskit
+
+qc = QiskitCircuit(2)
+qc.h(0)
+qc.cx(0, 1)
+
+sim = QuantumSimulator(2)
+from_qiskit(qc).run(sim)
+
+print(sim.tableau.stabilizer_strings())    # ['+XX', '+ZZ']
+print(sim.tableau.destabilizer_strings())  # e.g. ['+ZI', '+IX']
+```
+
+Qiskit packs each generator row as `[X | Z]` in a single `(n, 2n)` `PauliTable`. We store separate `x_mat` and `z_mat` matrices with `2n` rows. The Pauli labels agree; only the storage layout differs.
+
+For a full side-by-side comparison, see [Comparison with Qiskit's Clifford](../theory/tableau.md#comparison-with-qiskits-clifford).
+
+For method-level details, see [`qiskit_interop`](../api-reference.md#qiskit_interop). For the conversion algorithm, see [How from_qiskit Works](../qiskit-interop.md).

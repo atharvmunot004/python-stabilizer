@@ -76,7 +76,13 @@ All gate methods modify the state in place and return `None`.
 #### `cy(control: int, target: int)` - Controlled-Y
 #### `swap(q1: int, q2: int)` - SWAP (via 3 CNOTs)
 
-Index validation is currently explicit for `i(q)` and implicit for most other gate methods through Python list indexing.
+All gate and measurement methods validate qubit indices and raise `ValueError`
+if a target is out of range for the state's `n` qubits.
+
+#### `_check_tableau_invariants() -> None`
+
+Debug helper. Asserts that stabilizer rows are independent and mutually
+commuting. Intended for tests and for `QuantumSimulator(debug=True)`.
 
 ---
 
@@ -127,7 +133,7 @@ st = StabilizerState.from_stabilizer_list(["XX", "ZZ"])
 print(st.stabilizer_strings())  # ['+XX', '+ZZ']
 ```
 
-This mirrors Qiskit's `Clifford.to_labels(mode="S")` style.
+This mirrors Qiskit's `Clifford.to_labels(mode="S")` style. See [Comparison with Qiskit's Clifford](theory/tableau.md#comparison-with-qiskits-clifford) for layout differences.
 
 #### `destabilizer_strings() -> List[str]`
 
@@ -139,6 +145,20 @@ print(st.destabilizer_strings())  # ['+XI', '+IX']
 ```
 
 This mirrors Qiskit's `Clifford.to_labels(mode="D")` style. Destabilizers are tableau bookkeeping rows used for efficient measurement simulation, not the physical stabilizer generators of the state.
+
+#### `destabilizer_generators() -> List[Tuple[int, List[int], List[int]]]`
+
+Returns the first $n$ tableau rows as `(phase_bit, x_row, z_row)` tuples. Symmetric with `stabilizer_generators()`.
+
+#### `tableau_dict() -> Dict[str, List[str]]`
+
+Returns both generator sets as signed Pauli strings:
+
+```python
+st = StabilizerState.zero(2)
+print(st.tableau_dict())
+# {'stabilizers': ['+ZI', '+IZ'], 'destabilizers': ['+XI', '+IX']}
+```
 
 #### `copy() -> StabilizerState`
 
@@ -211,6 +231,10 @@ Prints the $2n \times 1$ phase bit column.
 All three formats combined. Useful for step-by-step debugging.
 
 Equivalent to the `debug` view in `inspect()`.
+
+Formatting methods are for inspection only. They use `io.StringIO` internally
+and should not be called inside tight simulation loops. For bulk runs, prefer
+`stabilizer_strings()` or raw measurement outcomes over repeated CHP formatting.
 
 ---
 
@@ -489,7 +513,7 @@ Source: `stabilizer_python/simulator.py`
 
 Hybrid simulator. Starts in O(n²) tableau mode; auto-switches to O(2^n) statevector on the first non-Clifford gate.
 
-Constructor: `QuantumSimulator(n: int)`
+Constructor: `QuantumSimulator(n: int, trace: bool = False, debug: bool = False)`
 
 Attributes:
 
@@ -499,6 +523,11 @@ Attributes:
 | `tableau` | `StabilizerState` | Active in tableau mode |
 | `sv` | `Statevector \| None` | Active after first non-Clifford gate |
 | `n` | `int` | Number of qubits |
+| `trace` | `List[SimulatorTraceStep]` | Gate-by-gate snapshots when `trace=True` |
+
+Pass `debug=True` to run tableau invariant checks after every Clifford gate and
+Z measurement while the simulator is in tableau mode. Out-of-range or duplicate
+qubit indices raise `ValueError` before a gate is applied.
 
 Methods:
 
@@ -539,6 +568,96 @@ print(sim.mode)   # "statevector"
 print(sim.sv.to_dict())
 ```
 
+#### Gate tracing
+
+Pass `trace=True` to record the state after every `apply` / `apply_gate` call:
+
+```python
+from stabilizer_python import QuantumSimulator
+import math
+
+sim = QuantumSimulator(3, trace=True)
+sim.apply("h", [0])
+sim.apply("cnot", [0, 1])
+sim.apply("rz", [0], params=[math.pi / 4])
+
+for step in sim.trace:
+    print(step.gate_name, step.qubits, step.mode_after)
+    if step.mode_after == "tableau":
+        print(step.snapshot.format_chp_printstate())
+    else:
+        print(step.snapshot.to_dict())
+```
+
+Each `SimulatorTraceStep` captures: gate name, qubit targets, params, mode before and after, and a snapshot (`StabilizerState.copy()` or `Statevector` copy).
+
+---
+
+## `tracing`
+
+Source: [`stabilizer_python/tracing.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tracing.py)
+
+Step-by-step Clifford circuit tracing for QEC pedagogy.
+
+### `TraceStep`
+
+Frozen dataclass recorded for each traced operation:
+
+| Field | Type | Meaning |
+|---|---|---|
+| `index` | `int` | 1-based step number |
+| `op_label` | `str` | Formatted gate or measurement label |
+| `kind` | `str` | `"gate"` or `"measurement"` |
+| `state` | `StabilizerState` | Tableau snapshot after the operation |
+| `outcome` | `Optional[int]` | Measurement outcome for `MZ` steps |
+| `measurement_branch` | `Optional[str]` | `"deterministic"` or `"random"` for `MZ` steps |
+
+### `SimulatorTraceStep`
+
+Frozen dataclass recorded for each traced gate in `QuantumSimulator(trace=True)`:
+
+| Field | Type | Meaning |
+|---|---|---|
+| `gate_name` | `str` | Gate name, e.g. `"h"`, `"cnot"`, `"rz"` |
+| `qubits` | `List[int]` | Target qubit indices |
+| `params` | `List[float]` | Gate parameters (empty for fixed gates) |
+| `mode_before` | `str` | `"tableau"` or `"statevector"` before the gate |
+| `mode_after` | `str` | Mode after the gate |
+| `snapshot` | `StabilizerState \| Statevector` | State copy after the gate |
+
+### `TracedCircuit`
+
+#### `TracedCircuit(circuit: Circuit, trace: bool = True)`
+
+Wrap a `Circuit` for optional step recording.
+
+#### `run(state: StabilizerState) -> List[int]`
+
+Apply the wrapped circuit to `state` in place. Returns measurement outcomes in circuit order. When `trace=True`, appends a `TraceStep` after every gate and measurement.
+
+Raises `ValueError` if the state has fewer qubits than the circuit, or if a non-Clifford operation forces the simulator out of tableau mode.
+
+```python
+from stabilizer_python import StabilizerState
+from stabilizer_python.codes import BitFlip3Code
+from stabilizer_python.tracing import TracedCircuit
+
+st = StabilizerState.zero(5)
+BitFlip3Code.encoder_circuit().run(st)
+
+tc = TracedCircuit(BitFlip3Code.syndrome_circuit(), trace=True)
+outcomes = tc.run(st)
+tc.print_trace()
+```
+
+#### `print_trace() -> None`
+
+Print every recorded step: operation label, measurement outcome and branch when applicable, and CHP-style tableau output.
+
+#### `steps: List[TraceStep]`
+
+Programmatic access to recorded steps after `run()`.
+
 ---
 
 ## `qiskit_interop`
@@ -554,6 +673,8 @@ pip install qiskit
 #### `from_qiskit(qc: qiskit.circuit.QuantumCircuit) -> Circuit`
 
 Converts a Qiskit `QuantumCircuit` into a local `Circuit`. The returned `Circuit` can be run on either a `StabilizerState` for Clifford circuits or a `QuantumSimulator`.
+
+See [How from_qiskit Works](qiskit-interop.md) for the full conversion walkthrough.
 
 - Parameterized gates are translated using bound numeric parameters. If the circuit contains unbound `ParameterExpression` objects, a `ValueError` is raised.
 - `barrier` and `delay` instructions are silently skipped.

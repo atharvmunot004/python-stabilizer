@@ -169,6 +169,13 @@ print(st.destabilizer_strings())
 # ['+ZII', '+IXI', '+IIX']
 ```
 
+For raw `(phase, x_row, z_row)` tuples, use `destabilizer_generators()`. To get both stabilizers and destabilizers in one call:
+
+```python
+print(st.tableau_dict())
+# {'stabilizers': ['+XXX', '+ZZI', '+ZIZ'], 'destabilizers': ['+ZII', '+IXI', '+IIX']}
+```
+
 ## Combining Views
 
 Pass view names in the exact order you want:
@@ -210,5 +217,17 @@ Signs are optional and default to `+`:
 ```python
 st = StabilizerState.from_stabilizer_list(["XX", "ZZ"])
 ```
+
+For how these rows relate to Qiskit's `Clifford.stabilizer` and `Clifford.destabilizer`, see [Comparison with Qiskit's Clifford](../theory/tableau.md#comparison-with-qiskits-clifford).
+
+## Performance
+
+Formatting is separate from simulation:
+
+- Call `inspect()` or `format_*()` **after** a circuit finishes, not inside per-gate or per-shot loops.
+- For many repeated runs (noise benchmarking, Monte Carlo shots), use `trace=False`, skip state snapshots, and record only measurement outcomes.
+- When you need programmatic access without string building, prefer `stabilizer_strings()`, `destabilizer_strings()`, or `tableau_dict()` over full CHP output.
+
+The hot path is tableau mutation (`h`, `cnot`, `measure_z`, etc.), which is already $O(n)$ per Clifford gate.
 
 For the theory behind these rows and matrices, see [The Tableau Representation](../theory/tableau.md).

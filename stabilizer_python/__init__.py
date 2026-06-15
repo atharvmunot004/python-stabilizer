@@ -53,12 +53,14 @@ from .gate import (
 from .linear_algebra import gaussian_elimination_gf2, rank_gf2
 from .simulator import QuantumSimulator
 from .statevector import Statevector
+from .decomposition import StabilizerDecomposition
 from . import codes
 
 __all__ = [
     "StabilizerState",
     "Circuit",
     "QuantumSimulator",
+    "StabilizerDecomposition",
     "Statevector",
     "Gate",
     "IGate",

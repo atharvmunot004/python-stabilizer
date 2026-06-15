@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import io
 import random
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 
 def _row_mult_phase(x1: int, z1: int, x2: int, z2: int) -> int:
@@ -37,6 +38,22 @@ def _row_mult_phase(x1: int, z1: int, x2: int, z2: int) -> int:
         return 3
 
     raise ValueError("invalid Pauli bits for row multiplication")
+
+
+def _pauli_string(phase: int, x_row: List[int], z_row: List[int]) -> str:
+    """Convert a tableau row to a signed Pauli string."""
+    sign = "-" if phase else "+"
+    pauli = ""
+    for xb, zb in zip(x_row, z_row):
+        if xb == 0 and zb == 0:
+            pauli += "I"
+        elif xb == 1 and zb == 0:
+            pauli += "X"
+        elif xb == 1 and zb == 1:
+            pauli += "Y"
+        else:
+            pauli += "Z"
+    return sign + pauli
 
 
 class StabilizerState:
@@ -204,6 +221,34 @@ class StabilizerState:
             r_phase=self.r_phase[:],
         )
 
+    def _check_qubit(self, q: int, name: str = "q") -> None:
+        if not (0 <= q < self.n):
+            raise ValueError(f"{name}={q} out of range for {self.n}-qubit state")
+
+    def _symplectic_product(self, row_a: int, row_b: int) -> int:
+        total = 0
+        for q in range(self.n):
+            total ^= self.x_mat[row_a][q] & self.z_mat[row_b][q]
+            total ^= self.z_mat[row_a][q] & self.x_mat[row_b][q]
+        return total
+
+    def _check_tableau_invariants(self) -> None:
+        """Assert stabilizer rows are independent and mutually commuting."""
+        from .linear_algebra import rank_gf2
+
+        stab_x = [self.x_mat[self.n + i][:] for i in range(self.n)]
+        stab_z = [self.z_mat[self.n + i][:] for i in range(self.n)]
+        combined = [stab_x[i] + stab_z[i] for i in range(self.n)]
+        assert rank_gf2(combined) == self.n, "Stabilizer rows are not independent"
+        for i in range(self.n):
+            row_a = self.n + i
+            assert any(stab_x[i] + stab_z[i]), "Stabilizer row is zero"
+            for j in range(i + 1, self.n):
+                row_b = self.n + j
+                assert self._symplectic_product(row_a, row_b) == 0, (
+                    "Stabilizer rows do not commute"
+                )
+
     def _rowswap(self, a: int, b: int) -> None:
         self.x_mat[a], self.x_mat[b] = self.x_mat[b], self.x_mat[a]
         self.z_mat[a], self.z_mat[b] = self.z_mat[b], self.z_mat[a]
@@ -236,10 +281,10 @@ class StabilizerState:
     # --- Clifford gates ---
     def i(self, q: int) -> None:
         """Identity gate; included for completeness with Clifford gate sets."""
-        if q < 0 or q >= self.n:
-            raise IndexError("qubit index out of range")
+        self._check_qubit(q)
 
     def h(self, q: int) -> None:
+        self._check_qubit(q)
         for r in range(2 * self.n):
             x = self.x_mat[r][q]
             z = self.z_mat[r][q]
@@ -248,6 +293,7 @@ class StabilizerState:
             self.x_mat[r][q], self.z_mat[r][q] = z, x
 
     def s(self, q: int) -> None:
+        self._check_qubit(q)
         for r in range(2 * self.n):
             x = self.x_mat[r][q]
             z = self.z_mat[r][q]
@@ -256,6 +302,7 @@ class StabilizerState:
             self.z_mat[r][q] ^= x
 
     def sdg(self, q: int) -> None:
+        self._check_qubit(q)
         for r in range(2 * self.n):
             x = self.x_mat[r][q]
             z = self.z_mat[r][q]
@@ -267,6 +314,7 @@ class StabilizerState:
         self.sdg(q)
 
     def sx(self, q: int) -> None:
+        self._check_qubit(q)
         for r in range(2 * self.n):
             x = self.x_mat[r][q]
             z = self.z_mat[r][q]
@@ -278,6 +326,7 @@ class StabilizerState:
         self.sx(q)
 
     def sxdg(self, q: int) -> None:
+        self._check_qubit(q)
         for r in range(2 * self.n):
             x = self.x_mat[r][q]
             z = self.z_mat[r][q]
@@ -289,18 +338,21 @@ class StabilizerState:
         self.sxdg(q)
 
     def x(self, q: int) -> None:
+        self._check_qubit(q)
         # Conjugation by X flips sign of Z and Y.
         for r in range(2 * self.n):
             if self.z_mat[r][q] == 1:
                 self.r_phase[r] ^= 1
 
     def y(self, q: int) -> None:
+        self._check_qubit(q)
         # Conjugation by Y flips sign of X and Z, but not Y.
         for r in range(2 * self.n):
             if self.x_mat[r][q] ^ self.z_mat[r][q]:
                 self.r_phase[r] ^= 1
 
     def z(self, q: int) -> None:
+        self._check_qubit(q)
         # Conjugation by Z flips sign of X and Y.
         for r in range(2 * self.n):
             if self.x_mat[r][q] == 1:
@@ -310,6 +362,8 @@ class StabilizerState:
         self.cnot(control, target)
 
     def cnot(self, control: int, target: int) -> None:
+        self._check_qubit(control, "control")
+        self._check_qubit(target, "target")
         c, t = control, target
         for r in range(2 * self.n):
             xc = self.x_mat[r][c]
@@ -335,6 +389,8 @@ class StabilizerState:
         self.s(target)
 
     def swap(self, q1: int, q2: int) -> None:
+        self._check_qubit(q1, "q1")
+        self._check_qubit(q2, "q2")
         self.cnot(q1, q2)
         self.cnot(q2, q1)
         self.cnot(q1, q2)
@@ -347,6 +403,7 @@ class StabilizerState:
         Matches the branch taken by measure_z(): random when some stabilizer row
         anticommutes with Z_q (X component on q), otherwise deterministic.
         """
+        self._check_qubit(q)
         for r in range(self.n, 2 * self.n):
             if self.x_mat[r][q] == 1:
                 return "random"
@@ -356,6 +413,7 @@ class StabilizerState:
         """
         Measure Z on qubit q. Returns outcome bit (0 -> +1 eigenvalue, 1 -> -1 eigenvalue).
         """
+        self._check_qubit(q)
         n = self.n
         # Search for a stabilizer row that anticommutes with Z_q (i.e., has X on q)
         p = -1
@@ -474,6 +532,11 @@ class StabilizerState:
             return "Y"
         return "Z"
 
+    def _row_to_pauli(self, r: int) -> str:
+        sign = "-" if self.r_phase[r] else "+"
+        pauli = "".join(self._pauli_char_at(r, q) for q in range(self.n))
+        return sign + pauli
+
     def format_chp_printstate(self) -> str:
         """
         Same layout as CHP's printstate(): destabilizer rows, a rule line, stabilizer rows,
@@ -484,15 +547,16 @@ class StabilizerState:
     def _format_chp_rows(
         self, start: int, end: int, *, include_separator: bool = False
     ) -> str:
-        lines: List[str] = []
+        buf = io.StringIO()
         for i in range(start, end):
             if include_separator and i == self.n:
-                lines.append("")
-                lines.append("-" * (self.n + 1))
-            sign = "-" if self.r_phase[i] else "+"
-            pauli = "".join(self._pauli_char_at(i, q) for q in range(self.n))
-            lines.append(sign + pauli)
-        return "\n".join(lines)
+                buf.write("\n")
+                buf.write("-" * (self.n + 1))
+                buf.write("\n")
+            buf.write(self._row_to_pauli(i))
+            buf.write("\n")
+        text = buf.getvalue()
+        return text[:-1] if text else text
 
     def _format_stabilizers_only(self) -> str:
         """CHP-style stabilizer rows only (tableau rows n..2n-1)."""
@@ -522,7 +586,12 @@ class StabilizerState:
         unknown = [view for view in selected if view not in view_map]
         if unknown:
             raise ValueError(f"unknown inspect view(s): {unknown}")
-        return "\n\n".join(view_map[view]() for view in selected)
+        buf = io.StringIO()
+        for index, view in enumerate(selected):
+            if index:
+                buf.write("\n\n")
+            buf.write(view_map[view]())
+        return buf.getvalue()
 
     def format_xz_binary_matrices(self) -> str:
         """Print the raw X and Z bit tables (2n rows × n columns), side by side."""
@@ -538,28 +607,33 @@ class StabilizerState:
         z_rows = [_fmt_row(row) for row in self.z_mat]
         left_width = max([len(x_title)] + [len(r) for r in x_rows])
 
-        lines = [x_title.ljust(left_width) + gap + z_title]
-        lines.extend(
-            x_rows[i].ljust(left_width) + gap + z_rows[i] for i in range(n_rows)
-        )
-        return "\n".join(lines)
+        buf = io.StringIO()
+        buf.write(x_title.ljust(left_width) + gap + z_title)
+        buf.write("\n")
+        for i in range(n_rows):
+            buf.write(x_rows[i].ljust(left_width) + gap + z_rows[i])
+            buf.write("\n")
+        text = buf.getvalue()
+        return text[:-1] if text else text
 
     def format_phase_matrix(self) -> str:
         """Print the tableau phase bits as a 2n × 1 column matrix."""
-        lines = [f"Phase matrix ({2 * self.n} x 1)"]
-        lines.extend(f"  [{phase}]" for phase in self.r_phase)
-        return "\n".join(lines)
+        buf = io.StringIO()
+        buf.write(f"Phase matrix ({2 * self.n} x 1)")
+        for phase in self.r_phase:
+            buf.write(f"\n  [{phase}]")
+        return buf.getvalue()
 
     def format_tableau_debug(self) -> str:
         """CHP-style Pauli rows plus explicit X, Z, and phase matrices."""
-        return (
-            "Tableau (CHP-style destabilizers | stabilizers):\n"
-            + self.format_chp_printstate()
-            + "\n\n"
-            + self.format_xz_binary_matrices()
-            + "\n\n"
-            + self.format_phase_matrix()
-        )
+        buf = io.StringIO()
+        buf.write("Tableau (CHP-style destabilizers | stabilizers):\n")
+        buf.write(self.format_chp_printstate())
+        buf.write("\n\n")
+        buf.write(self.format_xz_binary_matrices())
+        buf.write("\n\n")
+        buf.write(self.format_phase_matrix())
+        return buf.getvalue()
 
     def stabilizer_generators(self) -> List[Tuple[int, List[int], List[int]]]:
         """
@@ -567,6 +641,15 @@ class StabilizerState:
         """
         out = []
         for r in range(self.n, 2 * self.n):
+            out.append((self.r_phase[r], self.x_mat[r][:], self.z_mat[r][:]))
+        return out
+
+    def destabilizer_generators(self) -> List[Tuple[int, List[int], List[int]]]:
+        """
+        Returns list of destabilizer generators as (phase_bit, x_row, z_row) for the first n rows.
+        """
+        out = []
+        for r in range(self.n):
             out.append((self.r_phase[r], self.x_mat[r][:], self.z_mat[r][:]))
         return out
 
@@ -583,12 +666,10 @@ class StabilizerState:
             >>> st.stabilizer_strings()
             ['+XXX', '+ZZI', '+ZIZ']
         """
-        out: List[str] = []
-        for r in range(self.n, 2 * self.n):
-            sign = "-" if self.r_phase[r] else "+"
-            pauli = "".join(self._pauli_char_at(r, q) for q in range(self.n))
-            out.append(sign + pauli)
-        return out
+        return [
+            _pauli_string(phase, x_row, z_row)
+            for phase, x_row, z_row in self.stabilizer_generators()
+        ]
 
     def destabilizer_strings(self) -> List[str]:
         """
@@ -607,10 +688,22 @@ class StabilizerState:
             >>> st.destabilizer_strings()
             ['+ZII', '+IXI', '+IIX']
         """
-        out: List[str] = []
-        for r in range(self.n):
-            sign = "-" if self.r_phase[r] else "+"
-            pauli = "".join(self._pauli_char_at(r, q) for q in range(self.n))
-            out.append(sign + pauli)
-        return out
+        return [
+            _pauli_string(phase, x_row, z_row)
+            for phase, x_row, z_row in self.destabilizer_generators()
+        ]
+
+    def tableau_dict(self) -> Dict[str, List[str]]:
+        """
+        Return stabilizer and destabilizer generators as signed Pauli strings.
+
+        Example for a Bell state::
+
+            >>> st.tableau_dict()
+            {'stabilizers': ['+XX', '+ZZ'], 'destabilizers': ['+XI', '+IX']}
+        """
+        return {
+            "stabilizers": self.stabilizer_strings(),
+            "destabilizers": self.destabilizer_strings(),
+        }
 

@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import io
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from .circuit import Circuit, Op
 from .gate import CNOTGate, HGate, SGate, XGate, ZGate
 from .simulator import QuantumSimulator
+from .statevector import Statevector
 from .tableau import StabilizerState
 
 
@@ -19,6 +21,18 @@ class TraceStep:
     state: StabilizerState
     outcome: Optional[int] = None
     measurement_branch: Optional[str] = None
+
+
+@dataclass(frozen=True)
+class SimulatorTraceStep:
+    """One recorded gate application in a traced QuantumSimulator run."""
+
+    gate_name: str
+    qubits: List[int]
+    params: List[float]
+    mode_before: str
+    mode_after: str
+    snapshot: Union[StabilizerState, Statevector]
 
 
 def _format_op_label(op: Op) -> str:
@@ -61,6 +75,9 @@ class TracedCircuit:
     """
     Run a Circuit while optionally recording the tableau after every gate and
     measurement. Intended for step-by-step QEC syndrome extraction demos.
+
+    Tracing copies the full tableau after each step. For bulk simulation or
+    noise benchmarking, use ``trace=False`` and record only measurement outcomes.
     """
 
     def __init__(self, circuit: Circuit, trace: bool = True):
@@ -125,11 +142,13 @@ class TracedCircuit:
             print("(no trace recorded)")
             return
 
+        buf = io.StringIO()
         for step in self.steps:
-            print(f"Step {step.index}: {step.op_label}")
+            buf.write(f"Step {step.index}: {step.op_label}\n")
             if step.kind == "measurement":
-                print(
-                    f"  outcome={step.outcome} ({step.measurement_branch})"
+                buf.write(
+                    f"  outcome={step.outcome} ({step.measurement_branch})\n"
                 )
-            print(step.state.format_chp_printstate())
-            print()
+            buf.write(step.state.format_chp_printstate())
+            buf.write("\n\n")
+        print(buf.getvalue(), end="")

@@ -91,6 +91,31 @@ def test_destabilizer_strings_zero_state():
     assert "+IX" in labels
 
 
+def test_destabilizer_generators_match_strings():
+    st = _bell()
+    for (phase, x_row, z_row), label in zip(
+        st.destabilizer_generators(), st.destabilizer_strings()
+    ):
+        from stabilizer_python.tableau import _pauli_string
+
+        assert _pauli_string(phase, x_row, z_row) == label
+
+
+def test_tableau_dict_zero_state():
+    st = StabilizerState.zero(2)
+    assert st.tableau_dict() == {
+        "stabilizers": ["+ZI", "+IZ"],
+        "destabilizers": ["+XI", "+IX"],
+    }
+
+
+def test_tableau_dict_bell():
+    st = _bell()
+    table = st.tableau_dict()
+    assert set(table["stabilizers"]) == {"+XX", "+ZZ"}
+    assert len(table["destabilizers"]) == 2
+
+
 # --- from_stabilizer_list() ---
 
 def test_from_stabilizer_list_bell():
