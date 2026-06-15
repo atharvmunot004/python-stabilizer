@@ -1756,6 +1756,8 @@
 <p>This page derives every tableau update rule in <code>tableau.py</code> from first
 principles. Each rule is stated as a theorem, proved algebraically, and
 then shown as the corresponding code.</p>
+<p>Implementation links point to the <code>main</code> branch of the GitHub repository:
+<a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>stabilizer_python/tableau.py</code></a>.</p>
 <hr />
 <h2 id="1-foundations">1. Foundations</h2>
 <h3 id="11-the-pauli-group">1.1 The Pauli Group</h3>
@@ -1767,8 +1769,12 @@ Y = \begin{pmatrix}0&amp;-i\\i&amp;0\end{pmatrix},\quad
 Z = \begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix}
 \]</div>
 <p>They satisfy <span class="arithmatex">\(X^2 = Y^2 = Z^2 = I\)</span> and the cyclic multiplication rules:</p>
-<div class="arithmatex">\[XY = iZ,\quad YZ = iX,\quad ZX = iY$$
-$$YX = -iZ,\quad ZY = -iX,\quad XZ = -iY\]</div>
+<div class="arithmatex">\[
+XY = iZ,\quad YZ = iX,\quad ZX = iY
+$$
+$$
+YX = -iZ,\quad ZY = -iX,\quad XZ = -iY
+\]</div>
 <p>The <span class="arithmatex">\(n\)</span>-qubit Pauli group <span class="arithmatex">\(\mathcal{P}_n\)</span> consists of all <span class="arithmatex">\(n\)</span>-fold tensor
 products <span class="arithmatex">\(i^k P_1 \otimes \cdots \otimes P_n\)</span> where <span class="arithmatex">\(P_j \in \{I,X,Y,Z\}\)</span>
 and <span class="arithmatex">\(k \in \{0,1,2,3\}\)</span>.</p>
@@ -1853,6 +1859,7 @@ swapping the <span class="arithmatex">\(x\)</span> and <span class="arithmatex">
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span>   <span class="c1"># swap x ↔ z</span>
 </code></pre></div></p>
+<p>Source reference: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L286-L293"><code>StabilizerState.h</code></a>.</p>
 <hr />
 <h3 id="22-phase-gate-s">2.2 Phase Gate S</h3>
 <p><strong>Theorem 2.3.</strong> The phase gate <span class="arithmatex">\(S = \begin{pmatrix}1&amp;0\\0&amp;i\end{pmatrix}\)</span> satisfies:</p>
@@ -1887,6 +1894,7 @@ swapping the <span class="arithmatex">\(x\)</span> and <span class="arithmatex">
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">^=</span> <span class="n">x</span>  <span class="c1"># z := z XOR x</span>
 </code></pre></div></p>
+<p>Source reference: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L295-L302"><code>StabilizerState.s</code></a>.</p>
 <hr />
 <h3 id="23-s-dagger">2.3 S-dagger</h3>
 <p><strong>Theorem 2.5.</strong> <span class="arithmatex">\(S^\dagger = \begin{pmatrix}1&amp;0\\0&amp;-i\end{pmatrix}\)</span> satisfies:</p>
@@ -1912,6 +1920,7 @@ is identical to that for <span class="arithmatex">\(S\)</span>, but the phase fl
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">^=</span> <span class="n">x</span>   <span class="c1"># same bit mutation as S</span>
 </code></pre></div></p>
+<p>Source reference: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L304-L311"><code>StabilizerState.sdg</code></a>.</p>
 <hr />
 <h3 id="24-pauli-gates">2.4 Pauli Gates</h3>
 <p><strong>Theorem 2.7.</strong> The Pauli gates satisfy:</p>
@@ -1972,6 +1981,7 @@ and <span class="arithmatex">\(Y\)</span> (those with <span class="arithmatex">\
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>      <span class="c1"># X component → sign flip</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
 </code></pre></div></p>
+<p>Source references: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L340-L345"><code>StabilizerState.x</code></a>, <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L347-L352"><code>StabilizerState.y</code></a>, and <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L354-L359"><code>StabilizerState.z</code></a>.</p>
 <hr />
 <h3 id="25-x-and-x">2.5 √X and (√X)†</h3>
 <p><strong>Theorem 2.9.</strong> <span class="arithmatex">\(\sqrt{X} = \frac{1}{2}\begin{pmatrix}1+i&amp;1-i\\1-i&amp;1+i\end{pmatrix}\)</span> satisfies:</p>
@@ -2038,6 +2048,7 @@ with a phase flip when the input is <span class="arithmatex">\(Z\)</span> (i.e. 
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">^=</span> <span class="n">z</span>       <span class="c1"># x := x XOR z</span>
 </code></pre></div></p>
+<p>Source reference: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L316-L323"><code>StabilizerState.sx</code></a>.</p>
 <p><strong>Theorem 2.11</strong> <em>(√X†)</em>. <span class="arithmatex">\((\sqrt{X})^\dagger\)</span> satisfies:</p>
 <div class="arithmatex">\[(\sqrt{X})^\dagger X (\sqrt{X}) = X,\quad
 (\sqrt{X})^\dagger Y (\sqrt{X}) = -Z,\quad
@@ -2063,6 +2074,7 @@ but phase flip when input is <span class="arithmatex">\(Y\)</span> (condition: <
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">^=</span> <span class="n">z</span>        <span class="c1"># x := x XOR z</span>
 </code></pre></div></p>
+<p>Source reference: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L328-L335"><code>StabilizerState.sxdg</code></a>.</p>
 <hr />
 <h2 id="3-the-cnot-phase-condition">3. The CNOT Phase Condition</h2>
 <p>The CNOT rule is the most complex because the sign correction involves both
@@ -2199,6 +2211,7 @@ no flip. <span class="arithmatex">\(\square\)</span></p>
 <a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">t</span><span class="p">]</span> <span class="o">^=</span> <span class="n">xc</span>        <span class="c1"># X spreads: x_t := x_t XOR x_c</span>
 <a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">^=</span> <span class="n">zt</span>        <span class="c1"># Z backtracks: z_c := z_c XOR z_t</span>
 </code></pre></div></p>
+<p>Source reference: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L364-L379"><code>StabilizerState.cnot</code></a>.</p>
 <hr />
 <h2 id="4-the-phase-accumulation-function">4. The Phase Accumulation Function</h2>
 <p>When <code>_rowmult</code> multiplies two tableau rows (Pauli strings), it must track
@@ -2294,6 +2307,7 @@ the table above, <span class="arithmatex">\(g(Z,X)=1\)</span> since <span class=
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="k">if</span> <span class="n">x1</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">z1</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">z2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># X·Y = -iZ</span>
 <a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid Pauli bits for row multiplication&quot;</span><span class="p">)</span>
 </code></pre></div></p>
+<p>Source reference: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L8-L33"><code>_row_mult_phase</code></a>.</p>
 <h3 id="42-row-multiplication">4.2 Row Multiplication</h3>
 <p><strong>Theorem 4.2</strong> <em>(Row Multiplication)</em>. For two <span class="arithmatex">\(n\)</span>-qubit Pauli operators
 <span class="arithmatex">\(A = (-1)^{r_A} \bigotimes_q P^A_q\)</span> and <span class="arithmatex">\(B = (-1)^{r_B} \bigotimes_q P^B_q\)</span>,
@@ -2325,6 +2339,7 @@ cannot arise for products of Hermitian Paulis with phase <span class="arithmatex
 <a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">^=</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">q</span><span class="p">]</span>
 <a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">exp_i</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="mi">0</span>   <span class="c1"># sign: 0=+1, 1=−1</span>
 </code></pre></div></p>
+<p>Source reference: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L257-L279"><code>StabilizerState._rowmult</code></a>.</p>
 <hr />
 <h2 id="5-measurement-proofs">5. Measurement Proofs</h2>
 <h3 id="51-setup">5.1 Setup</h3>
@@ -2355,6 +2370,7 @@ solution over GF(2) since the generators are independent. Multiplying the
 selected rows via <code>_rowmult</code> accumulates the correct phase using Theorem 4.2.
 The returned <code>r_phase[0]</code> of the work copy is 0 (eigenvalue <span class="arithmatex">\(+1\)</span>) or 1
 (eigenvalue <span class="arithmatex">\(-1\)</span>). <span class="arithmatex">\(\square\)</span></p>
+<p>Source references: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L458-L477"><code>StabilizerState._deterministic_z_outcome</code></a> and <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L479-L520"><code>StabilizerState._solve_stabilizer_product</code></a>.</p>
 <h3 id="53-random-branch">5.3 Random Branch</h3>
 <p><strong>Theorem 5.3</strong> <em>(Random Measurement)</em>. If some stabilizer row <span class="arithmatex">\(p\)</span> has
 <span class="arithmatex">\(x_\text{mat}[p][q] = 1\)</span> (i.e., generator <span class="arithmatex">\(g_{p-n}\)</span> anticommutes with <span class="arithmatex">\(Z_q\)</span>),
@@ -2426,6 +2442,7 @@ qubit, so it commutes with all generators that have no <span class="arithmatex">
 <a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>
 <a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>    <span class="k">return</span> <span class="n">outcome</span>
 </code></pre></div></p>
+<p>Source reference: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L412-L456"><code>StabilizerState.measure_z</code></a>.</p>
 <hr />
 <h2 id="6-worked-example-bell-state">6. Worked Example — Bell State</h2>
 <p>We trace through the complete tableau evolution for the Bell state
