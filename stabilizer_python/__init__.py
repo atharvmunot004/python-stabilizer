@@ -54,6 +54,13 @@ from .linear_algebra import gaussian_elimination_gf2, rank_gf2
 from .simulator import QuantumSimulator
 from .statevector import Statevector
 from .decomposition import StabilizerDecomposition
+from .magic import (
+    NoisyStabilizerState,
+    PauliChannel,
+    stabilizer_entropy,
+    stabilizer_extent,
+    stabilizer_fidelity,
+)
 from . import codes
 
 __all__ = [
@@ -61,6 +68,11 @@ __all__ = [
     "Circuit",
     "QuantumSimulator",
     "StabilizerDecomposition",
+    "NoisyStabilizerState",
+    "PauliChannel",
+    "stabilizer_entropy",
+    "stabilizer_extent",
+    "stabilizer_fidelity",
     "Statevector",
     "Gate",
     "IGate",
