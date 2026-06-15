@@ -818,6 +818,34 @@
   
   
     <li class="md-nav__item">
+      <a href="qiskit-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How from_qiskit Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="getting-started/qec/" class="md-nav__link">
         
   
@@ -826,6 +854,34 @@
     
   
     QEC Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting-started/tracing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing Syndrome Extraction
   
 
     
@@ -1052,6 +1108,34 @@
     
   
     Error-Correcting Codes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="theory/gate-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gate Operation Rules
   
 
     
@@ -1309,6 +1393,11 @@
 <td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py"><code>circuit.py</code></a></td>
 </tr>
 <tr>
+<td><code>QuantumSimulator</code></td>
+<td>Hybrid tableau/statevector simulator with optional gate tracing</td>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/simulator.py"><code>simulator.py</code></a></td>
+</tr>
+<tr>
 <td><code>BitFlip3Code</code></td>
 <td>3-qubit repetition-code encoder, syndrome reader, and X correction</td>
 <td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>codes.py</code></a></td>
@@ -1343,11 +1432,12 @@
 <li>Clifford updates: <code>H</code>, <code>S</code>, Pauli gates, <code>CNOT</code>, plus several state-level derived Clifford gates</li>
 <li>Z-basis measurement with deterministic and random tableau update paths</li>
 <li>Small fluent circuits through <code>Circuit</code></li>
-<li>Stabilizer inspection through <code>inspect()</code> plus direct debug formatters</li>
+<li>Stabilizer inspection through <code>inspect()</code>, <code>stabilizer_strings()</code>, <code>destabilizer_strings()</code>, and <code>tableau_dict()</code></li>
+<li>Hybrid simulation through <code>QuantumSimulator</code>, including optional gate-by-gate tracing</li>
 <li>GF(2) rank and RREF utilities for binary stabilizer checks</li>
 <li>Educational QEC examples for the 3-qubit repetition code and Shor's 9-qubit code</li>
 </ul>
-<p>The simulator is intentionally not a universal quantum simulator. It does not support non-Clifford gates such as <code>T</code> or arbitrary state-vector amplitudes. If you need large-scale production stabilizer simulation, use a tool such as <a href="https://github.com/quantumlib/Stim">Stim</a>; this project is designed to show the mechanics clearly.</p>
+<p>The core tableau simulator is intentionally not a universal quantum simulator. Use <code>QuantumSimulator</code> for small circuits that cross into non-Clifford gates such as <code>T</code>, rotations, Toffoli, or arbitrary state-vector amplitudes. If you need large-scale production stabilizer simulation, use a tool such as <a href="https://github.com/quantumlib/Stim">Stim</a>; this project is designed to show the mechanics clearly.</p>
 <hr />
 <h2 id="installation">Installation</h2>
 <p>Install from GitHub:</p>
@@ -1399,6 +1489,7 @@
 <li><a href="theory/tableau/">The Tableau Representation</a>: how X/Z/phase arrays encode stabilizer states and how gates mutate them.</li>
 <li><a href="theory/measurement/">Measurement</a>: deterministic versus random measurement and tableau row updates.</li>
 <li><a href="theory/qec-codes/">Error-Correcting Codes</a>: repetition-code and Shor-code concepts mapped to the implementation.</li>
+<li><a href="hybrid-simulation/">Hybrid Simulation</a>: how <code>QuantumSimulator</code> switches from tableau to statevector mode and records trace snapshots.</li>
 <li><a href="api-reference/">API Reference</a>: public classes, functions, method behavior, and source links.</li>
 <li><a href="references/">References</a>: papers, tools, textbooks, and repository resources.</li>
 </ul>

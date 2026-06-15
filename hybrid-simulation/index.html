@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://atharvmunot004.github.io/python-stabilizer/hybrid-simulation/">
       
       
-        <link rel="prev" href="../theory/qec-codes/">
+        <link rel="prev" href="../theory/gate-rules/">
       
       
         <link rel="next" href="../api-reference/">
@@ -690,6 +690,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../qiskit-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How from_qiskit Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../getting-started/qec/" class="md-nav__link">
         
   
@@ -698,6 +726,34 @@
     
   
     QEC Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/tracing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing Syndrome Extraction
   
 
     
@@ -946,6 +1002,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../theory/gate-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gate Operation Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1024,6 +1108,17 @@
     <span class="md-ellipsis">
       
         The Clifford/non-Clifford boundary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tracing-the-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracing the boundary
       
     </span>
   </a>
@@ -1182,6 +1277,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#tracing-the-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracing the boundary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-tableau_to_statevector-bridge" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1254,6 +1360,32 @@
 <p>The switch is one-way. Once the simulator is in statevector mode, it stays there for all later gates, including Clifford gates.</p>
 <p>The reason is practical and mathematical. Converting a statevector back to a tableau is only possible when the current state happens to be a stabilizer state, and checking or reconstructing that representation costs O(2^n). The hybrid design keeps the boundary simple and predictable.</p>
 <hr />
+<h2 id="tracing-the-boundary">Tracing the boundary</h2>
+<p>Pass <code>trace=True</code> to <code>QuantumSimulator</code> when you want to see the state after
+each gate:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">math</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">trace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;cnot&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;rz&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">])</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">sim</span><span class="o">.</span><span class="n">trace</span><span class="p">:</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">gate_name</span><span class="p">,</span> <span class="n">step</span><span class="o">.</span><span class="n">qubits</span><span class="p">,</span> <span class="n">step</span><span class="o">.</span><span class="n">mode_before</span><span class="p">,</span> <span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">.</span><span class="n">mode_after</span><span class="p">)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="k">if</span> <span class="n">step</span><span class="o">.</span><span class="n">mode_after</span> <span class="o">==</span> <span class="s2">&quot;tableau&quot;</span><span class="p">:</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">snapshot</span><span class="o">.</span><span class="n">format_chp_printstate</span><span class="p">())</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">snapshot</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</code></pre></div>
+<p>Each trace entry stores the gate name, qubit targets, parameters, mode before
+and after the gate, and a copied snapshot of the active backend. Tableau-mode
+snapshots are <code>StabilizerState</code> copies; statevector-mode snapshots are
+<code>Statevector</code> copies.</p>
+<p>This is useful when teaching or debugging the Clifford/non-Clifford boundary:
+the first non-Clifford gate is the step where <code>mode_before == "tableau"</code> and
+<code>mode_after == "statevector"</code>.</p>
+<hr />
 <h2 id="the-tableau_to_statevector-bridge">The <code>tableau_to_statevector</code> bridge</h2>
 <p>Given stabilizer generators <span class="arithmatex">\(g_1, \ldots, g_n\)</span>, the stabilizer state <span class="arithmatex">\(|\psi\rangle\)</span> is the unique state satisfying:</p>
 <div class="arithmatex">\[
@@ -1272,15 +1404,15 @@ g_i = \pm P_1 \otimes P_2 \otimes \cdots \otimes P_n
 <p>Each projector <code>(I + g_i) / 2</code> is a <code>2^n x 2^n</code> matrix built from Kronecker products of single-qubit Pauli matrices. After each projection, the vector is renormalized.</p>
 <p>Cost: O(n · 2^n). This is called exactly once at the boundary from tableau mode to statevector mode.</p>
 <p>For a two-qubit Bell state, the stabilizer generators are:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>g1 = XX
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>g2 = ZZ
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>g1 = XX
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>g2 = ZZ
 </code></pre></div>
 <p>The bridge applies:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>(I + XX) / 2
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>(I + ZZ) / 2
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>(I + XX) / 2
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>(I + ZZ) / 2
 </code></pre></div>
 <p>The resulting normalized state is:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>(|00&gt; + |11&gt;) / sqrt(2)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>(|00&gt; + |11&gt;) / sqrt(2)
 </code></pre></div>
 <hr />
 <h2 id="performance-implications">Performance implications</h2>

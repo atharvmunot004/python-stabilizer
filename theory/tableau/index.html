@@ -690,6 +690,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../qiskit-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How from_qiskit Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../getting-started/qec/" class="md-nav__link">
         
   
@@ -698,6 +726,34 @@
     
   
     QEC Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/tracing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing Syndrome Extraction
   
 
     
@@ -1146,6 +1202,67 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#comparison-with-qiskits-clifford" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison with Qiskit's Clifford
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparison with Qiskit&#39;s Clifford">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qiskits-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qiskit's layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#our-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Our layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#row-correspondence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Row correspondence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-stays-aligned" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What stays aligned
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1208,6 +1325,34 @@
     
   
     Error-Correcting Codes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gate-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gate Operation Rules
   
 
     
@@ -1558,6 +1703,67 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#comparison-with-qiskits-clifford" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison with Qiskit's Clifford
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparison with Qiskit&#39;s Clifford">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qiskits-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qiskit's layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#our-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Our layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#row-correspondence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Row correspondence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-stays-aligned" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What stays aligned
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1865,6 +2071,8 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">st</span><span class="o">.</span><span class="n">stabilizer_strings</span><span class="p">()</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="c1"># [&#39;+XXX&#39;, &#39;+ZZI&#39;, &#39;+ZIZ&#39;]</span>
 </code></pre></div>
+<p>For raw tableau data instead of labels, use <code>stabilizer_generators()</code>. It returns
+<code>(phase_bit, x_row, z_row)</code> tuples for the stabilizer rows.</p>
 <h3 id="destabilizers-only-rows-0n-1"><code>destabilizers</code>: only rows <code>0..n-1</code></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;destabilizers&quot;</span><span class="p">]))</span>
 </code></pre></div>
@@ -1877,9 +2085,20 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">st</span><span class="o">.</span><span class="n">destabilizer_strings</span><span class="p">()</span>
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="c1"># [&#39;+ZII&#39;, &#39;+IXI&#39;, &#39;+IIX&#39;]</span>
 </code></pre></div>
+<p>For raw tuple access, use <code>destabilizer_generators()</code>. It returns the same
+<code>(phase_bit, x_row, z_row)</code> structure as <code>stabilizer_generators()</code>, but for rows
+<code>0..n-1</code>.</p>
+<p>To read both sides of the tableau as signed Pauli strings in one call, use
+<code>tableau_dict()</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">st</span><span class="o">.</span><span class="n">tableau_dict</span><span class="p">()</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="c1"># {</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="c1">#     &#39;stabilizers&#39;: [&#39;+XXX&#39;, &#39;+ZZI&#39;, &#39;+ZIZ&#39;],</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="c1">#     &#39;destabilizers&#39;: [&#39;+ZII&#39;, &#39;+IXI&#39;, &#39;+IIX&#39;],</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="c1"># }</span>
+</code></pre></div>
 <h3 id="combining-views">Combining views</h3>
 <p>The <code>views</code> argument is ordered. This prints exactly the selected views in the requested order:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">]))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">]))</span>
 </code></pre></div>
 <p>Supported view keys are:</p>
 <table>
@@ -1914,26 +2133,151 @@
 <tr>
 <td><code>stabilizers</code></td>
 <td>Stabilizer rows only (<code>n..2n-1</code>)</td>
-<td>internal helper</td>
+<td><code>stabilizer_strings()</code></td>
 </tr>
 <tr>
 <td><code>destabilizers</code></td>
 <td>Destabilizer rows only (<code>0..n-1</code>)</td>
-<td>internal helper</td>
+<td><code>destabilizer_strings()</code></td>
 </tr>
 </tbody>
 </table>
 <p>If a view name is unknown, <code>inspect()</code> raises <code>ValueError</code>.</p>
 <h3 id="constructing-a-tableau-from-stabilizer-strings">Constructing a tableau from stabilizer strings</h3>
 <p><code>from_stabilizer_list()</code> builds a tableau from signed Pauli labels:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">from_stabilizer_list</span><span class="p">([</span><span class="s2">&quot;+XX&quot;</span><span class="p">,</span> <span class="s2">&quot;+ZZ&quot;</span><span class="p">])</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">stabilizer_strings</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">from_stabilizer_list</span><span class="p">([</span><span class="s2">&quot;+XX&quot;</span><span class="p">,</span> <span class="s2">&quot;+ZZ&quot;</span><span class="p">])</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">stabilizer_strings</span><span class="p">())</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>[&#39;+XX&#39;, &#39;+ZZ&#39;]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>[&#39;+XX&#39;, &#39;+ZZ&#39;]
 </code></pre></div>
 <p>Signs are optional and default to <code>+</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">StabilizerState</span><span class="o">.</span><span class="n">from_stabilizer_list</span><span class="p">([</span><span class="s2">&quot;XX&quot;</span><span class="p">,</span> <span class="s2">&quot;ZZ&quot;</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">StabilizerState</span><span class="o">.</span><span class="n">from_stabilizer_list</span><span class="p">([</span><span class="s2">&quot;XX&quot;</span><span class="p">,</span> <span class="s2">&quot;ZZ&quot;</span><span class="p">])</span>
 </code></pre></div>
+<hr />
+<h2 id="comparison-with-qiskits-clifford">Comparison with Qiskit's <code>Clifford</code></h2>
+<p>Qiskit represents Clifford states with <a href="https://docs.quantum.ibm.com/api/qiskit/qiskit.quantum_info.Clifford"><code>qiskit.quantum_info.Clifford</code></a>. Like this package, it keeps <strong>stabilizers</strong> and <strong>destabilizers</strong> as separate generator sets. The physics is the same; the storage layout differs.</p>
+<h3 id="qiskits-layout">Qiskit's layout</h3>
+<p><code>Clifford</code> wraps a <code>StabilizerTable</code> with two <code>PauliTable</code> sub-tables:</p>
+<table>
+<thead>
+<tr>
+<th>Qiskit attribute</th>
+<th>Meaning</th>
+<th>Shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cliff.stabilizer</code></td>
+<td>Stabilizer generators</td>
+<td><code>(n, 2n)</code></td>
+</tr>
+<tr>
+<td><code>cliff.destabilizer</code></td>
+<td>Destabilizer generators</td>
+<td><code>(n, 2n)</code></td>
+</tr>
+<tr>
+<td><code>cliff.stabilizer.phase</code></td>
+<td>Stabilizer sign bits</td>
+<td><code>(n,)</code></td>
+</tr>
+<tr>
+<td><code>cliff.destabilizer.phase</code></td>
+<td>Destabilizer sign bits</td>
+<td><code>(n,)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each <code>PauliTable</code> row stores Pauli bits in <strong><code>[X | Z]</code> column order</strong>: columns <code>0..n-1</code> are X bits, columns <code>n..2n-1</code> are Z bits. Phase is stored separately as a boolean array, not inside the bit matrix.</p>
+<p>Access pattern:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="kn">from</span> <span class="nn">qiskit.quantum_info</span> <span class="kn">import</span> <span class="n">Clifford</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="n">cliff</span> <span class="o">=</span> <span class="n">Clifford</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">cliff</span><span class="o">.</span><span class="n">stabilizer</span><span class="p">)</span>      <span class="c1"># PauliTable for stabilizer rows</span>
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">cliff</span><span class="o">.</span><span class="n">destabilizer</span><span class="p">)</span>    <span class="c1"># PauliTable for destabilizer rows</span>
+<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">cliff</span><span class="o">.</span><span class="n">to_labels</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;S&quot;</span><span class="p">))</span>  <span class="c1"># e.g. [&#39;+XX&#39;, &#39;+ZZ&#39;]</span>
+<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">cliff</span><span class="o">.</span><span class="n">to_labels</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;D&quot;</span><span class="p">))</span>  <span class="c1"># destabilizer labels</span>
+</code></pre></div>
+<h3 id="our-layout">Our layout</h3>
+<p><code>StabilizerState</code> follows Aaronson–Gottesman CHP-style storage:</p>
+<table>
+<thead>
+<tr>
+<th>Our attribute</th>
+<th>Meaning</th>
+<th>Shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x_mat</code></td>
+<td>X bits for all <code>2n</code> tableau rows</td>
+<td><code>(2n, n)</code></td>
+</tr>
+<tr>
+<td><code>z_mat</code></td>
+<td>Z bits for all <code>2n</code> tableau rows</td>
+<td><code>(2n, n)</code></td>
+</tr>
+<tr>
+<td><code>r_phase</code></td>
+<td>Sign bits for all <code>2n</code> rows</td>
+<td><code>(2n,)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Rows <code>0..n-1</code> are destabilizers. Rows <code>n..2n-1</code> are stabilizers. X and Z live in <strong>separate</strong> matrices instead of one combined <code>[X|Z]</code> row.</p>
+<p>Equivalent read APIs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="n">st</span><span class="o">.</span><span class="n">stabilizer_strings</span><span class="p">()</span>       <span class="c1"># like cliff.to_labels(mode=&quot;S&quot;)</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="n">st</span><span class="o">.</span><span class="n">destabilizer_strings</span><span class="p">()</span>     <span class="c1"># like cliff.to_labels(mode=&quot;D&quot;)</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="n">st</span><span class="o">.</span><span class="n">tableau_dict</span><span class="p">()</span>             <span class="c1"># both sides in one dict</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="n">st</span><span class="o">.</span><span class="n">stabilizer_generators</span><span class="p">()</span>    <span class="c1"># raw (phase, x_row, z_row) tuples</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="n">st</span><span class="o">.</span><span class="n">destabilizer_generators</span><span class="p">()</span>  <span class="c1"># raw tuples for destabilizer rows</span>
+</code></pre></div>
+<h3 id="row-correspondence">Row correspondence</h3>
+<p>For an <code>n</code>-qubit state, Qiskit row <code>i</code> in <code>.stabilizer</code> matches our tableau row <code>n + i</code>. Qiskit row <code>i</code> in <code>.destabilizer</code> matches our tableau row <code>i</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Generator set</th>
+<th>Qiskit source</th>
+<th>Our source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stabilizer row <code>i</code></td>
+<td><code>cliff.stabilizer[i]</code></td>
+<td><code>x_mat[n+i]</code>, <code>z_mat[n+i]</code>, <code>r_phase[n+i]</code></td>
+</tr>
+<tr>
+<td>Destabilizer row <code>i</code></td>
+<td><code>cliff.destabilizer[i]</code></td>
+<td><code>x_mat[i]</code>, <code>z_mat[i]</code>, <code>r_phase[i]</code></td>
+</tr>
+</tbody>
+</table>
+<p>To compare Pauli <strong>content</strong>, translate Qiskit's combined row into separate X/Z lists:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="c1"># Qiskit stabilizer row i -&gt; our stabilizer row n + i</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="n">x_row</span> <span class="o">=</span> <span class="n">cliff</span><span class="o">.</span><span class="n">stabilizer</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="n">z_row</span> <span class="o">=</span> <span class="n">cliff</span><span class="o">.</span><span class="n">stabilizer</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="n">phase</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cliff</span><span class="o">.</span><span class="n">stabilizer</span><span class="o">.</span><span class="n">phase</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># 0 -&gt; +, 1 -&gt; -</span>
+</code></pre></div>
+<p>Direct NumPy array comparison against <code>x_mat</code> / <code>z_mat</code> requires reshaping: Qiskit packs <code>[X|Z]</code> horizontally into one <code>(n, 2n)</code> matrix, while we store X and Z as two <code>(2n, n)</code> matrices. The bits match after accounting for row offset and column layout.</p>
+<h3 id="what-stays-aligned">What stays aligned</h3>
+<ul>
+<li>Stabilizer <strong>labels</strong> from Qiskit <code>to_labels(mode="S")</code> match <code>stabilizer_strings()</code> for the same Clifford circuit.</li>
+<li>Destabilizer <strong>labels</strong> from <code>to_labels(mode="D")</code> match <code>destabilizer_strings()</code>.</li>
+<li>Gate semantics are aligned through <code>from_qiskit()</code> for supported Clifford gates.</li>
+</ul>
+<p>The main practical difference is API shape: Qiskit exposes two <code>(n, 2n)</code> Pauli tables plus separate phase vectors; we expose two <code>(2n, n)</code> bit matrices plus one phase vector over all rows.</p>
+<p>For loading Qiskit circuits into this simulator, see <a href="../../getting-started/qiskit/">Qiskit Interop</a>.</p>
 <hr />
 <h2 id="summary">Summary</h2>
 <table>

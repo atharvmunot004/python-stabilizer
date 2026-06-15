@@ -690,6 +690,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../qiskit-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How from_qiskit Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../getting-started/qec/" class="md-nav__link">
         
   
@@ -698,6 +726,34 @@
     
   
     QEC Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/tracing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing Syndrome Extraction
   
 
     
@@ -924,6 +980,34 @@
     
   
     Error-Correcting Codes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../theory/gate-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gate Operation Rules
   
 
     
@@ -1266,6 +1350,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_check_tableau_invariants-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _check_tableau_invariants() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1349,6 +1444,28 @@
     <span class="md-ellipsis">
       
         destabilizer_strings() -&gt; List[str]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destabilizer_generators-listtupleint-listint-listint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        destabilizer_generators() -&gt; List[Tuple[int, List[int], List[int]]]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tableau_dict-dictstr-liststr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tableau_dict() -&gt; Dict[str, List[str]]
       
     </span>
   </a>
@@ -1884,6 +2001,117 @@
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate tracing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tracing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tracing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tracestep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TraceStep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulatortracestep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SimulatorTraceStep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tracedcircuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TracedCircuit
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TracedCircuit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tracedcircuitcircuit-circuit-trace-bool-true" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TracedCircuit(circuit: Circuit, trace: bool = True)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runstate-stabilizerstate-listint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run(state: StabilizerState) -&gt; List[int]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_trace-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_trace() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps-listtracestep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        steps: List[TraceStep]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2209,6 +2437,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_check_tableau_invariants-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _check_tableau_invariants() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2292,6 +2531,28 @@
     <span class="md-ellipsis">
       
         destabilizer_strings() -&gt; List[str]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destabilizer_generators-listtupleint-listint-listint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        destabilizer_generators() -&gt; List[Tuple[int, List[int], List[int]]]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tableau_dict-dictstr-liststr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tableau_dict() -&gt; Dict[str, List[str]]
       
     </span>
   </a>
@@ -2830,6 +3091,117 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#gate-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate tracing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tracing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tracing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tracestep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TraceStep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulatortracestep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SimulatorTraceStep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tracedcircuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TracedCircuit
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TracedCircuit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tracedcircuitcircuit-circuit-trace-bool-true" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TracedCircuit(circuit: Circuit, trace: bool = True)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runstate-stabilizerstate-listint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run(state: StabilizerState) -&gt; List[int]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_trace-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_trace() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps-listtracestep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        steps: List[TraceStep]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2956,7 +3328,11 @@
 <h4 id="czcontrol-int-target-int-controlled-z"><code>cz(control: int, target: int)</code> - Controlled-Z</h4>
 <h4 id="cycontrol-int-target-int-controlled-y"><code>cy(control: int, target: int)</code> - Controlled-Y</h4>
 <h4 id="swapq1-int-q2-int-swap-via-3-cnots"><code>swap(q1: int, q2: int)</code> - SWAP (via 3 CNOTs)</h4>
-<p>Index validation is currently explicit for <code>i(q)</code> and implicit for most other gate methods through Python list indexing.</p>
+<p>All gate and measurement methods validate qubit indices and raise <code>ValueError</code>
+if a target is out of range for the state's <code>n</code> qubits.</p>
+<h4 id="_check_tableau_invariants-none"><code>_check_tableau_invariants() -&gt; None</code></h4>
+<p>Debug helper. Asserts that stabilizer rows are independent and mutually
+commuting. Intended for tests and for <code>QuantumSimulator(debug=True)</code>.</p>
 <hr />
 <h3 id="measurement">Measurement</h3>
 <h4 id="measure_zq-int-int"><code>measure_z(q: int) -&gt; int</code></h4>
@@ -2988,13 +3364,21 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">from_stabilizer_list</span><span class="p">([</span><span class="s2">&quot;XX&quot;</span><span class="p">,</span> <span class="s2">&quot;ZZ&quot;</span><span class="p">])</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">stabilizer_strings</span><span class="p">())</span>  <span class="c1"># [&#39;+XX&#39;, &#39;+ZZ&#39;]</span>
 </code></pre></div>
-<p>This mirrors Qiskit's <code>Clifford.to_labels(mode="S")</code> style.</p>
+<p>This mirrors Qiskit's <code>Clifford.to_labels(mode="S")</code> style. See <a href="../theory/tableau/#comparison-with-qiskits-clifford">Comparison with Qiskit's Clifford</a> for layout differences.</p>
 <h4 id="destabilizer_strings-liststr"><code>destabilizer_strings() -&gt; List[str]</code></h4>
 <p>Returns the <span class="arithmatex">\(n\)</span> destabilizer generators as signed Pauli strings.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">destabilizer_strings</span><span class="p">())</span>  <span class="c1"># [&#39;+XI&#39;, &#39;+IX&#39;]</span>
 </code></pre></div>
 <p>This mirrors Qiskit's <code>Clifford.to_labels(mode="D")</code> style. Destabilizers are tableau bookkeeping rows used for efficient measurement simulation, not the physical stabilizer generators of the state.</p>
+<h4 id="destabilizer_generators-listtupleint-listint-listint"><code>destabilizer_generators() -&gt; List[Tuple[int, List[int], List[int]]]</code></h4>
+<p>Returns the first <span class="arithmatex">\(n\)</span> tableau rows as <code>(phase_bit, x_row, z_row)</code> tuples. Symmetric with <code>stabilizer_generators()</code>.</p>
+<h4 id="tableau_dict-dictstr-liststr"><code>tableau_dict() -&gt; Dict[str, List[str]]</code></h4>
+<p>Returns both generator sets as signed Pauli strings:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">tableau_dict</span><span class="p">())</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># {&#39;stabilizers&#39;: [&#39;+ZI&#39;, &#39;+IZ&#39;], &#39;destabilizers&#39;: [&#39;+XI&#39;, &#39;+IX&#39;]}</span>
+</code></pre></div>
 <h4 id="copy-stabilizerstate"><code>copy() -&gt; StabilizerState</code></h4>
 <p>Returns a deep copy of the state.</p>
 <p>The copied state has independent <code>x_mat</code>, <code>z_mat</code>, and <code>r_phase</code> lists.</p>
@@ -3002,15 +3386,15 @@
 <h3 id="debug-formatting">Debug formatting</h3>
 <h4 id="inspectviews-optionalliststr-none-str"><code>inspect(views: Optional[List[str]] = None) -&gt; str</code></h4>
 <p>Unified tableau inspection entrypoint. Returns formatted text; it does not print by itself.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">())</span>  <span class="c1"># default: same as views=[&quot;chp&quot;]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">())</span>  <span class="c1"># default: same as views=[&quot;chp&quot;]</span>
 </code></pre></div>
 <p>When <code>views</code> is <code>None</code>, <code>inspect()</code> returns the <code>chp</code> view only.</p>
 <p>Request multiple views explicitly:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">,</span> <span class="s2">&quot;debug&quot;</span><span class="p">]))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">,</span> <span class="s2">&quot;debug&quot;</span><span class="p">]))</span>
 </code></pre></div>
 <p>When <code>views</code> is a list, only those views are returned, in the order requested:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stabilizers&quot;</span><span class="p">,</span> <span class="s2">&quot;destabilizers&quot;</span><span class="p">]))</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">]))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stabilizers&quot;</span><span class="p">,</span> <span class="s2">&quot;destabilizers&quot;</span><span class="p">]))</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">]))</span>
 </code></pre></div>
 <p>Supported view names:</p>
 <table>
@@ -3050,11 +3434,11 @@
 <p>Raises <code>ValueError</code> if any requested view name is unknown.</p>
 <h4 id="format_chp_printstate-str"><code>format_chp_printstate() -&gt; str</code></h4>
 <p>CHP-style output: destabilizer rows, a separator line, stabilizer rows. Each row prefixed with <code>+</code> or <code>-</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>+XI
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>+IX
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>-----------
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>+XX
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>+ZZ
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>+XI
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>+IX
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>-----------
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>+XX
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>+ZZ
 </code></pre></div>
 <h4 id="format_xz_binary_matrices-str"><code>format_xz_binary_matrices() -&gt; str</code></h4>
 <p>Prints the raw <span class="arithmatex">\(2n \times n\)</span> X and Z bit tables side by side.</p>
@@ -3063,12 +3447,15 @@
 <h4 id="format_tableau_debug-str"><code>format_tableau_debug() -&gt; str</code></h4>
 <p>All three formats combined. Useful for step-by-step debugging.</p>
 <p>Equivalent to the <code>debug</code> view in <code>inspect()</code>.</p>
+<p>Formatting methods are for inspection only. They use <code>io.StringIO</code> internally
+and should not be called inside tight simulation loops. For bulk runs, prefer
+<code>stabilizer_strings()</code> or raw measurement outcomes over repeated CHP formatting.</p>
 <hr />
 <h2 id="circuit"><code>Circuit</code></h2>
 <p>Lightweight fluent circuit builder.</p>
 <p>Source: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py"><code>stabilizer_python/circuit.py</code></a></p>
 <h3 id="circuitn_qubits-int"><code>Circuit(n_qubits: int)</code></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">c</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">c</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="gate-methods">Gate methods</h3>
 <p>All return <code>self</code> for chaining.</p>
@@ -3169,8 +3556,8 @@
 <p><code>Circuit</code> can be run on either a <code>StabilizerState</code> for Clifford circuits or a <code>QuantumSimulator</code> for hybrid circuits.</p>
 <h3 id="runstate-stabilizerstate-quantumsimulator-listint"><code>run(state: StabilizerState | QuantumSimulator) -&gt; List[int]</code></h3>
 <p>Apply all ops to <code>state</code>. Returns list of measurement outcomes (one per <code>.mz()</code> call), in order.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">outcomes</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mz</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mz</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">outcomes</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mz</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mz</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="op"><code>Op</code></h3>
 <p>Frozen dataclass: <code>Op(name: str, targets: Tuple[int, ...])</code>. Gate name is a string like <code>"H"</code>, <code>"CNOT"</code>, <code>"MZ"</code>, <code>"MZ:key"</code>.</p>
@@ -3245,17 +3632,17 @@
 <li>Returns: <code>(rref_matrix, pivot_columns)</code></li>
 <li>Input is not modified</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">gaussian_elimination_gf2</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">M</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">rref</span><span class="p">,</span> <span class="n">pivots</span> <span class="o">=</span> <span class="n">gaussian_elimination_gf2</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">gaussian_elimination_gf2</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="n">M</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">rref</span><span class="p">,</span> <span class="n">pivots</span> <span class="o">=</span> <span class="n">gaussian_elimination_gf2</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="rank_gf2matrix-int"><code>rank_gf2(matrix) -&gt; int</code></h3>
 <p>Returns the rank of a binary matrix over GF(2).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">rank_gf2</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="n">rank</span> <span class="o">=</span> <span class="n">rank_gf2</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># -&gt; 3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">rank_gf2</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">rank</span> <span class="o">=</span> <span class="n">rank_gf2</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># -&gt; 3</span>
 </code></pre></div>
 <hr />
 <h2 id="gate"><code>Gate</code></h2>
@@ -3309,11 +3696,11 @@
 <p>Parameterized gate factories:</p>
 <p><code>RXGate(theta)</code>, <code>RYGate(theta)</code>, <code>RZGate(theta)</code>, <code>PhaseGate(lam)</code>, <code>U1Gate(lam)</code>, <code>U2Gate(phi, lam)</code>, <code>U3Gate(theta, phi, lam)</code>, <code>UGate(theta, phi, lam)</code>, <code>RGate(theta, phi)</code>, <code>CRXGate(theta)</code>, <code>CRYGate(theta)</code>, <code>CRZGate(theta)</code>, <code>CPhaseGate(lam)</code>, <code>RXXGate(theta)</code>, <code>RYYGate(theta)</code>, <code>RZZGate(theta)</code>, <code>RZXGate(theta)</code>, <code>XXPlusYYGate(theta, beta)</code>, <code>XXMinusYYGate(theta, beta)</code></p>
 <p>Example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">TGate</span><span class="p">,</span> <span class="n">RZGate</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="kn">import</span> <span class="nn">math</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">TGate</span><span class="o">.</span><span class="n">matrix</span><span class="p">)</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">RZGate</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">matrix</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">TGate</span><span class="p">,</span> <span class="n">RZGate</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="kn">import</span> <span class="nn">math</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">TGate</span><span class="o">.</span><span class="n">matrix</span><span class="p">)</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">RZGate</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">matrix</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="statevector"><code>Statevector</code></h2>
@@ -3339,21 +3726,21 @@
 <h4 id="tableau_to_statevectorstate-stabilizerstate-statevector"><code>tableau_to_statevector(state: StabilizerState) -&gt; Statevector</code></h4>
 <p>Converts a stabilizer tableau to the unique statevector it represents. Algorithm: applies the projector <code>(I + g_i) / 2</code> for each stabilizer generator <code>g_i</code> to an initial state, then renormalizes. Cost: O(n · 2^n). It is called once at the Clifford-to-non-Clifford boundary inside <code>QuantumSimulator</code>.</p>
 <p>Example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span><span class="p">,</span> <span class="n">Circuit</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.statevector</span> <span class="kn">import</span> <span class="n">tableau_to_statevector</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="n">sv</span> <span class="o">=</span> <span class="n">tableau_to_statevector</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
-<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="c1"># {&#39;00&#39;: (0.707+0j), &#39;11&#39;: (0.707+0j)}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span><span class="p">,</span> <span class="n">Circuit</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.statevector</span> <span class="kn">import</span> <span class="n">tableau_to_statevector</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="n">sv</span> <span class="o">=</span> <span class="n">tableau_to_statevector</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="c1"># {&#39;00&#39;: (0.707+0j), &#39;11&#39;: (0.707+0j)}</span>
 </code></pre></div>
 <hr />
 <h2 id="quantumsimulator"><code>QuantumSimulator</code></h2>
 <p>Source: <code>stabilizer_python/simulator.py</code></p>
 <p>Hybrid simulator. Starts in O(n²) tableau mode; auto-switches to O(2^n) statevector on the first non-Clifford gate.</p>
-<p>Constructor: <code>QuantumSimulator(n: int)</code></p>
+<p>Constructor: <code>QuantumSimulator(n: int, trace: bool = False, debug: bool = False)</code></p>
 <p>Attributes:</p>
 <table>
 <thead>
@@ -3384,8 +3771,16 @@
 <td><code>int</code></td>
 <td>Number of qubits</td>
 </tr>
+<tr>
+<td><code>trace</code></td>
+<td><code>List[SimulatorTraceStep]</code></td>
+<td>Gate-by-gate snapshots when <code>trace=True</code></td>
+</tr>
 </tbody>
 </table>
+<p>Pass <code>debug=True</code> to run tableau invariant checks after every Clifford gate and
+Z measurement while the simulator is in tableau mode. Out-of-range or duplicate
+qubit indices raise <code>ValueError</code> before a gate is applied.</p>
 <p>Methods:</p>
 <h4 id="applyname-str-qubits-listint-params-listfloat-none-none-none"><code>apply(name: str, qubits: list[int], params: list[float] | None = None) -&gt; None</code></h4>
 <p>Apply a gate by name. Clifford gates route to the tableau; non-Clifford gates trigger the statevector switch. Gate name must match a key in the internal routing table, using the same strings as <code>gate.py</code> <code>Gate.name</code> values.</p>
@@ -3398,27 +3793,157 @@
 <h4 id="statevector_snapshot-statevector"><code>statevector_snapshot() -&gt; Statevector</code></h4>
 <p>Return the current state as a <code>Statevector</code> without modifying <code>mode</code>. In tableau mode this calls <code>tableau_to_statevector</code>.</p>
 <p>Example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kn">import</span> <span class="nn">math</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;cnot&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>   <span class="c1"># &quot;tableau&quot;</span>
-<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
-<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;rz&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">])</span>
-<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>   <span class="c1"># &quot;statevector&quot;</span>
-<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>
-<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="kn">import</span> <span class="nn">math</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;cnot&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>   <span class="c1"># &quot;tableau&quot;</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;rz&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">])</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>   <span class="c1"># &quot;statevector&quot;</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
 </code></pre></div>
+<h4 id="gate-tracing">Gate tracing</h4>
+<p>Pass <code>trace=True</code> to record the state after every <code>apply</code> / <code>apply_gate</code> call:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="kn">import</span> <span class="nn">math</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">trace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;cnot&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="n">sim</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;rz&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">])</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">sim</span><span class="o">.</span><span class="n">trace</span><span class="p">:</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">gate_name</span><span class="p">,</span> <span class="n">step</span><span class="o">.</span><span class="n">qubits</span><span class="p">,</span> <span class="n">step</span><span class="o">.</span><span class="n">mode_after</span><span class="p">)</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>    <span class="k">if</span> <span class="n">step</span><span class="o">.</span><span class="n">mode_after</span> <span class="o">==</span> <span class="s2">&quot;tableau&quot;</span><span class="p">:</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">snapshot</span><span class="o">.</span><span class="n">format_chp_printstate</span><span class="p">())</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">snapshot</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</code></pre></div>
+<p>Each <code>SimulatorTraceStep</code> captures: gate name, qubit targets, params, mode before and after, and a snapshot (<code>StabilizerState.copy()</code> or <code>Statevector</code> copy).</p>
+<hr />
+<h2 id="tracing"><code>tracing</code></h2>
+<p>Source: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tracing.py"><code>stabilizer_python/tracing.py</code></a></p>
+<p>Step-by-step Clifford circuit tracing for QEC pedagogy.</p>
+<h3 id="tracestep"><code>TraceStep</code></h3>
+<p>Frozen dataclass recorded for each traced operation:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>index</code></td>
+<td><code>int</code></td>
+<td>1-based step number</td>
+</tr>
+<tr>
+<td><code>op_label</code></td>
+<td><code>str</code></td>
+<td>Formatted gate or measurement label</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td><code>str</code></td>
+<td><code>"gate"</code> or <code>"measurement"</code></td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td><code>StabilizerState</code></td>
+<td>Tableau snapshot after the operation</td>
+</tr>
+<tr>
+<td><code>outcome</code></td>
+<td><code>Optional[int]</code></td>
+<td>Measurement outcome for <code>MZ</code> steps</td>
+</tr>
+<tr>
+<td><code>measurement_branch</code></td>
+<td><code>Optional[str]</code></td>
+<td><code>"deterministic"</code> or <code>"random"</code> for <code>MZ</code> steps</td>
+</tr>
+</tbody>
+</table>
+<h3 id="simulatortracestep"><code>SimulatorTraceStep</code></h3>
+<p>Frozen dataclass recorded for each traced gate in <code>QuantumSimulator(trace=True)</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gate_name</code></td>
+<td><code>str</code></td>
+<td>Gate name, e.g. <code>"h"</code>, <code>"cnot"</code>, <code>"rz"</code></td>
+</tr>
+<tr>
+<td><code>qubits</code></td>
+<td><code>List[int]</code></td>
+<td>Target qubit indices</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td><code>List[float]</code></td>
+<td>Gate parameters (empty for fixed gates)</td>
+</tr>
+<tr>
+<td><code>mode_before</code></td>
+<td><code>str</code></td>
+<td><code>"tableau"</code> or <code>"statevector"</code> before the gate</td>
+</tr>
+<tr>
+<td><code>mode_after</code></td>
+<td><code>str</code></td>
+<td>Mode after the gate</td>
+</tr>
+<tr>
+<td><code>snapshot</code></td>
+<td><code>StabilizerState \| Statevector</code></td>
+<td>State copy after the gate</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tracedcircuit"><code>TracedCircuit</code></h3>
+<h4 id="tracedcircuitcircuit-circuit-trace-bool-true"><code>TracedCircuit(circuit: Circuit, trace: bool = True)</code></h4>
+<p>Wrap a <code>Circuit</code> for optional step recording.</p>
+<h4 id="runstate-stabilizerstate-listint"><code>run(state: StabilizerState) -&gt; List[int]</code></h4>
+<p>Apply the wrapped circuit to <code>state</code> in place. Returns measurement outcomes in circuit order. When <code>trace=True</code>, appends a <code>TraceStep</code> after every gate and measurement.</p>
+<p>Raises <code>ValueError</code> if the state has fewer qubits than the circuit, or if a non-Clifford operation forces the simulator out of tableau mode.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.codes</span> <span class="kn">import</span> <span class="n">BitFlip3Code</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="kn">from</span> <span class="nn">stabilizer_python.tracing</span> <span class="kn">import</span> <span class="n">TracedCircuit</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">encoder_circuit</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="n">tc</span> <span class="o">=</span> <span class="n">TracedCircuit</span><span class="p">(</span><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">syndrome_circuit</span><span class="p">(),</span> <span class="n">trace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="n">outcomes</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="n">tc</span><span class="o">.</span><span class="n">print_trace</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="print_trace-none"><code>print_trace() -&gt; None</code></h4>
+<p>Print every recorded step: operation label, measurement outcome and branch when applicable, and CHP-style tableau output.</p>
+<h4 id="steps-listtracestep"><code>steps: List[TraceStep]</code></h4>
+<p>Programmatic access to recorded steps after <code>run()</code>.</p>
 <hr />
 <h2 id="qiskit_interop"><code>qiskit_interop</code></h2>
 <p>Source: <code>stabilizer_python/qiskit_interop.py</code></p>
 <p>Qiskit integration. Requires <code>qiskit</code> to be installed separately:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>pip<span class="w"> </span>install<span class="w"> </span>qiskit
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>pip<span class="w"> </span>install<span class="w"> </span>qiskit
 </code></pre></div>
 <h4 id="from_qiskitqc-qiskitcircuitquantumcircuit-circuit"><code>from_qiskit(qc: qiskit.circuit.QuantumCircuit) -&gt; Circuit</code></h4>
 <p>Converts a Qiskit <code>QuantumCircuit</code> into a local <code>Circuit</code>. The returned <code>Circuit</code> can be run on either a <code>StabilizerState</code> for Clifford circuits or a <code>QuantumSimulator</code>.</p>
+<p>See <a href="../qiskit-interop/">How from_qiskit Works</a> for the full conversion walkthrough.</p>
 <ul>
 <li>Parameterized gates are translated using bound numeric parameters. If the circuit contains unbound <code>ParameterExpression</code> objects, a <code>ValueError</code> is raised.</li>
 <li><code>barrier</code> and <code>delay</code> instructions are silently skipped.</li>
@@ -3469,21 +3994,21 @@
 </tbody>
 </table>
 <p>Example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span> <span class="k">as</span> <span class="n">QiskitCircuit</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="kn">from</span> <span class="nn">stabilizer_python.qiskit_interop</span> <span class="kn">import</span> <span class="n">from_qiskit</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="n">qc</span> <span class="o">=</span> <span class="n">QiskitCircuit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="n">qc</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>
-<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="n">from_qiskit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
-<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>
-<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>           <span class="c1"># &quot;statevector&quot;</span>
-<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">probabilities</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span> <span class="k">as</span> <span class="n">QiskitCircuit</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="kn">from</span> <span class="nn">stabilizer_python.qiskit_interop</span> <span class="kn">import</span> <span class="n">from_qiskit</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="n">qc</span> <span class="o">=</span> <span class="n">QiskitCircuit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="n">qc</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="n">qc</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="n">from_qiskit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>           <span class="c1"># &quot;statevector&quot;</span>
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">sv</span><span class="o">.</span><span class="n">probabilities</span><span class="p">())</span>
 </code></pre></div>
 
 

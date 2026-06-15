@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://atharvmunot004.github.io/python-stabilizer/getting-started/installation/">
+        <link rel="canonical" href="https://atharvmunot004.github.io/python-stabilizer/getting-started/tracing/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../qec/">
       
       
-        <link rel="next" href="../first-tableau/">
+        <link rel="next" href="../tests/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Installation - stabilizer-python</title>
+        <title>Tracing Syndrome Extraction - stabilizer-python</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
+        <a href="#tracing-syndrome-extraction" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Installation
+              Tracing Syndrome Extraction
             
           </span>
         </div>
@@ -496,37 +496,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Installation
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
         
   
   
@@ -542,59 +515,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Requirements
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verify-the-install" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Verify The Install
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#common-setup-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Common Setup Issues
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -828,10 +748,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../tracing/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing Syndrome Extraction
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -847,6 +794,114 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-gets-recorded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Gets Recorded
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bit-flip-syndrome-circuit-step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bit-Flip Syndrome Circuit Step By Step
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-trace-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Trace Output
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deterministic-vs-random-measurements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deterministic vs Random Measurements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syndrome-circuit-vs-measure_syndrome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syndrome Circuit vs measure_syndrome()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disabling-the-trace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disabling The Trace
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limits
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1222,10 +1277,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#quick-example" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requirements
+        Quick Example
       
     </span>
   </a>
@@ -1233,10 +1288,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verify-the-install" class="md-nav__link">
+  <a href="#what-gets-recorded" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verify The Install
+        What Gets Recorded
       
     </span>
   </a>
@@ -1244,10 +1299,65 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#common-setup-issues" class="md-nav__link">
+  <a href="#bit-flip-syndrome-circuit-step-by-step" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Common Setup Issues
+        Bit-Flip Syndrome Circuit Step By Step
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-trace-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Trace Output
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deterministic-vs-random-measurements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deterministic vs Random Measurements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syndrome-circuit-vs-measure_syndrome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syndrome Circuit vs measure_syndrome()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disabling-the-trace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disabling The Trace
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limits
       
     </span>
   </a>
@@ -1274,52 +1384,170 @@
   
 
 
-<h1 id="installation">Installation</h1>
-<p>Install directly from GitHub:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/atharvmunot004/python-stabilizer.git
+<h1 id="tracing-syndrome-extraction">Tracing Syndrome Extraction</h1>
+<p><code>TracedCircuit</code> records the tableau after every gate and every measurement in a Clifford circuit. It is the main pedagogical tool for seeing how syndrome ancillas become entangled with data qubits and then collapse on measurement.</p>
+<h2 id="quick-example">Quick Example</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.codes</span> <span class="kn">import</span> <span class="n">BitFlip3Code</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span> <span class="nn">stabilizer_python.tracing</span> <span class="kn">import</span> <span class="n">TracedCircuit</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>   <span class="c1"># q0-q2 data, q3-q4 ancilla</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">encoder_circuit</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">st</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                        <span class="c1"># inject an X error on q1</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">tc</span> <span class="o">=</span> <span class="n">TracedCircuit</span><span class="p">(</span><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">syndrome_circuit</span><span class="p">(),</span> <span class="n">trace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">outcomes</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span>   <span class="c1"># [1, 1]</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">tc</span><span class="o">.</span><span class="n">print_trace</span><span class="p">()</span>
 </code></pre></div>
-<p>Install a pinned release, useful for reproducible experiments:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/atharvmunot004/python-stabilizer.git@v0.2.0
+<p>Run the packaged demo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>-m<span class="w"> </span>stabilizer_python.examples.bitflip3_trace_demo
 </code></pre></div>
-<p>For local development:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/atharvmunot004/python-stabilizer.git
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span><span class="w"> </span>python-stabilizer
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+<h2 id="what-gets-recorded">What Gets Recorded</h2>
+<p>Each recorded step is a <code>TraceStep</code> with:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>index</code></td>
+<td>1-based step number in the circuit</td>
+</tr>
+<tr>
+<td><code>op_label</code></td>
+<td>Human-readable operation, e.g. <code>CNOT(0, 3)</code> or <code>MZ(3, key='s01')</code></td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td><code>"gate"</code> or <code>"measurement"</code></td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>Snapshot of the tableau after the operation</td>
+</tr>
+<tr>
+<td><code>outcome</code></td>
+<td>Measurement bit for <code>MZ</code> steps (<code>0</code> or <code>1</code>)</td>
+</tr>
+<tr>
+<td><code>measurement_branch</code></td>
+<td><code>"deterministic"</code> or <code>"random"</code> for <code>MZ</code> steps</td>
+</tr>
+</tbody>
+</table>
+<p>Access steps programmatically:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">steps</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">op_label</span><span class="p">,</span> <span class="n">step</span><span class="o">.</span><span class="n">kind</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">inspect</span><span class="p">())</span>
 </code></pre></div>
-<p>The <code>dev</code> extra installs <code>pytest</code> and <code>qiskit</code>, which are used by the optional tests and Qiskit interop examples.</p>
-<h2 id="requirements">Requirements</h2>
+<h2 id="bit-flip-syndrome-circuit-step-by-step">Bit-Flip Syndrome Circuit Step By Step</h2>
+<p><code>BitFlip3Code.syndrome_circuit()</code> performs six operations on five qubits:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Operation</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>CNOT(0, 3)</code></td>
+<td>Copy <span class="arithmatex">\(Z_0\)</span> parity onto ancilla q3</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>CNOT(1, 3)</code></td>
+<td>Combine with <span class="arithmatex">\(Z_1\)</span> so q3 tracks <span class="arithmatex">\(Z_0Z_1\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>MZ(3, key='s01')</code></td>
+<td>Measure ancilla q3, read syndrome bit <code>s01</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>CNOT(1, 4)</code></td>
+<td>Copy <span class="arithmatex">\(Z_1\)</span> parity onto ancilla q4</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>CNOT(2, 4)</code></td>
+<td>Combine with <span class="arithmatex">\(Z_2\)</span> so q4 tracks <span class="arithmatex">\(Z_1Z_2\)</span></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>MZ(4, key='s12')</code></td>
+<td>Measure ancilla q4, read syndrome bit <code>s12</code></td>
+</tr>
+</tbody>
+</table>
+<p>After steps 1-2, ancilla q3 is entangled with the data qubits through the stabilizer group update. Step 3 collapses that entanglement into a single syndrome bit and rewrites the tableau.</p>
+<h2 id="example-trace-output">Example Trace Output</h2>
+<p>For an encoded <span class="arithmatex">\(|0_L\rangle\)</span> with no error, a trace looks like:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Step 1: CNOT(0, 3)
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>+XXIII
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>+IXIII
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>+IIXII
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>+IIIXI
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>+IIIIX
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>---
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>+ZZIII
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>+IZZII
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>+IIZZI
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>+IIIZZ
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>+IIIII
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>Step 3: MZ(3, key=&#39;s01&#39;)
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>  outcome=0 (deterministic)
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>...
+</code></pre></div>
+<p>For an <code>X</code> error on q1, the same circuit returns <code>outcomes == [1, 1]</code>.</p>
+<h2 id="deterministic-vs-random-measurements">Deterministic vs Random Measurements</h2>
+<p>Before each <code>MZ</code>, <code>TracedCircuit</code> calls <code>z_measurement_branch(q)</code> on the tableau. That reports whether <code>measure_z(q)</code> will take the deterministic path or sample randomly.</p>
+<p>For a valid encoded state with no error, the parity measurements are usually deterministic. After an uncorrected error, the syndrome bits are still deterministic readings of the corrupted stabilizer group — the random branch appears when measuring an observable that anticommutes with the current stabilizer generators.</p>
+<h2 id="syndrome-circuit-vs-measure_syndrome">Syndrome Circuit vs <code>measure_syndrome()</code></h2>
+<p>Two APIs measure the same parities:</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BitFlip3Code.syndrome_circuit()</code></td>
+<td>CNOT + measure ancillas; leaves ancillas in post-measurement states</td>
+</tr>
+<tr>
+<td><code>BitFlip3Code.measure_syndrome(st)</code></td>
+<td>Imperative CNOT + measure + <code>reset_z()</code> on each ancilla</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>TracedCircuit</code> with <code>syndrome_circuit()</code> when you want a step-by-step circuit trace. Use <code>measure_syndrome()</code> when you want the full measure-and-reset workflow in one call.</p>
+<h2 id="disabling-the-trace">Disabling The Trace</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">tc</span> <span class="o">=</span> <span class="n">TracedCircuit</span><span class="p">(</span><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">syndrome_circuit</span><span class="p">(),</span> <span class="n">trace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">outcomes</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">assert</span> <span class="n">tc</span><span class="o">.</span><span class="n">steps</span> <span class="o">==</span> <span class="p">[]</span>
+</code></pre></div>
+<p>Use <code>trace=False</code> for bulk simulation. Tracing copies the full tableau after
+every step; that is useful for teaching but expensive in tight loops such as
+1000-shot syndrome benchmarking.</p>
+<h2 id="limits">Limits</h2>
 <ul>
-<li>Python <code>&gt;=3.9</code></li>
-<li>Pure Clifford tableau workflows use only the standard library</li>
-<li>Hybrid statevector simulation uses NumPy</li>
-<li>Qiskit interop requires Qiskit</li>
+<li><code>TracedCircuit</code> requires Clifford operations in tableau mode.</li>
+<li>Non-Clifford gates in the wrapped circuit raise <code>ValueError</code> during tracing.</li>
+<li>Tracing works on <code>StabilizerState</code> directly; it mutates the passed state in place.</li>
 </ul>
-<p>Source links:</p>
-<ul>
-<li>Repository: <a href="https://github.com/atharvmunot004/python-stabilizer"><code>atharvmunot004/python-stabilizer</code></a></li>
-<li>Package metadata: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/pyproject.toml"><code>pyproject.toml</code></a></li>
-<li>Public exports: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/__init__.py"><code>stabilizer_python/__init__.py</code></a></li>
-</ul>
-<h2 id="verify-the-install">Verify The Install</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;&#39;PY&#39;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="s">from stabilizer_python import Circuit, StabilizerState</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="s">st = StabilizerState.zero(2)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="s">Circuit(2).h(0).cnot(0, 1).run(st)</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="s">print(st.inspect(views=[&quot;stabilizers&quot;]))</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="s">PY</span>
-</code></pre></div>
-<p>Expected output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>+XX
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>+ZZ
-</code></pre></div>
-<h2 id="common-setup-issues">Common Setup Issues</h2>
-<p>If <code>qiskit</code> imports fail, install the development dependencies:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
-</code></pre></div>
-<p>If Python imports an older installed version while you are editing the checkout, reinstall editable mode from the repository root:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
-</code></pre></div>
+<p>For the underlying measurement algorithm, see <a href="../../theory/measurement/">Measurement</a>. For code theory, see <a href="../../theory/qec-codes/">Error-Correcting Codes</a>.</p>
 
 
 

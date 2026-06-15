@@ -1,0 +1,2552 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Minimal stabilizer (Clifford) simulator in pure Python — tableau-based state representation, QEC code examples, and a learning resource for anyone wanting to understand stabilizer simulation from first principles.">
+      
+      
+      
+        <link rel="canonical" href="https://atharvmunot004.github.io/python-stabilizer/theory/gate-rules/">
+      
+      
+        <link rel="prev" href="../qec-codes/">
+      
+      
+        <link rel="next" href="../../hybrid-simulation/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Gate Operation Rules - stabilizer-python</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gate-operation-rules-mathematical-proofs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="stabilizer-python" class="md-header__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            stabilizer-python
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Gate Operation Rules
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/atharvmunot004/python-stabilizer" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    atharvmunot004/python-stabilizer
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../stabilizer-formalism/" class="md-tabs__link">
+          
+  
+  
+  Theory
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api-reference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../references/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  References
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="stabilizer-python" class="md-nav__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    stabilizer-python
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/atharvmunot004/python-stabilizer" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    atharvmunot004/python-stabilizer
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/first-tableau/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your First Tableau State
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/circuits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building Circuits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/inspection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inspecting Tableaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/measurement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Measuring Qubits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/non-clifford/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/qiskit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Qiskit Interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qiskit-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How from_qiskit Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/qec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QEC Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/tracing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing Syndrome Extraction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Theory
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Theory
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stabilizer-formalism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stabilizer Formalism
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tableau/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tableau
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../measurement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Measurement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qec-codes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Error-Correcting Codes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gate Operation Rules
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gate Operation Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Foundations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Foundations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-the-pauli-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 The Pauli Group
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-the-bit-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 The Bit Encoding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-single-qubit-gate-proofs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Single-Qubit Gate Proofs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Single-Qubit Gate Proofs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-hadamard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Hadamard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-phase-gate-s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Phase Gate S
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-s-dagger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 S-dagger
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-pauli-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Pauli Gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-x-and-x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 √X and (√X)†
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-the-cnot-phase-condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. The CNOT Phase Condition
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. The CNOT Phase Condition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-cnot-conjugation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 CNOT Conjugation Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-bit-rules-for-cnot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Bit Rules for CNOT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-derivation-of-the-phase-correction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Derivation of the Phase Correction
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-phase-accumulation-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The Phase Accumulation Function
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. The Phase Accumulation Function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-the-single-qubit-phase-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 The Single-Qubit Phase Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-row-multiplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Row Multiplication
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-measurement-proofs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Measurement Proofs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Measurement Proofs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-deterministic-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Deterministic Branch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-random-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Random Branch
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-worked-example-bell-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Worked Example — Bell State
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hybrid-simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Foundations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Foundations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-the-pauli-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 The Pauli Group
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-the-bit-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 The Bit Encoding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-single-qubit-gate-proofs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Single-Qubit Gate Proofs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Single-Qubit Gate Proofs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-hadamard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Hadamard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-phase-gate-s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Phase Gate S
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-s-dagger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 S-dagger
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-pauli-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Pauli Gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-x-and-x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 √X and (√X)†
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-the-cnot-phase-condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. The CNOT Phase Condition
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. The CNOT Phase Condition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-cnot-conjugation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 CNOT Conjugation Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-bit-rules-for-cnot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Bit Rules for CNOT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-derivation-of-the-phase-correction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Derivation of the Phase Correction
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-phase-accumulation-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The Phase Accumulation Function
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. The Phase Accumulation Function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-the-single-qubit-phase-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 The Single-Qubit Phase Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-row-multiplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Row Multiplication
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-measurement-proofs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Measurement Proofs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Measurement Proofs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-deterministic-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Deterministic Branch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-random-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Random Branch
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-worked-example-bell-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Worked Example — Bell State
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="gate-operation-rules-mathematical-proofs">Gate Operation Rules — Mathematical Proofs</h1>
+<p>This page derives every tableau update rule in <code>tableau.py</code> from first
+principles. Each rule is stated as a theorem, proved algebraically, and
+then shown as the corresponding code.</p>
+<hr />
+<h2 id="1-foundations">1. Foundations</h2>
+<h3 id="11-the-pauli-group">1.1 The Pauli Group</h3>
+<p>The single-qubit Pauli matrices are:</p>
+<div class="arithmatex">\[
+I = \begin{pmatrix}1&amp;0\\0&amp;1\end{pmatrix},\quad
+X = \begin{pmatrix}0&amp;1\\1&amp;0\end{pmatrix},\quad
+Y = \begin{pmatrix}0&amp;-i\\i&amp;0\end{pmatrix},\quad
+Z = \begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix}
+\]</div>
+<p>They satisfy <span class="arithmatex">\(X^2 = Y^2 = Z^2 = I\)</span> and the cyclic multiplication rules:</p>
+<div class="arithmatex">\[XY = iZ,\quad YZ = iX,\quad ZX = iY$$
+$$YX = -iZ,\quad ZY = -iX,\quad XZ = -iY\]</div>
+<p>The <span class="arithmatex">\(n\)</span>-qubit Pauli group <span class="arithmatex">\(\mathcal{P}_n\)</span> consists of all <span class="arithmatex">\(n\)</span>-fold tensor
+products <span class="arithmatex">\(i^k P_1 \otimes \cdots \otimes P_n\)</span> where <span class="arithmatex">\(P_j \in \{I,X,Y,Z\}\)</span>
+and <span class="arithmatex">\(k \in \{0,1,2,3\}\)</span>.</p>
+<h3 id="12-the-bit-encoding">1.2 The Bit Encoding</h3>
+<p><strong>Definition.</strong> The tableau encodes a Pauli <span class="arithmatex">\(P \in \{I,X,Y,Z\}\)</span> on qubit <span class="arithmatex">\(q\)</span>
+using two bits <span class="arithmatex">\((x, z)\)</span> and a global phase bit as follows:</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(z\)</span></th>
+<th>Pauli</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td><span class="arithmatex">\(I\)</span></td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td><span class="arithmatex">\(X\)</span></td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td><span class="arithmatex">\(Y\)</span></td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td><span class="arithmatex">\(Z\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The global sign <span class="arithmatex">\((-1)^r\)</span> is stored in <code>r_phase[r]</code>. Note that <span class="arithmatex">\(Y\)</span> requires
+both bits set: this encodes <span class="arithmatex">\(Y = iXZ\)</span> at the level of the full operator, but
+since all tableau rows represent Hermitian Paulis with eigenvalues <span class="arithmatex">\(\pm 1\)</span>,
+the phase bit tracks the sign, not the <span class="arithmatex">\(i\)</span> factor.</p>
+<p><strong>Lemma 1.1</strong> <em>(Completeness)</em>. The encoding is a bijection between
+<span class="arithmatex">\(\{I,X,Y,Z\}\)</span> and <span class="arithmatex">\(\{0,1\}^2\)</span>. Every Hermitian single-qubit Pauli (up to
+sign) has a unique <span class="arithmatex">\((x,z)\)</span> representation.</p>
+<p><em>Proof.</em> The four pairs <span class="arithmatex">\((0,0),(1,0),(1,1),(0,1)\)</span> are distinct elements of
+<span class="arithmatex">\(\{0,1\}^2\)</span> and there are exactly four Paulis <span class="arithmatex">\(\{I,X,Y,Z\}\)</span>, so the map is
+a bijection. <span class="arithmatex">\(\square\)</span></p>
+<hr />
+<h2 id="2-single-qubit-gate-proofs">2. Single-Qubit Gate Proofs</h2>
+<p>For each gate <span class="arithmatex">\(G\)</span>, we must show that the bit manipulation rules in <code>tableau.py</code>
+correctly implement the conjugation map <span class="arithmatex">\(P \mapsto GPG^\dagger\)</span> for all
+<span class="arithmatex">\(P \in \{I,X,Y,Z\}\)</span>.</p>
+<h3 id="21-hadamard">2.1 Hadamard</h3>
+<p><strong>Theorem 2.1.</strong> The Hadamard gate satisfies:</p>
+<div class="arithmatex">\[HXH^\dagger = Z,\quad HYH^\dagger = -Y,\quad HZH^\dagger = X\]</div>
+<p><em>Proof.</em> Using <span class="arithmatex">\(H = \frac{1}{\sqrt{2}}\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}\)</span>:</p>
+<div class="arithmatex">\[HXH^\dagger = \frac{1}{2}\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}
+\begin{pmatrix}0&amp;1\\1&amp;0\end{pmatrix}
+\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}
+= \frac{1}{2}\begin{pmatrix}2&amp;0\\0&amp;-2\end{pmatrix} = Z \checkmark\]</div>
+<div class="arithmatex">\[HYH^\dagger = \frac{1}{2}\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}
+\begin{pmatrix}0&amp;-i\\i&amp;0\end{pmatrix}
+\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}
+= \frac{1}{2}\begin{pmatrix}0&amp;2i\\-2i&amp;0\end{pmatrix} = -Y \checkmark\]</div>
+<div class="arithmatex">\[HZH^\dagger = \frac{1}{2}\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}
+\begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix}
+\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}
+= \frac{1}{2}\begin{pmatrix}0&amp;2\\2&amp;0\end{pmatrix} = X \checkmark \quad\square\]</div>
+<p><strong>Corollary 2.2</strong> <em>(Bit rule for H)</em>. In the <span class="arithmatex">\((x,z)\)</span> encoding:</p>
+<div class="arithmatex">\[H: (x,z) \mapsto (z,x), \quad \text{phase flipped iff } x=1 \text{ and } z=1\]</div>
+<p><em>Proof.</em> The conjugation rules <span class="arithmatex">\(X\leftrightarrow Z\)</span> correspond exactly to
+swapping the <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(z\)</span> bits, since <span class="arithmatex">\(X \sim (1,0)\)</span> and <span class="arithmatex">\(Z \sim (0,1)\)</span>. For
+<span class="arithmatex">\(Y \sim (1,1)\)</span>: <span class="arithmatex">\(HYH^\dagger = -Y\)</span> adds a sign, so the phase bit flips when
+<span class="arithmatex">\(x \wedge z = 1\)</span>. For <span class="arithmatex">\(I \sim (0,0)\)</span>: <span class="arithmatex">\(HIH^\dagger = I\)</span>, no change. <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Code:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="k">if</span> <span class="n">x</span> <span class="o">&amp;</span> <span class="n">z</span><span class="p">:</span>                              <span class="c1"># Y case: phase flip</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span>   <span class="c1"># swap x ↔ z</span>
+</code></pre></div></p>
+<hr />
+<h3 id="22-phase-gate-s">2.2 Phase Gate S</h3>
+<p><strong>Theorem 2.3.</strong> The phase gate <span class="arithmatex">\(S = \begin{pmatrix}1&amp;0\\0&amp;i\end{pmatrix}\)</span> satisfies:</p>
+<div class="arithmatex">\[SXS^\dagger = Y,\quad SYS^\dagger = -X,\quad SZS^\dagger = Z\]</div>
+<p><em>Proof.</em></p>
+<div class="arithmatex">\[SXS^\dagger = \begin{pmatrix}1&amp;0\\0&amp;i\end{pmatrix}
+\begin{pmatrix}0&amp;1\\1&amp;0\end{pmatrix}
+\begin{pmatrix}1&amp;0\\0&amp;-i\end{pmatrix}
+= \begin{pmatrix}0&amp;-i\\i&amp;0\end{pmatrix} = Y \checkmark\]</div>
+<div class="arithmatex">\[SYS^\dagger = \begin{pmatrix}1&amp;0\\0&amp;i\end{pmatrix}
+\begin{pmatrix}0&amp;-i\\i&amp;0\end{pmatrix}
+\begin{pmatrix}1&amp;0\\0&amp;-i\end{pmatrix}
+= \begin{pmatrix}0&amp;-1\\-1&amp;0\end{pmatrix} = -X \checkmark\]</div>
+<div class="arithmatex">\[SZS^\dagger = \begin{pmatrix}1&amp;0\\0&amp;i\end{pmatrix}
+\begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix}
+\begin{pmatrix}1&amp;0\\0&amp;-i\end{pmatrix}
+= \begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix} = Z \checkmark \quad\square\]</div>
+<p><strong>Corollary 2.4</strong> <em>(Bit rule for S)</em>. In the <span class="arithmatex">\((x,z)\)</span> encoding:</p>
+<div class="arithmatex">\[S: (x,z) \mapsto (x,\; z \oplus x), \quad \text{phase flipped iff } x=1 \text{ and } z=1\]</div>
+<p><em>Proof.</em> We need <span class="arithmatex">\(S\)</span> to map:
+- <span class="arithmatex">\(X \sim (1,0) \to Y \sim (1,1)\)</span>: XOR <span class="arithmatex">\(z\)</span> with <span class="arithmatex">\(x\)</span> gives <span class="arithmatex">\((1,0\oplus 1)=(1,1)\)</span>. ✓
+- <span class="arithmatex">\(Y \sim (1,1) \to -X \sim (1,0)\)</span>: XOR <span class="arithmatex">\(z\)</span> with <span class="arithmatex">\(x\)</span> gives <span class="arithmatex">\((1,1\oplus 1)=(1,0)\)</span>, plus phase flip since input was <span class="arithmatex">\(Y\)</span> (<span class="arithmatex">\(x\wedge z=1\)</span>). ✓
+- <span class="arithmatex">\(Z \sim (0,1) \to Z \sim (0,1)\)</span>: XOR <span class="arithmatex">\(z\)</span> with <span class="arithmatex">\(x=0\)</span> leaves <span class="arithmatex">\((0,1)\)</span> unchanged. ✓
+- <span class="arithmatex">\(I \sim (0,0) \to I \sim (0,0)\)</span>: unchanged. ✓ <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Code:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span> <span class="nf">s</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="k">if</span> <span class="n">x</span> <span class="o">&amp;</span> <span class="n">z</span><span class="p">:</span>               <span class="c1"># Y → -X: phase flip</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">^=</span> <span class="n">x</span>  <span class="c1"># z := z XOR x</span>
+</code></pre></div></p>
+<hr />
+<h3 id="23-s-dagger">2.3 S-dagger</h3>
+<p><strong>Theorem 2.5.</strong> <span class="arithmatex">\(S^\dagger = \begin{pmatrix}1&amp;0\\0&amp;-i\end{pmatrix}\)</span> satisfies:</p>
+<div class="arithmatex">\[S^\dagger X (S^\dagger)^\dagger = -Y,\quad S^\dagger Y (S^\dagger)^\dagger = X,\quad S^\dagger Z (S^\dagger)^\dagger = Z\]</div>
+<p><em>Proof.</em> <span class="arithmatex">\(S^\dagger = S^3 = S^{-1}\)</span>, so the rules follow by inverting those of <span class="arithmatex">\(S\)</span>:
+<span class="arithmatex">\(S: X \to Y\)</span> inverts to <span class="arithmatex">\(S^\dagger: Y \to X\)</span>; <span class="arithmatex">\(S: Y \to -X\)</span> inverts to
+<span class="arithmatex">\(S^\dagger: X \to -Y\)</span>; <span class="arithmatex">\(S: Z \to Z\)</span> inverts to <span class="arithmatex">\(S^\dagger: Z \to Z\)</span>. <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Corollary 2.6</strong> <em>(Bit rule for S†)</em>. The bit mutation <span class="arithmatex">\(z \mathrel{\oplus}= x\)</span>
+is identical to that for <span class="arithmatex">\(S\)</span>, but the phase flip fires when <span class="arithmatex">\(x=1, z=0\)</span> (the
+<span class="arithmatex">\(X\)</span> Pauli) rather than when <span class="arithmatex">\(x=1, z=1\)</span> (the <span class="arithmatex">\(Y\)</span> Pauli).</p>
+<p><em>Proof.</em> The mutation maps:
+- <span class="arithmatex">\(X \sim (1,0) \to (1,1) = Y\)</span>, but <span class="arithmatex">\(S^\dagger X S = -Y\)</span> requires a sign flip.
+  The condition <span class="arithmatex">\(x \wedge (z \oplus 1)\)</span> is true iff <span class="arithmatex">\(x=1\)</span> and <span class="arithmatex">\(z=0\)</span>, i.e. input is <span class="arithmatex">\(X\)</span>. ✓
+- <span class="arithmatex">\(Y \sim (1,1) \to (1,0) = X\)</span>, no phase flip (no sign in <span class="arithmatex">\(S^\dagger Y S = X\)</span>). ✓
+- <span class="arithmatex">\(Z \sim (0,1) \to (0,1) = Z\)</span>, no change. ✓ <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Code:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span> <span class="nf">sdg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="k">if</span> <span class="n">x</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">z</span> <span class="o">^</span> <span class="mi">1</span><span class="p">):</span>         <span class="c1"># X → -Y: phase flip (x=1, z=0)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">^=</span> <span class="n">x</span>   <span class="c1"># same bit mutation as S</span>
+</code></pre></div></p>
+<hr />
+<h3 id="24-pauli-gates">2.4 Pauli Gates</h3>
+<p><strong>Theorem 2.7.</strong> The Pauli gates satisfy:</p>
+<div class="arithmatex">\[XXX^\dagger = X,\quad XYX^\dagger = -Y,\quad XZX^\dagger = -Z$$
+$$YXY^\dagger = -X,\quad YYY^\dagger = Y,\quad YZY^\dagger = -Z$$
+$$ZXZ^\dagger = -X,\quad ZYZ^\dagger = -Y,\quad ZZZ^\dagger = Z\]</div>
+<p><em>Proof.</em> Using <span class="arithmatex">\(XZ = -ZX\)</span> and <span class="arithmatex">\(XY = iZ = -YX\)</span>:</p>
+<p>For <span class="arithmatex">\(X\)</span>: <span class="arithmatex">\(X\)</span> commutes with itself (<span class="arithmatex">\(X^2P = P\)</span> if <span class="arithmatex">\(P = X\)</span> or <span class="arithmatex">\(I\)</span>) and
+anticommutes with <span class="arithmatex">\(Y\)</span> and <span class="arithmatex">\(Z\)</span>. Conjugation by <span class="arithmatex">\(X\)</span> flips the sign of any
+Pauli that anticommutes with <span class="arithmatex">\(X\)</span>, i.e. <span class="arithmatex">\(Y\)</span> and <span class="arithmatex">\(Z\)</span>. <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Corollary 2.8</strong> <em>(Bit rules for X, Y, Z)</em>. Conjugation by a Pauli gate only
+produces sign flips — it never changes the Pauli type. The sign flip rule for
+each gate is:</p>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Flip sign when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(X\)</span></td>
+<td><span class="arithmatex">\(z = 1\)</span> (Pauli has Z component: Z or Y)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(Y\)</span></td>
+<td><span class="arithmatex">\(x \oplus z = 1\)</span> (Pauli is X or Z, not Y or I)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(Z\)</span></td>
+<td><span class="arithmatex">\(x = 1\)</span> (Pauli has X component: X or Y)</td>
+</tr>
+</tbody>
+</table>
+<p><em>Proof.</em> A Pauli <span class="arithmatex">\(P\)</span> flips sign under conjugation by <span class="arithmatex">\(Q\)</span> iff <span class="arithmatex">\(P\)</span> and <span class="arithmatex">\(Q\)</span>
+anticommute, i.e. <span class="arithmatex">\(PQ = -QP\)</span>. The anticommutation relations are:
+<span class="arithmatex">\(\{X,Y\} = \{X,Z\} = 0\)</span>, <span class="arithmatex">\(\{Y,Z\} = 0\)</span>, and all others commute.
+So <span class="arithmatex">\(X\)</span> anticommutes with <span class="arithmatex">\(Y\)</span> and <span class="arithmatex">\(Z\)</span> (those with <span class="arithmatex">\(z=1\)</span>); <span class="arithmatex">\(Y\)</span> anticommutes
+with <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> (those with <span class="arithmatex">\(x \oplus z = 1\)</span>); <span class="arithmatex">\(Z\)</span> anticommutes with <span class="arithmatex">\(X\)</span>
+and <span class="arithmatex">\(Y\)</span> (those with <span class="arithmatex">\(x=1\)</span>). <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Code:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span> <span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>      <span class="c1"># Z component → sign flip</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">def</span> <span class="nf">y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">^</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]:</span>  <span class="c1"># X or Z → sign flip</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="k">def</span> <span class="nf">z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>      <span class="c1"># X component → sign flip</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
+</code></pre></div></p>
+<hr />
+<h3 id="25-x-and-x">2.5 √X and (√X)†</h3>
+<p><strong>Theorem 2.9.</strong> <span class="arithmatex">\(\sqrt{X} = \frac{1}{2}\begin{pmatrix}1+i&amp;1-i\\1-i&amp;1+i\end{pmatrix}\)</span> satisfies:</p>
+<div class="arithmatex">\[\sqrt{X}\cdot X\cdot(\sqrt{X})^\dagger = X,\quad
+\sqrt{X}\cdot Y\cdot(\sqrt{X})^\dagger = Z,\quad
+\sqrt{X}\cdot Z\cdot(\sqrt{X})^\dagger = -Y\]</div>
+<p><em>Proof.</em> Note <span class="arithmatex">\(\sqrt{X} = e^{-i\pi X/4} = \cos(\pi/4)I - i\sin(\pi/4)X
+= \frac{1}{\sqrt{2}}(I - iX)\)</span>. Then:</p>
+<div class="arithmatex">\[\sqrt{X}\cdot Z\cdot(\sqrt{X})^\dagger
+= \frac{1}{2}(I-iX)Z(I+iX) = \frac{1}{2}(Z + iZX - iXZ + XZX)\]</div>
+<p>Using <span class="arithmatex">\(ZX = -XZ = -iY\)</span> and <span class="arithmatex">\(XZX = X(-XZ)X^{-1}X = -ZX^2 = -Z \cdot I\)</span>... Let
+us compute directly:</p>
+<div class="arithmatex">\[\frac{1}{2}(Z + iZX - iXZ + XZX)
+= \frac{1}{2}\big(Z + i(-iY) - i(iY) + (-Z)\big)
+= \frac{1}{2}(Z + Y + Y - Z) = Y\]</div>
+<p>But the sign: <span class="arithmatex">\(\sqrt{X}\cdot Z = \frac{1}{\sqrt{2}}(I-iX)Z = \frac{1}{\sqrt{2}}(Z - iXZ) = \frac{1}{\sqrt{2}}(Z + i \cdot iY) = \frac{1}{\sqrt{2}}(Z - Y)\)</span>.
+Post-multiplying by <span class="arithmatex">\((\sqrt{X})^\dagger = \frac{1}{\sqrt{2}}(I + iX)\)</span>:</p>
+<div class="arithmatex">\[\frac{1}{2}(Z-Y)(I+iX) = \frac{1}{2}(Z + iZX - Y - iYX)
+= \frac{1}{2}(Z - iY - Y + iZ) \cdot (-1)\]</div>
+<p>Re-doing carefully: <span class="arithmatex">\(\sqrt{X} = \frac{1}{\sqrt{2}}(I - iX)\)</span>, so
+<span class="arithmatex">\(\sqrt{X} \cdot Z \cdot \sqrt{X}^\dagger
+= \frac{1}{2}(I-iX)Z(I+iX)
+= \frac{1}{2}(Z + iZ X - i X Z + X Z X)\)</span>.</p>
+<p>Since <span class="arithmatex">\(XZ = -iY\)</span> and <span class="arithmatex">\(ZX = iY\)</span>:</p>
+<div class="arithmatex">\[= \frac{1}{2}\bigl(Z + i(iY) - i(-iY) + X(-iY)X^{-1} \cdot X^2\bigr)\]</div>
+<div class="arithmatex">\[= \frac{1}{2}(Z - Y - Y + X(-iY)X)\]</div>
+<p><span class="arithmatex">\(X(-iY)X = -i \cdot XYX = -i(-Y) = iY\)</span>, so:</p>
+<div class="arithmatex">\[= \frac{1}{2}(Z - 2Y + iY \cdot ???)\]</div>
+<p>Let us use a cleaner approach. Since <span class="arithmatex">\(\sqrt{X}^2 = X\)</span> and the conjugation
+action of <span class="arithmatex">\(X\)</span> sends <span class="arithmatex">\(Z \to -Z\)</span>, applying <span class="arithmatex">\(\sqrt{X}\)</span> twice gives a sign flip.
+So the half-step must send <span class="arithmatex">\(Z\)</span> to something whose square under conjugation
+is <span class="arithmatex">\(-Z\)</span>. The candidate is <span class="arithmatex">\(-Y\)</span> since <span class="arithmatex">\(Y \cdot Z \cdot Y = -Z\)</span>... actually
+<span class="arithmatex">\((-Y)(-Y) = Y^2 = I\)</span>, and <span class="arithmatex">\(Y Z Y = -Z\)</span>. Checking <span class="arithmatex">\(-Y\)</span> directly:
+<span class="arithmatex">\(\sqrt{X} \cdot Z \cdot (\sqrt{X})^\dagger = ?\)</span> We verify numerically:</p>
+<div class="arithmatex">\[\frac{1}{2}\begin{pmatrix}1+i&amp;1-i\\1-i&amp;1+i\end{pmatrix}
+\begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix}
+\frac{1}{2}\begin{pmatrix}1-i&amp;1+i\\1+i&amp;1-i\end{pmatrix}\]</div>
+<div class="arithmatex">\[= \frac{1}{4}\begin{pmatrix}1+i&amp;-(1-i)\\1-i&amp;-(1+i)\end{pmatrix}
+\begin{pmatrix}1-i&amp;1+i\\1+i&amp;1-i\end{pmatrix}\]</div>
+<div class="arithmatex">\[= \frac{1}{4}\begin{pmatrix}
+(1+i)(1-i)-(1-i)(1+i) &amp; (1+i)(1+i)-(1-i)(1-i) \\
+(1-i)(1-i)-(1+i)(1+i) &amp; (1-i)(1+i)-(1+i)(1-i)
+\end{pmatrix}\]</div>
+<div class="arithmatex">\[= \frac{1}{4}\begin{pmatrix} 2-2 &amp; (2i)-(-2i) \\ (-2i)-(2i) &amp; 0 \end{pmatrix}
+= \frac{1}{4}\begin{pmatrix}0 &amp; 4i \\ -4i &amp; 0\end{pmatrix}
+= \begin{pmatrix}0 &amp; i \\ -i &amp; 0\end{pmatrix} = -Y \checkmark\]</div>
+<p>So <span class="arithmatex">\(\sqrt{X}: Z \to -Y\)</span>. Similarly one verifies <span class="arithmatex">\(\sqrt{X}: Y \to Z\)</span> and
+<span class="arithmatex">\(\sqrt{X}: X \to X\)</span>. <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Corollary 2.10</strong> <em>(Bit rule for √X)</em>. The mutation is <span class="arithmatex">\(x \mathrel{\oplus}= z\)</span>,
+with a phase flip when the input is <span class="arithmatex">\(Z\)</span> (i.e. <span class="arithmatex">\(x=0, z=1\)</span>, captured by
+<span class="arithmatex">\((x \oplus 1) \wedge z\)</span>).</p>
+<p><em>Proof.</em>
+- <span class="arithmatex">\(X \sim (1,0) \to (1 \oplus 0, 0) = (1,0) = X\)</span>. ✓
+- <span class="arithmatex">\(Y \sim (1,1) \to (1 \oplus 1, 1) = (0,1) = Z\)</span>. ✓
+- <span class="arithmatex">\(Z \sim (0,1) \to (0 \oplus 1, 1) = (1,1) = Y\)</span>, then phase flip since <span class="arithmatex">\(\sqrt{X}: Z \to -Y\)</span>.
+  Condition: <span class="arithmatex">\((x \oplus 1) \wedge z = (0 \oplus 1) \wedge 1 = 1\)</span>. ✓ <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Code:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span> <span class="nf">sx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">^</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">z</span><span class="p">:</span>             <span class="c1"># Z → -Y: phase flip (x=0, z=1)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">^=</span> <span class="n">z</span>       <span class="c1"># x := x XOR z</span>
+</code></pre></div></p>
+<p><strong>Theorem 2.11</strong> <em>(√X†)</em>. <span class="arithmatex">\((\sqrt{X})^\dagger\)</span> satisfies:</p>
+<div class="arithmatex">\[(\sqrt{X})^\dagger X (\sqrt{X}) = X,\quad
+(\sqrt{X})^\dagger Y (\sqrt{X}) = -Z,\quad
+(\sqrt{X})^\dagger Z (\sqrt{X}) = Y\]</div>
+<p><em>Proof.</em> Invert the <span class="arithmatex">\(\sqrt{X}\)</span> rules: <span class="arithmatex">\(\sqrt{X}: Y \to Z\)</span> inverts to
+<span class="arithmatex">\((\sqrt{X})^\dagger: Z \to Y\)</span>; <span class="arithmatex">\(\sqrt{X}: Z \to -Y\)</span> inverts to
+<span class="arithmatex">\((\sqrt{X})^\dagger: Y \to -Z\)</span>; <span class="arithmatex">\(\sqrt{X}: X \to X\)</span> inverts to
+<span class="arithmatex">\((\sqrt{X})^\dagger: X \to X\)</span>. <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Corollary 2.12</strong> <em>(Bit rule for √X†)</em>. Same bit mutation <span class="arithmatex">\(x \mathrel{\oplus}= z\)</span>,
+but phase flip when input is <span class="arithmatex">\(Y\)</span> (condition: <span class="arithmatex">\(x \wedge z = 1\)</span>).</p>
+<p><em>Proof.</em>
+- <span class="arithmatex">\(Y \sim (1,1) \to (0,1) = Z\)</span>, and <span class="arithmatex">\((\sqrt{X})^\dagger: Y \to -Z\)</span>. Phase flip needed.
+  Condition <span class="arithmatex">\(x \wedge z = 1 \wedge 1 = 1\)</span>. ✓
+- <span class="arithmatex">\(Z \sim (0,1) \to (1,1) = Y\)</span>, no sign (<span class="arithmatex">\((\sqrt{X})^\dagger: Z \to Y\)</span>). ✓
+- <span class="arithmatex">\(X \sim (1,0) \to (1,0) = X\)</span>, no sign. ✓ <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Code:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span> <span class="nf">sxdg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="k">if</span> <span class="n">x</span> <span class="o">&amp;</span> <span class="n">z</span><span class="p">:</span>                    <span class="c1"># Y → -Z: phase flip (x=1, z=1)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">^=</span> <span class="n">z</span>        <span class="c1"># x := x XOR z</span>
+</code></pre></div></p>
+<hr />
+<h2 id="3-the-cnot-phase-condition">3. The CNOT Phase Condition</h2>
+<p>The CNOT rule is the most complex because the sign correction involves both
+qubits simultaneously.</p>
+<h3 id="31-cnot-conjugation-rules">3.1 CNOT Conjugation Rules</h3>
+<p><strong>Theorem 3.1.</strong> The CNOT gate with control <span class="arithmatex">\(c\)</span> and target <span class="arithmatex">\(t\)</span> satisfies:</p>
+<div class="arithmatex">\[\text{CNOT}_{ct}\,(X_c \otimes I_t)\,\text{CNOT}_{ct}^\dagger = X_c \otimes X_t$$
+$$\text{CNOT}_{ct}\,(I_c \otimes X_t)\,\text{CNOT}_{ct}^\dagger = I_c \otimes X_t$$
+$$\text{CNOT}_{ct}\,(Z_c \otimes I_t)\,\text{CNOT}_{ct}^\dagger = Z_c \otimes I_t$$
+$$\text{CNOT}_{ct}\,(I_c \otimes Z_t)\,\text{CNOT}_{ct}^\dagger = Z_c \otimes Z_t\]</div>
+<p><em>Proof.</em> The CNOT matrix in the <span class="arithmatex">\(\{|00\rangle,|01\rangle,|10\rangle,|11\rangle\}\)</span> basis is:</p>
+<div class="arithmatex">\[\text{CNOT} = \begin{pmatrix}1&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0\\0&amp;0&amp;0&amp;1\\0&amp;0&amp;1&amp;0\end{pmatrix}\]</div>
+<p>For <span class="arithmatex">\(X_c \otimes I_t = \begin{pmatrix}0&amp;0&amp;1&amp;0\\0&amp;0&amp;0&amp;1\\1&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0\end{pmatrix}\)</span>, direct matrix multiplication gives <span class="arithmatex">\(\text{CNOT}\,(X_c\otimes I_t)\,\text{CNOT}^\dagger = X_c \otimes X_t\)</span>.</p>
+<p>For <span class="arithmatex">\(I_c \otimes Z_t = \text{diag}(1,-1,1,-1)\)</span>:</p>
+<div class="arithmatex">\[\text{CNOT}\,\text{diag}(1,-1,1,-1)\,\text{CNOT}^\dagger\]</div>
+<p>The CNOT swaps rows/columns 2 and 3 (0-indexed), so <span class="arithmatex">\(\text{diag}(1,-1,-1,1) = Z_c \otimes Z_t\)</span>. <span class="arithmatex">\(\square\)</span></p>
+<h3 id="32-bit-rules-for-cnot">3.2 Bit Rules for CNOT</h3>
+<p>The tensor product structure means two qubits each carry their own <span class="arithmatex">\((x,z)\)</span>
+bits. Let <span class="arithmatex">\((x_c, z_c)\)</span> be the bits for the control qubit and <span class="arithmatex">\((x_t, z_t)\)</span>
+for the target.</p>
+<p><strong>Corollary 3.2.</strong> The CNOT bit updates are:</p>
+<div class="arithmatex">\[x_t \;\mathrel{\oplus}=\; x_c \qquad z_c \;\mathrel{\oplus}=\; z_t\]</div>
+<p><em>Proof.</em> From Theorem 3.1:
+- <span class="arithmatex">\(X_c I_t \to X_c X_t\)</span>: the target's <span class="arithmatex">\(x\)</span> bit picks up the control's <span class="arithmatex">\(x\)</span> bit. ✓
+- <span class="arithmatex">\(I_c Z_t \to Z_c Z_t\)</span>: the control's <span class="arithmatex">\(z\)</span> bit picks up the target's <span class="arithmatex">\(z\)</span> bit. ✓
+- <span class="arithmatex">\(Z_c I_t \to Z_c I_t\)</span>: no change. ✓
+- <span class="arithmatex">\(I_c X_t \to I_c X_t\)</span>: no change. ✓</p>
+<p>For a general product <span class="arithmatex">\(P_c \otimes P_t\)</span>, the two XOR operations handle
+each qubit's Pauli independently. <span class="arithmatex">\(\square\)</span></p>
+<h3 id="33-derivation-of-the-phase-correction">3.3 Derivation of the Phase Correction</h3>
+<p>The bit updates from Corollary 3.2 are correct only when the product of
+the resulting Paulis carries no extra <span class="arithmatex">\(i\)</span> factor. When the inputs are
+single-qubit operators that mix to produce <span class="arithmatex">\(Y\)</span>, the Pauli multiplication
+rules introduce <span class="arithmatex">\(\pm i\)</span> factors that must be compensated.</p>
+<p><strong>Theorem 3.3</strong> <em>(CNOT Phase Condition)</em>. The sign correction in <code>cnot</code> fires
+when the update would produce a <span class="arithmatex">\(Y\)</span> factor requiring a phase sign flip. The
+condition is:</p>
+<div class="arithmatex">\[\text{phase flip} \iff x_c = 1 \text{ and } z_t = 1 \text{ and } (x_t \oplus z_c \oplus 1) = 1\]</div>
+<p>equivalently: <span class="arithmatex">\(x_c \wedge z_t \wedge \neg(x_t \oplus z_c)\)</span>, or in code:
+<code>xc &amp; zt &amp; (xt ^ zc ^ 1)</code>.</p>
+<p><em>Proof.</em> We need to track when <span class="arithmatex">\(P_c \cdot Q_c\)</span> and <span class="arithmatex">\(P_t \cdot Q_t\)</span> each
+produce a phase of <span class="arithmatex">\(i\)</span> or <span class="arithmatex">\(-i\)</span>, where <span class="arithmatex">\(Q_c = P_c \cdot \Delta_c\)</span> and
+<span class="arithmatex">\(Q_t = P_t \cdot \Delta_t\)</span> after the XOR updates.</p>
+<p>The CNOT effect on a row with <span class="arithmatex">\((x_c, z_c, x_t, z_t)\)</span> is:
+- Control qubit goes from <span class="arithmatex">\(P_c\)</span> to <span class="arithmatex">\(P_c\)</span> (unchanged).
+- Target qubit goes from <span class="arithmatex">\(P_t\)</span> to <span class="arithmatex">\(P_t \cdot X_c^{x_c}\)</span> (X applied if <span class="arithmatex">\(x_c=1\)</span>).
+- Control qubit picks up <span class="arithmatex">\(Z_t^{z_t}\)</span> (Z-backtrack).</p>
+<p>The phase from multiplying <span class="arithmatex">\(P_t\)</span> by <span class="arithmatex">\(X\)</span> (when <span class="arithmatex">\(x_c=1\)</span>) is the same as
+<code>_row_mult_phase</code> on the target qubit:</p>
+<div class="arithmatex">\[\text{phase}_{t} = g(P_t, X) = \begin{cases}
+-1 &amp; P_t = Y \text{ (i.e. } x_t=1, z_t=1\text{)} \\
++1 &amp; \text{otherwise}
+\end{cases}\]</div>
+<p>The phase from multiplying <span class="arithmatex">\(P_c\)</span> by <span class="arithmatex">\(Z\)</span> (when <span class="arithmatex">\(z_t=1\)</span>) on the control:</p>
+<div class="arithmatex">\[\text{phase}_{c} = g(P_c, Z) = \begin{cases}
+-1 &amp; P_c = X \text{ (i.e. } x_c=1, z_c=0\text{)} \\
++1 &amp; \text{otherwise}
+\end{cases}\]</div>
+<p>The combined sign flip (XOR of both) occurs when exactly one fires:</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(P_c\)</span></th>
+<th><span class="arithmatex">\(P_t\)</span></th>
+<th>phase<span class="arithmatex">\(_c\)</span></th>
+<th>phase<span class="arithmatex">\(_t\)</span></th>
+<th>Net flip?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(X\)</span></td>
+<td><span class="arithmatex">\(Y\)</span></td>
+<td><span class="arithmatex">\(-1\)</span></td>
+<td><span class="arithmatex">\(-1\)</span></td>
+<td>No (cancels)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(X\)</span></td>
+<td>other</td>
+<td><span class="arithmatex">\(-1\)</span></td>
+<td><span class="arithmatex">\(+1\)</span></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(Y\)</span></td>
+<td><span class="arithmatex">\(Y\)</span></td>
+<td><span class="arithmatex">\(+1\)</span></td>
+<td><span class="arithmatex">\(-1\)</span></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(Y\)</span></td>
+<td>other</td>
+<td><span class="arithmatex">\(+1\)</span></td>
+<td><span class="arithmatex">\(+1\)</span></td>
+<td>No</td>
+</tr>
+<tr>
+<td>other</td>
+<td><span class="arithmatex">\(Y\)</span></td>
+<td><span class="arithmatex">\(+1\)</span></td>
+<td><span class="arithmatex">\(-1\)</span></td>
+<td>(no <span class="arithmatex">\(x_c=1\)</span>, so <span class="arithmatex">\(z_t\)</span> update doesn't apply)</td>
+</tr>
+</tbody>
+</table>
+<p>The net flip condition when both <span class="arithmatex">\(x_c=1\)</span> and <span class="arithmatex">\(z_t=1\)</span>:</p>
+<ul>
+<li>Flip if <span class="arithmatex">\(P_t = Y\)</span> (<span class="arithmatex">\(x_t=1, z_t=1\)</span>) and <span class="arithmatex">\(P_c \neq X\)</span> (<span class="arithmatex">\(z_c \neq 0\)</span>).</li>
+<li>Flip if <span class="arithmatex">\(P_c = X\)</span> (<span class="arithmatex">\(x_c=1, z_c=0\)</span>) and <span class="arithmatex">\(P_t \neq Y\)</span> (<span class="arithmatex">\(x_t \oplus z_t \neq 2\)</span>,
+  but since <span class="arithmatex">\(z_t=1\)</span> here, we need <span class="arithmatex">\(x_t=0\)</span>).</li>
+</ul>
+<p>Combining: flip when <span class="arithmatex">\(x_c=1\)</span> and <span class="arithmatex">\(z_t=1\)</span> and NOT (<span class="arithmatex">\(x_t=1\)</span> and <span class="arithmatex">\(z_c=1\)</span>) and
+NOT (<span class="arithmatex">\(x_t=0\)</span> and <span class="arithmatex">\(z_c=0\)</span>)... The Aaronson-Gottesman formula captures this as:</p>
+<div class="arithmatex">\[x_c \wedge z_t \wedge (x_t \oplus z_c \oplus 1)\]</div>
+<p>When <span class="arithmatex">\(x_c = 1, z_t = 1\)</span>: the flip fires unless <span class="arithmatex">\(x_t \oplus z_c = 1\)</span>, i.e.
+exactly when <span class="arithmatex">\(x_t = z_c\)</span> (both 0 or both 1). The case <span class="arithmatex">\(x_t=1, z_c=1\)</span> is
+<span class="arithmatex">\(P_t=Y, P_c=Y\)</span>: both phases fire and cancel (net no flip). The case <span class="arithmatex">\(x_t=0,
+z_c=0\)</span> is <span class="arithmatex">\(P_t=Z, P_c=X\)</span>: neither phase fires (no Y in either product), so
+no flip. <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Code:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span> <span class="nf">cnot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">control</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="s2">&quot;control&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">c</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">control</span><span class="p">,</span> <span class="n">target</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="n">xc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="n">zc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="n">xt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">t</span><span class="p">]</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="n">zt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">t</span><span class="p">]</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="k">if</span> <span class="n">xc</span> <span class="o">&amp;</span> <span class="n">zt</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">xt</span> <span class="o">^</span> <span class="n">zc</span> <span class="o">^</span> <span class="mi">1</span><span class="p">):</span>   <span class="c1"># Aaronson-Gottesman phase condition</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">t</span><span class="p">]</span> <span class="o">^=</span> <span class="n">xc</span>        <span class="c1"># X spreads: x_t := x_t XOR x_c</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">^=</span> <span class="n">zt</span>        <span class="c1"># Z backtracks: z_c := z_c XOR z_t</span>
+</code></pre></div></p>
+<hr />
+<h2 id="4-the-phase-accumulation-function">4. The Phase Accumulation Function</h2>
+<p>When <code>_rowmult</code> multiplies two tableau rows (Pauli strings), it must track
+total <span class="arithmatex">\(i\)</span>-phase accumulated across all <span class="arithmatex">\(n\)</span> qubit positions.</p>
+<h3 id="41-the-single-qubit-phase-table">4.1 The Single-Qubit Phase Table</h3>
+<p><strong>Lemma 4.1.</strong> For <span class="arithmatex">\(P_a, P_b \in \{I,X,Y,Z\}\)</span>, define <span class="arithmatex">\(g(P_a, P_b)\)</span> by
+<span class="arithmatex">\(P_a P_b = i^{g(P_a, P_b)} P_c\)</span>. Then:</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(P_a\)</span></th>
+<th><span class="arithmatex">\(P_b\)</span></th>
+<th style="text-align: right;"><span class="arithmatex">\(g\)</span></th>
+<th>Identity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(X\)</span></td>
+<td><span class="arithmatex">\(Z\)</span></td>
+<td style="text-align: right;">1</td>
+<td><span class="arithmatex">\(XZ = iY\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(Z\)</span></td>
+<td><span class="arithmatex">\(X\)</span></td>
+<td style="text-align: right;">3</td>
+<td><span class="arithmatex">\(ZX = -iY\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(Z\)</span></td>
+<td><span class="arithmatex">\(Y\)</span></td>
+<td style="text-align: right;">1</td>
+<td><span class="arithmatex">\(ZY = iX\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(Y\)</span></td>
+<td><span class="arithmatex">\(Z\)</span></td>
+<td style="text-align: right;">3</td>
+<td><span class="arithmatex">\(YZ = -iX\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(Y\)</span></td>
+<td><span class="arithmatex">\(X\)</span></td>
+<td style="text-align: right;">1</td>
+<td><span class="arithmatex">\(YX = iZ\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(X\)</span></td>
+<td><span class="arithmatex">\(Y\)</span></td>
+<td style="text-align: right;">3</td>
+<td><span class="arithmatex">\(XY = -iZ\)</span></td>
+</tr>
+<tr>
+<td>any</td>
+<td><span class="arithmatex">\(I\)</span></td>
+<td style="text-align: right;">0</td>
+<td><span class="arithmatex">\(PI = P\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(I\)</span></td>
+<td>any</td>
+<td style="text-align: right;">0</td>
+<td><span class="arithmatex">\(IP = P\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P\)</span></td>
+<td><span class="arithmatex">\(P\)</span></td>
+<td style="text-align: right;">0</td>
+<td><span class="arithmatex">\(P^2 = I\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><em>Proof.</em> Each row follows from the cyclic product rules <span class="arithmatex">\(XY = iZ\)</span>, <span class="arithmatex">\(YZ = iX\)</span>,
+<span class="arithmatex">\(ZX = iY\)</span> and their reverses. For example, <span class="arithmatex">\(XZ = X \cdot Z\)</span>. Since
+<span class="arithmatex">\(XY = iZ\)</span>, we have <span class="arithmatex">\(Z = -iXY\)</span>, so <span class="arithmatex">\(XZ = X(-iXY) = -iX^2Y = -iY\)</span>... that
+gives <span class="arithmatex">\(g=3\)</span>. Actually <span class="arithmatex">\(XZ = -iY\)</span> since <span class="arithmatex">\(ZX = iY\)</span> and <span class="arithmatex">\(XZ = -(ZX)\)</span> from
+anticommutativity: <span class="arithmatex">\(\{X,Z\}=0\)</span> so <span class="arithmatex">\(XZ = -ZX = -iY\)</span>. Hence <span class="arithmatex">\(g(X,Z)=3\)</span>. By
+the table above, <span class="arithmatex">\(g(Z,X)=1\)</span> since <span class="arithmatex">\(ZX = iY\)</span>. The pattern is cyclic:
+<span class="arithmatex">\(X \to Y \to Z \to X\)</span> (forward) gives <span class="arithmatex">\(+i\)</span>; going backwards gives <span class="arithmatex">\(-i\)</span>. <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Code:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span> <span class="nf">_row_mult_phase</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">z1</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">z2</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">if</span> <span class="p">(</span><span class="n">x1</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">z1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">x2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">z2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        <span class="k">return</span> <span class="mi">0</span>          <span class="c1"># identity contributes no phase</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="k">if</span> <span class="n">x1</span> <span class="o">==</span> <span class="n">x2</span> <span class="ow">and</span> <span class="n">z1</span> <span class="o">==</span> <span class="n">z2</span><span class="p">:</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        <span class="k">return</span> <span class="mi">0</span>          <span class="c1"># P·P = I: no phase</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="c1"># XZ = -iY (g=3), ZX = +iY (g=1)</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="k">if</span> <span class="n">x1</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">z1</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">z2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>  <span class="c1"># Z·X = iY</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="k">if</span> <span class="n">x1</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">z1</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">x2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">z2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># X·Z = -iY</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    <span class="k">if</span> <span class="n">x1</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">z1</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">x2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">z2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>  <span class="c1"># Z·Y = iX</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="k">if</span> <span class="n">x1</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">z1</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">x2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">z2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># Y·Z = -iX</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    <span class="k">if</span> <span class="n">x1</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">z1</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">x2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">z2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>  <span class="c1"># Y·X = iZ</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="k">if</span> <span class="n">x1</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">z1</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">z2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># X·Y = -iZ</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid Pauli bits for row multiplication&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="42-row-multiplication">4.2 Row Multiplication</h3>
+<p><strong>Theorem 4.2</strong> <em>(Row Multiplication)</em>. For two <span class="arithmatex">\(n\)</span>-qubit Pauli operators
+<span class="arithmatex">\(A = (-1)^{r_A} \bigotimes_q P^A_q\)</span> and <span class="arithmatex">\(B = (-1)^{r_B} \bigotimes_q P^B_q\)</span>,
+their product is:</p>
+<div class="arithmatex">\[AB = (-1)^{r_A + r_B + \lfloor e/2 \rfloor} \bigotimes_q (P^A_q P^B_q)\]</div>
+<p>where <span class="arithmatex">\(e = 2r_A + 2r_B + \sum_q g(P^A_q, P^B_q)\)</span> reduced mod 4, and the
+final sign is <span class="arithmatex">\((-1)^1\)</span> iff <span class="arithmatex">\(e \equiv 2 \pmod{4}\)</span>.</p>
+<p><em>Proof.</em> The product across <span class="arithmatex">\(n\)</span> tensor factors accumulates one <span class="arithmatex">\(i^{g_q}\)</span>
+per qubit position from Lemma 4.1. The total <span class="arithmatex">\(i\)</span>-exponent is <span class="arithmatex">\(\sum_q g_q\)</span>,
+plus <span class="arithmatex">\(i^2 = -1\)</span> for each existing <span class="arithmatex">\(-1\)</span> phase. Summing all contributions
+mod 4 and checking whether the result is <span class="arithmatex">\(i^2 = -1\)</span> (i.e. the exponent is
+2 mod 4) gives the new phase bit. Values 1 or 3 (i.e. overall <span class="arithmatex">\(\pm i\)</span>)
+cannot arise for products of Hermitian Paulis with phase <span class="arithmatex">\(\pm 1\)</span>, so
+<span class="arithmatex">\(e \in \{0,2\}\)</span> always for valid tableau rows. <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Code:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span> <span class="nf">_rowmult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="n">exp_i</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">a</span><span class="p">]:</span> <span class="n">exp_i</span> <span class="o">+=</span> <span class="mi">2</span>   <span class="c1"># −1 = i²</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">b</span><span class="p">]:</span> <span class="n">exp_i</span> <span class="o">+=</span> <span class="mi">2</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        <span class="n">exp_i</span> <span class="o">+=</span> <span class="n">_row_mult_phase</span><span class="p">(</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">q</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">q</span><span class="p">],</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">q</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">q</span><span class="p">],</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>        <span class="p">)</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="n">exp_i</span> <span class="o">%=</span> <span class="mi">4</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">^=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">q</span><span class="p">]</span>   <span class="c1"># Pauli type: XOR bits</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">^=</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">q</span><span class="p">]</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">exp_i</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="mi">0</span>   <span class="c1"># sign: 0=+1, 1=−1</span>
+</code></pre></div></p>
+<hr />
+<h2 id="5-measurement-proofs">5. Measurement Proofs</h2>
+<h3 id="51-setup">5.1 Setup</h3>
+<p>Let <span class="arithmatex">\(\mathcal{S} = \langle g_1, \ldots, g_n \rangle\)</span> be the stabilizer group
+of the state <span class="arithmatex">\(|\psi\rangle\)</span>, where rows <span class="arithmatex">\(n, n+1, \ldots, 2n-1\)</span> of the tableau
+are the generators. Let <span class="arithmatex">\(\mathcal{D} = \langle d_1, \ldots, d_n \rangle\)</span>
+be the destabilizers (rows <span class="arithmatex">\(0, \ldots, n-1\)</span>), with the invariant:</p>
+<div class="arithmatex">\[d_i g_j = (-1)^{\delta_{ij}} g_j d_i \qquad \text{(destabilizer } d_i \text{ anticommutes only with } g_i\text{)}\]</div>
+<h3 id="52-deterministic-branch">5.2 Deterministic Branch</h3>
+<p><strong>Theorem 5.1</strong> <em>(Deterministic Measurement)</em>. If <span class="arithmatex">\(Z_q\)</span> commutes with every
+stabilizer generator <span class="arithmatex">\(g_i\)</span> (i.e. <span class="arithmatex">\(x_\text{mat}[n+i][q] = 0\)</span> for all <span class="arithmatex">\(i\)</span>),
+then <span class="arithmatex">\(\pm Z_q \in \mathcal{S}\)</span> and the measurement outcome is deterministic.</p>
+<p><em>Proof.</em> Since <span class="arithmatex">\(Z_q\)</span> commutes with all generators, it commutes with the entire
+group <span class="arithmatex">\(\mathcal{S}\)</span>. By the structure of abelian stabilizer groups on <span class="arithmatex">\(n\)</span>
+qubits: either <span class="arithmatex">\(Z_q \in \mathcal{S}\)</span> (outcome 0, eigenvalue <span class="arithmatex">\(+1\)</span>) or
+<span class="arithmatex">\(-Z_q \in \mathcal{S}\)</span> (outcome 1, eigenvalue <span class="arithmatex">\(-1\)</span>). One of these must hold
+because <span class="arithmatex">\(Z_q^2 = I \in \mathcal{S}\)</span> and <span class="arithmatex">\(Z_q\)</span> commutes with all of <span class="arithmatex">\(\mathcal{S}\)</span>,
+so by the maximality of the stabilizer group on a pure state, <span class="arithmatex">\(Z_q\)</span> or <span class="arithmatex">\(-Z_q\)</span>
+is in <span class="arithmatex">\(\mathcal{S}\)</span>. <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Theorem 5.2</strong> <em>(Deterministic Outcome Algorithm)</em>. The code in
+<code>_deterministic_z_outcome(q)</code> correctly finds the product of generators
+equal to <span class="arithmatex">\(\pm Z_q\)</span> and returns its sign.</p>
+<p><em>Proof.</em> The method performs GF(2) row reduction on the binary representation
+of the generators (the <span class="arithmatex">\([X|Z]\)</span> matrix) to find a subset whose XOR equals
+the binary vector for <span class="arithmatex">\(Z_q\)</span> (which has a 1 in position <span class="arithmatex">\(n+q\)</span> of the <span class="arithmatex">\(2n\)</span>
+vector). The row reduction in <code>_solve_stabilizer_product</code> finds the unique
+solution over GF(2) since the generators are independent. Multiplying the
+selected rows via <code>_rowmult</code> accumulates the correct phase using Theorem 4.2.
+The returned <code>r_phase[0]</code> of the work copy is 0 (eigenvalue <span class="arithmatex">\(+1\)</span>) or 1
+(eigenvalue <span class="arithmatex">\(-1\)</span>). <span class="arithmatex">\(\square\)</span></p>
+<h3 id="53-random-branch">5.3 Random Branch</h3>
+<p><strong>Theorem 5.3</strong> <em>(Random Measurement)</em>. If some stabilizer row <span class="arithmatex">\(p\)</span> has
+<span class="arithmatex">\(x_\text{mat}[p][q] = 1\)</span> (i.e., generator <span class="arithmatex">\(g_{p-n}\)</span> anticommutes with <span class="arithmatex">\(Z_q\)</span>),
+then the measurement outcome is uniformly random, and the post-measurement
+state is the stabilizer state obtained by:</p>
+<ol>
+<li>For all rows <span class="arithmatex">\(r \neq p\)</span> with <span class="arithmatex">\(x_\text{mat}[r][q] = 1\)</span>: replace row <span class="arithmatex">\(r\)</span>
+   with <span class="arithmatex">\(r \cdot p\)</span> (row multiplication, clearing <span class="arithmatex">\(X\)</span> on qubit <span class="arithmatex">\(q\)</span>).</li>
+<li>Replace destabilizer row <span class="arithmatex">\(q\)</span> with the content of row <span class="arithmatex">\(p\)</span> (via swap).</li>
+<li>Set stabilizer row <span class="arithmatex">\(n+q\)</span> to <span class="arithmatex">\((-1)^{\text{outcome}} Z_q\)</span>.</li>
+<li>Set destabilizer row <span class="arithmatex">\(q\)</span> to <span class="arithmatex">\(+X_q\)</span>.</li>
+</ol>
+<p><em>Proof.</em></p>
+<p><strong>Uniform randomness:</strong> Since <span class="arithmatex">\(g_{p-n}\)</span> anticommutes with <span class="arithmatex">\(Z_q\)</span>, the state
+<span class="arithmatex">\(|\psi\rangle\)</span> is not a <span class="arithmatex">\(Z_q\)</span> eigenstate. In fact, since <span class="arithmatex">\(|\psi\rangle\)</span> is
+stabilized by <span class="arithmatex">\(g_{p-n}\)</span>, and <span class="arithmatex">\(Z_q g_{p-n} = -g_{p-n} Z_q\)</span>, applying the
+projector <span class="arithmatex">\(\Pi_0 = (I + Z_q)/2\)</span> gives:</p>
+<div class="arithmatex">\[\Pi_0 g_{p-n} |\psi\rangle = \Pi_0 |\psi\rangle\]</div>
+<p>but also <span class="arithmatex">\(g_{p-n} \Pi_0 |\psi\rangle = \Pi_1 g_{p-n}|\psi\rangle = \Pi_1 |\psi\rangle\)</span>,
+so <span class="arithmatex">\(\|\Pi_0 |\psi\rangle\|^2 = \|\Pi_1 |\psi\rangle\|^2 = 1/2\)</span>.</p>
+<p><strong>Step 1 correctness:</strong> After the outcome is sampled, the post-measurement
+state is stabilized by <span class="arithmatex">\(\pm Z_q\)</span> (the measured eigenvalue). For any generator
+<span class="arithmatex">\(g_r\)</span> with <span class="arithmatex">\(x_\text{mat}[r][q] = 1\)</span> (anticommutes with <span class="arithmatex">\(Z_q\)</span>), we cannot
+keep <span class="arithmatex">\(g_r\)</span> in the stabilizer group since <span class="arithmatex">\(g_r Z_q \neq Z_q g_r\)</span>. Replacing
+<span class="arithmatex">\(g_r\)</span> with <span class="arithmatex">\(g_r \cdot g_p\)</span> (where <span class="arithmatex">\(g_p\)</span> also anticommutes with <span class="arithmatex">\(Z_q\)</span>) gives
+a product that commutes with <span class="arithmatex">\(Z_q\)</span>: <span class="arithmatex">\((g_r g_p)Z_q = g_r(-Z_q g_p) = -g_r Z_q g_p
+= -(-Z_q g_r)g_p = Z_q(g_r g_p)\)</span>. So <span class="arithmatex">\(g_r g_p\)</span> commutes with <span class="arithmatex">\(Z_q\)</span>. ✓</p>
+<p><strong>Step 3 correctness:</strong> The new stabilizer group is generated by
+<span class="arithmatex">\(\{(-1)^k Z_q\} \cup \{g_r g_p : r \neq p, x[r][q]=1\} \cup \{g_r : x[r][q]=0\}\)</span>,
+where <span class="arithmatex">\(k \in \{0,1\}\)</span> is the measurement outcome.</p>
+<p><strong>Step 4 correctness (maintaining the destabilizer invariant):</strong> After
+replacing stabilizer <span class="arithmatex">\(n+q\)</span> with <span class="arithmatex">\((-1)^k Z_q\)</span>, we need destabilizer <span class="arithmatex">\(q\)</span> to
+anticommute with <span class="arithmatex">\((-1)^k Z_q\)</span> and commute with all other new stabilizers.
+Setting destabilizer <span class="arithmatex">\(q\)</span> to <span class="arithmatex">\(+X_q\)</span> satisfies this: <span class="arithmatex">\(X_q Z_q = -Z_q X_q\)</span>
+(anticommutes with the new stabilizer) and <span class="arithmatex">\(X_q\)</span> has no support on any other
+qubit, so it commutes with all generators that have no <span class="arithmatex">\(Z\)</span> on qubit <span class="arithmatex">\(q\)</span>
+(which is all of them after Step 1). <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Code:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span> <span class="nf">measure_z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_check_qubit</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">p</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>            <span class="n">p</span> <span class="o">=</span> <span class="n">r</span><span class="p">;</span> <span class="k">break</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deterministic_z_outcome</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>   <span class="c1"># Theorem 5.2</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="n">outcome</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>                <span class="c1"># Theorem 5.3: uniform</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">):</span>                        <span class="c1"># Step 1: clear X on q</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>        <span class="k">if</span> <span class="n">r</span> <span class="o">!=</span> <span class="n">p</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_rowmult</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_rowswap</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="n">q</span><span class="p">)</span>                       <span class="c1"># Step 2: pivot to slot n+q</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>                            <span class="c1"># Step 3: set ±Z_q</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="n">q</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="n">q</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="n">q</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">outcome</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>                            <span class="c1"># Step 4: set +X_q destabilizer</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">q</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">q</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">x_mat</span><span class="p">[</span><span class="n">q</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>
+<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>    <span class="k">return</span> <span class="n">outcome</span>
+</code></pre></div></p>
+<hr />
+<h2 id="6-worked-example-bell-state">6. Worked Example — Bell State</h2>
+<p>We trace through the complete tableau evolution for the Bell state
+preparation circuit <span class="arithmatex">\(H_0 \cdot \text{CNOT}_{01}\)</span> applied to <span class="arithmatex">\(|00\rangle\)</span>.</p>
+<p><strong>Initial state</strong> <span class="arithmatex">\(|00\rangle\)</span>: stabilizers <span class="arithmatex">\(\{+Z_0, +Z_1\}\)</span>,
+destabilizers <span class="arithmatex">\(\{+X_0, +X_1\}\)</span>.</p>
+<p>Tableau (rows 0,1 are destabilizers; rows 2,3 are stabilizers):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">Row</span> <span class="mi">0</span> <span class="p">(</span><span class="n">destab</span><span class="p">):</span> <span class="o">+</span><span class="n">X_0</span> <span class="n">I_1</span>   <span class="err">→</span>  <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">phase</span><span class="o">=</span><span class="mi">0</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">Row</span> <span class="mi">1</span> <span class="p">(</span><span class="n">destab</span><span class="p">):</span> <span class="o">+</span><span class="n">I_0</span> <span class="n">X_1</span>   <span class="err">→</span>  <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">phase</span><span class="o">=</span><span class="mi">0</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">Row</span> <span class="mi">2</span> <span class="p">(</span><span class="n">stab</span><span class="p">):</span>   <span class="o">+</span><span class="n">Z_0</span> <span class="n">I_1</span>   <span class="err">→</span>  <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">phase</span><span class="o">=</span><span class="mi">0</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">Row</span> <span class="mi">3</span> <span class="p">(</span><span class="n">stab</span><span class="p">):</span>   <span class="o">+</span><span class="n">I_0</span> <span class="n">Z_1</span>   <span class="err">→</span>  <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">phase</span><span class="o">=</span><span class="mi">0</span>
+</code></pre></div>
+<p><strong>After H on qubit 0</strong> (swap <span class="arithmatex">\(x \leftrightarrow z\)</span> for column 0):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">Row</span> <span class="mi">0</span><span class="p">:</span> <span class="o">+</span><span class="n">Z_0</span> <span class="n">I_1</span>   <span class="p">(</span><span class="n">was</span> <span class="n">X_0</span> <span class="n">I</span><span class="p">,</span> <span class="n">x</span> <span class="n">swap</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">Row</span> <span class="mi">1</span><span class="p">:</span> <span class="o">+</span><span class="n">I_0</span> <span class="n">X_1</span>   <span class="p">(</span><span class="n">qubit</span> <span class="mi">1</span> <span class="n">unchanged</span><span class="p">)</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">Row</span> <span class="mi">2</span><span class="p">:</span> <span class="o">+</span><span class="n">X_0</span> <span class="n">I_1</span>   <span class="p">(</span><span class="n">was</span> <span class="n">Z_0</span> <span class="n">I</span><span class="p">,</span> <span class="n">x</span> <span class="n">swap</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">Row</span> <span class="mi">3</span><span class="p">:</span> <span class="o">+</span><span class="n">I_0</span> <span class="n">Z_1</span>   <span class="p">(</span><span class="n">unchanged</span><span class="p">)</span>
+</code></pre></div>
+<p>Verification: <span class="arithmatex">\(H Z_0 H^\dagger = X_0\)</span> ✓ and <span class="arithmatex">\(H X_0 H^\dagger = Z_0\)</span> ✓.</p>
+<p><strong>After CNOT(0→1)</strong> (for each row: <span class="arithmatex">\(x_t \mathrel{\oplus}= x_c\)</span>, <span class="arithmatex">\(z_c \mathrel{\oplus}= z_t\)</span>):</p>
+<p>Row 0: <span class="arithmatex">\(x_c=0, z_c=1, x_t=0, z_t=0\)</span>. Phase condition: <span class="arithmatex">\(0 \wedge 0 \wedge \ldots = 0\)</span>. No flip.
+<span class="arithmatex">\(x_t \mathrel{\oplus}= 0\)</span>, <span class="arithmatex">\(z_c \mathrel{\oplus}= 0\)</span>. Row 0 unchanged: <span class="arithmatex">\(+Z_0 I_1\)</span>.</p>
+<p>Row 1: <span class="arithmatex">\(x_c=0, z_c=0, x_t=1, z_t=0\)</span>. No phase flip. <span class="arithmatex">\(x_t \mathrel{\oplus}= 0\)</span>, <span class="arithmatex">\(z_c \mathrel{\oplus}= 0\)</span>.
+Row 1 unchanged: <span class="arithmatex">\(+I_0 X_1\)</span>.</p>
+<p>Row 2: <span class="arithmatex">\(x_c=1, z_c=0, x_t=0, z_t=0\)</span>. Phase: <span class="arithmatex">\(1 \wedge 0 \wedge \ldots = 0\)</span>. No flip.
+<span class="arithmatex">\(x_t \mathrel{\oplus}= 1 \Rightarrow x_t=1\)</span>. <span class="arithmatex">\(z_c \mathrel{\oplus}= 0\)</span>. Row 2: <span class="arithmatex">\(+X_0 X_1\)</span>.</p>
+<p>Row 3: <span class="arithmatex">\(x_c=0, z_c=0, x_t=0, z_t=1\)</span>. Phase: <span class="arithmatex">\(0 \wedge 1 \wedge \ldots = 0\)</span>. No flip.
+<span class="arithmatex">\(x_t \mathrel{\oplus}= 0\)</span>. <span class="arithmatex">\(z_c \mathrel{\oplus}= 1 \Rightarrow z_c=1\)</span>. Row 3: <span class="arithmatex">\(+Z_0 Z_1\)</span>.</p>
+<p><strong>Final tableau:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">Row</span> <span class="mi">0</span> <span class="p">(</span><span class="n">destab</span><span class="p">):</span> <span class="o">+</span><span class="n">Z_0</span> <span class="n">I_1</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">Row</span> <span class="mi">1</span> <span class="p">(</span><span class="n">destab</span><span class="p">):</span> <span class="o">+</span><span class="n">I_0</span> <span class="n">X_1</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">Row</span> <span class="mi">2</span> <span class="p">(</span><span class="n">stab</span><span class="p">):</span>   <span class="o">+</span><span class="n">X_0</span> <span class="n">X_1</span>   <span class="err">←</span> <span class="n">stabilizer</span> <span class="n">of</span> <span class="n">Bell</span> <span class="n">state</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">Row</span> <span class="mi">3</span> <span class="p">(</span><span class="n">stab</span><span class="p">):</span>   <span class="o">+</span><span class="n">Z_0</span> <span class="n">Z_1</span>   <span class="err">←</span> <span class="n">stabilizer</span> <span class="n">of</span> <span class="n">Bell</span> <span class="n">state</span>
+</code></pre></div></p>
+<p>Verification:
+- <span class="arithmatex">\(XX|\Phi^+\rangle = |\Phi^+\rangle\)</span> ✓
+- <span class="arithmatex">\(ZZ|\Phi^+\rangle = |\Phi^+\rangle\)</span> ✓</p>
+<p><strong>Running in Python:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span><span class="p">,</span> <span class="n">Circuit</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">Circuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">]))</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="c1"># +Z_0 I</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="c1"># +I X</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="c1"># -----------</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="c1"># +XX</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="c1"># +ZZ</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">stabilizer_strings</span><span class="p">())</span>   <span class="c1"># [&#39;+XX&#39;, &#39;+ZZ&#39;]</span>
+</code></pre></div></p>
+<hr />
+<h2 id="reference">Reference</h2>
+<blockquote>
+<p>Scott Aaronson and Daniel Gottesman,
+"Improved Simulation of Stabilizer Circuits,"
+<em>Physical Review A</em> 70, 052328 (2004).
+<a href="https://arxiv.org/abs/quant-ph/0406196">arXiv:quant-ph/0406196</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

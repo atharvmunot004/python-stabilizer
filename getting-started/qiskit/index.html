@@ -16,7 +16,7 @@
         <link rel="prev" href="../non-clifford/">
       
       
-        <link rel="next" href="../qec/">
+        <link rel="next" href="../../qiskit-interop/">
       
       
         
@@ -792,10 +792,49 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#stabilizers-vs-destabilizers-in-qiskit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stabilizers vs Destabilizers in Qiskit
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qiskit-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How from_qiskit Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -816,6 +855,34 @@
     
   
     QEC Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tracing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing Syndrome Extraction
   
 
     
@@ -1062,6 +1129,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../theory/gate-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gate Operation Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../hybrid-simulation/" class="md-nav__link">
         
   
@@ -1236,6 +1331,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#stabilizers-vs-destabilizers-in-qiskit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stabilizers vs Destabilizers in Qiskit
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1261,6 +1367,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>qiskit
 </code></pre></div>
 <p>Then convert a Qiskit <code>QuantumCircuit</code> with <code>from_qiskit()</code>.</p>
+<p>For a step-by-step explanation of the conversion algorithm, see <a href="../../qiskit-interop/">How from_qiskit Works</a>.</p>
 <h2 id="pure-clifford-qiskit-circuit">Pure Clifford Qiskit Circuit</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span> <span class="k">as</span> <span class="n">QiskitCircuit</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
@@ -1382,7 +1489,25 @@
 </tbody>
 </table>
 <p><code>barrier</code> and <code>delay</code> are skipped. Unknown gates raise <code>ValueError</code> with the gate name.</p>
-<p>For method-level details, see <a href="../../api-reference/#qiskit_interop"><code>qiskit_interop</code></a>.</p>
+<h2 id="stabilizers-vs-destabilizers-in-qiskit">Stabilizers vs Destabilizers in Qiskit</h2>
+<p>Qiskit's <a href="https://docs.quantum.ibm.com/api/qiskit/qiskit.quantum_info.Clifford"><code>Clifford</code></a> object stores stabilizers and destabilizers separately, similar to our tableau rows. After running a pure Clifford Qiskit circuit locally:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span> <span class="k">as</span> <span class="n">QiskitCircuit</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kn">from</span> <span class="nn">stabilizer_python.qiskit_interop</span> <span class="kn">import</span> <span class="n">from_qiskit</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">qc</span> <span class="o">=</span> <span class="n">QiskitCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">from_qiskit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">tableau</span><span class="o">.</span><span class="n">stabilizer_strings</span><span class="p">())</span>    <span class="c1"># [&#39;+XX&#39;, &#39;+ZZ&#39;]</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">tableau</span><span class="o">.</span><span class="n">destabilizer_strings</span><span class="p">())</span>  <span class="c1"># e.g. [&#39;+ZI&#39;, &#39;+IX&#39;]</span>
+</code></pre></div>
+<p>Qiskit packs each generator row as <code>[X | Z]</code> in a single <code>(n, 2n)</code> <code>PauliTable</code>. We store separate <code>x_mat</code> and <code>z_mat</code> matrices with <code>2n</code> rows. The Pauli labels agree; only the storage layout differs.</p>
+<p>For a full side-by-side comparison, see <a href="../../theory/tableau/#comparison-with-qiskits-clifford">Comparison with Qiskit's Clifford</a>.</p>
+<p>For method-level details, see <a href="../../api-reference/#qiskit_interop"><code>qiskit_interop</code></a>. For the conversion algorithm, see <a href="../../qiskit-interop/">How from_qiskit Works</a>.</p>
 
 
 

@@ -690,6 +690,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../qiskit-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How from_qiskit Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../getting-started/qec/" class="md-nav__link">
         
   
@@ -698,6 +726,34 @@
     
   
     QEC Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/tracing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing Syndrome Extraction
   
 
     
@@ -1173,6 +1229,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../theory/gate-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gate Operation Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../hybrid-simulation/" class="md-nav__link">
         
   
@@ -1609,7 +1693,8 @@
 <li>Single-qubit Clifford gates: <code>h</code>, <code>s</code>, <code>sdg</code>, <code>sx</code>, <code>sxdg</code>, <code>x</code>, <code>y</code>, <code>z</code>, <code>i</code></li>
 <li>Two-qubit Clifford gates: <code>cnot</code>/<code>cx</code>, <code>cz</code>, <code>cy</code>, <code>swap</code></li>
 <li>Measurement and reset: <code>measure_z</code>, <code>reset_z</code></li>
-<li>Inspection: <code>inspect</code>, <code>stabilizer_generators</code>, <code>stabilizer_strings</code>, <code>destabilizer_strings</code>, <code>copy</code>, <code>format_chp_printstate</code>, <code>format_xz_binary_matrices</code>, <code>format_phase_matrix</code>, <code>format_tableau_debug</code></li>
+<li>Validation: <code>_check_qubit</code>, <code>_check_tableau_invariants</code> (debug/tests)</li>
+<li>Inspection: <code>inspect</code>, <code>stabilizer_generators</code>, <code>destabilizer_generators</code>, <code>stabilizer_strings</code>, <code>destabilizer_strings</code>, <code>tableau_dict</code>, <code>copy</code>, <code>format_chp_printstate</code>, <code>format_xz_binary_matrices</code>, <code>format_phase_matrix</code>, <code>format_tableau_debug</code></li>
 </ul>
 <h3 id="gate"><code>Gate</code></h3>
 <p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/gate.py"><code>gate.py</code></a> defines the <code>Gate</code> dataclass:</p>
@@ -1640,15 +1725,15 @@
 <li><code>sv: Statevector | None</code></li>
 </ul>
 <p><code>apply(name, qubits, params)</code> or <code>apply_gate(gate, qubits)</code> routes to <code>StabilizerState</code> methods when <code>is_clifford=True</code> and <code>mode == "tableau"</code>. Otherwise it calls <code>_switch_to_statevector()</code> and then <code>sv.apply_gate()</code>.</p>
-<p><code>_switch_to_statevector()</code> calls <code>tableau_to_statevector()</code> exactly once, stores the result, and sets <code>mode</code> to <code>"statevector"</code>. <code>measure_z(qubit)</code> delegates to whichever backend is active. <code>statevector_snapshot()</code> returns a dense statevector in either mode without changing <code>mode</code>.</p>
+<p><code>_switch_to_statevector()</code> calls <code>tableau_to_statevector()</code> exactly once, stores the result, and sets <code>mode</code> to <code>"statevector"</code>. <code>measure_z(qubit)</code> delegates to whichever backend is active. <code>statevector_snapshot()</code> returns a dense statevector in either mode without changing <code>mode</code>. Pass <code>trace=True</code> to record a <code>SimulatorTraceStep</code> after every gate with mode before/after and a state snapshot. Pass <code>debug=True</code> to assert tableau invariants after Clifford gates and measurements. Gate application validates qubit indices and rejects duplicates before routing.</p>
 <h3 id="circuit"><code>Circuit</code></h3>
 <p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py"><code>Circuit</code></a> is a minimal operation list. It does not simulate by itself; it records operations and applies them to a <code>StabilizerState</code> or <code>QuantumSimulator</code> in <code>run(state)</code>.</p>
 <p>Supported builder operations include Clifford methods (<code>h</code>, <code>s</code>, <code>sdg</code>, <code>sx</code>, <code>sxdg</code>, <code>x</code>, <code>y</code>, <code>z</code>, <code>i</code>, <code>cnot</code>, <code>cx</code>, <code>cz</code>, <code>cy</code>, <code>ch</code>, <code>swap</code>, <code>iswap</code>, <code>cs</code>, <code>csdg</code>, <code>ecr</code>, <code>dcx</code>), non-Clifford methods (<code>t</code>, <code>tdg</code>, rotations, controlled rotations, Toffoli, controlled-SWAP), <code>.gate(g, qubits)</code>, <code>.mz(q)</code>, and <code>.extend(ops)</code>.</p>
 <p><code>Circuit.run(state)</code> mutates the supplied target and returns measurement outcomes in the order <code>mz</code> operations appear.</p>
 <h3 id="qiskit_interop"><code>qiskit_interop</code></h3>
 <p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/qiskit_interop.py"><code>qiskit_interop.py</code></a> provides <code>from_qiskit(qc: QuantumCircuit) -&gt; Circuit</code>.</p>
-<p>It walks <code>qc.data</code>, maps each instruction name to the local gate name, extracts qubit indices from the circuit's qubit register, and builds a local <code>Circuit</code> using <code>.gate()</code> for parameterized gates and named convenience methods for fixed gates. Barriers and delay instructions are silently skipped. Unknown gate names raise <code>ValueError</code>.</p>
-<p>Composite Qiskit library instructions are recursively expanded through their definitions when possible.</p>
+<p>It walks <code>qc.data</code>, maps each instruction name to the local gate name, extracts qubit indices from the circuit's qubit register, and builds a local <code>Circuit</code> using named convenience methods for fixed gates and parameterized builder calls where needed. Barriers and delay instructions are silently skipped. Unknown gate names raise <code>ValueError</code>.</p>
+<p>Composite Qiskit library instructions are recursively expanded through their definitions when possible. See <a href="../qiskit-interop/">How from_qiskit Works</a> for the full conversion algorithm.</p>
 <h3 id="codes"><code>codes</code></h3>
 <p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>codes.py</code></a> contains pedagogical QEC workflows built on top of <code>Circuit</code> and <code>StabilizerState</code>.</p>
 <p><code>BitFlip3Code</code> implements:</p>

@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://atharvmunot004.github.io/python-stabilizer/getting-started/qec/">
+        <link rel="canonical" href="https://atharvmunot004.github.io/python-stabilizer/qiskit-interop/">
       
       
-        <link rel="prev" href="../../qiskit-interop/">
+        <link rel="prev" href="../getting-started/qiskit/">
       
       
-        <link rel="next" href="../tracing/">
+        <link rel="next" href="../getting-started/qec/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>QEC Examples - stabilizer-python</title>
+        <title>How from_qiskit Works - stabilizer-python</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#qec-examples" class="md-skip">
+        <a href="#qiskit-circuit-conversion" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="stabilizer-python" class="md-header__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
+    <a href=".." title="stabilizer-python" class="md-header__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              QEC Examples
+              How from_qiskit Works
             
           </span>
         </div>
@@ -223,7 +223,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href=".." class="md-tabs__link">
         
   
   
@@ -246,7 +246,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        <a href="../getting-started/" class="md-tabs__link">
           
   
   
@@ -264,7 +264,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../architecture/" class="md-tabs__link">
+      <a href="../architecture/" class="md-tabs__link">
         
   
   
@@ -285,7 +285,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../theory/stabilizer-formalism/" class="md-tabs__link">
+        <a href="../theory/stabilizer-formalism/" class="md-tabs__link">
           
   
   
@@ -303,7 +303,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../api-reference/" class="md-tabs__link">
+      <a href="../api-reference/" class="md-tabs__link">
         
   
   
@@ -322,7 +322,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../references/" class="md-tabs__link">
+      <a href="../references/" class="md-tabs__link">
         
   
   
@@ -357,7 +357,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="stabilizer-python" class="md-nav__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
+    <a href=".." title="stabilizer-python" class="md-nav__button md-logo" aria-label="stabilizer-python" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -387,7 +387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -471,7 +471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../getting-started/" class="md-nav__link">
         
   
   
@@ -499,7 +499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
+      <a href="../getting-started/installation/" class="md-nav__link">
         
   
   
@@ -527,7 +527,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../first-tableau/" class="md-nav__link">
+      <a href="../getting-started/first-tableau/" class="md-nav__link">
         
   
   
@@ -555,7 +555,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../circuits/" class="md-nav__link">
+      <a href="../getting-started/circuits/" class="md-nav__link">
         
   
   
@@ -583,7 +583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../inspection/" class="md-nav__link">
+      <a href="../getting-started/inspection/" class="md-nav__link">
         
   
   
@@ -611,7 +611,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../measurement/" class="md-nav__link">
+      <a href="../getting-started/measurement/" class="md-nav__link">
         
   
   
@@ -639,7 +639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../non-clifford/" class="md-nav__link">
+      <a href="../getting-started/non-clifford/" class="md-nav__link">
         
   
   
@@ -667,7 +667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../qiskit/" class="md-nav__link">
+      <a href="../getting-started/qiskit/" class="md-nav__link">
         
   
   
@@ -675,34 +675,6 @@
     
   
     Qiskit Interop
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../qiskit-interop/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    How from_qiskit Works
   
 
     
@@ -739,7 +711,7 @@
   <span class="md-ellipsis">
     
   
-    QEC Examples
+    How from_qiskit Works
   
 
     
@@ -757,7 +729,7 @@
   <span class="md-ellipsis">
     
   
-    QEC Examples
+    How from_qiskit Works
   
 
     
@@ -783,10 +755,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#3-qubit-bit-flip-code" class="md-nav__link">
+  <a href="#entry-point" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3-Qubit Bit-Flip Code
+        Entry point
       
     </span>
   </a>
@@ -794,10 +766,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#syndrome-circuit" class="md-nav__link">
+  <a href="#reading-quantumcircuitdata" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Syndrome Circuit
+        Reading QuantumCircuit.data
       
     </span>
   </a>
@@ -805,10 +777,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tracing-syndrome-extraction" class="md-nav__link">
+  <a href="#qubit-index-resolution" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tracing Syndrome Extraction
+        Qubit index resolution
       
     </span>
   </a>
@@ -816,10 +788,76 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#shor-9-qubit-code" class="md-nav__link">
+  <a href="#gate-name-mapping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Shor 9-Qubit Code
+        Gate name mapping
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters-must-be-numeric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters must be numeric
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skipped-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skipped instructions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composite-gate-expansion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Composite gate expansion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End-to-end walkthrough
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-not-converted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is not converted
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
       
     </span>
   </a>
@@ -842,7 +880,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../tracing/" class="md-nav__link">
+      <a href="../getting-started/qec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QEC Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/tracing/" class="md-nav__link">
         
   
   
@@ -870,7 +936,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tests/" class="md-nav__link">
+      <a href="../getting-started/tests/" class="md-nav__link">
         
   
   
@@ -905,7 +971,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/" class="md-nav__link">
+      <a href="../architecture/" class="md-nav__link">
         
   
   
@@ -984,7 +1050,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theory/stabilizer-formalism/" class="md-nav__link">
+      <a href="../theory/stabilizer-formalism/" class="md-nav__link">
         
   
   
@@ -1012,7 +1078,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theory/tableau/" class="md-nav__link">
+      <a href="../theory/tableau/" class="md-nav__link">
         
   
   
@@ -1040,7 +1106,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theory/measurement/" class="md-nav__link">
+      <a href="../theory/measurement/" class="md-nav__link">
         
   
   
@@ -1068,7 +1134,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theory/qec-codes/" class="md-nav__link">
+      <a href="../theory/qec-codes/" class="md-nav__link">
         
   
   
@@ -1096,7 +1162,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theory/gate-rules/" class="md-nav__link">
+      <a href="../theory/gate-rules/" class="md-nav__link">
         
   
   
@@ -1124,7 +1190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../hybrid-simulation/" class="md-nav__link">
+      <a href="../hybrid-simulation/" class="md-nav__link">
         
   
   
@@ -1159,7 +1225,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api-reference/" class="md-nav__link">
+      <a href="../api-reference/" class="md-nav__link">
         
   
   
@@ -1186,7 +1252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references/" class="md-nav__link">
+      <a href="../references/" class="md-nav__link">
         
   
   
@@ -1233,10 +1299,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#3-qubit-bit-flip-code" class="md-nav__link">
+  <a href="#entry-point" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3-Qubit Bit-Flip Code
+        Entry point
       
     </span>
   </a>
@@ -1244,10 +1310,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#syndrome-circuit" class="md-nav__link">
+  <a href="#reading-quantumcircuitdata" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Syndrome Circuit
+        Reading QuantumCircuit.data
       
     </span>
   </a>
@@ -1255,10 +1321,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tracing-syndrome-extraction" class="md-nav__link">
+  <a href="#qubit-index-resolution" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tracing Syndrome Extraction
+        Qubit index resolution
       
     </span>
   </a>
@@ -1266,10 +1332,76 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#shor-9-qubit-code" class="md-nav__link">
+  <a href="#gate-name-mapping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Shor 9-Qubit Code
+        Gate name mapping
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters-must-be-numeric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters must be numeric
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skipped-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skipped instructions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composite-gate-expansion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Composite gate expansion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End-to-end walkthrough
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-not-converted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is not converted
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
       
     </span>
   </a>
@@ -1296,91 +1428,224 @@
   
 
 
-<h1 id="qec-examples">QEC Examples</h1>
-<p>The package includes educational quantum error-correction examples. They are designed to expose the tableau mechanics rather than hide them behind a black-box API.</p>
-<h2 id="3-qubit-bit-flip-code">3-Qubit Bit-Flip Code</h2>
-<p>The 3-qubit repetition code protects against a single <code>X</code> error.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.codes</span> <span class="kn">import</span> <span class="n">BitFlip3Code</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># q0-q2 data, q3-q4 ancilla</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">encoder_circuit</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">st</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># inject an X error on q2</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">s01</span><span class="p">,</span> <span class="n">s12</span> <span class="o">=</span> <span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">measure_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">correct_x_from_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">s01</span><span class="p">,</span> <span class="n">s12</span><span class="p">)</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Syndrome: (</span><span class="si">{</span><span class="n">s01</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">s12</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stabilizers&quot;</span><span class="p">]))</span>
+<h1 id="qiskit-circuit-conversion">Qiskit Circuit Conversion</h1>
+<p>This page explains what <code>from_qiskit()</code> does under the hood when it converts a
+Qiskit <code>QuantumCircuit</code> into a local <code>Circuit</code>.</p>
+<p>For usage examples, see <a href="../getting-started/qiskit/">Qiskit Interop</a>. For
+method signatures, see <a href="../api-reference/#qiskit_interop"><code>qiskit_interop</code></a>.</p>
+<hr />
+<h2 id="entry-point">Entry point</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python.qiskit_interop</span> <span class="kn">import</span> <span class="n">from_qiskit</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">local</span> <span class="o">=</span> <span class="n">from_qiskit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">local</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>  <span class="c1"># StabilizerState or QuantumSimulator</span>
 </code></pre></div>
-<p>Syndrome interpretation:</p>
+<p><code>from_qiskit(qc)</code> creates an empty local <code>Circuit(qc.num_qubits)</code> and walks
+<code>qc.data</code> instruction by instruction. The returned <code>Circuit</code> is a plain
+operation list — no simulation happens until you call <code>.run(state)</code>.</p>
+<p>Source: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/qiskit_interop.py"><code>stabilizer_python/qiskit_interop.py</code></a></p>
+<hr />
+<h2 id="reading-quantumcircuitdata">Reading <code>QuantumCircuit.data</code></h2>
+<p>Qiskit stores circuit instructions in <code>qc.data</code>. Each entry is a
+<code>CircuitInstruction</code> with three fields the converter uses:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: center;">Syndrome</th>
+<th>Field</th>
+<th>Type</th>
 <th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;"><code>(0, 0)</code></td>
-<td>No detected X error</td>
+<td><code>instruction.operation.name</code></td>
+<td><code>str</code></td>
+<td>Gate name, e.g. <code>"h"</code>, <code>"cx"</code>, <code>"rz"</code></td>
 </tr>
 <tr>
-<td style="text-align: center;"><code>(1, 0)</code></td>
-<td>X error on q0</td>
+<td><code>instruction.operation.params</code></td>
+<td>list</td>
+<td>Numeric gate parameters</td>
 </tr>
 <tr>
-<td style="text-align: center;"><code>(1, 1)</code></td>
-<td>X error on q1</td>
-</tr>
-<tr>
-<td style="text-align: center;"><code>(0, 1)</code></td>
-<td>X error on q2</td>
+<td><code>instruction.qubits</code></td>
+<td>tuple</td>
+<td>Target <code>Qubit</code> objects for this instruction</td>
 </tr>
 </tbody>
 </table>
-<h2 id="syndrome-circuit">Syndrome Circuit</h2>
-<p>The explicit syndrome circuit uses two ancillas:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">circuit</span> <span class="o">=</span> <span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">syndrome_circuit</span><span class="p">()</span>
+<p>Conceptually:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">for</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="n">qc</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">operation</span><span class="o">.</span><span class="n">name</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">params</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">operation</span><span class="o">.</span><span class="n">params</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">qubits</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="c1"># map qubits -&gt; local indices, then append to local Circuit</span>
 </code></pre></div>
-<p>It measures:</p>
+<hr />
+<h2 id="qubit-index-resolution">Qubit index resolution</h2>
+<p>Qiskit qubits are register objects, not plain integers. The converter resolves
+each qubit to a flat index in the circuit's qubit list:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">qubits</span> <span class="o">=</span> <span class="p">[</span><span class="n">qc</span><span class="o">.</span><span class="n">find_bit</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">qubit</span> <span class="ow">in</span> <span class="n">instruction</span><span class="o">.</span><span class="n">qubits</span><span class="p">]</span>
+</code></pre></div>
+<p>That integer is what gets passed to local gate methods such as <code>.h(0)</code> or
+<code>.cnot(0, 1)</code>.</p>
+<p>For the top-level circuit, indices are <code>0..n-1</code> in register order. When a
+composite instruction is expanded from its definition, indices are remapped
+through the outer instruction's qubit list so nested gates target the correct
+physical qubits.</p>
+<hr />
+<h2 id="gate-name-mapping">Gate name mapping</h2>
+<p>Most Qiskit gate names map directly to local <code>Circuit</code> methods. A few names
+are renamed:</p>
+<table>
+<thead>
+<tr>
+<th>Qiskit name</th>
+<th>Local name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cx</code></td>
+<td><code>cnot</code></td>
+<td>Controlled-X</td>
+</tr>
+<tr>
+<td><code>measure</code></td>
+<td><code>mz</code></td>
+<td>Z-basis measurement</td>
+</tr>
+<tr>
+<td><code>u1</code></td>
+<td><code>p</code></td>
+<td>Phase gate</td>
+</tr>
+<tr>
+<td><code>u3</code></td>
+<td><code>u</code></td>
+<td>General single-qubit unitary</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>i</code></td>
+<td>Identity</td>
+</tr>
+<tr>
+<td>all others</td>
+<td>same name</td>
+<td>e.g. <code>h</code>, <code>t</code>, <code>ccx</code>, <code>crz</code></td>
+</tr>
+</tbody>
+</table>
+<p>In code this is not a separate dictionary constant — <code>_append_instruction()</code>
+branches on <code>operation.name</code> and calls the matching <code>Circuit</code> builder method.</p>
+<p>Supported fixed gates include <code>h</code>, <code>s</code>, <code>sdg</code>, <code>sx</code>, <code>sxdg</code>, <code>x</code>, <code>y</code>, <code>z</code>,
+<code>t</code>, <code>tdg</code>, <code>cy</code>, <code>cz</code>, <code>ch</code>, <code>swap</code>, <code>iswap</code>, <code>ecr</code>, <code>dcx</code>, <code>cs</code>, <code>csdg</code>,
+<code>ccx</code>, <code>toffoli</code>, <code>ccz</code>, <code>cswap</code>, and <code>fredkin</code>.</p>
+<p>Supported parameterized gates include <code>rx</code>, <code>ry</code>, <code>rz</code>, <code>p</code>, <code>u2</code>, <code>u</code>, <code>r</code>,
+<code>crx</code>, <code>cry</code>, <code>crz</code>, <code>cp</code>, <code>rxx</code>, <code>ryy</code>, <code>rzz</code>, <code>rzx</code>, <code>xx_plus_yy</code>, and
+<code>xx_minus_yy</code>.</p>
+<hr />
+<h2 id="parameters-must-be-numeric">Parameters must be numeric</h2>
+<p>Before appending a gate, the converter tries to cast each parameter to <code>float</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">param</span><span class="p">))</span>
+</code></pre></div>
+<p>If a parameter is still an unbound Qiskit <code>ParameterExpression</code>, conversion
+raises:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ValueError: unbound parameter in Qiskit instruction: &lt;gate_name&gt;
+</code></pre></div>
+<p>Bind parameters first:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">bound</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">assign_parameters</span><span class="p">({</span><span class="n">theta</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">})</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">from_qiskit</span><span class="p">(</span><span class="n">bound</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="skipped-instructions">Skipped instructions</h2>
+<p>These Qiskit instructions are silently ignored:</p>
 <ul>
-<li><code>s01</code>: <span class="arithmatex">\(Z_0Z_1\)</span> using ancilla q3</li>
-<li><code>s12</code>: <span class="arithmatex">\(Z_1Z_2\)</span> using ancilla q4</li>
+<li><code>barrier</code></li>
+<li><code>delay</code></li>
 </ul>
-<h2 id="tracing-syndrome-extraction">Tracing Syndrome Extraction</h2>
-<p>Use <code>TracedCircuit</code> to see every CNOT and measurement step. For a full walkthrough with example output, see <a href="../tracing/">Tracing Syndrome Extraction</a>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.codes</span> <span class="kn">import</span> <span class="n">BitFlip3Code</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">from</span> <span class="nn">stabilizer_python.tracing</span> <span class="kn">import</span> <span class="n">TracedCircuit</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">encoder_circuit</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">st</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="n">tc</span> <span class="o">=</span> <span class="n">TracedCircuit</span><span class="p">(</span><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">syndrome_circuit</span><span class="p">(),</span> <span class="n">trace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">outcomes</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="n">tc</span><span class="o">.</span><span class="n">print_trace</span><span class="p">()</span>
+<p>They carry no unitary action, so dropping them does not change simulation
+results.</p>
+<hr />
+<h2 id="composite-gate-expansion">Composite gate expansion</h2>
+<p>If an instruction name is not handled directly and Qiskit provides a
+decomposition, the converter recurses into <code>operation.definition</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">if</span> <span class="n">operation</span><span class="o">.</span><span class="n">definition</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">_append_circuit</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">operation</span><span class="o">.</span><span class="n">definition</span><span class="p">,</span> <span class="n">qubits</span><span class="p">)</span>
 </code></pre></div>
-<p>Each trace step includes the operation label, measurement outcome and branch for <code>MZ</code> operations, and the CHP tableau after the step.</p>
-<p><code>BitFlip3Code.syndrome_circuit()</code> measures ancillas but does not reset them. For measure-and-reset in one call, use <code>BitFlip3Code.measure_syndrome(st)</code>.</p>
-<h2 id="shor-9-qubit-code">Shor 9-Qubit Code</h2>
-<p>The Shor example builds the 9-qubit encoder and includes an <code>X</code>-error syndrome helper:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.codes</span> <span class="kn">import</span> <span class="n">Shor9Code</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">Shor9Code</span><span class="o">.</span><span class="n">encoder_circuit</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">st</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">syndrome</span> <span class="o">=</span> <span class="n">Shor9Code</span><span class="o">.</span><span class="n">read_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">Shor9Code</span><span class="o">.</span><span class="n">correct_x_from_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">syndrome</span><span class="p">)</span>
+<p>This is how library gates such as decomposed <code>QFT</code> blocks become sequences of
+local <code>h</code>, <code>cnot</code>, and rotation gates. The nested circuit's qubits are remapped
+through the outer instruction's resolved qubit list.</p>
+<p>If a gate is unknown and has no definition, conversion raises:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ValueError: unsupported Qiskit instruction: &lt;gate_name&gt;
 </code></pre></div>
-<p>For the code theory and stabilizer layouts, see <a href="../../theory/qec-codes/">Error-Correcting Codes</a>.</p>
+<p>The error includes the gate name so missing support is easy to spot and add.</p>
+<hr />
+<h2 id="end-to-end-walkthrough">End-to-end walkthrough</h2>
+<p>Consider:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<p>Conversion proceeds as:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Qiskit instruction</th>
+<th>Local operation appended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>h</code> on qubit 0</td>
+<td><code>.h(0)</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>cx</code> on qubits 0, 1</td>
+<td><code>.cnot(0, 1)</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>measure</code> on qubit 0</td>
+<td><code>.mz(0)</code></td>
+</tr>
+</tbody>
+</table>
+<p>The classical bit index in <code>qc.measure(0, 0)</code> is ignored — local simulation
+records only the quantum measurement outcome via <code>.mz()</code>.</p>
+<p>Running on a simulator:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">QuantumSimulator</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.qiskit_interop</span> <span class="kn">import</span> <span class="n">from_qiskit</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">QuantumSimulator</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">outcomes</span> <span class="o">=</span> <span class="n">from_qiskit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+</code></pre></div>
+<p>Because this circuit is pure Clifford until measurement, <code>sim.mode</code> stays
+<code>"tableau"</code> through the gates. Measurements delegate to the active backend.</p>
+<hr />
+<h2 id="what-is-not-converted">What is not converted</h2>
+<ul>
+<li>Classical registers and classical logic</li>
+<li>Mid-circuit measurements with conditional operations (only direct <code>measure</code> → <code>mz</code> is supported)</li>
+<li>Unbound symbolic parameters</li>
+<li>Unknown gates without a Qiskit definition</li>
+</ul>
+<hr />
+<h2 id="related-pages">Related pages</h2>
+<ul>
+<li><a href="../getting-started/qiskit/">Qiskit Interop examples</a></li>
+<li><a href="../theory/tableau/#comparison-with-qiskits-clifford">Comparison with Qiskit's Clifford</a></li>
+<li><a href="../api-reference/#qiskit_interop"><code>qiskit_interop</code> API reference</a></li>
+<li><a href="../architecture/#qiskit_interop">Architecture: qiskit_interop module</a></li>
+</ul>
 
 
 
@@ -1436,10 +1701,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

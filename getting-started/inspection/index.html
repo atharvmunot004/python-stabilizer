@@ -730,6 +730,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -830,6 +841,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../qiskit-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How from_qiskit Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../qec/" class="md-nav__link">
         
   
@@ -838,6 +877,34 @@
     
   
     QEC Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tracing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing Syndrome Extraction
   
 
     
@@ -1084,6 +1151,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../theory/gate-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gate Operation Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../hybrid-simulation/" class="md-nav__link">
         
   
@@ -1280,6 +1375,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1404,10 +1510,14 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">destabilizer_strings</span><span class="p">())</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="c1"># [&#39;+ZII&#39;, &#39;+IXI&#39;, &#39;+IIX&#39;]</span>
 </code></pre></div>
+<p>For raw <code>(phase, x_row, z_row)</code> tuples, use <code>destabilizer_generators()</code>. To get both stabilizers and destabilizers in one call:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">tableau_dict</span><span class="p">())</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="c1"># {&#39;stabilizers&#39;: [&#39;+XXX&#39;, &#39;+ZZI&#39;, &#39;+ZIZ&#39;], &#39;destabilizers&#39;: [&#39;+ZII&#39;, &#39;+IXI&#39;, &#39;+IIX&#39;]}</span>
+</code></pre></div>
 <h2 id="combining-views">Combining Views</h2>
 <p>Pass view names in the exact order you want:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">]))</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stabilizers&quot;</span><span class="p">,</span> <span class="s2">&quot;destabilizers&quot;</span><span class="p">]))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">]))</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stabilizers&quot;</span><span class="p">,</span> <span class="s2">&quot;destabilizers&quot;</span><span class="p">]))</span>
 </code></pre></div>
 <p>Supported view keys:</p>
 <table>
@@ -1445,17 +1555,26 @@
 </tbody>
 </table>
 <p>Unknown view names raise <code>ValueError</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">,</span> <span class="s2">&quot;not-a-view&quot;</span><span class="p">])</span>  <span class="c1"># ValueError</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">st</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chp&quot;</span><span class="p">,</span> <span class="s2">&quot;not-a-view&quot;</span><span class="p">])</span>  <span class="c1"># ValueError</span>
 </code></pre></div>
 <h2 id="constructing-from-stabilizer-labels">Constructing From Stabilizer Labels</h2>
 <p>Use <code>from_stabilizer_list()</code> when you already have signed Pauli labels:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">from_stabilizer_list</span><span class="p">([</span><span class="s2">&quot;+XX&quot;</span><span class="p">,</span> <span class="s2">&quot;+ZZ&quot;</span><span class="p">])</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">stabilizer_strings</span><span class="p">())</span>
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="c1"># [&#39;+XX&#39;, &#39;+ZZ&#39;]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">from_stabilizer_list</span><span class="p">([</span><span class="s2">&quot;+XX&quot;</span><span class="p">,</span> <span class="s2">&quot;+ZZ&quot;</span><span class="p">])</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">stabilizer_strings</span><span class="p">())</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="c1"># [&#39;+XX&#39;, &#39;+ZZ&#39;]</span>
 </code></pre></div>
 <p>Signs are optional and default to <code>+</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">from_stabilizer_list</span><span class="p">([</span><span class="s2">&quot;XX&quot;</span><span class="p">,</span> <span class="s2">&quot;ZZ&quot;</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">from_stabilizer_list</span><span class="p">([</span><span class="s2">&quot;XX&quot;</span><span class="p">,</span> <span class="s2">&quot;ZZ&quot;</span><span class="p">])</span>
 </code></pre></div>
+<p>For how these rows relate to Qiskit's <code>Clifford.stabilizer</code> and <code>Clifford.destabilizer</code>, see <a href="../../theory/tableau/#comparison-with-qiskits-clifford">Comparison with Qiskit's Clifford</a>.</p>
+<h2 id="performance">Performance</h2>
+<p>Formatting is separate from simulation:</p>
+<ul>
+<li>Call <code>inspect()</code> or <code>format_*()</code> <strong>after</strong> a circuit finishes, not inside per-gate or per-shot loops.</li>
+<li>For many repeated runs (noise benchmarking, Monte Carlo shots), use <code>trace=False</code>, skip state snapshots, and record only measurement outcomes.</li>
+<li>When you need programmatic access without string building, prefer <code>stabilizer_strings()</code>, <code>destabilizer_strings()</code>, or <code>tableau_dict()</code> over full CHP output.</li>
+</ul>
+<p>The hot path is tableau mutation (<code>h</code>, <code>cnot</code>, <code>measure_z</code>, etc.), which is already <span class="arithmatex">\(O(n)\)</span> per Clifford gate.</p>
 <p>For the theory behind these rows and matrices, see <a href="../../theory/tableau/">The Tableau Representation</a>.</p>
 
 
