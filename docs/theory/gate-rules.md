@@ -4,6 +4,9 @@ This page derives every tableau update rule in `tableau.py` from first
 principles. Each rule is stated as a theorem, proved algebraically, and
 then shown as the corresponding code.
 
+Implementation links point to the `main` branch of the GitHub repository:
+[`stabilizer_python/tableau.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py).
+
 ---
 
 ## 1. Foundations
@@ -21,8 +24,12 @@ $$
 
 They satisfy $X^2 = Y^2 = Z^2 = I$ and the cyclic multiplication rules:
 
-$$XY = iZ,\quad YZ = iX,\quad ZX = iY$$
-$$YX = -iZ,\quad ZY = -iX,\quad XZ = -iY$$
+$$
+XY = iZ,\quad YZ = iX,\quad ZX = iY
+$$
+$$
+YX = -iZ,\quad ZY = -iX,\quad XZ = -iY
+$$
 
 The $n$-qubit Pauli group $\mathcal{P}_n$ consists of all $n$-fold tensor
 products $i^k P_1 \otimes \cdots \otimes P_n$ where $P_j \in \{I,X,Y,Z\}$
@@ -105,6 +112,8 @@ def h(self, q: int) -> None:
         self.x_mat[r][q], self.z_mat[r][q] = z, x   # swap x ↔ z
 ```
 
+Source reference: [`StabilizerState.h`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L286-L293).
+
 ---
 
 ### 2.2 Phase Gate S
@@ -152,6 +161,8 @@ def s(self, q: int) -> None:
         self.z_mat[r][q] ^= x  # z := z XOR x
 ```
 
+Source reference: [`StabilizerState.s`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L295-L302).
+
 ---
 
 ### 2.3 S-dagger
@@ -185,6 +196,8 @@ def sdg(self, q: int) -> None:
             self.r_phase[r] ^= 1
         self.z_mat[r][q] ^= x   # same bit mutation as S
 ```
+
+Source reference: [`StabilizerState.sdg`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L304-L311).
 
 ---
 
@@ -239,6 +252,8 @@ def z(self, q: int) -> None:
         if self.x_mat[r][q] == 1:      # X component → sign flip
             self.r_phase[r] ^= 1
 ```
+
+Source references: [`StabilizerState.x`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L340-L345), [`StabilizerState.y`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L347-L352), and [`StabilizerState.z`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L354-L359).
 
 ---
 
@@ -332,6 +347,8 @@ def sx(self, q: int) -> None:
         self.x_mat[r][q] ^= z       # x := x XOR z
 ```
 
+Source reference: [`StabilizerState.sx`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L316-L323).
+
 **Theorem 2.11** *(√X†)*. $(\sqrt{X})^\dagger$ satisfies:
 
 $$(\sqrt{X})^\dagger X (\sqrt{X}) = X,\quad
@@ -363,6 +380,8 @@ def sxdg(self, q: int) -> None:
             self.r_phase[r] ^= 1
         self.x_mat[r][q] ^= z        # x := x XOR z
 ```
+
+Source reference: [`StabilizerState.sxdg`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L328-L335).
 
 ---
 
@@ -495,6 +514,8 @@ def cnot(self, control: int, target: int) -> None:
         self.z_mat[r][c] ^= zt        # Z backtracks: z_c := z_c XOR z_t
 ```
 
+Source reference: [`StabilizerState.cnot`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L364-L379).
+
 ---
 
 ## 4. The Phase Accumulation Function
@@ -544,6 +565,8 @@ def _row_mult_phase(x1: int, z1: int, x2: int, z2: int) -> int:
     raise ValueError("invalid Pauli bits for row multiplication")
 ```
 
+Source reference: [`_row_mult_phase`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L8-L33).
+
 ### 4.2 Row Multiplication
 
 **Theorem 4.2** *(Row Multiplication)*. For two $n$-qubit Pauli operators
@@ -581,6 +604,8 @@ def _rowmult(self, a: int, b: int) -> None:
         self.z_mat[a][q] ^= self.z_mat[b][q]
     self.r_phase[a] = 1 if exp_i == 2 else 0   # sign: 0=+1, 1=−1
 ```
+
+Source reference: [`StabilizerState._rowmult`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L257-L279).
 
 ---
 
@@ -621,6 +646,8 @@ solution over GF(2) since the generators are independent. Multiplying the
 selected rows via `_rowmult` accumulates the correct phase using Theorem 4.2.
 The returned `r_phase[0]` of the work copy is 0 (eigenvalue $+1$) or 1
 (eigenvalue $-1$). $\square$
+
+Source references: [`StabilizerState._deterministic_z_outcome`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L458-L477) and [`StabilizerState._solve_stabilizer_product`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L479-L520).
 
 ### 5.3 Random Branch
 
@@ -702,6 +729,8 @@ def measure_z(self, q: int) -> int:
 
     return outcome
 ```
+
+Source reference: [`StabilizerState.measure_z`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py#L412-L456).
 
 ---
 
