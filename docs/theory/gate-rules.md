@@ -26,6 +26,9 @@ They satisfy $X^2 = Y^2 = Z^2 = I$ and the cyclic multiplication rules:
 
 $$
 XY = iZ,\quad YZ = iX,\quad ZX = iY
+$$
+
+$$
 YX = -iZ,\quad ZY = -iX,\quad XZ = -iY
 $$
 
