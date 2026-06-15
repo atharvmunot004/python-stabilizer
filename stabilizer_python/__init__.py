@@ -61,6 +61,14 @@ from .magic import (
     stabilizer_extent,
     stabilizer_fidelity,
 )
+from .ancilla import (
+    AncillaRegister,
+    mixed_parity_check,
+    x_parity_check,
+    y_parity_check,
+    z_parity_check,
+)
+from .syndrome import SyndromeExtractor, read_syndrome
 from . import codes
 
 __all__ = [
@@ -73,6 +81,13 @@ __all__ = [
     "stabilizer_entropy",
     "stabilizer_extent",
     "stabilizer_fidelity",
+    "AncillaRegister",
+    "mixed_parity_check",
+    "x_parity_check",
+    "y_parity_check",
+    "z_parity_check",
+    "SyndromeExtractor",
+    "read_syndrome",
     "Statevector",
     "Gate",
     "IGate",

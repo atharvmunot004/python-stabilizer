@@ -521,6 +521,114 @@ class StabilizerState:
             self.x(q)
         return m
 
+    def add_ancilla_zero(self) -> None:
+        """
+        Extend the tableau by one ancilla qubit in |0>.
+
+        Existing rows gain identity support on the new qubit. A new
+        destabilizer +X_n is inserted at the destabilizer/stabilizer boundary,
+        and a new stabilizer +Z_n is appended at the end.
+        """
+        n = self.n
+        new_n = n + 1
+
+        for i in range(2 * n):
+            self.x_mat[i].append(0)
+            self.z_mat[i].append(0)
+
+        new_destab_x = [0] * new_n
+        new_destab_z = [0] * new_n
+        new_destab_x[n] = 1
+        self.x_mat.insert(n, new_destab_x)
+        self.z_mat.insert(n, new_destab_z)
+        self.r_phase.insert(n, 0)
+
+        new_stab_x = [0] * new_n
+        new_stab_z = [0] * new_n
+        new_stab_z[n] = 1
+        self.x_mat.append(new_stab_x)
+        self.z_mat.append(new_stab_z)
+        self.r_phase.append(0)
+
+        self.n = new_n
+
+    def add_ancilla_plus(self) -> None:
+        """
+        Extend the tableau by one ancilla qubit in |+>.
+
+        Equivalent to add_ancilla_zero() followed by H on the new qubit.
+        """
+        self.add_ancilla_zero()
+        self.h(self.n - 1)
+
+    def remove_ancilla(self, q: int) -> None:
+        """
+        Remove a disentangled ancilla qubit from the tableau.
+
+        Call measure_z(q) and reset_z(q) first so the qubit is in |0>. Qubits
+        above q are shifted down by one index after removal.
+        """
+        n = self.n
+        if q < 0 or q >= n:
+            raise IndexError(f"qubit index {q} out of range for {n}-qubit state")
+        if n <= 1:
+            raise ValueError("cannot remove the only qubit in a tableau")
+
+        def _only_support(row: int) -> bool:
+            for col in range(n):
+                if col == q:
+                    continue
+                if self.x_mat[row][col] or self.z_mat[row][col]:
+                    return False
+            return True
+
+        stab_rows = [
+            row
+            for row in range(n, 2 * n)
+            if self.x_mat[row][q] or self.z_mat[row][q]
+        ]
+        if len(stab_rows) != 1:
+            raise ValueError(
+                f"Qubit {q} appears in {len(stab_rows)} stabilizer rows; "
+                "call measure_z(q) and reset_z(q) before removing it."
+            )
+        stab_row = stab_rows[0]
+        if (
+            self.x_mat[stab_row][q] != 0
+            or self.z_mat[stab_row][q] != 1
+            or not _only_support(stab_row)
+        ):
+            raise ValueError(f"Qubit {q} is not isolated as a +Z stabilizer")
+
+        destab_rows = [
+            row
+            for row in range(n)
+            if self.x_mat[row][q] or self.z_mat[row][q]
+        ]
+        if len(destab_rows) != 1:
+            raise ValueError(
+                f"Qubit {q} appears in {len(destab_rows)} destabilizer rows; "
+                "call measure_z(q) and reset_z(q) before removing it."
+            )
+        destab_row = destab_rows[0]
+        if (
+            self.x_mat[destab_row][q] != 1
+            or self.z_mat[destab_row][q] != 0
+            or not _only_support(destab_row)
+        ):
+            raise ValueError(f"Qubit {q} is not isolated as a +X destabilizer")
+
+        for row in sorted([stab_row, destab_row], reverse=True):
+            self.x_mat.pop(row)
+            self.z_mat.pop(row)
+            self.r_phase.pop(row)
+
+        for row in range(len(self.x_mat)):
+            del self.x_mat[row][q]
+            del self.z_mat[row][q]
+
+        self.n = n - 1
+
     # --- Debug / inspection helpers ---
     def _pauli_char_at(self, r: int, q: int) -> str:
         xb, zb = self.x_mat[r][q], self.z_mat[r][q]
