@@ -4,9 +4,12 @@ Quantum error correction (QEC) is the primary application of stabilizer formalis
 
 Implementation links:
 
+- General code class: [`stabilizer_python/stabilizer_code.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/stabilizer_code.py)
 - QEC helpers: [`stabilizer_python/codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py)
+- Syndrome extraction: [`stabilizer_python/syndrome.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/syndrome.py)
+- Ancilla parity checks: [`stabilizer_python/ancilla.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/ancilla.py)
 - Tableau operations used by syndrome extraction: [`stabilizer_python/tableau.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py)
-- QEC tests: [`tests/test_bitflip3.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_bitflip3.py)
+- QEC tests: [`tests/test_stabilizer_code.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_stabilizer_code.py)
 
 ---
 
@@ -20,6 +23,64 @@ An $[[n, k, d]]$ stabilizer code encodes $k$ logical qubits into $n$ physical qu
 - **Distance $d$**: minimum number of errors needed to cause an undetectable logical error
 
 The stabilizer generators are Pauli operators that all commute with each other and have $+1$ eigenvalue on the code space. Any error that anticommutes with a generator is detectable.
+
+---
+
+## General `StabilizerCode` Implementation
+
+The modern code API represents a code directly from its stabilizer generators:
+
+```python
+from stabilizer_python import StabilizerCode
+
+code = StabilizerCode(
+    n=5,
+    k=1,
+    generators=["+XZZXI", "+IXZZX", "+XIXZZ", "+ZXIXZ"],
+    logical_xs=["+XXXXX"],
+    logical_zs=["+ZZZZZ"],
+    name="Perfect [[5,1,3]]",
+)
+```
+
+The constructor checks the algebraic requirements of a stabilizer code:
+
+1. there are exactly $n-k$ generators
+2. every generator has length $n$
+3. every generator is a Pauli string over $\{I,X,Y,Z\}$
+4. the generator matrix has GF(2) rank $n-k$
+5. every pair of generators has symplectic product 0, so all checks commute
+6. provided logical operators commute with stabilizers but are not stabilizers
+
+The logical zero state is constructed from:
+
+$$
+\{g_1,\ldots,g_{n-k}, Z_{L,1},\ldots,Z_{L,k}\}
+$$
+
+That gives a full set of $n$ commuting stabilizers for the encoded
+$|0_L\rangle$ state.
+
+```python
+from stabilizer_python import SteaneCode
+
+state = SteaneCode.zero_state()
+print(SteaneCode.read_syndrome(state))
+# [0, 0, 0, 0, 0, 0]
+```
+
+Distance is computed by searching for the minimum-weight Pauli operator that
+commutes with every stabilizer but is not itself in the stabilizer group.
+
+```python
+from stabilizer_python import PerfectCode
+
+print(PerfectCode.distance())
+# 3
+```
+
+For implementation details, see
+[Architecture: Stabilizer Codes](../architecture/stabilizer-codes.md).
 
 ---
 
@@ -245,9 +306,36 @@ The current package implements the encoder and an `X`-error correction helper. T
 
 ---
 
+## Named Code Instances
+
+The package also exposes named `StabilizerCode` instances:
+
+| Code | Parameters | Stabilizer generators | Distance helper |
+|---|---:|---:|---|
+| `BitFlip3Code` | `[[3,1,1]]` | 2 | detects single X errors |
+| `PhaseFlip3Code` | `[[3,1,1]]` | 2 | detects single Z errors |
+| `PerfectCode` | `[[5,1,3]]` | 4 | `distance() == 3` |
+| `SteaneCode` | `[[7,1,3]]` | 6 | `distance() == 3` |
+| `Shor9Code` | `[[9,1,3]]` | 8 | stabilizer instance matching the legacy encoder stabilizers |
+| `SurfaceCode3` | `[[9,1,3]]` | 8 | distance-3 surface-code-style instance |
+
+Use these through top-level imports:
+
+```python
+from stabilizer_python import SteaneCode, PerfectCode, SurfaceCode3
+```
+
+The older `stabilizer_python.codes.BitFlip3Code` and
+`stabilizer_python.codes.Shor9Code` remain available when you specifically want
+the explicit encoder circuit helpers.
+
+---
+
 ## Further reading
 
 - [References](../references.md) — key papers on stabilizer codes and QEC
+- [General Stabilizer Codes](../getting-started/stabilizer-codes.md) — user guide for the new `StabilizerCode` API
+- [Architecture: Input Processing](../architecture/input-processing.md) — validation and case handling for code inputs
 - For LDPC codes, surface codes, and beyond: see the decoder benchmarking resources in references
 
 **Next:** [API Reference](../api-reference.md)

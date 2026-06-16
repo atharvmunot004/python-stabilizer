@@ -55,9 +55,17 @@ nav:
     - Qiskit Interop: getting-started/qiskit.md
     - How from_qiskit Works: qiskit-interop.md
     - QEC Examples: getting-started/qec.md
+    - General Stabilizer Codes: getting-started/stabilizer-codes.md
+    - Noise And Benchmarking: getting-started/benchmarking.md
     - Tracing Syndrome Extraction: getting-started/tracing.md
     - Running Tests: getting-started/tests.md
-  - Architecture: architecture.md
+  - Architecture:
+    - Overview: architecture/index.md
+    - Module Map: architecture/module-map.md
+    - Input Processing: architecture/input-processing.md
+    - Simulation Flow: architecture/simulation-flow.md
+    - Stabilizer Codes: architecture/stabilizer-codes.md
+    - Extension Points: architecture/extension-points.md
   - Theory:
     - Stabilizer Formalism: theory/stabilizer-formalism.md
     - The Tableau: theory/tableau.md

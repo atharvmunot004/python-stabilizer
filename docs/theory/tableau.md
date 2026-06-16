@@ -519,4 +519,4 @@ For loading Qiskit circuits into this simulator, see [Qiskit Interop](../getting
 
 **Next:** [Measurement](measurement.md) — the most non-trivial operation in the tableau.
 
-For the full source map, see [Architecture](../architecture.md).
+For the full source map, see [Architecture](../architecture/index.md).

@@ -171,4 +171,4 @@ This is just a bitwise inner product over GF(2). The [`linear_algebra.py`](https
 
 **Next:** [The Tableau Representation](tableau.md) — how all of this is stored as bit arrays.
 
-For the source-level module map, see [Architecture](../architecture.md).
+For the source-level module map, see [Architecture](../architecture/index.md).

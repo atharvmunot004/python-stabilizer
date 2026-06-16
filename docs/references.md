@@ -113,13 +113,20 @@ The source repository is [`atharvmunot004/python-stabilizer`](https://github.com
 
 - [`stabilizer_python/tableau.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py) — Aaronson-Gottesman tableau implementation
 - [`stabilizer_python/circuit.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py) — fluent circuit builder
-- [`stabilizer_python/codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py) — QEC examples
+- [`stabilizer_python/stabilizer_code.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/stabilizer_code.py) — general `[[n,k,d]]` code definitions
+- [`stabilizer_python/codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py) — legacy explicit QEC examples
 - [`tests/test_random_circuits.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_random_circuits.py) — random circuit and tableau invariant tests
-- [`docs/architecture.md`](https://github.com/atharvmunot004/python-stabilizer/blob/main/docs/architecture.md) — source-level documentation map
+- [`docs/architecture/`](https://github.com/atharvmunot004/python-stabilizer/tree/main/docs/architecture) — source-level documentation map and input-processing explanations
 
-If present in the source repository, a `references/` folder may contain supplementary notebooks and PDFs:
+### Supplementary Markdown walkthroughs
 
-- `Gottesman-Knill Theorem Part 1 & 2` — worked derivations of the theorem
+The source repository's `references/` folder contains supplementary derivations and background material that are not part of the installed Python package. The Gottesman-Knill walkthroughs were converted from local Jupyter notebooks into Markdown documents so they can be reviewed directly in GitHub and linked from the docs. The original `.ipynb` notebooks are kept local-only and ignored by Git.
+
+- [`Gottesman-Knill Theorem Part 1`](https://github.com/atharvmunot004/python-stabilizer/blob/main/references/Gottesman-Knill%20Theorem%20Part%201.md) — introductory worked notes on Clifford gates, stabilizers, and the theorem
+- [`Gottesman-Knill Theorem Part 2`](https://github.com/atharvmunot004/python-stabilizer/blob/main/references/Gottesman-Knill%20Theorem%20Part%202.md) — step-by-step tableau and measurement derivations
+
+If present in the source repository, the same `references/` folder may also contain PDFs:
+
 - `Stabilizer Formalism.pdf` — lecture-style notes on the formalism
 - `Stabilizer Codes.pdf` — code construction reference
 

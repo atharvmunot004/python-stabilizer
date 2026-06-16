@@ -15,8 +15,9 @@ Source repository: [`atharvmunot004/python-stabilizer`](https://github.com/athar
 | `StabilizerState` | Core Aaronson-Gottesman tableau state representation | [`tableau.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py) |
 | `Circuit` | Fluent builder for small Clifford circuits | [`circuit.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py) |
 | `QuantumSimulator` | Hybrid tableau/statevector simulator with optional gate tracing | [`simulator.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/simulator.py) |
-| `BitFlip3Code` | 3-qubit repetition-code encoder, syndrome reader, and X correction | [`codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py) |
-| `Shor9Code` | 9-qubit Shor encoder and current X-syndrome correction helper | [`codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py) |
+| `StabilizerCode` | General `[[n,k,d]]` stabilizer-code class with logicals, syndrome extraction, and distance search | [`stabilizer_code.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/stabilizer_code.py) |
+| Named codes | `BitFlip3Code`, `PhaseFlip3Code`, `PerfectCode`, `SteaneCode`, `Shor9Code`, `SurfaceCode3` | [`stabilizer_code.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/stabilizer_code.py) |
+| Legacy QEC helpers | Explicit bit-flip and Shor encoder/syndrome circuits | [`codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py) |
 | `gaussian_elimination_gf2`, `rank_gf2` | Binary linear algebra helpers | [`linear_algebra.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/linear_algebra.py) |
 | Examples | Runnable Bell, bit-flip, and Shor demos | [`stabilizer_python/examples`](https://github.com/atharvmunot004/python-stabilizer/tree/main/stabilizer_python/examples) |
 | Tests | Invariant, random-circuit, QEC, and Qiskit interop checks | [`tests`](https://github.com/atharvmunot004/python-stabilizer/tree/main/tests) |
@@ -34,7 +35,9 @@ Source repository: [`atharvmunot004/python-stabilizer`](https://github.com/athar
 - Stabilizer inspection through `inspect()`, `stabilizer_strings()`, `destabilizer_strings()`, and `tableau_dict()`
 - Hybrid simulation through `QuantumSimulator`, including optional gate-by-gate tracing
 - GF(2) rank and RREF utilities for binary stabilizer checks
-- Educational QEC examples for the 3-qubit repetition code and Shor's 9-qubit code
+- General `StabilizerCode` definitions for small `[[n,k,d]]` codes
+- Named code instances for bit-flip, phase-flip, perfect, Steane, Shor, and distance-3 surface-code-style examples
+- Educational legacy QEC helpers for explicit bit-flip and Shor circuits
 
 The core tableau simulator is intentionally not a universal quantum simulator. Use `QuantumSimulator` for small circuits that cross into non-Clifford gates such as `T`, rotations, Toffoli, or arbitrary state-vector amplitudes. If you need large-scale production stabilizer simulation, use a tool such as [Stim](https://github.com/quantumlib/Stim); this project is designed to show the mechanics clearly.
 
@@ -90,29 +93,30 @@ Use `st.inspect()` with no arguments for compact CHP-style output. Pass `views=[
 ### 3-qubit bit-flip correction
 
 ```python
-from stabilizer_python import StabilizerState
-from stabilizer_python.codes import BitFlip3Code
+from stabilizer_python import BitFlip3Code
 
-st = StabilizerState.zero(5)   # 3 data qubits + 2 syndrome ancillas
-BitFlip3Code.encoder_circuit().run(st)
+st = BitFlip3Code.zero_state()
 
 st.x(1)                        # inject an X error on q1
-s01, s12 = BitFlip3Code.measure_syndrome(st)
-BitFlip3Code.correct_x_from_syndrome(st, s01, s12)
+syndrome = BitFlip3Code.read_syndrome(st)
+print(syndrome)
+# [1, 1]
 ```
 
-The syndrome `(1, 1)` identifies an `X` error on qubit 1.
+The syndrome `[1, 1]` identifies an `X` error on qubit 1.
 
 ---
 
 ## Documentation map
 
-- [Getting Started](getting-started/index.md): beginner path for installation, first states, circuits, measurement, Qiskit, QEC, and tests.
-- [Architecture](architecture.md): module responsibilities, source map, data flow, measurement internals, and extension points.
+- [Getting Started](getting-started/index.md): beginner path for installation, first states, circuits, measurement, Qiskit, QEC, noise, benchmarking, and tests.
+- [Architecture](architecture/index.md): module responsibilities, source map, input processing, data flow, measurement internals, and extension points.
 - [Stabilizer Formalism](theory/stabilizer-formalism.md): Pauli groups, stabilizers, Clifford evolution, and Gottesman-Knill.
 - [The Tableau Representation](theory/tableau.md): how X/Z/phase arrays encode stabilizer states and how gates mutate them.
 - [Measurement](theory/measurement.md): deterministic versus random measurement and tableau row updates.
 - [Error-Correcting Codes](theory/qec-codes.md): repetition-code and Shor-code concepts mapped to the implementation.
+- [General Stabilizer Codes](getting-started/stabilizer-codes.md): creating `[[n,k,d]]` codes from Pauli generators.
+- [Noise And Benchmarking](getting-started/benchmarking.md): Pauli noise channels, `EncodedState`, lookup decoders, `benchmark_code`, and threshold scans.
 - [Hybrid Simulation](hybrid-simulation.md): how `QuantumSimulator` switches from tableau to statevector mode and records trace snapshots.
 - [API Reference](api-reference.md): public classes, functions, method behavior, and source links.
-- [References](references.md): papers, tools, textbooks, and repository resources.
+- [References](references.md): papers, tools, textbooks, source resources, and the converted Gottesman-Knill Markdown walkthroughs.

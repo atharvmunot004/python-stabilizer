@@ -6,6 +6,7 @@ dist/
 .pytest_cache/
 site/
 *.ipynb_checkpoints/
+*.ipynb
 pytest_out.txt
 pushfiles.bat
 development-roadmap-*

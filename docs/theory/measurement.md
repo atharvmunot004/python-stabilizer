@@ -172,4 +172,4 @@ Tracking these factors correctly is what [`_row_mult_phase()`](https://github.co
 
 **Next:** [Error-Correcting Codes](qec-codes.md) — how measurement is used to detect and correct errors.
 
-For broader context on how measurement fits into the simulator, see [Architecture](../architecture.md).
+For broader context on how measurement fits into the simulator, see [Architecture: Simulation Flow](../architecture/simulation-flow.md).

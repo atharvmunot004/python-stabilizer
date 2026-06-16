@@ -207,4 +207,4 @@ Because this circuit is pure Clifford until measurement, `sim.mode` stays
 - [Qiskit Interop examples](getting-started/qiskit.md)
 - [Comparison with Qiskit's Clifford](theory/tableau.md#comparison-with-qiskits-clifford)
 - [`qiskit_interop` API reference](api-reference.md#qiskit_interop)
-- [Architecture: qiskit_interop module](architecture.md#qiskit_interop)
+- [Architecture: Input Processing](architecture/input-processing.md#qiskit-inputs)

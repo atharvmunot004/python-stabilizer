@@ -1,13 +1,29 @@
 # API Reference
 
-This page documents the public API exposed by [`stabilizer_python`](https://github.com/atharvmunot004/python-stabilizer/tree/main/stabilizer_python). For a source-level overview, see [Architecture](architecture.md).
+This page documents the public API exposed by [`stabilizer_python`](https://github.com/atharvmunot004/python-stabilizer/tree/main/stabilizer_python). For a source-level overview, see [Architecture](architecture/index.md).
 
 ## `stabilizer_python`
 
 Top-level imports:
 
 ```python
-from stabilizer_python import StabilizerState, Circuit, gaussian_elimination_gf2, rank_gf2, codes
+from stabilizer_python import (
+    StabilizerState,
+    Circuit,
+    QuantumSimulator,
+    StabilizerCode,
+    EncodedState,
+    SteaneCode,
+    PerfectCode,
+    BitFlip3Code,
+    NoisyCircuit,
+    benchmark_code,
+    build_lookup_decoder,
+    threshold_scan,
+    gaussian_elimination_gf2,
+    rank_gf2,
+    codes,
+)
 ```
 
 Exports are defined in [`stabilizer_python/__init__.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/__init__.py).
@@ -297,7 +313,420 @@ Frozen dataclass: `Op(name: str, targets: Tuple[int, ...])`. Gate name is a stri
 
 ---
 
-## `codes`
+## `StabilizerCode`
+
+General `[[n,k,d]]` stabilizer-code abstraction.
+
+Source: [`stabilizer_python/stabilizer_code.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/stabilizer_code.py)
+
+### Constructor
+
+#### `StabilizerCode(n, k, generators, name="", logical_xs=None, logical_zs=None)`
+
+Create a stabilizer code from `n-k` independent, mutually commuting Pauli
+generators.
+
+```python
+from stabilizer_python import StabilizerCode
+
+code = StabilizerCode(
+    n=3,
+    k=1,
+    generators=["+ZZI", "+IZZ"],
+    name="Bit-flip [[3,1,1]]",
+    logical_xs=["+XXX"],
+    logical_zs=["+IIZ"],
+)
+```
+
+Arguments:
+
+| Argument | Type | Meaning |
+|---|---|---|
+| `n` | `int` | number of physical qubits |
+| `k` | `int` | number of logical qubits |
+| `generators` | `List[str]` | signed or unsigned Pauli strings, exactly `n-k` entries |
+| `name` | `str` | optional human-readable label |
+| `logical_xs` | `Optional[List[str]]` | optional logical X operators, exactly `k` entries |
+| `logical_zs` | `Optional[List[str]]` | optional logical Z operators, exactly `k` entries |
+
+Validation:
+
+- `n >= 1`
+- `0 <= k <= n`
+- `len(generators) == n-k`
+- every generator has length `n`
+- every generator uses only `I`, `X`, `Y`, `Z`, with optional `+` or `-`
+- generators have GF(2) rank `n-k`
+- generators commute pairwise under the binary symplectic product
+- provided logical operators commute with stabilizers, are not stabilizers, and
+  have the correct logical anticommutation relations
+
+Raises `ValueError` for invalid definitions.
+
+### Attributes
+
+| Attribute | Type | Meaning |
+|---|---|---|
+| `n` | `int` | physical qubits |
+| `k` | `int` | logical qubits |
+| `generators` | `List[str]` | normalized signed generators |
+| `name` | `str` | display name |
+
+### `zero_state() -> StabilizerState`
+
+Return the logical $|0_L\rangle$ codeword.
+
+```python
+from stabilizer_python import SteaneCode
+
+state = SteaneCode.zero_state()
+print(SteaneCode.read_syndrome(state))
+# [0, 0, 0, 0, 0, 0]
+```
+
+The state is built from the stabilizer checks plus one logical `+Z_L` per
+logical qubit.
+
+### `StabilizerCode.zero_logical(code) -> StabilizerState`
+
+Compatibility classmethod:
+
+```python
+state = StabilizerCode.zero_logical(SteaneCode)
+```
+
+Equivalent to `SteaneCode.zero_state()`.
+
+### `encode(state: StabilizerState) -> None`
+
+Mutate an existing `StabilizerState` into the logical zero codeword.
+
+```python
+from stabilizer_python import StabilizerState, PerfectCode
+
+state = StabilizerState.zero(5)
+PerfectCode.encode(state)
+```
+
+Raises `ValueError` if `state.n != code.n`.
+
+### `encoding_circuit() -> Circuit`
+
+Return a best-effort Clifford encoder circuit for simple CSS/repetition-style
+codes.
+
+The authoritative preparation path is `zero_state()`, because it directly
+constructs the target stabilizer state. `encoding_circuit()` is primarily a
+pedagogical helper.
+
+### `read_syndrome(state: StabilizerState) -> List[int]`
+
+Extract all syndrome bits for the code generators.
+
+```python
+from stabilizer_python import BitFlip3Code
+
+state = BitFlip3Code.zero_state()
+state.x(1)
+print(BitFlip3Code.read_syndrome(state))
+# [1, 1]
+```
+
+The method:
+
+1. checks that `state.n == code.n`
+2. strips signs from generators
+3. delegates to `syndrome.read_syndrome`
+4. adds/removes a temporary ancilla internally
+
+### `syndrome_extractor(state: StabilizerState) -> SyndromeExtractor`
+
+Return a reusable extractor for repeated syndrome rounds.
+
+```python
+state = BitFlip3Code.zero_state()
+extractor = BitFlip3Code.syndrome_extractor(state)
+print(extractor.extract())
+```
+
+Unlike `read_syndrome`, this keeps an ancilla attached to the state.
+
+### `logical_x(logical_qubit=0) -> str`
+
+Return the logical X operator for a logical qubit.
+
+```python
+print(PerfectCode.logical_x())
+# +XXXXX
+```
+
+Raises `IndexError` if `logical_qubit` is outside `0..k-1`.
+
+### `logical_z(logical_qubit=0) -> str`
+
+Return the logical Z operator for a logical qubit.
+
+```python
+print(PerfectCode.logical_z())
+# +ZZZZZ
+```
+
+Raises `IndexError` if `logical_qubit` is outside `0..k-1`.
+
+### `distance() -> int`
+
+Compute the minimum weight of a non-trivial logical operator.
+
+```python
+print(PerfectCode.distance())  # 3
+print(SteaneCode.distance())   # 3
+```
+
+The implementation performs an exact minimum-weight search over normalizer
+operators for small codes. It is exponential and intended for educational-size
+codes.
+
+### Named Code Instances
+
+Top-level exports:
+
+| Name | Parameters | Description |
+|---|---|---|
+| `BitFlip3Code` | `[[3,1,1]]` | bit-flip repetition code |
+| `PhaseFlip3Code` | `[[3,1,1]]` | phase-flip repetition code |
+| `PerfectCode` | `[[5,1,3]]` | 5-qubit perfect code |
+| `SteaneCode` | `[[7,1,3]]` | Steane CSS code |
+| `Shor9Code` | `[[9,1,3]]` | Shor-code stabilizer instance |
+| `SurfaceCode3` | `[[9,1,3]]` | distance-3 surface-code-style instance |
+
+For a tutorial, see [General Stabilizer Codes](getting-started/stabilizer-codes.md).
+For internal validation details, see
+[Architecture: Stabilizer Codes](architecture/stabilizer-codes.md).
+
+---
+
+## `EncodedState`
+
+Logical-operator wrapper around a physical `StabilizerState`.
+
+Source: [`stabilizer_python/encoded_state.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/encoded_state.py)
+
+Constructor: `EncodedState(state: StabilizerState, code, *, code_name: str = "")`
+
+The wrapper reads logical operators from `code.logical_x(i)` and
+`code.logical_z(i)`, keeps a small logical frame, and compares observed logical
+signs against that frame when checking for residual errors.
+
+```python
+from stabilizer_python import BitFlip3Code, EncodedState
+
+state = BitFlip3Code.zero_state()
+encoded = EncodedState(state, BitFlip3Code)
+
+print(encoded.logical_z_eigenvalue())  # +1
+print(encoded.logical_state_string())  # |0_L>
+```
+
+### Construction helpers
+
+#### `EncodedState.from_logical_ops(state, logical_xs, logical_zs, check_operators=None, code_name="")`
+
+Construct directly from logical Pauli strings when a full `StabilizerCode`
+object is not available.
+
+### Logical readout
+
+#### `logical_z_eigenvalue(logical_qubit: int = 0) -> Optional[int]`
+#### `logical_x_eigenvalue(logical_qubit: int = 0) -> Optional[int]`
+
+Return `+1`, `-1`, or `None` when the observable is not determined by the
+current stabilizer group.
+
+#### `measure_logical_z(logical_qubit: int = 0) -> int`
+#### `measure_logical_x(logical_qubit: int = 0) -> int`
+
+Return classical bits: `0` for eigenvalue `+1`, `1` for eigenvalue `-1`.
+These are non-destructive logical readouts; they do not measure physical qubits.
+
+### Logical error checks
+
+#### `has_logical_x_error(logical_qubit: int = 0) -> bool`
+#### `has_logical_z_error(logical_qubit: int = 0) -> bool`
+#### `has_logical_error() -> bool`
+#### `logical_error_type(logical_qubit: int = 0) -> str`
+
+`logical_error_type()` returns `"I"`, `"X"`, `"Z"`, or `"Y"`.
+
+### Code membership and logical gates
+
+#### `syndrome() -> List[int]`
+#### `is_valid_codeword() -> bool`
+#### `apply_logical_x(logical_qubit: int = 0) -> None`
+#### `apply_logical_z(logical_qubit: int = 0) -> None`
+#### `apply_logical_y(logical_qubit: int = 0) -> None`
+#### `apply_logical_h(logical_qubit: int = 0) -> None`
+#### `logical_state_string(logical_qubit: int = 0) -> str`
+#### `summary() -> str`
+
+Apply intentional logical Pauli gates through `EncodedState`, not directly to
+the physical tableau, when you want the logical frame updated.
+
+---
+
+## `noise`
+
+Single-shot Pauli noise channels for Monte Carlo simulation.
+
+Source: [`stabilizer_python/noise.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/noise.py)
+
+These functions mutate a `StabilizerState` in place and return which sampled
+Pauli error was applied.
+
+### Single-qubit channels
+
+#### `apply_pauli_channel(state, qubit, p_x, p_y, p_z) -> str`
+#### `apply_depolarizing(state, qubit, p) -> str`
+#### `apply_bit_flip(state, qubit, p) -> str`
+#### `apply_phase_flip(state, qubit, p) -> str`
+#### `apply_bit_phase_flip(state, qubit, p) -> str`
+
+Returned value is one of `"I"`, `"X"`, `"Y"`, or `"Z"`.
+Probabilities must be in `[0, 1]`; custom Pauli channels must satisfy
+`p_x + p_y + p_z <= 1`.
+
+### Multi-qubit helpers
+
+#### `apply_pauli_channel_all(state, p_x, p_y, p_z, qubits=None) -> List[str]`
+#### `apply_depolarizing_all(state, p, qubits=None) -> List[str]`
+#### `apply_bit_flip_all(state, p, qubits=None) -> List[str]`
+#### `apply_phase_flip_all(state, p, qubits=None) -> List[str]`
+
+Each target qubit is sampled independently. If `qubits` is omitted, all qubits
+in the state are targeted.
+
+### `NoisyCircuit`
+
+`NoisyCircuit(n: int, gate_error: float = 0.0, meas_error: float = 0.0)`
+
+Subclass of `Circuit` that injects depolarizing noise after Clifford gates and
+flips returned measurement bits with probability `meas_error`.
+
+```python
+from stabilizer_python import NoisyCircuit, StabilizerState
+
+state = StabilizerState.zero(2)
+outcomes = NoisyCircuit(2, gate_error=0.01).h(0).cnot(0, 1).mz(0).run(state)
+```
+
+With a `StabilizerState`, `NoisyCircuit` supports Clifford operations. Run
+non-Clifford circuits on `QuantumSimulator`.
+
+### `run_shots(...) -> dict`
+
+Low-level shot loop retained from E2:
+
+```python
+run_shots(
+    encode_fn,
+    check_operators,
+    decoder_fn,
+    noise_channel,
+    n_shots,
+    n_data,
+    logical_x=None,
+    logical_z=None,
+    seed=None,
+)
+```
+
+Use `benchmark_code()` for the newer `StabilizerCode`-integrated E4 workflow.
+
+---
+
+## `benchmark`
+
+Shot-based syndrome sampling for decoder evaluation.
+
+Source: [`stabilizer_python/benchmark.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/benchmark.py)
+
+### Dataclasses
+
+#### `ShotRecord`
+
+Per-shot details:
+
+| Field | Meaning |
+|---|---|
+| `shot_index` | zero-based shot number |
+| `syndrome` | measured syndrome bits |
+| `correction` | decoder output as `(qubit, pauli)` pairs |
+| `logical_error_type` | `"I"`, `"X"`, `"Z"`, or `"Y"` |
+| `had_logical_error` | whether any logical error remained |
+
+#### `CodeBenchmarkResult`
+
+Aggregated result from `benchmark_code()`. Main fields include `n_shots`,
+`n_logical_errors`, `logical_error_rate`, `n_x_errors`, `n_z_errors`,
+`x_error_rate`, `z_error_rate`, `elapsed_seconds`, `shots_per_second`, `seed`,
+and optional `records`.
+
+Methods:
+
+- `summary() -> str`
+
+#### `ThresholdScanResult`
+
+Result from `threshold_scan()`. Stores the physical `p_values`, logical/X/Z
+rates, `n_shots_per_p`, `code_name`, and the full per-point benchmark results.
+
+Methods:
+
+- `as_dict() -> Dict[float, float]`
+- `summary() -> str`
+
+### Benchmark functions
+
+#### `benchmark_code(code, noise_model, decoder, n_shots, *, seed=None, record_shots=False, verbose=False) -> CodeBenchmarkResult`
+
+Each shot constructs a fresh `StabilizerState.zero(code.n)`, calls
+`code.encode(state)`, applies `noise_model(state)`, extracts
+`code.read_syndrome(state)`, applies decoder corrections, and checks residual
+logical errors through `EncodedState`.
+
+```python
+from stabilizer_python import BitFlip3Code, benchmark_code, build_lookup_decoder
+from stabilizer_python.noise import apply_bit_flip_all
+
+decoder = build_lookup_decoder(BitFlip3Code)
+result = benchmark_code(
+    BitFlip3Code,
+    noise_model=lambda st: apply_bit_flip_all(st, p=0.05, qubits=[0, 1, 2]),
+    decoder=decoder,
+    n_shots=500,
+    seed=42,
+)
+```
+
+#### `threshold_scan(code, noise_model_factory, decoder, p_values, n_shots_per_p, *, seed=None, verbose=True) -> ThresholdScanResult`
+
+Runs `benchmark_code()` once for each physical error rate. The factory receives
+`p` and returns a `noise_model`.
+
+#### `compare_codes(codes, noise_model_factory, decoder_factory, p_values, n_shots_per_p, *, seed=None, verbose=True) -> Dict[str, ThresholdScanResult]`
+
+Convenience wrapper for running the same scan over several codes.
+
+#### `build_lookup_decoder(code, noise_model_factory=None, *, max_errors=1) -> Callable`
+
+Enumerates Pauli errors up to `max_errors`, computes their syndromes, and
+returns a minimum-weight lookup decoder. Intended for small codes.
+
+For a tutorial, see [Noise And Benchmarking](getting-started/benchmarking.md).
+
+---
+
+## `codes` Legacy Helpers
 
 Source: [`stabilizer_python/codes.py`](https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py)
 
