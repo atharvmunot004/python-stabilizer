@@ -261,17 +261,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="architecture/" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="architecture/" class="md-tabs__link">
+          
+  
   
   Architecture
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -874,6 +875,62 @@
   
   
     <li class="md-nav__item">
+      <a href="getting-started/stabilizer-codes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    General Stabilizer Codes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting-started/benchmarking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noise And Benchmarking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="getting-started/tracing/" class="md-nav__link">
         
   
@@ -936,9 +993,25 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="architecture/" class="md-nav__link">
+    
+    
+    
+    
+      
+      
         
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -952,7 +1025,191 @@
   
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture/module-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture/input-processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture/simulation-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulation Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture/stabilizer-codes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stabilizer Codes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture/extension-points/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extension Points
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -1398,13 +1655,18 @@
 <td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/simulator.py"><code>simulator.py</code></a></td>
 </tr>
 <tr>
-<td><code>BitFlip3Code</code></td>
-<td>3-qubit repetition-code encoder, syndrome reader, and X correction</td>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>codes.py</code></a></td>
+<td><code>StabilizerCode</code></td>
+<td>General <code>[[n,k,d]]</code> stabilizer-code class with logicals, syndrome extraction, and distance search</td>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/stabilizer_code.py"><code>stabilizer_code.py</code></a></td>
 </tr>
 <tr>
-<td><code>Shor9Code</code></td>
-<td>9-qubit Shor encoder and current X-syndrome correction helper</td>
+<td>Named codes</td>
+<td><code>BitFlip3Code</code>, <code>PhaseFlip3Code</code>, <code>PerfectCode</code>, <code>SteaneCode</code>, <code>Shor9Code</code>, <code>SurfaceCode3</code></td>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/stabilizer_code.py"><code>stabilizer_code.py</code></a></td>
+</tr>
+<tr>
+<td>Legacy QEC helpers</td>
+<td>Explicit bit-flip and Shor encoder/syndrome circuits</td>
 <td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>codes.py</code></a></td>
 </tr>
 <tr>
@@ -1435,7 +1697,9 @@
 <li>Stabilizer inspection through <code>inspect()</code>, <code>stabilizer_strings()</code>, <code>destabilizer_strings()</code>, and <code>tableau_dict()</code></li>
 <li>Hybrid simulation through <code>QuantumSimulator</code>, including optional gate-by-gate tracing</li>
 <li>GF(2) rank and RREF utilities for binary stabilizer checks</li>
-<li>Educational QEC examples for the 3-qubit repetition code and Shor's 9-qubit code</li>
+<li>General <code>StabilizerCode</code> definitions for small <code>[[n,k,d]]</code> codes</li>
+<li>Named code instances for bit-flip, phase-flip, perfect, Steane, Shor, and distance-3 surface-code-style examples</li>
+<li>Educational legacy QEC helpers for explicit bit-flip and Shor circuits</li>
 </ul>
 <p>The core tableau simulator is intentionally not a universal quantum simulator. Use <code>QuantumSimulator</code> for small circuits that cross into non-Clifford gates such as <code>T</code>, rotations, Toffoli, or arbitrary state-vector amplitudes. If you need large-scale production stabilizer simulation, use a tool such as <a href="https://github.com/quantumlib/Stim">Stim</a>; this project is designed to show the mechanics clearly.</p>
 <hr />
@@ -1469,29 +1733,30 @@
 <p>The stabilizers <code>+XX</code> and <code>+ZZ</code> are the generators of the Bell state <span class="arithmatex">\(|\Phi^+\rangle\)</span>.</p>
 <p>Use <code>st.inspect()</code> with no arguments for compact CHP-style output. Pass <code>views=["chp", "binary", "phase", "debug", "stabilizers", "destabilizers"]</code> to select specific output.</p>
 <h3 id="3-qubit-bit-flip-correction">3-qubit bit-flip correction</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">StabilizerState</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span> <span class="nn">stabilizer_python.codes</span> <span class="kn">import</span> <span class="n">BitFlip3Code</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">st</span> <span class="o">=</span> <span class="n">StabilizerState</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>   <span class="c1"># 3 data qubits + 2 syndrome ancillas</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">encoder_circuit</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">st</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                        <span class="c1"># inject an X error on q1</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">s01</span><span class="p">,</span> <span class="n">s12</span> <span class="o">=</span> <span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">measure_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">correct_x_from_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">s01</span><span class="p">,</span> <span class="n">s12</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">stabilizer_python</span> <span class="kn">import</span> <span class="n">BitFlip3Code</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">st</span> <span class="o">=</span> <span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">zero_state</span><span class="p">()</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">st</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                        <span class="c1"># inject an X error on q1</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">syndrome</span> <span class="o">=</span> <span class="n">BitFlip3Code</span><span class="o">.</span><span class="n">read_syndrome</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">syndrome</span><span class="p">)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># [1, 1]</span>
 </code></pre></div>
-<p>The syndrome <code>(1, 1)</code> identifies an <code>X</code> error on qubit 1.</p>
+<p>The syndrome <code>[1, 1]</code> identifies an <code>X</code> error on qubit 1.</p>
 <hr />
 <h2 id="documentation-map">Documentation map</h2>
 <ul>
-<li><a href="getting-started/">Getting Started</a>: beginner path for installation, first states, circuits, measurement, Qiskit, QEC, and tests.</li>
-<li><a href="architecture/">Architecture</a>: module responsibilities, source map, data flow, measurement internals, and extension points.</li>
+<li><a href="getting-started/">Getting Started</a>: beginner path for installation, first states, circuits, measurement, Qiskit, QEC, noise, benchmarking, and tests.</li>
+<li><a href="architecture/">Architecture</a>: module responsibilities, source map, input processing, data flow, measurement internals, and extension points.</li>
 <li><a href="theory/stabilizer-formalism/">Stabilizer Formalism</a>: Pauli groups, stabilizers, Clifford evolution, and Gottesman-Knill.</li>
 <li><a href="theory/tableau/">The Tableau Representation</a>: how X/Z/phase arrays encode stabilizer states and how gates mutate them.</li>
 <li><a href="theory/measurement/">Measurement</a>: deterministic versus random measurement and tableau row updates.</li>
 <li><a href="theory/qec-codes/">Error-Correcting Codes</a>: repetition-code and Shor-code concepts mapped to the implementation.</li>
+<li><a href="getting-started/stabilizer-codes/">General Stabilizer Codes</a>: creating <code>[[n,k,d]]</code> codes from Pauli generators.</li>
+<li><a href="getting-started/benchmarking/">Noise And Benchmarking</a>: Pauli noise channels, <code>EncodedState</code>, lookup decoders, <code>benchmark_code</code>, and threshold scans.</li>
 <li><a href="hybrid-simulation/">Hybrid Simulation</a>: how <code>QuantumSimulator</code> switches from tableau to statevector mode and records trace snapshots.</li>
 <li><a href="api-reference/">API Reference</a>: public classes, functions, method behavior, and source links.</li>
-<li><a href="references/">References</a>: papers, tools, textbooks, and repository resources.</li>
+<li><a href="references/">References</a>: papers, tools, textbooks, source resources, and the converted Gottesman-Knill Markdown walkthroughs.</li>
 </ul>
 
 

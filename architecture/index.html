@@ -16,7 +16,7 @@
         <link rel="prev" href="../getting-started/tests/">
       
       
-        <link rel="next" href="../theory/stabilizer-formalism/">
+        <link rel="next" href="module-map/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Architecture - stabilizer-python</title>
+        <title>Overview - stabilizer-python</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#architecture" class="md-skip">
+        <a href="#architecture-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Architecture
+              Overview
             
           </span>
         </div>
@@ -263,17 +263,18 @@
     
   
   
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
   
   Architecture
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -746,6 +747,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../getting-started/stabilizer-codes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    General Stabilizer Codes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/benchmarking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noise And Benchmarking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../getting-started/tracing/" class="md-nav__link">
         
   
@@ -810,6 +867,63 @@
   
   
   
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -825,7 +939,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Overview
   
 
     
@@ -843,7 +957,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Overview
   
 
     
@@ -872,7 +986,7 @@
   <a href="#design-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Design goals
+        Design Goals
       
     </span>
   </a>
@@ -880,10 +994,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#repository-layout" class="md-nav__link">
+  <a href="#architecture-pages" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Repository layout
+        Architecture Pages
       
     </span>
   </a>
@@ -891,115 +1005,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#runtime-components" class="md-nav__link">
+  <a href="#high-level-data-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Runtime components
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Runtime components">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#stabilizerstate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        StabilizerState
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Gate
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#statevector" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Statevector
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#quantumsimulator" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        QuantumSimulator
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#circuit" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Circuit
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#qiskit_interop" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        qiskit_interop
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#codes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        codes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#linear_algebra" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        linear_algebra
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#simulation-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Simulation flow
+        High-Level Data Flow
       
     </span>
   </a>
@@ -1007,43 +1016,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gate-architecture" class="md-nav__link">
+  <a href="#source-layout" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Gate architecture
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#measurement-architecture" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Measurement architecture
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#testing-strategy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Testing strategy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#extension-points" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Extension points
+        Source Layout
       
     </span>
   </a>
@@ -1053,6 +1029,154 @@
     </ul>
   
 </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="module-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="input-processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="simulation-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulation Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="stabilizer-codes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stabilizer Codes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="extension-points/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extension Points
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -1369,7 +1493,7 @@
   <a href="#design-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Design goals
+        Design Goals
       
     </span>
   </a>
@@ -1377,10 +1501,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#repository-layout" class="md-nav__link">
+  <a href="#architecture-pages" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Repository layout
+        Architecture Pages
       
     </span>
   </a>
@@ -1388,115 +1512,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#runtime-components" class="md-nav__link">
+  <a href="#high-level-data-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Runtime components
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Runtime components">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#stabilizerstate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        StabilizerState
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Gate
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#statevector" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Statevector
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#quantumsimulator" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        QuantumSimulator
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#circuit" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Circuit
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#qiskit_interop" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        qiskit_interop
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#codes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        codes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#linear_algebra" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        linear_algebra
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#simulation-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Simulation flow
+        High-Level Data Flow
       
     </span>
   </a>
@@ -1504,43 +1523,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gate-architecture" class="md-nav__link">
+  <a href="#source-layout" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Gate architecture
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#measurement-architecture" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Measurement architecture
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#testing-strategy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Testing strategy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#extension-points" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Extension points
+        Source Layout
       
     </span>
   </a>
@@ -1567,13 +1553,17 @@
   
 
 
-<h1 id="architecture">Architecture</h1>
-<p>This page is a source-level map of <code>stabilizer-python</code>: what each module owns, how data flows through the simulator, and where to look in the GitHub repository when you want to verify or change behavior.</p>
-<p>Source links point at the <code>main</code> branch of <a href="https://github.com/atharvmunot004/python-stabilizer"><code>atharvmunot004/python-stabilizer</code></a>.</p>
+<h1 id="architecture-overview">Architecture Overview</h1>
+<p>This section is a source-level map of <code>stabilizer-python</code>: what each module owns,
+how data flows through the simulator, and how inputs are parsed, validated, and
+routed through all supported cases.</p>
+<p>Source links point at the <code>main</code> branch of
+<a href="https://github.com/atharvmunot004/python-stabilizer"><code>atharvmunot004/python-stabilizer</code></a>.</p>
 <hr />
-<h2 id="design-goals">Design goals</h2>
-<p><code>stabilizer-python</code> is intentionally small. The package optimizes for readability and traceability to the stabilizer formalism rather than production-scale simulator throughput.</p>
-<p>The main design choices are:</p>
+<h2 id="design-goals">Design Goals</h2>
+<p><code>stabilizer-python</code> is intentionally small. The package optimizes for
+readability and traceability to the stabilizer formalism rather than
+production-scale simulator throughput.</p>
 <table>
 <thead>
 <tr>
@@ -1583,29 +1573,97 @@
 </thead>
 <tbody>
 <tr>
-<td>Pure Python runtime</td>
-<td>Clifford tableau simulation uses only the standard library; hybrid statevector simulation uses NumPy</td>
+<td>Pure Python tableau logic</td>
+<td><code>StabilizerState</code>, <code>StabilizerCode</code>, syndrome extraction, and GF(2) helpers use lists and standard library code</td>
 </tr>
 <tr>
 <td>Explicit tableau representation</td>
-<td>State is stored in public bit arrays on <code>StabilizerState</code></td>
+<td>State is stored in public <code>x_mat</code>, <code>z_mat</code>, and <code>r_phase</code> arrays</td>
 </tr>
 <tr>
 <td>Theory-to-code readability</td>
-<td>Gate, measurement, and statevector rules are written directly instead of hidden behind dense abstractions</td>
+<td>Gate, measurement, and row-multiplication rules mirror the derivations in the theory docs</td>
 </tr>
 <tr>
-<td>Small composable API</td>
-<td><code>StabilizerState</code> performs Clifford simulation, <code>QuantumSimulator</code> routes hybrid simulation, <code>Circuit</code> sequences operations, <code>codes</code> builds QEC examples</td>
+<td>Hybrid simulation when needed</td>
+<td>Clifford operations stay in tableau mode; non-Clifford gates route to <code>Statevector</code> through <code>QuantumSimulator</code></td>
+</tr>
+<tr>
+<td>General QEC definitions</td>
+<td><code>StabilizerCode</code> accepts arbitrary <code>[[n,k,d]]</code> stabilizer generators as Pauli strings</td>
+</tr>
+<tr>
+<td>Shot-based QEC benchmarking</td>
+<td>Pauli noise helpers, <code>EncodedState</code>, and <code>benchmark_code</code> provide a small Monte Carlo stack</td>
 </tr>
 <tr>
 <td>Testable invariants</td>
-<td>Tests validate stabilizer rank, commutation, round trips, Qiskit interop, and non-Clifford fallback</td>
+<td>Tests validate commutation, GF(2) rank, syndrome extraction, logical tracking, noise channels, benchmark loops, Qiskit conversion, and distance checks</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="repository-layout">Repository layout</h2>
+<h2 id="architecture-pages">Architecture Pages</h2>
+<p>Use these pages as a map from user input to implementation behavior:</p>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>What it explains</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="module-map/">Module Map</a></td>
+<td>Every package module, public responsibility, and source link</td>
+</tr>
+<tr>
+<td><a href="input-processing/">Input Processing</a></td>
+<td>How code processes gate names, qubit indices, Pauli strings, Qiskit instructions, syndrome checks, and invalid cases</td>
+</tr>
+<tr>
+<td><a href="simulation-flow/">Simulation Flow</a></td>
+<td>How <code>Circuit</code>, <code>QuantumSimulator</code>, <code>StabilizerState</code>, and <code>Statevector</code> cooperate</td>
+</tr>
+<tr>
+<td><a href="stabilizer-codes/">Stabilizer Codes</a></td>
+<td>How <code>StabilizerCode</code> validates generators, builds logical zero states, extracts syndromes, computes logicals, and searches distance</td>
+</tr>
+<tr>
+<td><a href="extension-points/">Extension Points</a></td>
+<td>Where to add gates, backends, code families, docs, and tests</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="high-level-data-flow">High-Level Data Flow</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>User input
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>   |
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>   +--&gt; StabilizerState.zero(n)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>   |       |
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>   |       +--&gt; tableau arrays x_mat, z_mat, r_phase
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>   |
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>   +--&gt; Circuit(n).h(...).cnot(...).run(target)
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>   |       |
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>   |       +--&gt; QuantumSimulator routing or direct tableau mutation
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>   |
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>   +--&gt; StabilizerCode(n, k, generators)
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>   |       |
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>   |       +--&gt; Pauli-string parsing
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>   |       +--&gt; commutation/rank validation
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>   |       +--&gt; logical operators and syndrome checks
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>   |       +--&gt; EncodedState and benchmark_code workflows
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>   |
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>   +--&gt; from_qiskit(qc)
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>           |
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>           +--&gt; Qiskit instruction parsing
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>           +--&gt; local Circuit construction
+</code></pre></div>
+<p>The central invariant is that a valid tableau state keeps its stabilizer rows
+independent and mutually commuting. Code-level checks use the binary symplectic
+product and GF(2) rank helpers to preserve this invariant.</p>
+<hr />
+<h2 id="source-layout">Source Layout</h2>
 <table>
 <thead>
 <tr>
@@ -1620,260 +1678,70 @@
 </tr>
 <tr>
 <td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>stabilizer_python/tableau.py</code></a></td>
-<td>Core Aaronson-Gottesman tableau state and gate/measurement updates</td>
+<td>Core Aaronson-Gottesman tableau state and Clifford updates</td>
+</tr>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/stabilizer_code.py"><code>stabilizer_python/stabilizer_code.py</code></a></td>
+<td>General <code>[[n,k,d]]</code> code class and named code instances</td>
+</tr>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/encoded_state.py"><code>stabilizer_python/encoded_state.py</code></a></td>
+<td>Logical operator tracking and logical error checks</td>
+</tr>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/noise.py"><code>stabilizer_python/noise.py</code></a></td>
+<td>Sampled Pauli noise channels, <code>NoisyCircuit</code>, and low-level shot loops</td>
+</tr>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/benchmark.py"><code>stabilizer_python/benchmark.py</code></a></td>
+<td><code>StabilizerCode</code>-aware Monte Carlo benchmarking and threshold scans</td>
+</tr>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/syndrome.py"><code>stabilizer_python/syndrome.py</code></a></td>
+<td>One-shot and reusable syndrome extraction</td>
+</tr>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/ancilla.py"><code>stabilizer_python/ancilla.py</code></a></td>
+<td>Ancilla allocation and mixed Pauli parity checks</td>
 </tr>
 <tr>
 <td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/gate.py"><code>stabilizer_python/gate.py</code></a></td>
-<td>Gate dataclass and full standard gate library</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/statevector.py"><code>stabilizer_python/statevector.py</code></a></td>
-<td>Dense statevector backend and tableau bridge</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/simulator.py"><code>stabilizer_python/simulator.py</code></a></td>
-<td><code>QuantumSimulator</code> hybrid router</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/qiskit_interop.py"><code>stabilizer_python/qiskit_interop.py</code></a></td>
-<td><code>from_qiskit()</code> Qiskit circuit converter</td>
+<td>Gate dataclass, fixed gates, and parameterized gate factories</td>
 </tr>
 <tr>
 <td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py"><code>stabilizer_python/circuit.py</code></a></td>
-<td>Lightweight fluent circuit builder</td>
+<td>Fluent operation builder</td>
+</tr>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/simulator.py"><code>stabilizer_python/simulator.py</code></a></td>
+<td>Hybrid tableau/statevector router</td>
+</tr>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/statevector.py"><code>stabilizer_python/statevector.py</code></a></td>
+<td>Dense non-Clifford backend</td>
+</tr>
+<tr>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/qiskit_interop.py"><code>stabilizer_python/qiskit_interop.py</code></a></td>
+<td>Qiskit <code>QuantumCircuit</code> conversion</td>
 </tr>
 <tr>
 <td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tracing.py"><code>stabilizer_python/tracing.py</code></a></td>
-<td><code>TracedCircuit</code> wrapper for step-by-step tableau snapshots</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>stabilizer_python/codes.py</code></a></td>
-<td>Bit-flip and Shor-code examples plus convenience helpers</td>
+<td>Step-by-step trace snapshots</td>
 </tr>
 <tr>
 <td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/linear_algebra.py"><code>stabilizer_python/linear_algebra.py</code></a></td>
-<td>GF(2) RREF and rank utilities</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/tree/main/stabilizer_python/examples"><code>stabilizer_python/examples/</code></a></td>
-<td>Runnable examples for Bell, bit-flip, and Shor code workflows</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/tree/main/tests"><code>tests/</code></a></td>
-<td>Unit and integration-style tests</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/tree/main/docs"><code>docs/</code></a></td>
-<td>This MkDocs documentation site</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/mkdocs.yml"><code>mkdocs.yml</code></a></td>
-<td>Documentation site configuration</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/pyproject.toml"><code>pyproject.toml</code></a></td>
-<td>Build metadata, package discovery, and dev dependencies</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="runtime-components">Runtime components</h2>
-<h3 id="stabilizerstate"><code>StabilizerState</code></h3>
-<p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>StabilizerState</code></a> is the simulator core. It stores an <code>n</code>-qubit state as:</p>
-<ul>
-<li><code>x_mat</code>: a <code>2n x n</code> binary matrix for X components of Pauli rows</li>
-<li><code>z_mat</code>: a <code>2n x n</code> binary matrix for Z components of Pauli rows</li>
-<li><code>r_phase</code>: a <code>2n</code>-bit sign vector, where <code>0</code> means <code>+</code> and <code>1</code> means <code>-</code></li>
-<li><code>n</code>: the number of qubits</li>
-</ul>
-<p>Rows <code>0..n-1</code> are destabilizers. Rows <code>n..2n-1</code> are stabilizer generators. This follows Aaronson-Gottesman's extended tableau representation and makes measurement efficient.</p>
-<p>The class owns all Clifford state mutation:</p>
-<ul>
-<li>Constructors: <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>zero(n)</code></a>, <code>from_stabilizer_list(...)</code></li>
-<li>Single-qubit Clifford gates: <code>h</code>, <code>s</code>, <code>sdg</code>, <code>sx</code>, <code>sxdg</code>, <code>x</code>, <code>y</code>, <code>z</code>, <code>i</code></li>
-<li>Two-qubit Clifford gates: <code>cnot</code>/<code>cx</code>, <code>cz</code>, <code>cy</code>, <code>swap</code></li>
-<li>Measurement and reset: <code>measure_z</code>, <code>reset_z</code></li>
-<li>Validation: <code>_check_qubit</code>, <code>_check_tableau_invariants</code> (debug/tests)</li>
-<li>Inspection: <code>inspect</code>, <code>stabilizer_generators</code>, <code>destabilizer_generators</code>, <code>stabilizer_strings</code>, <code>destabilizer_strings</code>, <code>tableau_dict</code>, <code>copy</code>, <code>format_chp_printstate</code>, <code>format_xz_binary_matrices</code>, <code>format_phase_matrix</code>, <code>format_tableau_debug</code></li>
-</ul>
-<h3 id="gate"><code>Gate</code></h3>
-<p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/gate.py"><code>gate.py</code></a> defines the <code>Gate</code> dataclass:</p>
-<ul>
-<li><code>name: str</code></li>
-<li><code>num_qubits: int</code></li>
-<li><code>matrix: np.ndarray</code>, the <code>2^n x 2^n</code> unitary</li>
-<li><code>is_clifford: bool</code></li>
-<li><code>params: list[float]</code></li>
-</ul>
-<p>Fixed gates are module-level instances such as <code>HGate</code>, <code>TGate</code>, <code>CXGate</code>, and <code>CCXGate</code>. Parameterized gates are factory functions such as <code>RZGate(theta)</code>, <code>UGate(theta, phi, lam)</code>, and <code>RZZGate(theta)</code>.</p>
-<p>Runtime code does not import Qiskit to build matrices. Gate matrices are built from NumPy arrays, Kronecker products, projection operators, and elementary trigonometric formulas.</p>
-<h3 id="statevector"><code>Statevector</code></h3>
-<p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/statevector.py"><code>statevector.py</code></a> owns the dense backend:</p>
-<ul>
-<li><code>Statevector(n, data)</code>: a little-endian <code>2^n</code> complex128 array</li>
-<li><code>apply_gate(gate, qubits)</code>: embeds a gate into the full <code>2^n</code> space and applies it</li>
-<li><code>measure_z(qubit)</code>: samples and collapses a Z-basis measurement</li>
-<li><code>probabilities()</code>, <code>to_dict()</code>, <code>inner_product()</code>: inspection helpers</li>
-<li><code>tableau_to_statevector(state)</code>: converts a <code>StabilizerState</code> to a <code>Statevector</code></li>
-</ul>
-<p>The bridge function applies stabilizer projectors <code>(I + g_i) / 2</code> iteratively. It is O(n · 2^n) and is called once at the Clifford-to-non-Clifford boundary.</p>
-<h3 id="quantumsimulator"><code>QuantumSimulator</code></h3>
-<p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/simulator.py"><code>simulator.py</code></a> is the routing layer. It holds:</p>
-<ul>
-<li><code>mode: str</code>: <code>"tableau"</code> or <code>"statevector"</code></li>
-<li><code>tableau: StabilizerState</code></li>
-<li><code>sv: Statevector | None</code></li>
-</ul>
-<p><code>apply(name, qubits, params)</code> or <code>apply_gate(gate, qubits)</code> routes to <code>StabilizerState</code> methods when <code>is_clifford=True</code> and <code>mode == "tableau"</code>. Otherwise it calls <code>_switch_to_statevector()</code> and then <code>sv.apply_gate()</code>.</p>
-<p><code>_switch_to_statevector()</code> calls <code>tableau_to_statevector()</code> exactly once, stores the result, and sets <code>mode</code> to <code>"statevector"</code>. <code>measure_z(qubit)</code> delegates to whichever backend is active. <code>statevector_snapshot()</code> returns a dense statevector in either mode without changing <code>mode</code>. Pass <code>trace=True</code> to record a <code>SimulatorTraceStep</code> after every gate with mode before/after and a state snapshot. Pass <code>debug=True</code> to assert tableau invariants after Clifford gates and measurements. Gate application validates qubit indices and rejects duplicates before routing.</p>
-<h3 id="circuit"><code>Circuit</code></h3>
-<p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/circuit.py"><code>Circuit</code></a> is a minimal operation list. It does not simulate by itself; it records operations and applies them to a <code>StabilizerState</code> or <code>QuantumSimulator</code> in <code>run(state)</code>.</p>
-<p>Supported builder operations include Clifford methods (<code>h</code>, <code>s</code>, <code>sdg</code>, <code>sx</code>, <code>sxdg</code>, <code>x</code>, <code>y</code>, <code>z</code>, <code>i</code>, <code>cnot</code>, <code>cx</code>, <code>cz</code>, <code>cy</code>, <code>ch</code>, <code>swap</code>, <code>iswap</code>, <code>cs</code>, <code>csdg</code>, <code>ecr</code>, <code>dcx</code>), non-Clifford methods (<code>t</code>, <code>tdg</code>, rotations, controlled rotations, Toffoli, controlled-SWAP), <code>.gate(g, qubits)</code>, <code>.mz(q)</code>, and <code>.extend(ops)</code>.</p>
-<p><code>Circuit.run(state)</code> mutates the supplied target and returns measurement outcomes in the order <code>mz</code> operations appear.</p>
-<h3 id="qiskit_interop"><code>qiskit_interop</code></h3>
-<p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/qiskit_interop.py"><code>qiskit_interop.py</code></a> provides <code>from_qiskit(qc: QuantumCircuit) -&gt; Circuit</code>.</p>
-<p>It walks <code>qc.data</code>, maps each instruction name to the local gate name, extracts qubit indices from the circuit's qubit register, and builds a local <code>Circuit</code> using named convenience methods for fixed gates and parameterized builder calls where needed. Barriers and delay instructions are silently skipped. Unknown gate names raise <code>ValueError</code>.</p>
-<p>Composite Qiskit library instructions are recursively expanded through their definitions when possible. See <a href="../qiskit-interop/">How from_qiskit Works</a> for the full conversion algorithm.</p>
-<h3 id="codes"><code>codes</code></h3>
-<p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>codes.py</code></a> contains pedagogical QEC workflows built on top of <code>Circuit</code> and <code>StabilizerState</code>.</p>
-<p><code>BitFlip3Code</code> implements:</p>
-<ul>
-<li><code>encoder_circuit()</code></li>
-<li><code>syndrome_circuit()</code></li>
-<li><code>measure_syndrome(state, ancilla_01=3, ancilla_12=4)</code></li>
-<li><code>read_syndrome(state)</code></li>
-<li><code>correct_x_from_syndrome(state, s01, s12)</code></li>
-</ul>
-<p><code>Shor9Code</code> implements:</p>
-<ul>
-<li><code>encoder_circuit()</code></li>
-<li><code>read_syndrome(state)</code></li>
-<li><code>correct_x_from_syndrome(state, syndrome)</code></li>
-</ul>
-<p>The Shor encoder constructs the 9-qubit code state. The current correction helper recognizes and corrects single-qubit <code>X</code> errors from stored syndrome patterns; the theory page explains the full Shor-code idea, including phase protection.</p>
-<h3 id="linear_algebra"><code>linear_algebra</code></h3>
-<p><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/linear_algebra.py"><code>linear_algebra.py</code></a> provides small GF(2) helpers:</p>
-<ul>
-<li><code>gaussian_elimination_gf2(matrix)</code> returns an RREF copy and pivot columns</li>
-<li><code>rank_gf2(matrix)</code> returns the binary rank</li>
-</ul>
-<p>The tests use these helpers to validate stabilizer independence and tableau invariants.</p>
-<hr />
-<h2 id="simulation-flow">Simulation flow</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>                    Circuit.run(target)
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                           |
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>              +------------+------------+
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>              |                         |
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>     target is StabilizerState   target is QuantumSimulator
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>              |                         |
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>     pure Clifford path          check gate.is_clifford?
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>              |                         |
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>              v                   +-----+------+
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    tableau.h / .s / .cnot ...   YES           NO
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>              |                   |             |
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>              v                   v             v
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>       outcomes list       tableau path   _switch_to_statevector()
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>                           O(n) per gate  tableau_to_statevector()
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                                          then sv.apply_gate()
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>                                          O(2^n) per gate
-</code></pre></div>
-<p>For code examples, <code>codes.py</code> builds circuits or directly manipulates the state:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>BitFlip3Code.encoder_circuit()
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>        |
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        v
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Circuit.run(state)
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        |
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        v
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>BitFlip3Code.measure_syndrome(state)
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        |
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        +--&gt; state.cnot(data, ancilla)
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        +--&gt; state.measure_z(ancilla)
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        +--&gt; state.reset_z(ancilla)
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        |
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        v
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>BitFlip3Code.correct_x_from_syndrome(...)
-</code></pre></div>
-<hr />
-<h2 id="gate-architecture">Gate architecture</h2>
-<p>Gate methods on <code>StabilizerState</code> update every row of the tableau by Clifford conjugation. This is the Heisenberg-picture view: instead of multiplying a state vector by a unitary, each stabilizer generator is transformed as <code>g -&gt; U g U†</code>.</p>
-<p>Examples:</p>
-<ul>
-<li><code>h(q)</code> swaps the X and Z bits in column <code>q</code>; rows containing <code>Y</code> flip sign.</li>
-<li><code>s(q)</code> XORs the X bit into the Z bit in column <code>q</code>; rows containing <code>Y</code> flip sign.</li>
-<li><code>cnot(control, target)</code> XORs <code>x[control]</code> into <code>x[target]</code>, XORs <code>z[target]</code> into <code>z[control]</code>, and applies the Aaronson-Gottesman phase rule.</li>
-<li>Pauli gates (<code>x</code>, <code>y</code>, <code>z</code>) do not change X/Z support; they flip signs of rows that anticommute with the applied Pauli.</li>
-</ul>
-<p>Non-Clifford gates (<code>T</code>, <code>Rx</code>, <code>Rz</code>, <code>U</code>, <code>CCX</code>, and others) carry an explicit <code>matrix</code> field on the <code>Gate</code> object and are routed to the statevector backend by <code>QuantumSimulator.apply</code>. The matrix is a NumPy complex128 array of shape <code>(2^n, 2^n)</code> and is applied via <code>sv.apply_gate(gate, qubits)</code>, which embeds it into the full Hilbert space using identities on untouched qubits.</p>
-<p>The Clifford derivation is in <a href="../theory/tableau/">The Tableau Representation</a>, and the implementation is in <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/tableau.py"><code>tableau.py</code></a>.</p>
-<hr />
-<h2 id="measurement-architecture">Measurement architecture</h2>
-<p><code>measure_z(q)</code> has two paths:</p>
-<ol>
-<li>If no stabilizer row has an X component on <code>q</code>, the state is already a Z eigenstate on that qubit. The outcome is deterministic and is computed from existing phase bits.</li>
-<li>If some stabilizer row has an X component on <code>q</code>, the measurement anticommutes with the stabilizer group. The outcome is random, the tableau is row-reduced around a pivot row, and a signed <code>Z_q</code> row becomes the new stabilizer.</li>
-</ol>
-<p>The random path uses private row operations:</p>
-<ul>
-<li><code>_rowmult(a, b)</code> multiplies Pauli row <code>a</code> by row <code>b</code>, including phase tracking.</li>
-<li><code>_rowswap(a, b)</code> swaps X, Z, and phase data for two rows.</li>
-</ul>
-<p>In statevector mode, <code>Statevector.measure_z(q)</code> sums probabilities over basis indices, samples the outcome, zeroes inconsistent amplitudes, and renormalizes.</p>
-<p>This is the most delicate part of the simulator; see <a href="../theory/measurement/">Measurement</a> for the algorithmic explanation and <a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_random_circuits.py"><code>test_random_circuits.py</code></a> for invariant checks.</p>
-<hr />
-<h2 id="testing-strategy">Testing strategy</h2>
-<p>The test suite is intentionally close to simulator invariants:</p>
-<table>
-<thead>
-<tr>
-<th>Test file</th>
-<th>What it covers</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_two_qubit_bell.py"><code>tests/test_two_qubit_bell.py</code></a></td>
-<td>Bell-state stabilizers and formatting</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_bitflip3.py"><code>tests/test_bitflip3.py</code></a></td>
-<td>3-qubit repetition-code encode, syndrome, correction</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_gaussian_elimination.py"><code>tests/test_gaussian_elimination.py</code></a></td>
 <td>GF(2) RREF and rank</td>
 </tr>
 <tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_additional_clifford_gates.py"><code>tests/test_additional_clifford_gates.py</code></a></td>
-<td>Extra state-level Clifford operations</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_random_circuits.py"><code>tests/test_random_circuits.py</code></a></td>
-<td>Random Clifford round trips, measurement validity, commutation, rank</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_qiskit_circuits.py"><code>tests/test_qiskit_circuits.py</code></a></td>
-<td>Small Qiskit-to-local conversion checks</td>
-</tr>
-<tr>
-<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/tests/test_nonclifford_gates.py"><code>tests/test_nonclifford_gates.py</code></a></td>
-<td>Statevector fallback and non-Clifford gates</td>
+<td><a href="https://github.com/atharvmunot004/python-stabilizer/blob/main/stabilizer_python/codes.py"><code>stabilizer_python/codes.py</code></a></td>
+<td>Legacy pedagogical <code>BitFlip3Code</code> and <code>Shor9Code</code> helpers</td>
 </tr>
 </tbody>
 </table>
-<p>The most important tableau invariant is that stabilizer rows remain independent and mutually commuting after Clifford gates and measurements. In tests this is checked using the binary symplectic product and <code>rank_gf2</code>.</p>
-<hr />
-<h2 id="extension-points">Extension points</h2>
-<p>The cleanest ways to extend the project are:</p>
-<ul>
-<li>Add a new state-level Clifford gate to <code>StabilizerState</code>, then add tests that compare its decomposition or expected stabilizers.</li>
-<li>Add a new gate to <code>gate.py</code> as either a module-level instance for fixed gates or a factory function for parameterized gates.</li>
-<li>Set <code>is_clifford=True</code> only if the gate maps every Pauli to a single Pauli under conjugation.</li>
-<li>Add a convenience method to <code>Circuit</code> and to <code>QuantumSimulator.apply</code>'s routing table.</li>
-<li>Add the gate name to <code>qiskit_interop.py</code>'s name map if it has a Qiskit equivalent.</li>
-<li>Add new code examples in <code>codes.py</code> when the operation is part of a reusable QEC workflow.</li>
-<li>Add examples under <a href="https://github.com/atharvmunot004/python-stabilizer/tree/main/stabilizer_python/examples"><code>stabilizer_python/examples/</code></a> when the workflow is mainly educational.</li>
-<li>Add docs under <code>docs/theory/</code> for math-heavy concepts and under <code>docs/</code> for API or architecture guidance.</li>
-</ul>
+<p>The top-level package exports the new general-code instances (<code>BitFlip3Code</code>,
+<code>PhaseFlip3Code</code>, <code>PerfectCode</code>, <code>SteaneCode</code>, <code>Shor9Code</code>, <code>SurfaceCode3</code>) from
+<code>stabilizer_code.py</code>. The legacy helpers remain available under
+<code>stabilizer_python.codes</code>.</p>
 
 
 

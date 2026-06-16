@@ -10,9 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://atharvmunot004.github.io/python-stabilizer/proofs/x-gate-proof/">
+        <link rel="canonical" href="https://atharvmunot004.github.io/python-stabilizer/architecture/input-processing/">
       
       
+        <link rel="prev" href="../module-map/">
+      
+      
+        <link rel="next" href="../simulation-flow/">
       
       
         
@@ -23,7 +27,7 @@
     
     
       
-        <title>X gate proof - stabilizer-python</title>
+        <title>Input Processing - stabilizer-python</title>
       
     
     
@@ -74,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#x-gate-mathematical-proof-complexity-analysis" class="md-skip">
+        <a href="#input-processing-and-case-handling" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              X gate proof
+              Input Processing
             
           </span>
         </div>
@@ -256,11 +260,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../architecture/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -857,26 +863,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -894,7 +905,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -912,7 +923,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -940,7 +951,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/module-map/" class="md-nav__link">
+      <a href="../module-map/" class="md-nav__link">
         
   
   
@@ -965,10 +976,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../architecture/input-processing/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input Processing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -984,6 +1022,315 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stabilizer-state-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stabilizer State Inputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stabilizer State Inputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stabilizerstatezeron" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StabilizerState.zero(n)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pauli-string-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pauli String Inputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pauli String Inputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#normalization-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Normalization Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invalid-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Invalid Cases
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gate-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate Inputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gate Inputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Circuit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantumsimulatorapply" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QuantumSimulator.apply(...)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clifford-versus-non-clifford-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clifford Versus Non-Clifford Routing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measurement-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Measurement Inputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Measurement Inputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tableau-measurement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tableau Measurement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statevector-measurement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statevector Measurement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stabilizercode-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StabilizerCode Inputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="StabilizerCode Inputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameter Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generator-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generator Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-failure-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Failure Cases
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syndrome-check-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syndrome Check Inputs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#noise-and-benchmark-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Noise And Benchmark Inputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Noise And Benchmark Inputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pauli-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pauli noise
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encodedstate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EncodedState
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benchmark_code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        benchmark_code
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qiskit-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qiskit Inputs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug-and-trace-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug And Trace Cases
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -996,7 +1343,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/simulation-flow/" class="md-nav__link">
+      <a href="../simulation-flow/" class="md-nav__link">
         
   
   
@@ -1024,7 +1371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/stabilizer-codes/" class="md-nav__link">
+      <a href="../stabilizer-codes/" class="md-nav__link">
         
   
   
@@ -1052,7 +1399,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/extension-points/" class="md-nav__link">
+      <a href="../extension-points/" class="md-nav__link">
         
   
   
@@ -1378,6 +1725,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1386,89 +1735,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#x-gate-mathematical-proof-complexity-analysis" class="md-nav__link">
+  <a href="#stabilizer-state-inputs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        X Gate: Mathematical Proof &amp; Complexity Analysis
+        Stabilizer State Inputs
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="X Gate: Mathematical Proof &amp; Complexity Analysis">
+    <nav class="md-nav" aria-label="Stabilizer State Inputs">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-the-x-gate-does-to-stabilizers" class="md-nav__link">
+  <a href="#stabilizerstatezeron" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What the X Gate Does to Stabilizers
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-the-formal-proof" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why? The Formal Proof
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#your-implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Your Implementation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#time-complexity" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Time Complexity
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Time Complexity">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#your-implementation_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Your Implementation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#chps-implementation-aaronsongottesman-2004" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CHP's Implementation (Aaronson–Gottesman 2004)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#comparison-summary" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Comparison Summary
+        StabilizerState.zero(n)
       
     </span>
   </a>
@@ -1479,9 +1761,265 @@
     </nav>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#pauli-string-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pauli String Inputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pauli String Inputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#normalization-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Normalization Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invalid-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Invalid Cases
+      
+    </span>
+  </a>
+  
+</li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gate-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate Inputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gate Inputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Circuit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantumsimulatorapply" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QuantumSimulator.apply(...)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clifford-versus-non-clifford-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clifford Versus Non-Clifford Routing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measurement-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Measurement Inputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Measurement Inputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tableau-measurement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tableau Measurement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statevector-measurement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statevector Measurement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stabilizercode-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StabilizerCode Inputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="StabilizerCode Inputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameter Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generator-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generator Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-failure-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Failure Cases
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syndrome-check-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syndrome Check Inputs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#noise-and-benchmark-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Noise And Benchmark Inputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Noise And Benchmark Inputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pauli-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pauli noise
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encodedstate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EncodedState
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benchmark_code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        benchmark_code
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qiskit-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qiskit Inputs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug-and-trace-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug And Trace Cases
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1505,185 +2043,413 @@
   
 
 
-  <h1>X gate proof</h1>
-
-<h2 id="x-gate-mathematical-proof-complexity-analysis">X Gate: Mathematical Proof &amp; Complexity Analysis</h2>
-<h3 id="what-the-x-gate-does-to-stabilizers">What the X Gate Does to Stabilizers</h3>
-<p>The Pauli X gate acts on stabilizer tableaux via <strong>conjugation</strong>: for any stabilizer generator <span class="arithmatex">\(g\)</span>, the new stabilizer after applying <span class="arithmatex">\(X_q\)</span> is <span class="arithmatex">\(X_q \cdot g \cdot X_q^\dagger = X_q \cdot g \cdot X_q\)</span> (since <span class="arithmatex">\(X = X^\dagger\)</span>).</p>
-<p>We need to know how <span class="arithmatex">\(X_q\)</span> conjugates each single-qubit Pauli on qubit <span class="arithmatex">\(q\)</span>:</p>
-<div class="arithmatex">\[X_q \cdot I_q \cdot X_q = I_q$$
-$$X_q \cdot X_q \cdot X_q = X_q$$
-$$X_q \cdot Y_q \cdot X_q = X(iXZ)X = i \cdot X^2ZX = i \cdot ZX = -iXZ \cdot X = -Y_q$$
-$$X_q \cdot Z_q \cdot X_q = -Z_q\]</div>
-<p>So the sign rule is:</p>
-<blockquote>
-<p><strong><span class="arithmatex">\(X_q\)</span> conjugation flips the sign of any Pauli row that contains <span class="arithmatex">\(Z\)</span> or <span class="arithmatex">\(Y\)</span> on qubit <span class="arithmatex">\(q\)</span>.</strong></p>
-</blockquote>
+<h1 id="input-processing-and-case-handling">Input Processing And Case Handling</h1>
+<p>This page explains how <code>stabilizer-python</code> processes user input and what happens
+for valid, invalid, edge, and mixed-backend cases.</p>
 <hr />
-<h3 id="why-the-formal-proof">Why? The Formal Proof</h3>
-<p>A stabilizer row <span class="arithmatex">\(P\)</span> acting on <span class="arithmatex">\(n\)</span> qubits is a tensor product. Only the component on qubit <span class="arithmatex">\(q\)</span> matters for the sign update. That component is one of <span class="arithmatex">\(\{I, X, Y, Z\}\)</span>, encoded as <span class="arithmatex">\((x_q, z_q) \in \{(0,0),(1,0),(1,1),(0,1)\}\)</span>.</p>
-<p><strong>Claim:</strong> <span class="arithmatex">\(X_q P X_q = (-1)^{z_q} P\)</span></p>
-<p><em>Proof by exhaustive case analysis on the qubit-<span class="arithmatex">\(q\)</span> component:</em></p>
-<table>
-<thead>
-<tr>
-<th><span class="arithmatex">\((x_q, z_q)\)</span></th>
-<th>Pauli</th>
-<th><span class="arithmatex">\(X P X\)</span> on qubit <span class="arithmatex">\(q\)</span></th>
-<th>Sign flip?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\((0,0)\)</span></td>
-<td><span class="arithmatex">\(I\)</span></td>
-<td><span class="arithmatex">\(X I X = I\)</span></td>
-<td>No — <span class="arithmatex">\(z_q = 0\)</span> ✓</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\((1,0)\)</span></td>
-<td><span class="arithmatex">\(X\)</span></td>
-<td><span class="arithmatex">\(X X X = X\)</span></td>
-<td>No — <span class="arithmatex">\(z_q = 0\)</span> ✓</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\((0,1)\)</span></td>
-<td><span class="arithmatex">\(Z\)</span></td>
-<td><span class="arithmatex">\(X Z X = -Z\)</span></td>
-<td>Yes — <span class="arithmatex">\(z_q = 1\)</span> ✓</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\((1,1)\)</span></td>
-<td><span class="arithmatex">\(Y = iXZ\)</span></td>
-<td><span class="arithmatex">\(X(iXZ)X = i(X^2)(ZX) = i \cdot ZX = -iXZ = -Y\)</span></td>
-<td>Yes — <span class="arithmatex">\(z_q = 1\)</span> ✓</td>
-</tr>
-</tbody>
-</table>
-<p>The key identity for the <span class="arithmatex">\(Y\)</span> case spelled out:
-$<span class="arithmatex">\(XYX = X(iXZ)X = i \underbrace{(XX)}_{=I} ZX = iZX = i(-XZ) = -iXZ = -Y\)</span>$</p>
-<p>using <span class="arithmatex">\(ZX = -XZ\)</span> (anticommutativity). <span class="arithmatex">\(\square\)</span></p>
-<p>The sign flip rule is purely: <strong>if <span class="arithmatex">\(z_q = 1\)</span>, flip <span class="arithmatex">\(r\_phase[r]\)</span></strong>. The <span class="arithmatex">\(x_q, z_q\)</span> bits themselves are unchanged, because conjugation by <span class="arithmatex">\(X\)</span> doesn't change what <em>type</em> of Pauli it is — only its sign.</p>
+<h2 id="stabilizer-state-inputs">Stabilizer State Inputs</h2>
+<h3 id="stabilizerstatezeron"><code>StabilizerState.zero(n)</code></h3>
+<p>Input:</p>
+<ul>
+<li><code>n</code>: number of qubits</li>
+</ul>
+<p>Validation:</p>
+<ul>
+<li><code>n</code> must be at least 1</li>
+<li>invalid <code>n</code> raises <code>ValueError</code></li>
+</ul>
+<p>Processing:</p>
+<ol>
+<li>Allocate <code>2n x n</code> X and Z matrices full of zero bits.</li>
+<li>Allocate <code>2n</code> phase bits full of zeroes.</li>
+<li>Set destabilizer row <code>i</code> to <code>+X_i</code>.</li>
+<li>Set stabilizer row <code>n+i</code> to <code>+Z_i</code>.</li>
+</ol>
+<p>Result:</p>
+<ul>
+<li>the physical state <span class="arithmatex">\(|0\cdots0\rangle\)</span></li>
+<li>stabilizers <code>+ZIIII...</code>, <code>+IZIII...</code>, and so on</li>
+</ul>
 <hr />
-<h3 id="your-implementation">Your Implementation</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">q</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r_phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>
+<h2 id="pauli-string-inputs">Pauli String Inputs</h2>
+<p>Pauli strings are used by:</p>
+<ul>
+<li><code>StabilizerState.from_stabilizer_list(...)</code></li>
+<li><code>StabilizerCode(...)</code></li>
+<li><code>read_syndrome(...)</code></li>
+<li><code>SyndromeExtractor(...)</code></li>
+<li>parity-check helpers through check strings</li>
+</ul>
+<p>Accepted characters:</p>
+<ul>
+<li><code>I</code></li>
+<li><code>X</code></li>
+<li><code>Y</code></li>
+<li><code>Z</code></li>
+</ul>
+<p>Accepted sign prefixes:</p>
+<ul>
+<li><code>+</code></li>
+<li><code>-</code></li>
+<li>omitted sign, interpreted as <code>+</code></li>
+</ul>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="s2">&quot;ZZI&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="s2">&quot;+ZZI&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="s2">&quot;-XZZXI&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="s2">&quot;+IIIXXXX&quot;</span>
 </code></pre></div>
-<p>This is a direct encoding of the proof: iterate all <span class="arithmatex">\(2n\)</span> rows (destabilizers + stabilizers), and for each row where <span class="arithmatex">\(z\_mat[r][q] = 1\)</span> (meaning the Pauli on qubit <span class="arithmatex">\(q\)</span> is <span class="arithmatex">\(Z\)</span> or <span class="arithmatex">\(Y\)</span>), flip the phase bit. No <span class="arithmatex">\(x\_mat\)</span> modification needed.</p>
-<hr />
-<h3 id="time-complexity">Time Complexity</h3>
-<h4 id="your-implementation_1">Your Implementation</h4>
-<table>
-<thead>
-<tr>
-<th>Step</th>
-<th>Operations</th>
-<th>Cost</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Iterate all rows</td>
-<td><span class="arithmatex">\(2n\)</span> iterations</td>
-<td><span class="arithmatex">\(O(n)\)</span></td>
-</tr>
-<tr>
-<td>Per row: read <code>z_mat[r][q]</code></td>
-<td>1 read</td>
-<td><span class="arithmatex">\(O(1)\)</span></td>
-</tr>
-<tr>
-<td>Per row: conditional XOR on <code>r_phase[r]</code></td>
-<td>1 write (branch)</td>
-<td><span class="arithmatex">\(O(1)\)</span></td>
-</tr>
-<tr>
-<td><strong>Total</strong></td>
-<td></td>
-<td><strong><span class="arithmatex">\(O(n)\)</span></strong></td>
-</tr>
-</tbody>
-</table>
-<p>Memory access pattern: a single column scan over <code>z_mat</code>, which is a list-of-lists in your Python implementation. Each <code>z_mat[r][q]</code> access is a Python list index — <span class="arithmatex">\(O(1)\)</span> but with high constant factor due to interpreter overhead.</p>
-<h4 id="chps-implementation-aaronsongottesman-2004">CHP's Implementation (Aaronson–Gottesman 2004)</h4>
-<p>CHP stores the tableau as packed bitfields — each row is a C <code>unsigned long</code> array where bits are packed. The X gate in CHP is:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">r</span><span class="o">++</span><span class="p">)</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">qubit</span><span class="p">])</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="n">phase</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">phase</span><span class="p">[</span><span class="n">r</span><span class="p">];</span>
+<h3 id="normalization-rules">Normalization Rules</h3>
+<p>For <code>StabilizerCode</code>, each generator is stripped, uppercased, and stored with an
+explicit sign:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&quot;zzi&quot;   -&gt; &quot;+ZZI&quot;
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>&quot; +xzi&quot; -&gt; &quot;+XZI&quot;
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>&quot;-yyi&quot;  -&gt; &quot;-YYI&quot;
 </code></pre></div>
-<p>Structurally identical, so also <span class="arithmatex">\(O(n)\)</span> in the number of row iterations, but with important constant-factor differences:</p>
+<p>For syndrome extraction, signs are removed before measurement because a parity
+check circuit measures the Pauli support. A failed check is reported by the
+measured eigenvalue bit.</p>
+<h3 id="invalid-cases">Invalid Cases</h3>
+<p>These cases raise <code>ValueError</code>:</p>
 <table>
 <thead>
 <tr>
-<th>Factor</th>
-<th>Your Python</th>
-<th>CHP (C)</th>
+<th>Input problem</th>
+<th>Example</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Row iteration</td>
-<td>Python <code>for</code> loop</td>
-<td>C <code>for</code> loop</td>
+<td>empty string</td>
+<td><code>""</code></td>
 </tr>
 <tr>
-<td>Memory layout</td>
-<td>List of Python <code>int</code> objects, pointer-indirect</td>
-<td>Contiguous <code>int</code> array, cache-friendly</td>
+<td>sign only</td>
+<td><code>"+"</code></td>
 </tr>
 <tr>
-<td>Per-element access</td>
-<td>PyObject deref + bounds check</td>
-<td>Direct memory read</td>
+<td>invalid Pauli character</td>
+<td><code>"+ZAI"</code></td>
 </tr>
 <tr>
-<td>Phase flip</td>
-<td>Python XOR on boxed int</td>
-<td>Bitwise NOT on C int</td>
+<td>wrong length for code or state</td>
+<td><code>StabilizerCode(n=3, k=1, generators=["+ZZ"])</code></td>
 </tr>
 <tr>
-<td>Constant factor (approx)</td>
-<td>~50–100× slower</td>
-<td>Baseline</td>
+<td>wrong number of stabilizers for <code>from_stabilizer_list</code></td>
+<td>two generators for a 3-qubit full state</td>
+</tr>
+<tr>
+<td>identity stabilizer row in <code>from_stabilizer_list</code></td>
+<td><code>"+III"</code> in a full stabilizer-state definition</td>
 </tr>
 </tbody>
 </table>
-<p>CHP also optionally uses <strong>packed bitfields</strong> for larger simulations: entire rows are packed into <code>unsigned long</code> words, so a row multiplication becomes <span class="arithmatex">\(O(n/w)\)</span> with word size <span class="arithmatex">\(w = 64\)</span>. For the X gate specifically, packing doesn't help since you're accessing a single <em>column</em> (qubit <span class="arithmatex">\(q\)</span> across all rows) rather than full rows — you'd still need <span class="arithmatex">\(2n\)</span> bit extractions.</p>
-<h4 id="comparison-summary">Comparison Summary</h4>
+<hr />
+<h2 id="gate-inputs">Gate Inputs</h2>
+<p>Gate inputs enter through either <code>Circuit</code> or <code>QuantumSimulator</code>.</p>
+<h3 id="circuit"><code>Circuit</code></h3>
+<p><code>Circuit(n_qubits)</code> validates that <code>n_qubits &gt;= 1</code>.</p>
+<p>Fluent methods such as <code>.h(q)</code>, <code>.cnot(control, target)</code>, <code>.rz(theta, q)</code>, and
+<code>.mz(q)</code> append an <code>Op</code> object. They do not validate the target against a state
+yet, because no state has been supplied.</p>
+<p>Validation happens during <code>Circuit.run(state)</code>:</p>
+<ol>
+<li>A <code>QuantumSimulator</code> is created or reused.</li>
+<li>If the target is a <code>StabilizerState</code>, the simulator wraps that exact tableau.</li>
+<li>The simulator checks gate arity and target indices.</li>
+<li>Unknown <code>Op.name</code> values raise <code>ValueError</code>.</li>
+</ol>
+<h3 id="quantumsimulatorapply"><code>QuantumSimulator.apply(...)</code></h3>
+<p><code>QuantumSimulator.apply(name, qubits, params=None)</code> handles string gate names.</p>
+<p>Processing:</p>
+<ol>
+<li>Look up <code>name</code> in the simulator's gate table.</li>
+<li>Build or retrieve a <code>Gate</code> object.</li>
+<li>Validate arity.</li>
+<li>Validate each qubit index.</li>
+<li>Reject duplicate qubit indices for multi-qubit gates.</li>
+<li>Route by backend:</li>
+<li>Clifford gate and mode is <code>"tableau"</code>: mutate <code>StabilizerState</code></li>
+<li>non-Clifford gate or already in <code>"statevector"</code> mode: use <code>Statevector</code></li>
+</ol>
+<p>Invalid cases:</p>
 <table>
 <thead>
 <tr>
-<th>Metric</th>
-<th>Your Code</th>
-<th>CHP</th>
+<th>Case</th>
+<th>Result</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Algorithmic complexity</td>
-<td><span class="arithmatex">\(O(n)\)</span></td>
-<td><span class="arithmatex">\(O(n)\)</span></td>
+<td>unknown gate name</td>
+<td><code>ValueError</code></td>
 </tr>
 <tr>
-<td>Column access pattern</td>
-<td>Cache-unfriendly (row-major list-of-lists)</td>
-<td>Cache-unfriendly (same, but C arrays)</td>
+<td>too few or too many qubits</td>
+<td><code>ValueError</code></td>
 </tr>
 <tr>
-<td>Practical speed at <span class="arithmatex">\(n=1000\)</span></td>
-<td>~microseconds (CPython)</td>
-<td>~nanoseconds</td>
+<td>out-of-range qubit</td>
+<td><code>ValueError</code></td>
 </tr>
 <tr>
-<td>Correctness vs CHP</td>
-<td>✓ Identical logic</td>
-<td>Reference</td>
+<td>duplicate targets on a multi-qubit gate</td>
+<td><code>ValueError</code></td>
+</tr>
+<tr>
+<td>missing parameter for parameterized gate</td>
+<td><code>ValueError</code> or constructor error</td>
 </tr>
 </tbody>
 </table>
-<p><strong>The algorithm is optimal</strong> — you cannot do better than <span class="arithmatex">\(O(n)\)</span> since you must in principle inspect every row to check whether conjugation affects its phase. The gap between your implementation and CHP is purely a Python-vs-C constant factor, not algorithmic. If you wanted to close this gap, the path would be NumPy column masking: <code>self.r_phase ^= self.z_mat[:, q]</code> as arrays, which would recover roughly the same constant factor as CHP via vectorized C under the hood.</p>
+<hr />
+<h2 id="clifford-versus-non-clifford-routing">Clifford Versus Non-Clifford Routing</h2>
+<p>Every <code>Gate</code> object has <code>is_clifford</code>.</p>
+<p>If <code>is_clifford=True</code> and the simulator is still in tableau mode, the operation
+is dispatched to a tableau method such as:</p>
+<ul>
+<li><code>h</code></li>
+<li><code>s</code></li>
+<li><code>sdg</code></li>
+<li><code>sx</code></li>
+<li><code>sxdg</code></li>
+<li><code>x</code></li>
+<li><code>y</code></li>
+<li><code>z</code></li>
+<li><code>cnot</code></li>
+<li><code>cz</code></li>
+<li><code>cy</code></li>
+<li><code>swap</code></li>
+</ul>
+<p>If <code>is_clifford=False</code>, the simulator calls <code>_switch_to_statevector()</code>:</p>
+<ol>
+<li>Convert the current tableau to a dense vector using stabilizer projectors.</li>
+<li>Store the vector in <code>sim.sv</code>.</li>
+<li>Set <code>sim.mode = "statevector"</code>.</li>
+<li>Apply the gate matrix to the dense vector.</li>
+</ol>
+<p>Once in statevector mode, later Clifford gates also apply as matrices. The
+simulator does not switch back to tableau mode automatically.</p>
+<hr />
+<h2 id="measurement-inputs">Measurement Inputs</h2>
+<h3 id="tableau-measurement">Tableau Measurement</h3>
+<p><code>StabilizerState.measure_z(q)</code> validates <code>q</code> with <code>_check_qubit</code>.</p>
+<p>Then it has two branches:</p>
+<table>
+<thead>
+<tr>
+<th>Branch</th>
+<th>Condition</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>deterministic</td>
+<td>no stabilizer row has X support on <code>q</code></td>
+<td>compute the fixed sign by solving for a stabilizer product equal to <code>Z_q</code></td>
+</tr>
+<tr>
+<td>random</td>
+<td>some stabilizer row has X support on <code>q</code></td>
+<td>sample 0/1 uniformly, row-reduce around a pivot, then install signed <code>Z_q</code></td>
+</tr>
+</tbody>
+</table>
+<p>Invalid cases:</p>
+<ul>
+<li><code>q &lt; 0</code> raises <code>ValueError</code></li>
+<li><code>q &gt;= state.n</code> raises <code>ValueError</code></li>
+</ul>
+<h3 id="statevector-measurement">Statevector Measurement</h3>
+<p><code>Statevector.measure_z(qubit)</code>:</p>
+<ol>
+<li>Sums probabilities of basis states whose selected bit is 0 or 1.</li>
+<li>Samples an outcome.</li>
+<li>Zeroes inconsistent amplitudes.</li>
+<li>Renormalizes.</li>
+</ol>
+<hr />
+<h2 id="stabilizercode-inputs">StabilizerCode Inputs</h2>
+<p><code>StabilizerCode(n, k, generators, name="", logical_xs=None, logical_zs=None)</code>
+is the main high-level QEC input path.</p>
+<h3 id="parameter-validation">Parameter Validation</h3>
+<p>Validation order:</p>
+<ol>
+<li><code>n</code> must be at least 1.</li>
+<li><code>k</code> must satisfy <code>0 &lt;= k &lt;= n</code>.</li>
+<li><code>len(generators)</code> must equal <code>n-k</code>.</li>
+<li>Every generator must have length <code>n</code> after stripping an optional sign.</li>
+<li>Every generator character must be <code>I</code>, <code>X</code>, <code>Y</code>, or <code>Z</code>.</li>
+<li>The generator check matrix must have GF(2) rank <code>n-k</code>.</li>
+<li>Every generator pair must commute under the binary symplectic product.</li>
+<li>Provided logical operators, if present, must:</li>
+<li>have exactly <code>k</code> entries</li>
+<li>have length <code>n</code></li>
+<li>be non-identity</li>
+<li>commute with all stabilizers</li>
+<li>not be in the stabilizer span</li>
+<li>anticommute with the paired logical operator</li>
+<li>commute with all unpaired logical operators</li>
+</ol>
+<h3 id="generator-matrix">Generator Matrix</h3>
+<p>Each Pauli string becomes a binary vector:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Pauli string: +XZZXI
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>X bits:       10010
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Z bits:       01110
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Vector:       [X bits | Z bits]
+</code></pre></div>
+<p>The code uses this representation for:</p>
+<ul>
+<li>rank checks</li>
+<li>commutation checks</li>
+<li>logical operator validation</li>
+<li>normalizer search</li>
+<li>distance search</li>
+</ul>
+<h3 id="common-failure-cases">Common Failure Cases</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Why it fails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>StabilizerCode(3, 1, ["+ZZI"])</code></td>
+<td>only one generator, expected <code>n-k = 2</code></td>
+</tr>
+<tr>
+<td><code>StabilizerCode(3, 1, ["+ZZI", "+ZZI"])</code></td>
+<td>generators are dependent</td>
+</tr>
+<tr>
+<td><code>StabilizerCode(2, 0, ["+XX", "+ZI"])</code></td>
+<td>generators anticommute</td>
+</tr>
+<tr>
+<td>logical X of <code>"+III"</code></td>
+<td>logical operator cannot be identity</td>
+</tr>
+<tr>
+<td>logical X inside stabilizer span</td>
+<td>it is not a non-trivial logical</td>
+</tr>
+<tr>
+<td>state with wrong <code>n</code> passed to <code>read_syndrome</code></td>
+<td>data state size does not match the code</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="syndrome-check-inputs">Syndrome Check Inputs</h2>
+<p><code>StabilizerCode.read_syndrome(state)</code> strips signs from code generators and
+passes the check bodies to <code>syndrome.read_syndrome(state, check_operators)</code>.</p>
+<p><code>syndrome.read_syndrome</code>:</p>
+<ol>
+<li>Records the original data size.</li>
+<li>Validates every check string against that data size.</li>
+<li>Appends one <code>|0&gt;</code> ancilla.</li>
+<li>Measures each mixed Pauli check using <code>mixed_parity_check</code>.</li>
+<li>Removes the ancilla in a <code>finally</code> block.</li>
+</ol>
+<p>Because removal is in <code>finally</code>, the temporary ancilla is removed even when a
+check raises an error after allocation.</p>
+<p><code>SyndromeExtractor</code> is different: it allocates one or more ancillas once and
+keeps them attached to the state for repeated rounds.</p>
+<hr />
+<h2 id="noise-and-benchmark-inputs">Noise And Benchmark Inputs</h2>
+<h3 id="pauli-noise">Pauli noise</h3>
+<p>The E2 noise helpers validate probability inputs before mutating the tableau.</p>
+<table>
+<thead>
+<tr>
+<th>Function family</th>
+<th>Validation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apply_bit_flip</code>, <code>apply_phase_flip</code>, <code>apply_bit_phase_flip</code>, <code>apply_depolarizing</code></td>
+<td><code>p</code> must be in <code>[0, 1]</code></td>
+</tr>
+<tr>
+<td><code>apply_pauli_channel</code></td>
+<td><code>p_x</code>, <code>p_y</code>, and <code>p_z</code> must be non-negative and sum to at most 1</td>
+</tr>
+<tr>
+<td><code>_all</code> variants</td>
+<td>each target qubit is validated by the underlying single-qubit helper</td>
+</tr>
+<tr>
+<td><code>NoisyCircuit</code></td>
+<td><code>gate_error</code> and <code>meas_error</code> must be in <code>[0, 1]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each sampled error mutates the <code>StabilizerState</code> immediately and returns the
+Pauli label that was applied.</p>
+<h3 id="encodedstate">EncodedState</h3>
+<p><code>EncodedState(state, code)</code> expects:</p>
+<ul>
+<li>a physical <code>StabilizerState</code></li>
+<li>a code-like object with <code>k</code>, <code>logical_x(i)</code>, <code>logical_z(i)</code>, and optionally
+  <code>generators</code></li>
+</ul>
+<p>Logical-qubit indices are checked against <code>0 &lt;= i &lt; k</code>. Logical readout returns
+<code>None</code> when the current stabilizer group does not determine the requested
+logical observable.</p>
+<h3 id="benchmark_code">benchmark_code</h3>
+<p><code>benchmark_code(code, noise_model, decoder, n_shots, ...)</code> validates
+<code>n_shots &gt;= 0</code>. Per shot, it expects:</p>
+<ol>
+<li><code>code.n</code> to be the physical qubit count.</li>
+<li><code>code.encode(state)</code> to prepare the logical state in place.</li>
+<li><code>noise_model(state)</code> to mutate the state or leave it unchanged.</li>
+<li><code>code.read_syndrome(state)</code> to return a list of syndrome bits.</li>
+<li><code>decoder(syndrome)</code> to return <code>(qubit, pauli)</code> corrections.</li>
+</ol>
+<p>Correction Paulis must be <code>"X"</code>, <code>"Y"</code>, or <code>"Z"</code>. Any other correction label
+raises <code>ValueError</code>. Qubit range is validated by the corresponding tableau gate
+method.</p>
+<p><code>build_lookup_decoder(code, max_errors=...)</code> validates <code>max_errors &gt;= 0</code>, then
+enumerates Pauli errors up to that weight and stores the first minimum-weight
+correction found for each syndrome.</p>
+<hr />
+<h2 id="qiskit-inputs">Qiskit Inputs</h2>
+<p><code>from_qiskit(qc)</code> accepts a Qiskit <code>QuantumCircuit</code>.</p>
+<p>Processing:</p>
+<ol>
+<li>Iterate over <code>qc.data</code>.</li>
+<li>Resolve instruction name.</li>
+<li>Resolve local qubit indices from Qiskit's flat qubit list.</li>
+<li>Skip <code>barrier</code> and <code>delay</code>.</li>
+<li>Translate common aliases:</li>
+<li><code>cx</code> -&gt; <code>cnot</code></li>
+<li><code>measure</code> -&gt; <code>mz</code></li>
+<li><code>u1</code> -&gt; <code>p</code></li>
+<li><code>u3</code> -&gt; <code>u</code></li>
+<li>Extract numeric parameters for parameterized gates.</li>
+<li>Expand composite instructions through their definition when available.</li>
+<li>Raise <code>ValueError</code> for unknown unsupported instructions.</li>
+</ol>
+<p>See <a href="../../qiskit-interop/">How from_qiskit Works</a> for the full conversion path.</p>
+<hr />
+<h2 id="debug-and-trace-cases">Debug And Trace Cases</h2>
+<p><code>QuantumSimulator(debug=True)</code> checks tableau invariants after Clifford gates and
+measurements while still in tableau mode.</p>
+<p><code>QuantumSimulator(trace=True)</code> records a <code>SimulatorTraceStep</code> after every gate.
+The snapshot type depends on the active backend:</p>
+<ul>
+<li>tableau mode: <code>StabilizerState.copy()</code></li>
+<li>statevector mode: dense statevector copy</li>
+</ul>
+<p><code>TracedCircuit</code> records every Clifford operation and measurement when the target
+remains tableau-compatible. If a circuit operation forces the simulator into
+statevector mode, <code>TracedCircuit</code> raises because its purpose is tableau pedagogy.</p>
 
 
 
