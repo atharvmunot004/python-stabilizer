@@ -10,3 +10,4 @@ site/
 pytest_out.txt
 pushfiles.bat
 development-roadmap-*
+talking_points.md

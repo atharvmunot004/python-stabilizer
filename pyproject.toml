@@ -17,6 +17,7 @@ classifiers = [
 dev = [
     "pytest",
     "qiskit",
+    "numpy"
 ]
 
 [tool.pytest.ini_options]

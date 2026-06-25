@@ -59,6 +59,9 @@ nav:
     - Noise And Benchmarking: getting-started/benchmarking.md
     - Tracing Syndrome Extraction: getting-started/tracing.md
     - Running Tests: getting-started/tests.md
+  - Demos:
+    - 15-Minute Demo: demos/15-minute-demo.md
+    - Complete Feature Demo: demos/complete-demo.md
   - Architecture:
     - Overview: architecture/index.md
     - Module Map: architecture/module-map.md
