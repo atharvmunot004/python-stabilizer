@@ -5,8 +5,12 @@
 
 ```
 Install:  pip install git+https://github.com/atharvmunot004/python-stabilizer.git
+          pip install qiskit          # optional — used in every section below
 Docs:     atharvmunot004.github.io/python-stabilizer
 ```
+
+Every section builds its gates in **Qiskit** first, converts with
+`from_qiskit()`, then uses the library for simulation, inspection, or analysis.
 
 ---
 
@@ -16,23 +20,31 @@ The fundamental object is `StabilizerState` — a binary matrix (the *tableau*)
 that encodes the quantum state in O(n²) space.
 
 ```python
+from qiskit import QuantumCircuit as QiskitCircuit
 from stabilizer_python import StabilizerState
+from stabilizer_python.qiskit_interop import from_qiskit
 
 # ── Construct ──────────────────────────────────────────────────────────────
-st = StabilizerState.zero(3)          # |000⟩
+st = StabilizerState.zero(3)          # |000⟩  (state prep — not a gate)
 print("n =", st.n)                    # → 3
 
-# ── Single-qubit gates ─────────────────────────────────────────────────────
-st.h(0)                               # Hadamard: |0⟩ → |+⟩
+# ── Single-qubit gates (Qiskit → from_qiskit → run) ───────────────────────
+h_qc = QiskitCircuit(3)
+h_qc.h(0)                             # Hadamard: |0⟩ → |+⟩
+from_qiskit(h_qc).run(st)
 print(st.stabilizer_strings())        # → ['+XII', '+IZI', '+IIZ']
 
-st.s(0)                               # Phase / S: X → Y
+s_qc = QiskitCircuit(3)
+s_qc.s(0)                             # Phase / S: X → Y  (on current state)
+from_qiskit(s_qc).run(st)
 print(st.stabilizer_strings())        # → ['+YII', '+IZI', '+IIZ']
 
 # ── Two-qubit gates ────────────────────────────────────────────────────────
 st2 = StabilizerState.zero(2)
-st2.h(0)
-st2.cnot(0, 1)                        # Bell state
+bell = QiskitCircuit(2)
+bell.h(0)
+bell.cx(0, 1)                         # Bell state
+from_qiskit(bell).run(st2)
 print(st2.stabilizer_strings())       # → ['+XX', '+ZZ']
 print(st2.destabilizer_strings())     # → ['+ZI', '+IX']
 ```
@@ -44,27 +56,45 @@ No complex arithmetic. No 2^n vector. The full state lives in 2n × (2n+1) bits.
 
 ## 2 · Circuit Builder ⏱ ~1 min
 
-`Circuit` is a fluent gate builder. It separates circuit definition from state.
+Define gates in Qiskit, convert once with `from_qiskit()`, then `run()` on any
+state or simulator.
 
 ```python
-from stabilizer_python import StabilizerState, Circuit
+from qiskit import QuantumCircuit as QiskitCircuit
+from stabilizer_python import StabilizerState
+from stabilizer_python.qiskit_interop import from_qiskit
 
-# Build a circuit once, run it on any state
-ghz_circuit = Circuit(4).h(0).cnot(0,1).cnot(0,2).cnot(0,3)
+# ── GHZ-4 in Qiskit ────────────────────────────────────────────────────────
+ghz_qc = QiskitCircuit(4)
+ghz_qc.h(0)
+ghz_qc.cx(0, 1)
+ghz_qc.cx(0, 2)
+ghz_qc.cx(0, 3)
+ghz_circuit = from_qiskit(ghz_qc)
 
 st = StabilizerState.zero(4)
 ghz_circuit.run(st)
 print(st.stabilizer_strings())
 # → ['+XXXX', '+ZZII', '+ZIZI', '+ZIIZ']
 
-# Circuits can include measurements — returns outcomes as a list
+# ── GHZ-3 with measurements ────────────────────────────────────────────────
+meas_qc = QiskitCircuit(3, 3)
+meas_qc.h(0)
+meas_qc.cx(0, 1)
+meas_qc.cx(0, 2)
+meas_qc.measure(0, 0)
+meas_qc.measure(1, 1)
+meas_qc.measure(2, 2)
+meas_circuit = from_qiskit(meas_qc)
+
 st2 = StabilizerState.zero(3)
-outcomes = Circuit(3).h(0).cnot(0,1).cnot(0,2).mz(0).mz(1).mz(2).run(st2)
+outcomes = meas_circuit.run(st2)
 print("GHZ measurements:", outcomes)  # always all-0 or all-1
 ```
 
-**What this shows:** Circuits are composable and reusable. `run()` works on both
-`StabilizerState` and `QuantumSimulator` — the same circuit object covers both modes.
+**What this shows:** Qiskit circuits convert to the local `Circuit` type.
+`run()` works on both `StabilizerState` and `QuantumSimulator` — the same
+converted circuit covers both modes.
 
 ---
 
@@ -73,10 +103,17 @@ print("GHZ measurements:", outcomes)  # always all-0 or all-1
 The tableau is fully readable — every bit, every row.
 
 ```python
-from stabilizer_python import StabilizerState, Circuit
+from qiskit import QuantumCircuit as QiskitCircuit
+from stabilizer_python import StabilizerState
+from stabilizer_python.qiskit_interop import from_qiskit
+
+ghz_qc = QiskitCircuit(3)
+ghz_qc.h(0)
+ghz_qc.cx(0, 1)
+ghz_qc.cx(0, 2)
 
 st = StabilizerState.zero(3)
-Circuit(3).h(0).cnot(0,1).cnot(0,2).run(st)   # GHZ-3
+from_qiskit(ghz_qc).run(st)           # GHZ-3
 
 # ── String views ───────────────────────────────────────────────────────────
 print("Stabilizers:  ", st.stabilizer_strings())
@@ -108,12 +145,18 @@ the raw data can be handed off to any downstream analysis.
 `z_measurement_branch` tells you whether the outcome will be random *before* measuring.
 
 ```python
+from qiskit import QuantumCircuit as QiskitCircuit
 from stabilizer_python import StabilizerState
+from stabilizer_python.qiskit_interop import from_qiskit
 import random; random.seed(42)
 
-# Deterministic measurement
+# Deterministic measurement — Bell state from Qiskit
+bell = QiskitCircuit(2)
+bell.h(0)
+bell.cx(0, 1)
+
 st = StabilizerState.zero(2)
-st.h(0); st.cnot(0, 1)               # Bell state: XX, ZZ stabilizers
+from_qiskit(bell).run(st)              # stabilizers: +XX, +ZZ
 print("Branch check:", st.z_measurement_branch(0))   # "random"
 
 r0 = st.measure_z(0)
@@ -123,7 +166,9 @@ print("Post-measure:", st.stabilizer_strings())
 
 # Reset — measure + conditional X → always leaves |0⟩
 st2 = StabilizerState.zero(1)
-st2.h(0)                              # |+⟩ — random
+plus = QiskitCircuit(1)
+plus.h(0)                             # |+⟩ — random
+from_qiskit(plus).run(st2)
 outcome = st2.reset_z(0)
 print(f"\nReset measured {outcome}, qubit is now:", st2.stabilizer_strings())  # always +Z
 ```
@@ -135,13 +180,16 @@ The branch check is free — it's O(n) and doesn't change the state.
 
 ## 5 · QEC Codes ⏱ ~3 min
 
-Six named codes out of the box. All share the same API.
+Six named codes out of the box. All share the same API. Pauli errors are applied
+via small Qiskit circuits converted with `from_qiskit()`.
 
 ```python
+from qiskit import QuantumCircuit as QiskitCircuit
 from stabilizer_python import (
     BitFlip3Code, PhaseFlip3Code, PerfectCode,
     SteaneCode, Shor9Code, SurfaceCode3,
 )
+from stabilizer_python.qiskit_interop import from_qiskit
 
 # ── All 6 codes, same interface ────────────────────────────────────────────
 all_codes = [BitFlip3Code, PhaseFlip3Code, PerfectCode, SteaneCode, Shor9Code, SurfaceCode3]
@@ -153,17 +201,29 @@ for c in all_codes:
 print("\n--- Bit-Flip [[3,1,1]] ---")
 state = BitFlip3Code.zero_state()
 print("Clean:          ", BitFlip3Code.read_syndrome(state))    # [0, 0]
-state.x(0)
+
+err = QiskitCircuit(3)
+err.x(0)
+from_qiskit(err).run(state)
 print("After X(qubit 0):", BitFlip3Code.read_syndrome(state))  # [1, 0]
-state.x(0); state.x(1)
+
+err2 = QiskitCircuit(3)
+err2.x(0)
+err2.x(1)
+from_qiskit(err2).run(state)
 print("After X(qubit 1):", BitFlip3Code.read_syndrome(state))  # [1, 1]
 
 # ── Steane: CSS code, corrects both X and Z ────────────────────────────────
 print("\n--- Steane [[7,1,3]] ---")
 state2 = SteaneCode.zero_state()
-state2.x(3)
+x_err = QiskitCircuit(7)
+x_err.x(3)
+from_qiskit(x_err).run(state2)
 print("Syndrome after X(3):", SteaneCode.read_syndrome(state2))
-state2.x(3); state2.z(5)
+
+z_err = QiskitCircuit(7)
+z_err.z(5)
+from_qiskit(z_err).run(state2)
 print("Syndrome after Z(5):", SteaneCode.read_syndrome(state2))
 
 # ── Perfect code: minimum code for any single-qubit error ─────────────────
@@ -171,27 +231,32 @@ print("\n--- Perfect [[5,1,3]] ---")
 print("Generators:", PerfectCode.generators)
 print("Logical X: ", PerfectCode.logical_x(0))
 state3 = PerfectCode.zero_state()
-state3.y(2)                            # arbitrary Pauli error
+y_err = QiskitCircuit(5)
+y_err.y(2)                            # arbitrary Pauli error
+from_qiskit(y_err).run(state3)
 syn = PerfectCode.read_syndrome(state3)
 print("Syndrome after Y(2):", syn)     # non-zero → detectable + correctable
 ```
 
 **What this shows:** `zero_state()` builds the logical |0⟩. `read_syndrome()` extracts
-the error pattern without destructive measurement. Every code exposes the same
-`generators`, `logical_x()`, `logical_z()`, and `distance()` interface.
+the error pattern without destructive measurement. Qiskit Pauli gates convert cleanly
+and run on encoded states the same way as native gate calls.
 
 ---
 
 ## 6 · Noise Channels ⏱ ~1.5 min
 
-Pauli noise channels apply stochastic single-qubit errors.
+Pauli noise channels apply stochastic single-qubit errors. Gate sequences come
+from Qiskit via `from_qiskit()`.
 
 ```python
+from qiskit import QuantumCircuit as QiskitCircuit
 from stabilizer_python import StabilizerState, SteaneCode
 from stabilizer_python.noise import (
     apply_depolarizing, apply_bit_flip_all,
     NoisyCircuit,
 )
+from stabilizer_python.qiskit_interop import from_qiskit
 import random; random.seed(7)
 
 # ── Single-qubit depolarizing ──────────────────────────────────────────────
@@ -205,9 +270,14 @@ errors = apply_bit_flip_all(state, p=0.05)
 print("Errors across 7 qubits:", errors)
 print("Syndrome:", SteaneCode.read_syndrome(state))
 
-# ── NoisyCircuit: automatic gate-level + measurement noise ─────────────────
+# ── NoisyCircuit: Qiskit Bell prep + automatic gate/measurement noise ──────
+bell_qc = QiskitCircuit(2)
+bell_qc.h(0)
+bell_qc.cx(0, 1)
+
 noisy = NoisyCircuit(n=2, gate_error=0.02, meas_error=0.03)
-noisy.h(0).cnot(0, 1).mz(0).mz(1)
+noisy.extend(from_qiskit(bell_qc).ops)   # reuse converted gate list
+noisy.mz(0).mz(1)
 
 results = []
 for _ in range(200):
@@ -219,13 +289,14 @@ print(f"\nBell state: {correlated}/200 correlated outcomes (expect ~196)")
 ```
 
 **What this shows:** Noise is modular — apply it before syndrome extraction in a QEC loop,
-or wire it into a `NoisyCircuit` for automatic Monte Carlo simulation.
+or wire a `from_qiskit()` gate list into `NoisyCircuit` for automatic Monte Carlo simulation.
 
 ---
 
 ## 7 · Decoder Benchmarking ⏱ ~2 min
 
 Full shot-based benchmarking: decode syndromes, count logical errors, scan thresholds.
+This section uses the code and noise API directly (no gate circuit).
 
 ```python
 from stabilizer_python import SteaneCode, build_lookup_decoder, benchmark_code, threshold_scan
@@ -272,37 +343,53 @@ the threshold is where the code stops providing an advantage.
 automatically on the first non-Clifford gate.
 
 ```python
-from stabilizer_python import QuantumSimulator, Circuit
+from qiskit import QuantumCircuit as QiskitCircuit
+from stabilizer_python import QuantumSimulator
+from stabilizer_python.qiskit_interop import from_qiskit
 import math
 
 # ── Clifford path: stays in tableau mode ───────────────────────────────────
+ghz_qc = QiskitCircuit(3)
+ghz_qc.h(0)
+ghz_qc.cx(0, 1)
+ghz_qc.cx(0, 2)
+
 sim = QuantumSimulator(3)
 print("Initial mode:    ", sim.mode)      # "tableau"
 
-Circuit(3).h(0).cnot(0,1).cnot(0,2).run(sim)
+from_qiskit(ghz_qc).run(sim)
 print("After GHZ:       ", sim.mode)      # still "tableau"
 print("State:           ", sim.tableau.stabilizer_strings()[:2], "...")
 
 # ── Non-Clifford: auto-switch to statevector ───────────────────────────────
-sim2 = QuantumSimulator(2)
-sim2.apply("h", [0])
-print("\nBefore T gate:   ", sim2.mode)   # "tableau"
+t_qc = QiskitCircuit(2)
+t_qc.h(0)
+t_qc.t(0)
 
-sim2.apply("t", [0])                      # T gate — not Clifford
+sim2 = QuantumSimulator(2)
+print("\nBefore T gate:   ", sim2.mode)   # "tableau"
+from_qiskit(t_qc).run(sim2)               # H stays tableau; T triggers switch
 print("After T gate:    ", sim2.mode)     # "statevector"
 print("Statevector:     ", sim2.sv.to_dict())
 
 # ── Snapshot without committing to statevector ─────────────────────────────
+bell_qc = QiskitCircuit(2)
+bell_qc.h(0)
+bell_qc.cx(0, 1)
+
 sim3 = QuantumSimulator(2)
-Circuit(2).h(0).cnot(0,1).run(sim3)
+from_qiskit(bell_qc).run(sim3)
 sv = sim3.statevector_snapshot()          # converts internally, doesn't switch
 print("\nSnapshot:", sv.to_dict())
 print("Mode unchanged: ", sim3.mode)      # still "tableau"
 
 # ── Parameterized rotation (non-Clifford) ─────────────────────────────────
+rz_qc = QiskitCircuit(1)
+rz_qc.h(0)
+rz_qc.rz(math.pi / 4, 0)
+
 sim4 = QuantumSimulator(1)
-sim4.apply("h", [0])
-sim4.apply("rz", [0], params=[math.pi/4])
+from_qiskit(rz_qc).run(sim4)
 print("\nRz(π/4) result:", sim4.sv.to_dict())
 ```
 
@@ -316,35 +403,71 @@ dense simulation.
 ## 9 · StabilizerDecomposition — T-gate Without a Statevector ⏱ ~1 min
 
 For circuits with few T gates, the stabilizer rank decomposition is cheaper
-than converting to a 2^n statevector.
+than converting to a 2^n statevector. A non-Clifford state has **no single**
+stabilizer description — but each branch of the decomposition does.
 
 ```python
+from qiskit import QuantumCircuit as QiskitCircuit
 from stabilizer_python import StabilizerDecomposition
+from stabilizer_python.qiskit_interop import from_qiskit
 
-# Start: single stabilizer term
-d = StabilizerDecomposition(3)
-d.h(0); d.h(1); d.h(2)
-print(f"After H gates:   {d.term_count} term   (pure Clifford)")
+def run_on_decomp(d, circuit):
+    """Replay a from_qiskit() circuit on StabilizerDecomposition."""
+    for op in circuit.ops:
+        if op.gate_obj is not None:
+            g, t = op.gate_obj, list(op.targets)
+            if g.num_qubits == 1:
+                getattr(d, g.name)(t[0])
+            else:
+                getattr(d, g.name)(*t)
+        elif op.name == "H":
+            d.h(op.targets[0])
+        elif op.name == "S":
+            d.s(op.targets[0])
+        elif op.name == "X":
+            d.x(op.targets[0])
+        elif op.name == "Z":
+            d.z(op.targets[0])
+        elif op.name == "CNOT":
+            d.cnot(op.targets[0], op.targets[1])
 
-# Each T gate branches the state — up to doubling term count
-d.t(0)
-print(f"After 1 T gate:  {d.term_count} terms")
+# ── 2-qubit circuit in Qiskit: Clifford prep, then two T gates ─────────────
+qc = QiskitCircuit(2)
+qc.h(0)
+qc.h(1)
 
-d.t(1)
-print(f"After 2 T gates: {d.term_count} terms")
+d = StabilizerDecomposition(2)
+run_on_decomp(d, from_qiskit(qc))
+print(f"After Clifford prep: {d.term_count} term")
+print(f"  stabilizers: {d.terms[0][1].stabilizer_strings()}")   # ['+XI', '+IX']
 
-d.t(2)
-print(f"After 3 T gates: {d.term_count} terms  (cost ~ 2^t × n²)")
+# Each T gate branches into Z=+1 and Z=-1 eigenspaces — up to doubling terms
+qc.t(0)
+qc.cx(0, 1)
+d = StabilizerDecomposition(2)
+run_on_decomp(d, from_qiskit(qc))
+print(f"\nAfter T + CNOT:      {d.term_count} terms")
+for i, (coeff, state) in enumerate(d.terms):
+    print(f"  term {i}: α={coeff:.4f}  gens={state.stabilizer_strings()}")
 
-# Expectation value over the superposition of branches
+qc.t(1)
+d = StabilizerDecomposition(2)
+run_on_decomp(d, from_qiskit(qc))
+print(f"\nAfter 2nd T gate:      {d.term_count} terms  (2^t = 2²)")
+print(d.summary())   # each branch lists its own stabilizer generators
+
+# Expectation values over the weighted sum of branches
 print(f"\n⟨Z₀⟩ = {d.expectation_z(0):.4f}")
 print(f"⟨Z₁⟩ = {d.expectation_z(1):.4f}")
 print(f"T count: {d.t_count}")
 ```
 
-**What this shows:** Cost grows as O(2^t × n²) where t is the T-gate count —
-exponential in T gates, not qubits. For circuits with many qubits but few T gates,
-this is dramatically cheaper than a full 2^n statevector.
+**What this shows:** A T gate on a stabilizer state splits it into branches, each
+with its own Pauli stabilizer generators (`+ZI`, `-IZ`, …). The full state is a
+*sum* of stabilizer states, not a stabilizer state itself — that is why
+`QuantumSimulator` falls back to a statevector after a T gate. Cost grows as
+O(2^t × n²) in the T-gate count t, not in qubits n, so this stays cheap for
+wide circuits with few T gates.
 
 ---
 
@@ -374,7 +497,7 @@ stabilizer_python/
 **Core data flow:**
 
 ```
-StabilizerState  ──gates──►  StabilizerState  ──measure──►  int (0 or 1)
+Qiskit QuantumCircuit  ──from_qiskit()──►  Circuit  ──run()──►  StabilizerState / QuantumSimulator
       │                            │
       │ zero_state()               │ read_syndrome()
       ▼                            ▼
