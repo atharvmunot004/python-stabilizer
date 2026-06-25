@@ -2,122 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/api-reference/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/hybrid-simulation/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/qiskit-interop/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/references/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/architecture/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/architecture/extension-points/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/architecture/input-processing/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/architecture/module-map/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/architecture/simulation-flow/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/architecture/stabilizer-codes/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
+    </url>
+    <url>
+         <loc>https://atharvmunot004.github.io/python-stabilizer/demos/15-minute-demo/</loc>
+         <lastmod>2026-06-25</lastmod>
+    </url>
+    <url>
+         <loc>https://atharvmunot004.github.io/python-stabilizer/demos/complete-demo/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/benchmarking/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/circuits/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/first-tableau/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/inspection/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/installation/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/measurement/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/non-clifford/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/qec/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/qiskit/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/stabilizer-codes/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/tests/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/getting-started/tracing/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/proofs/x-gate-proof/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/theory/gate-rules/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/theory/measurement/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/theory/qec-codes/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/theory/stabilizer-formalism/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
          <loc>https://atharvmunot004.github.io/python-stabilizer/theory/tableau/</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-25</lastmod>
     </url>
 </urlset>
